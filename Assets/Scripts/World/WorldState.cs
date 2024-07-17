@@ -1,0 +1,64 @@
+﻿using UnityEngine.SceneManagement;
+using Utils;
+using Utils.Common;
+using World.InGameStates;
+
+namespace World
+{
+    public class WorldState : GameState
+    {
+        private static WorldState _instance;
+
+        public static WorldState instance => _instance;
+
+        private StateMachine<InGameState> m_gameStateMachine = new StateMachine<InGameState>();
+
+        public InGameState currentState => m_gameStateMachine.current;
+
+        public InGameState nextState
+        {
+            set => m_gameStateMachine.next = value;
+        }
+
+        public override void Enter(GameState last)
+        {
+            _instance = this;
+            SceneManager.LoadScene(Constants.TEST);
+
+        }
+
+        public override void Exit()
+        {
+            _instance = null;
+        }
+
+        public override void Update()
+        {
+            var state = m_gameStateMachine.current;
+
+            if (state != null)
+            {
+                m_gameStateMachine.isLocked = true;
+                state.Update();
+                m_gameStateMachine.isLocked = false;
+            }
+        }
+
+        public override void LateUpdate()
+        {
+            var state = m_gameStateMachine.current;
+            if (state != null)
+            {
+                m_gameStateMachine.isLocked = true;
+                state.LateUpdate();
+                m_gameStateMachine.isLocked = false;
+            }
+        }
+
+        // public void NotifySceneFinished(int nodeIdx)
+        // {
+        //     //m_gameStateMachine.next = new NodeState(nodeIdx);
+        //     
+        // }
+    }
+}
