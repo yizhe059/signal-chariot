@@ -1,24 +1,36 @@
-﻿namespace World
+﻿using UnityEngine;
+using Utils.Common;
+
+namespace World
 {
+    [System.Serializable]
     public struct BoardPosition
     {
         public int x;
         public int y;
     }
     
-    public class Board
+    [System.Serializable]
+    public class Board : Grid<Slot>
     {
-        private int m_width, m_height;
-        private Slot[,] m_slots;
-        
-        public static Board GenerateBoard(int width, int height)
+
+        private Board(int width, int height, float cellSize, Vector3 originPosition) : base(width, height, cellSize,
+            originPosition, () => new Slot())
         {
-            return new Board
+            for (int x = 0; x < width; x++)
             {
-                m_width = width,
-                m_height = height,
-                m_slots = new Slot[height, width]
-            };
+                for (int y = 0; y < height; y++)
+                {
+                    m_gridArray[x,y].SetPosition(x, y);
+                }
+            }
         }
+        
+        public static Board GenerateBoard(int width, int height, float cellSize, Vector3 originPosition)
+        {
+            return new Board(width, height, cellSize, originPosition);
+        }
+
+        
     }
 }
