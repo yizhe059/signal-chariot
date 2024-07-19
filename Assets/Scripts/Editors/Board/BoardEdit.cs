@@ -2,6 +2,8 @@
 using UnityEngine;
 using Utils.Common;
 using World;
+using World.SetUps;
+using World.Views;
 
 namespace Editors.Board
 {
@@ -13,24 +15,28 @@ namespace Editors.Board
         public Vector3 originPosition;
         public float cellSize;
         public List<BoardPosition> openSlots = new List<BoardPosition>();
+        public SlotView slotPrefab;
+        public Transform horizontalBorderPrefab, verticalBorderPrefab;
+        
         private Grid<SlotEdit> m_board;
-
+        
         private float m_prevCellSize=-1;
         private int m_prevWidth=-1, m_prevHeight=-1;
         private Vector3 m_prevOriginPosition;
-        private List<BoardPosition> prevOpenSlots = new List<BoardPosition>();
-        private bool m_firstTime = true;
+        private List<BoardPosition> m_prevOpenSlots = new List<BoardPosition>();
+
         public void OnValidate()
         {
             
             if (m_prevCellSize != cellSize || m_prevWidth != width || m_prevHeight != height || m_prevOriginPosition != originPosition)
             {
 
-                m_board = new Grid<SlotEdit>(width, height, cellSize, originPosition, () => new SlotEdit());
+                m_board = new Grid<SlotEdit>(width, height, cellSize, originPosition, 
+                    (Grid<SlotEdit> grid, int x, int y) => new SlotEdit(grid, x, y));
             }
 
 
-            foreach (var pos in prevOpenSlots)
+            foreach (var pos in m_prevOpenSlots)
             {
                 var slot = m_board.GetValue(pos.x, pos.y);
                 if (slot != null)
@@ -47,10 +53,10 @@ namespace Editors.Board
             m_prevWidth = width;
             m_prevHeight = height;
             m_prevOriginPosition = originPosition;
-            prevOpenSlots.Clear();
+            m_prevOpenSlots.Clear();
             foreach (var pos in openSlots)
             {
-                prevOpenSlots.Add(pos);
+                m_prevOpenSlots.Add(pos);
             }
         }
 
@@ -90,6 +96,24 @@ namespace Editors.Board
                     Gizmos.DrawCube((bl + tr) /2 + Vector3.forward , m_board.cellSize * new Vector3(1, 1, 1));
                 }
             }
+        }
+
+        public BoardSetUp GenerateBoardSetUp()
+        {
+            var setUp = new BoardSetUp
+            {
+                width = this.width,
+                height = this.height,
+                cellSize = this.cellSize,
+                originPosition = this.originPosition,
+                openSlots = new List<BoardPosition>(this.openSlots),
+                slotPrefab = this.slotPrefab,
+                horizontalBorderPrefab = this.horizontalBorderPrefab,
+                verticalBorderPrefab = this.verticalBorderPrefab
+            };
+            
+
+            return setUp;
         }
     }
 }

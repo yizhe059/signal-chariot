@@ -13,10 +13,10 @@ namespace Utils.Common
         protected float m_cellSize;
         [SerializeField]
         protected Vector3 m_originPosition;
-        [SerializeReference]
+        [SerializeField]
         protected T[,] m_gridArray;
 
-        public Grid(int width, int height, float cellSize, Vector3 originPosition, Func<T> constructor)
+        public Grid(int width, int height, float cellSize, Vector3 originPosition, Func<Grid<T>, int, int, T> constructor)
         {
             m_width = width;
             m_height = height;
@@ -28,7 +28,7 @@ namespace Utils.Common
             {
                 for (int y = 0; y < height; y++)
                 {
-                    m_gridArray[x, y] = constructor();
+                    m_gridArray[x, y] = constructor(this, x, y);
                 }
             }
         }
@@ -73,6 +73,12 @@ namespace Utils.Common
 
         public T GetValue(int x, int y)
         {
+            if (m_gridArray == null)
+            {
+                Debug.LogError("Array is null");
+                return default(T);
+            }
+            if (m_gridArray.Length == m_width) Debug.LogError($"Length does not match {m_gridArray.Length}");
             if ((x >= 0 && x < m_width) && (y >= 0 && y < m_height))
             {
                 return m_gridArray[x, y];
