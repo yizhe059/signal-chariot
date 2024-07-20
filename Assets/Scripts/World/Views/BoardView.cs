@@ -35,12 +35,20 @@ namespace World.Views
                 }
             }
             
+            m_board.RegisterStatusEvent(OnSlotStatusChanged);
+            m_board.SetSlotStatus(5,6,SlotStatus.Empty);
+            
         }
         
         private Vector3 GetSlotCenterWorldPosition(int x, int y)
         {
             var bl = m_slots.GetWorldPosition(x, y);
             return bl + 0.5f * m_slots.cellSize * new Vector3(1, 1, 0);
+        }
+
+        private void OnSlotStatusChanged(int x, int y, SlotStatus status)
+        {
+            m_slots.GetValue(x, y).OnStatusChanged(status);
         }
         
         

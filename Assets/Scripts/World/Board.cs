@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using Utils.Common;
 using World.SetUps;
 
@@ -16,9 +17,11 @@ namespace World
         }
     }
     
+    //To DO: 可能Board的逻辑是不需要position的，只有boardView才需要，在board里加位置是redundant的
     [System.Serializable]
     public class Board : Grid<Slot>
     {
+        private UnityEvent<int, int, SlotStatus> m_onStatusChanged = new UnityEvent<int, int, SlotStatus>();
 
         private Board(int width, int height, float cellSize, Vector3 originPosition) : base(width, height, cellSize,
             originPosition, (grid, x, y) => Slot.GenerateSlot(x, y))
@@ -67,6 +70,7 @@ namespace World
             if (slot != null)
             {
                 slot.status = status;
+                m_onStatusChanged.Invoke(x, y, status);
             }
         }
 
@@ -96,6 +100,24 @@ namespace World
         public static Board GenerateBoard(int width, int height, float cellSize, Vector3 originPosition)
         {
             return new Board(width, height, cellSize, originPosition);
+        }
+
+        public void RegisterStatusEvent(UnityAction<int, int, SlotStatus> act)
+        {
+            m_onStatusChanged.AddListener(act);
+            for (int x = 0; x < m_width; x++)
+            {
+                for (int y = 0; y < m_height; y++)
+                {
+                    m_onStatusChanged.Invoke(x, y, GetSlotStatus(x, y));
+                }
+            }
+        }
+        
+        public void UnregisterStatusEvent(UnityAction<int, int, SlotStatus> act)
+        {
+            m_onStatusChanged.RemoveListener(act);
+
         }
 
         public override string ToString()
