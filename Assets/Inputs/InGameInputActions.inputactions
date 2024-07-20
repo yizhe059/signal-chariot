@@ -1,0 +1,56 @@
+{
+    "name": "InGameInputActions",
+    "maps": [
+        {
+            "name": "InGame",
+            "id": "db82d9b6-138e-4f25-8791-54b08b6a46e0",
+            "actions": [
+                {
+                    "name": "Click",
+                    "type": "Value",
+                    "id": "b60e21c7-1f9e-43b1-9044-4e3a10de5721",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "One Modifier",
+                    "id": "d5c88c29-438c-42dd-b090-b1200cbe6a88",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "989a7ee0-fff1-43fa-8e15-2e2bda5a4678",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "9a7ec482-9e6e-4da9-bdec-f9fa7f20c4da",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

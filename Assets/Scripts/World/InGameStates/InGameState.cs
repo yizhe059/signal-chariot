@@ -4,7 +4,8 @@ namespace World.InGameStates
 {
     public enum InGameStateType
     {
-        None
+        None,
+        AddSlotState
     }
     public abstract class InGameState : IState<InGameState>
     {

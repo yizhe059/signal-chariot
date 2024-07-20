@@ -44,7 +44,7 @@ namespace Utils.Common
             return new Vector3(x, y) * m_cellSize + m_originPosition;
         }
 
-        protected void GetXY(Vector3 worldPosition, out int x, out int y)
+        public void GetXY(Vector3 worldPosition, out int x, out int y)
         {
             x = Mathf.FloorToInt((worldPosition.x - m_originPosition.x) / m_cellSize);
             y = Mathf.FloorToInt((worldPosition.y - m_originPosition.y) / m_cellSize);
@@ -85,7 +85,7 @@ namespace Utils.Common
             }
             else
             {
-                Debug.LogError($"Grid Out of Bound: {x}, {y}");
+                Debug.Log($"Grid Out of Bound: {x}, {y}");
                 return default(T);
             }
         }

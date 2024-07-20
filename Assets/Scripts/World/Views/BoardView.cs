@@ -4,6 +4,8 @@ using World.SetUps;
 
 namespace World.Views
 {
+    
+    //TO DO: Should the baord view be monobehavior?
     public class BoardView: MonoBehaviour
     {
         private Board m_board;
@@ -36,7 +38,7 @@ namespace World.Views
             }
             
             m_board.RegisterStatusEvent(OnSlotStatusChanged);
-            m_board.SetSlotStatus(5,6,SlotStatus.Empty);
+            m_board.SetSlotStatus(4,5,SlotStatus.Empty);
             
         }
         
@@ -50,8 +52,20 @@ namespace World.Views
         {
             m_slots.GetValue(x, y).OnStatusChanged(status);
         }
-        
-        
+
+        public bool GetXY(Vector2 worldPosition, out int x, out int y)
+        {
+            m_slots.GetXY(worldPosition, out x, out y);
+            
+            if ((x >= 0 && x < m_slots.width) && (y >= 0 && y < m_slots.height))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         
     }
 }

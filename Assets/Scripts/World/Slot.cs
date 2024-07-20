@@ -4,7 +4,8 @@
     {
         Hidden,
         Empty,
-        Occupied
+        Occupied,
+        Selectable
     }
     
     [System.Serializable]
