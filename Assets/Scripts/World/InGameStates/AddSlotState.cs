@@ -15,6 +15,7 @@ namespace World.InGameStates
             
         public override void Enter(InGameState last)
         {
+            Debug.Log("Enter AddSlot");
             // change all the adjacent slot to selectable
             m_selectableSlots = m_board.GetAdjacentSlots();
 
@@ -23,6 +24,13 @@ namespace World.InGameStates
                 m_board.SetSlotStatus(pos, SlotStatus.Selectable);
             }
 
+            if (m_selectableSlots.Count < m_amount)
+            {
+                m_amount = m_selectableSlots.Count;
+            }
+            
+            if (m_amount == 0) GameManager.Instance.ChangeToNullState();
+            
             // register the on click event for the board
             GameManager.Instance.GetInputManager().RegisterClickEvent(OnClicked);
 
@@ -39,6 +47,7 @@ namespace World.InGameStates
             }
             
             m_selectableSlots.Clear();
+            Debug.Log("Exit AddSlot");
         }
 
         private void OnClicked(Vector2 worldPosition)
