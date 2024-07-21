@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 using Utils.Common;
 using World.InGameStates;
 using World.Views;
@@ -33,7 +35,7 @@ namespace World.Cores
 
         public void ChangeToAddSlotState()
         {
-            WorldState.instance.nextState = AddSlotState.CreateAddSlotState(m_boardView, m_board, 5);
+            WorldState.instance.nextState = AddSlotState.CreateAddSlotState(m_boardView, m_board, Int32.MaxValue);
         }
 
         public void ChangeToNullState()
