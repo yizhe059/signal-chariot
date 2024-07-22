@@ -1,4 +1,6 @@
-﻿namespace World
+﻿using World.Modules;
+
+namespace World
 {
     public enum SlotStatus
     {
@@ -17,6 +19,8 @@
             x = 0,
             y = 0
         };
+
+        private ModuleSlot m_moduleSlot;
 
         public Slot()
         {

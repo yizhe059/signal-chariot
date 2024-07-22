@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using World.SetUps;
 
 namespace World
@@ -7,5 +8,7 @@ namespace World
     public class SetUp: ScriptableObject
     {
         public BoardSetUp boardSetUp;
+
+        public List<ModuleSetUp> moduleLibrary;
     }
 }

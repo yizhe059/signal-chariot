@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using Utils.Common;
 using World.InGameStates;
+using World.Modules;
 using World.Views;
 
 namespace World.Cores
@@ -14,6 +15,8 @@ namespace World.Cores
         private PlayerInput m_playerInput;
         
         private InputManager m_inputManager;
+
+        private ModuleLib m_moduleLib;
         
         [SerializeField] private SetUp m_setUp;
         private Board m_board;
@@ -24,6 +27,10 @@ namespace World.Cores
         protected override void Init()
         {
             m_inputManager = new InputManager(m_playerInput);
+
+            m_moduleLib = new ModuleLib();
+            m_moduleLib.Init(m_setUp.moduleLibrary);
+            Debug.Log(m_moduleLib);
             m_board = new Board(m_setUp.boardSetUp);
 
             m_boardView.Init(m_board, m_setUp.boardSetUp);
@@ -31,7 +38,7 @@ namespace World.Cores
         }
 
         public InputManager GetInputManager() => m_inputManager;
-
+        public ModuleLib GetModuleLib() =>  m_moduleLib;
 
         public void ChangeToAddSlotState()
         {

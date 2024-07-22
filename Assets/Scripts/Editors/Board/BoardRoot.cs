@@ -1,11 +1,12 @@
 ﻿#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
+using Utils.Common;
 using World;
 
 namespace Editors.Board
 {
-    public class BoardRoot: MonoBehaviour
+    public class BoardRoot: MonoSingleton<BoardRoot>
     {
         public SetUp setUp;
         

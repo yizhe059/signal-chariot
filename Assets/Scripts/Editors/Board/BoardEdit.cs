@@ -2,6 +2,7 @@
 using UnityEngine;
 using Utils.Common;
 using World;
+using World.Modules;
 using World.SetUps;
 using World.Views;
 
@@ -15,6 +16,8 @@ namespace Editors.Board
         public Vector3 originPosition;
         public float cellSize;
         public List<BoardPosition> openSlots = new List<BoardPosition>();
+        public List<ActiveModule> modules = new List<ActiveModule>();
+        
         public SlotView slotPrefab;
         public Transform horizontalBorderPrefab, verticalBorderPrefab;
         
@@ -58,6 +61,15 @@ namespace Editors.Board
             {
                 m_prevOpenSlots.Add(pos);
             }
+
+            foreach (var module in modules)
+            {
+                int idx = module.moduleID;
+                if (idx >= 0 && idx < BoardRoot.Instance.setUp.moduleLibrary.Count)
+                    module.moduleName = BoardRoot.Instance.setUp.moduleLibrary[idx].name;
+                else
+                    module.moduleName = "Invalid ID";
+            }
         }
 
         private void OnDrawGizmos()
@@ -75,12 +87,12 @@ namespace Editors.Board
                     var tr = br + Vector3.up * m_board.cellSize;
                     var tl = bl + Vector3.up * m_board.cellSize;
 
-                    Gizmos.color = Color.cyan;
-                    
-                    Gizmos.DrawLine(bl, br);
-                    Gizmos.DrawLine(br, tr);
-                    Gizmos.DrawLine(tr, tl);
-                    Gizmos.DrawLine(tl, bl);
+                    // Gizmos.color = Color.cyan;
+                    //
+                    // Gizmos.DrawLine(bl, br);
+                    // Gizmos.DrawLine(br, tr);
+                    // Gizmos.DrawLine(tr, tl);
+                    // Gizmos.DrawLine(tl, bl);
 
                     var slot = m_board.GetValue(x, y);
 
@@ -93,7 +105,22 @@ namespace Editors.Board
                     {
                         Gizmos.color = Color.white;
                     }
-                    Gizmos.DrawCube((bl + tr) /2 + Vector3.forward , m_board.cellSize * new Vector3(1, 1, 1));
+                    Gizmos.DrawCube((bl + tr) /2 + Vector3.forward , m_board.cellSize * 0.99f * new Vector3(1, 1, 1));
+                }
+            }
+
+            var moduleLib = BoardRoot.Instance.setUp.moduleLibrary;
+            Gizmos.color= Color.blue;
+            foreach (var module in modules)
+            {
+                Vector3 worldPos = m_board.GetWorldPosition(module.pos.x, module.pos.y);
+                Gizmos.DrawCube(worldPos + 1.1f * Vector3.forward + new Vector3(0.5f, 0.5f) , m_board.cellSize * new Vector3(1, 1, 1));
+                if (module.moduleID >= moduleLib.Count) continue;
+                foreach (var modulePos in BoardRoot.Instance.setUp.moduleLibrary[module.moduleID].otherPositions)
+                {
+                    var rotatedPos = Module.GetRotatedPos(modulePos, module.orientation);
+                    Vector3 otherWorldPos = m_board.GetWorldPosition(module.pos.x + rotatedPos.x, module.pos.y + rotatedPos.y);
+                    Gizmos.DrawCube(otherWorldPos + 1.1f * Vector3.forward + new Vector3(0.5f, 0.5f) , m_board.cellSize * new Vector3(1, 1, 1));
                 }
             }
         }
@@ -107,6 +134,7 @@ namespace Editors.Board
                 cellSize = this.cellSize,
                 originPosition = this.originPosition,
                 openSlots = new List<BoardPosition>(this.openSlots),
+                modules = new List<ActiveModule>(this.modules),
                 slotPrefab = this.slotPrefab,
                 horizontalBorderPrefab = this.horizontalBorderPrefab,
                 verticalBorderPrefab = this.verticalBorderPrefab

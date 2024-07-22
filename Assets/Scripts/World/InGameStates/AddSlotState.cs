@@ -11,6 +11,7 @@ namespace World.InGameStates
         private BoardView m_boardView;
         private Board m_board;
         private int m_amount;
+        private int m_currentSelectableAmount;
         private List<BoardPosition> m_selectableSlots;
             
         public override void Enter(InGameState last)
@@ -23,12 +24,8 @@ namespace World.InGameStates
             {
                 m_board.SetSlotStatus(pos, SlotStatus.Selectable);
             }
-
-            if (m_selectableSlots.Count < m_amount)
-            {
-                m_amount = m_selectableSlots.Count;
-            }
             
+            m_currentSelectableAmount = m_selectableSlots.Count;
             if (m_amount == 0) GameManager.Instance.ChangeToNullState();
             
             // register the on click event for the board
@@ -58,6 +55,8 @@ namespace World.InGameStates
             {
                 m_board.SetSlotStatus(x, y, SlotStatus.Empty);
                 m_amount--;
+                m_currentSelectableAmount--;
+                
                 var lists = m_board.GetAdjacentSlots(x, y);
 
                 
@@ -65,9 +64,10 @@ namespace World.InGameStates
                 {
                     m_board.SetSlotStatus(pos, SlotStatus.Selectable);
                     m_selectableSlots.Add(pos);
+                    m_currentSelectableAmount++;
                 }
-
-                if (m_amount <= 0)
+                
+                if (m_amount <= 0 || m_currentSelectableAmount <= 0)
                 {
                     GameManager.Instance.ChangeToNullState();
                 }
