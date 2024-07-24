@@ -34,14 +34,22 @@ MonoBehaviour:
       y: 4
     - x: 3
       y: 4
+    - x: 3
+      y: 4
     - x: 4
       y: 4
     modules:
     - pos:
         x: 4
-        y: 2
+        y: 4
       moduleID: 2
       moduleName: Module 3
+      orientation: 0
+    - pos:
+        x: 3
+        y: 2
+      moduleID: 1
+      moduleName: Module 2
       orientation: 0
     slotPrefab: {fileID: 6622818502655049371, guid: 80c85fcaea6536748bb67591b4fc60b2, type: 3}
     horizontalBorderPrefab: {fileID: 5301742505494614779, guid: bcf6e11ec71a8824abb63c5b40fe37fc, type: 3}
@@ -57,6 +65,7 @@ MonoBehaviour:
       y: -1
     - x: -1
       y: 0
+    prefab: {fileID: -5447537739969293526, guid: 780332fa93134cc499d3148c3d2857d8, type: 3}
   - name: Module 2
     otherPositions:
     - x: 1
@@ -65,5 +74,7 @@ MonoBehaviour:
       y: 1
     - x: -1
       y: 0
+    prefab: {fileID: 4244946465113611698, guid: 7dfda94a13c9d414db28b5c2e8ea0fac, type: 3}
   - name: Module 3
     otherPositions: []
+    prefab: {fileID: -341302883647983323, guid: 4f4f9e8cbb7996e41b35cf4c51cf482e, type: 3}

@@ -20,7 +20,7 @@ namespace World
             y = 0
         };
 
-        private ModuleSlot m_moduleSlot;
+        public ModuleSlot moduleSlot { get; set; }
 
         public Slot()
         {
@@ -39,6 +39,7 @@ namespace World
                 y = y
             };
         }
+        
 
         public static Slot GenerateSlot(int x, int y, SlotStatus status)
         {

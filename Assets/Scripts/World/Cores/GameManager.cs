@@ -30,19 +30,31 @@ namespace World.Cores
 
             m_moduleLib = new ModuleLib();
             m_moduleLib.Init(m_setUp.moduleLibrary);
-            Debug.Log(m_moduleLib);
-            m_board = new Board(m_setUp.boardSetUp);
 
+            m_board = new Board(m_setUp.boardSetUp);
+            Debug.Log(m_board);
             m_boardView.Init(m_board, m_setUp.boardSetUp);
+
+            ChangeToBoardWaitingState();
             //Debug.Log(m_board);
         }
 
         public InputManager GetInputManager() => m_inputManager;
         public ModuleLib GetModuleLib() =>  m_moduleLib;
 
+        public void ChangeToBoardWaitingState()
+        {
+            WorldState.instance.nextState = BoardWaitingState.CreateState(m_board, m_boardView);
+        }
+        
         public void ChangeToAddSlotState()
         {
             WorldState.instance.nextState = AddSlotState.CreateAddSlotState(m_boardView, m_board, Int32.MaxValue);
+        }
+
+        public void ChangeToModulePlacingState(Module module)
+        {
+            WorldState.instance.nextState = ModulePlacingState.CreateState(m_board, m_boardView, module);
         }
 
         public void ChangeToNullState()

@@ -3,24 +3,26 @@ using UnityEngine;
 using UnityEngine.Experimental.AI;
 using World.Modules;
 using World.SetUps;
+using World.Views;
 
 namespace Editors.Board
 {
     public class ModuleEdit: MonoBehaviour
     {
-        public string name ="";
+        public new string name ="";
+        public ModuleView prefab;
         public List<ModulePosition> otherPositions;
         
         private const float CellSize = 1f;
 
         private string m_prevName = "";
+        
         private void OnValidate()
         {
             if (name != m_prevName)
             {
                 m_prevName = name;
-                if (name != "") gameObject.name = name;
-                else gameObject.name = "No name";
+                gameObject.name = name != "" ? name : "No name";
             }
         }
 
@@ -44,7 +46,8 @@ namespace Editors.Board
             return new ModuleSetUp
             {
                 name = name,
-                otherPositions = new List<ModulePosition>(otherPositions)
+                otherPositions = new List<ModulePosition>(otherPositions),
+                prefab = prefab
             };
         }
     }

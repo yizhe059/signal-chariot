@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Module 1
+  prefab: {fileID: -5447537739969293526, guid: 780332fa93134cc499d3148c3d2857d8, type: 3}
   otherPositions:
   - x: 1
     y: 0
@@ -269,6 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Module 3
+  prefab: {fileID: -341302883647983323, guid: 4f4f9e8cbb7996e41b35cf4c51cf482e, type: 3}
   otherPositions: []
 --- !u!1 &1801328676
 GameObject:
@@ -315,6 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Module 2
+  prefab: {fileID: 4244946465113611698, guid: 7dfda94a13c9d414db28b5c2e8ea0fac, type: 3}
   otherPositions:
   - x: 1
     y: 0

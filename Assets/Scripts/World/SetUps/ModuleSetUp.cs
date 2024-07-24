@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using World.Modules;
+using World.Views;
 
 namespace World.SetUps
 {
@@ -8,5 +9,6 @@ namespace World.SetUps
     {
         public string name ="";
         public List<ModulePosition> otherPositions;
+        public ModuleView prefab;
     }
 }

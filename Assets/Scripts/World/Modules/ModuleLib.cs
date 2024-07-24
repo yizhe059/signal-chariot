@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 using World.SetUps;
 
 namespace World.Modules
@@ -16,6 +17,17 @@ namespace World.Modules
             
         }
 
+        public Module GenerateModule(int id)
+        {
+            if (id < 0 || id >= m_modules.Count)
+            {
+                Debug.LogError("Invalid ID");
+                return null;
+            }
+
+            return Module.CreateModule(m_modules[id]);
+        }
+
         public override string ToString()
         {
             var result = "";
@@ -26,5 +38,7 @@ namespace World.Modules
             }
             return result;
         }
+        
+        
     }
 }

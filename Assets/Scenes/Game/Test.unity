@@ -758,7 +758,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1288969268}
         m_TargetAssemblyTypeName: World.Cores.GameManager, Assembly-CSharp
-        m_MethodName: ChangeToNullState
+        m_MethodName: ChangeToBoardWaitingState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
