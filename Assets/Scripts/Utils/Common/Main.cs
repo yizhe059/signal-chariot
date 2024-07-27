@@ -1,4 +1,4 @@
-﻿using Initialization;
+﻿using MainMenu;
 using UnityEngine;
 
 namespace Utils.Common

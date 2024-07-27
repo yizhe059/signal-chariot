@@ -1,5 +1,5 @@
-﻿using Utils.Common;
-using World;
+﻿using InGame.Boards;
+using Utils.Common;
 
 namespace Editors.Board
 {

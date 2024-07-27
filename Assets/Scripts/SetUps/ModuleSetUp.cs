@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
+using InGame.Boards.Modules;
+using InGame.Effects;
+using InGame.Views;
 using UnityEngine;
-using World.Effects;
-using World.Modules;
-using World.Views;
 
-namespace World.SetUps
+namespace SetUps
 {
     [System.Serializable]
     public class ModuleSetUp

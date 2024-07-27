@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using Editors.Effects;
+using InGame.Boards.Modules;
+using InGame.Views;
+using SetUps;
 using UnityEngine;
 using UnityEngine.Experimental.AI;
-using World.Effects;
-using World.Modules;
-using World.SetUps;
-using World.Views;
 
 namespace Editors.Board
 {

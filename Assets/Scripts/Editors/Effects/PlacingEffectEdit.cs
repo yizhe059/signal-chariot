@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using InGame.Effects;
 using UnityEngine;
-using World.Effects;
 
 namespace Editors.Effects
 {

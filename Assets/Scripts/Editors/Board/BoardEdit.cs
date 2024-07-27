@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
+using InGame.Boards;
+using InGame.Boards.Modules;
+using InGame.Views;
+using SetUps;
 using UnityEngine;
 using Utils.Common;
-using World;
-using World.Modules;
-using World.SetUps;
-using World.Views;
 
 namespace Editors.Board
 {

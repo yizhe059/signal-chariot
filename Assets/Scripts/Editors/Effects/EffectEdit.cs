@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using World.Effects;
+﻿using InGame.Effects;
+using UnityEngine;
 
 namespace Editors.Effects
 {

@@ -1,6 +1,5 @@
-﻿using World;
-using World.Effects;
-using World.Signals;
+﻿using InGame.Boards.Signals;
+using InGame.Effects;
 
 namespace Editors.Effects
 {

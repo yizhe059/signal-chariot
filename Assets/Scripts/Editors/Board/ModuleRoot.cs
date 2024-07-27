@@ -1,6 +1,6 @@
-﻿using UnityEditor;
+﻿using SetUps;
+using UnityEditor;
 using UnityEngine;
-using World;
 
 namespace Editors.Board
 {

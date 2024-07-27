@@ -1,8 +1,8 @@
 ﻿#if UNITY_EDITOR
+using SetUps;
 using UnityEditor;
 using UnityEngine;
 using Utils.Common;
-using World;
 
 namespace Editors.Board
 {

@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d2de9e00e9447d581317c60030e041f, type: 3}
+  m_Name: Set Up
+  m_EditorClassIdentifier: 
+  boardSetUp:
+    width: 7
+    height: 7
+    cellSize: 1
+    originPosition: {x: -3.5, y: -3.5, z: 0}
+    openSlots:
+    - x: 2
+      y: 2
+    - x: 3
+      y: 2
+    - x: 4
+      y: 2
+    - x: 2
+      y: 3
+    - x: 3
+      y: 3
+    - x: 4
+      y: 3
+    - x: 2
+      y: 4
+    - x: 3
+      y: 4
+    - x: 3
+      y: 4
+    - x: 4
+      y: 4
+    modules:
+    - pos:
+        x: 4
+        y: 4
+      moduleID: 2
+      moduleName: Module 3
+      orientation: 0
+    - pos:
+        x: 3
+        y: 2
+      moduleID: 1
+      moduleName: Module 2
+      orientation: 0
+    slotPrefab: {fileID: 6622818502655049371, guid: 80c85fcaea6536748bb67591b4fc60b2, type: 3}
+    signalPrefab: {fileID: 7786143621109699157, guid: e7f648ad21042b64ca742ba22438c585, type: 3}
+    horizontalBorderPrefab: {fileID: 5301742505494614779, guid: bcf6e11ec71a8824abb63c5b40fe37fc, type: 3}
+    verticalBorderPrefab: {fileID: 7963412977830916438, guid: 5a56758ef5e6eb94c9f6af23bbebbe0a, type: 3}
+  moduleLibrary:
+  - name: Module 1
+    desc: 
+    otherPositions:
+    - x: 1
+      y: 0
+    - x: 0
+      y: 1
+    - x: 0
+      y: -1
+    - x: -1
+      y: 0
+    prefab: {fileID: -5447537739969293526, guid: 780332fa93134cc499d3148c3d2857d8, type: 3}
+    signalEffects: []
+    maxUses: 0
+    energyConsumption: 0
+    coolDown: 0
+    placingEffects: []
+  - name: Module 2
+    desc: 
+    otherPositions:
+    - x: 1
+      y: 0
+    - x: -1
+      y: 1
+    - x: -1
+      y: 0
+    prefab: {fileID: 4244946465113611698, guid: 7dfda94a13c9d414db28b5c2e8ea0fac, type: 3}
+    signalEffects: []
+    maxUses: 0
+    energyConsumption: 0
+    coolDown: 0
+    placingEffects: []
+  - name: Module 3
+    desc: 
+    otherPositions: []
+    prefab: {fileID: -341302883647983323, guid: 4f4f9e8cbb7996e41b35cf4c51cf482e, type: 3}
+    signalEffects: []
+    maxUses: 0
+    energyConsumption: 0
+    coolDown: 0
+    placingEffects: []
+  references:
+    version: 2
+    RefIds: []
