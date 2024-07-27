@@ -17,7 +17,8 @@ namespace Editors.Board
         public float cellSize;
         public List<BoardPosition> openSlots = new List<BoardPosition>();
         public List<ActiveModule> modules = new List<ActiveModule>();
-        
+
+        public SignalView signalPrefab;
         public SlotView slotPrefab;
         public Transform horizontalBorderPrefab, verticalBorderPrefab;
         
@@ -135,6 +136,7 @@ namespace Editors.Board
                 originPosition = this.originPosition,
                 openSlots = new List<BoardPosition>(this.openSlots),
                 modules = new List<ActiveModule>(this.modules),
+                signalPrefab = this.signalPrefab,
                 slotPrefab = this.slotPrefab,
                 horizontalBorderPrefab = this.horizontalBorderPrefab,
                 verticalBorderPrefab = this.verticalBorderPrefab

@@ -3,6 +3,7 @@ using Utils;
 using Utils.Common;
 using World.Modules;
 using World.SetUps;
+using World.Signals;
 
 namespace World.Views
 {
@@ -12,12 +13,14 @@ namespace World.Views
     {
         private Board m_board;
         private SlotView m_slotPrefab;
+        private SignalView m_signalPrefab; 
+            
         private Transform m_horizontalBorderPrefab, m_verticalBorderPrefab;
         private Grid<SlotView> m_slots;
 
-        private Transform m_slotTransform, m_modulesTransform;
-        
-        
+        private Transform m_slotTransform, m_modulesTransform, m_signalsTransform;
+
+        public float cellSize => m_slots.cellSize;
         public void Init(Board board, BoardSetUp boardSetUp)
         {
             m_board = board;
@@ -57,6 +60,10 @@ namespace World.Views
             
             m_board.RegisterStatusEvent(OnSlotStatusChanged);
             
+            m_signalsTransform = new GameObject("[Signals]").transform;
+            m_signalsTransform.parent = transform;
+            m_signalPrefab = boardSetUp.signalPrefab;
+
         }
 
         public void CreateModuleView(Module module, Vector3 pos)
@@ -111,6 +118,16 @@ namespace World.Views
                 return false;
             }
         }
-        
+
+        public SignalView CreateSignalView(Signal signal)
+        {
+            return SignalView.CreateSignalView(m_signalPrefab, m_signalsTransform, this, signal);
+        }
+
+        public void DestroySignalView(Signal signal)
+        {
+            var view = signal.view;
+            view.SelfDestroy();
+        }
     }
 }

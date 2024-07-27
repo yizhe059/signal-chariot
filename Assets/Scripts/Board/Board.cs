@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Utils.Common;
 using World.Cores;
+using World.Effects;
 using World.Modules;
 using World.SetUps;
 
@@ -14,6 +15,23 @@ namespace World
         public int x;
         public int y;
 
+        public BoardPosition(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+        
+        public BoardPosition(BoardPosition other)
+        {
+            x = other.x;
+            y = other.y;
+        }
+        
+        public static BoardPosition operator+(BoardPosition a, BoardPosition b)
+        {
+            return new BoardPosition(a.x + b.x, a.y + b.y);
+        }
+        
         public override string ToString()
         {
             return $"{x} , {y}";
@@ -26,9 +44,10 @@ namespace World
     {
         private UnityEvent<int, int, SlotStatus> m_onStatusChanged = new UnityEvent<int, int, SlotStatus>();
 
-        private List<Module> m_modules = new List<Module>(); 
+        private List<Module> m_modules = new List<Module>();
 
         #region Constructors
+
         private Board(int width, int height, float cellSize, Vector3 originPosition) : base(width, height, cellSize,
             originPosition, (grid, x, y) => Slot.GenerateSlot(x, y))
         {
@@ -36,12 +55,12 @@ namespace World
             {
                 for (int y = 0; y < height; y++)
                 {
-                    m_gridArray[x,y].SetPosition(x, y);
+                    m_gridArray[x, y].SetPosition(x, y);
                 }
             }
         }
 
-        private Board(Board other): base(other.m_width, other.m_height, other.m_cellSize, other.m_originPosition,
+        private Board(Board other) : base(other.m_width, other.m_height, other.m_cellSize, other.m_originPosition,
             (grid, x, y) => Slot.GenerateSlot(x, y))
         {
             for (int x = 0; x < m_width; x++)
@@ -56,7 +75,7 @@ namespace World
                     {
                         SetSlotStatus(x, y, other.GetSlotStatus(x, y));
                     }
-                    
+
                 }
             }
         }
@@ -77,14 +96,14 @@ namespace World
 
             }
         }
-        
+
         public static Board GenerateBoard(int width, int height, float cellSize, Vector3 originPosition)
         {
             return new Board(width, height, cellSize, originPosition);
         }
 
         #endregion
-        
+
         #region Module Realated
 
         public ModuleSlot GetModuleSlot(int x, int y)
@@ -98,7 +117,7 @@ namespace World
             var slot = GetValue(x, y);
             slot.moduleSlot = moduleSlot;
         }
-        
+
         public bool PlaceModule(Module module, BoardPosition pivotPos)
         {
             var slotList = module.GetModuleSlots();
@@ -108,11 +127,11 @@ namespace World
                 var boardPos = slot.GetBoardPosition(pivotPos);
                 if (GetSlotStatus(boardPos) != SlotStatus.Empty) return false;
             }
-  
+
             foreach (var moduleSlot in slotList)
             {
                 var boardPos = moduleSlot.GetBoardPosition(pivotPos);
-                
+
                 SetModuleSlot(boardPos.x, boardPos.y, moduleSlot);
                 SetSlotStatus(boardPos.x, boardPos.y, SlotStatus.Occupied);
             }
@@ -130,8 +149,9 @@ namespace World
             slotBoardPosition.x = x;
             slotBoardPosition.y = y;
 
-            var moduleSlotPos = module.GetBoardPositionList(module.GetPivotBoardPosition(moduleSlot, slotBoardPosition));
-            
+            var moduleSlotPos =
+                module.GetBoardPositionList(module.GetPivotBoardPosition(moduleSlot, slotBoardPosition));
+
 
             foreach (var pos in moduleSlotPos)
             {
@@ -141,9 +161,11 @@ namespace World
 
             return module;
         }
+
         #endregion
-        
+
         #region SlotStatus
+
         public void SetSlotStatus(int x, int y, SlotStatus status)
         {
             Slot slot = GetValue(x, y);
@@ -169,6 +191,8 @@ namespace World
             }
         }
 
+        public SlotStatus GetSlotStatus(BoardPosition pos) => GetSlotStatus(pos.x, pos.y);
+
         public bool GetSlotStatus(int x, int y, out SlotStatus status)
         {
             Slot slot = GetValue(x, y);
@@ -184,10 +208,12 @@ namespace World
             }
         }
 
-        public SlotStatus GetSlotStatus(BoardPosition pos) => GetSlotStatus(pos.x, pos.y);
+        public bool GetSlotStatus(BoardPosition pos, out SlotStatus status) => GetSlotStatus(pos.x, pos.y, out status);
+
         #endregion
-        
+
         #region Events
+
         public void RegisterStatusEvent(UnityAction<int, int, SlotStatus> act)
         {
             m_onStatusChanged.AddListener(act);
@@ -199,14 +225,26 @@ namespace World
                 }
             }
         }
-        
+
         public void UnregisterStatusEvent(UnityAction<int, int, SlotStatus> act)
         {
             m_onStatusChanged.RemoveListener(act);
 
         }
+
         #endregion
 
+        #region Effect
+
+        public void TriggerEffect(int x, int y, EffectBlackBoard blackBoard)
+        {
+            var slot = GetValue(x, y);
+            if (slot == null) return;
+
+            slot.TriggerEffect(blackBoard);
+        }
+
+        #endregion
         private bool IsAdjacentSlot(int x, int y)
         {
             if (!GetSlotStatus(x, y, out SlotStatus status) || status != SlotStatus.Hidden)
