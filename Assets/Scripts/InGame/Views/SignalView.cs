@@ -55,14 +55,14 @@ namespace InGame.Views
             return view;
         }
 
-        public void Update()
-        {
-            if (!m_isMoving) return;
-
-            float cellSize = m_boardView.cellSize;
-            var speed = cellSize / Constants.SIGNAL_MOVING_DURATION;
-
-            transform.localPosition += m_direciton * (speed * UnityEngine.Time.deltaTime);
-        }
+        // public void Update()
+        // {
+        //     if (!m_isMoving) return;
+        //
+        //     float cellSize = m_boardView.cellSize;
+        //     var speed = cellSize / Constants.SIGNAL_MOVING_DURATION;
+        //
+        //     transform.localPosition += m_direciton * (speed * UnityEngine.Time.deltaTime);
+        // }
     }
 }
