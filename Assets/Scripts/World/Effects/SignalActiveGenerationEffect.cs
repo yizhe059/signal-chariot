@@ -17,7 +17,12 @@ namespace World.Effects
 
         public override Effect CreateCopy()
         {
-            throw new System.NotImplementedException();
+            return new SignalActiveGenerationEffect
+            {
+                m_coolDown = m_coolDown,
+                m_signalStrength = m_signalStrength,
+                m_dir = m_dir
+            };
         }
 
         public static SignalActiveGenerationEffect CreateEffect(float coolDown, int strength, Signal.Direction dir)

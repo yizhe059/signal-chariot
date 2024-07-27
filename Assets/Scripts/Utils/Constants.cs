@@ -11,6 +11,7 @@ namespace Utils
 
         public const float SLOT_DEPTH = 0;
         public const float MODULE_DEPTH = -0.2f;
+        public const float SIGNAL_DEPTH = -0.6f;
         public const float PLACING_MODULE_DEPTH = -0.3f;
         public const float SIGNAL_MOVING_DURATION = 1f;
 

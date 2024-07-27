@@ -22,7 +22,9 @@ namespace World.Views
         public void SetPos(BoardPosition pos)
         {
             var worldPos = m_boardView.GetSlotCenterWorldPosition(pos);
+            worldPos.z = Constants.SIGNAL_DEPTH;
             transform.localPosition = worldPos;
+            
         }
 
         public void StartMoving()
@@ -48,6 +50,8 @@ namespace World.Views
 
             view.SetPos(signal.pos);
             view.UpdateDir(signal.dir);
+            
+            signal.SetView(view);
             
             return view;
         }

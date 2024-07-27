@@ -75,6 +75,15 @@ namespace World.Signals
             };
         }
 
+        public void SelfDestroy()
+        {
+            m_view?.SelfDestroy();
+            m_view = null;
+            
+            
+            
+        }
+
         public static BoardPosition GetDirVector(Direction dir)
         {
             return dir switch

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Utils;
-using World.Cores;
 using World.Effects;
 using World.Views;
 
@@ -24,14 +23,29 @@ namespace World.Signals
         private Board m_board;
         private BoardView m_boardView;
 
-        public static SignalController CreateSignalController(Board board)
+        public static SignalController CreateSignalController(Board board, BoardView boardView)
         {
-            return new SignalController {m_board = board}; 
+            return new SignalController {m_board = board, m_boardView = boardView}; 
         }
 
         public Signal CreateSignal(SignalSetUp setUp)
         {
-            var id = m_signals.Count;
+            
+            var id = -1;
+            for (int i = 0; i < m_signals.Count; i++)
+            {
+                if (m_signals[i] == null)
+                {
+                    id = i;
+                    break;
+                }
+            }
+
+            if (id == -1)
+            {
+                id = m_signals.Count;
+                m_signals.Add(null);
+            }
             setUp.id = id;
 
             var signal = Signal.CreateSignal(setUp);
@@ -44,13 +58,27 @@ namespace World.Signals
             var signalPack = new SignalPack
             {
                 signal = signal,
-                timer = 0f
+                timer = 0f,
+                blackBoard = blackBoard
             };
-            
-            m_signals.Add(signalPack);
+
+
+            m_signals[id] = signalPack;
             return signal;
         }
 
+        public void RemoveSignal(int id)
+        {
+            var signalPack = m_signals[id];
+
+            if (signalPack == null) return;
+
+            m_signals[id] = null;
+            
+            signalPack.signal.SelfDestroy();
+            signalPack.blackBoard.Clean();
+        }
+        
         public void Reset()
         {
             foreach (var signalPack in m_signals)
@@ -66,6 +94,7 @@ namespace World.Signals
             foreach (var signalPack in m_signals)
             {
                 m_boardView.CreateSignalView(signalPack.signal);
+                signalPack.signal.Start();
             }
         }
 
@@ -73,8 +102,10 @@ namespace World.Signals
         {
             if (!m_isOn) return;
 
-            foreach (var signalPack in m_signals)
+            for (int i = 0; i < m_signals.Count; i++)
             {
+                var signalPack = m_signals[i];
+                if (signalPack == null) continue;
                 signalPack.timer += deltaTime;
                 signalPack.blackBoard.time += new Time(deltaTime);
 
@@ -84,9 +115,12 @@ namespace World.Signals
                     signalPack.timer -= Constants.SIGNAL_MOVING_DURATION;
                     MoveSignal(signalPack.signal, signalPack.blackBoard, out signalPack.isDead);
                 }
-                
-                
+
+                if (signalPack.isDead) RemoveSignal(i);
+                 
             }
+
+            
         }
 
         private void MoveSignal(Signal signal, EffectBlackBoard bb, out bool isDead)
@@ -117,5 +151,7 @@ namespace World.Signals
             }
             
         }
+        
+        
     }
 }

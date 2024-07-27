@@ -336,7 +336,6 @@ namespace World.Modules
             {
                 placingEffects.Add(eff.CreateCopy());
             }
-            if (placingEffects.Count != 0) Debug.Log("Hello");
             var newModule = new Module
             {
                 name = setUp.name,

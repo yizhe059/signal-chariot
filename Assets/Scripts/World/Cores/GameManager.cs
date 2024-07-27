@@ -5,6 +5,7 @@ using UnityEngine.InputSystem.Controls;
 using Utils.Common;
 using World.InGameStates;
 using World.Modules;
+using World.Signals;
 using World.Views;
 
 namespace World.Cores
@@ -17,6 +18,8 @@ namespace World.Cores
         private InputManager m_inputManager;
 
         private ModuleLib m_moduleLib;
+
+        private SignalController m_signalController;
         
         [SerializeField] private SetUp m_setUp;
         private Board m_board;
@@ -32,15 +35,32 @@ namespace World.Cores
             m_moduleLib.Init(m_setUp.moduleLibrary);
 
             m_board = new Board(m_setUp.boardSetUp);
-            Debug.Log(m_board);
             m_boardView.Init(m_board, m_setUp.boardSetUp);
+            
+            m_signalController = SignalController.CreateSignalController(m_board, m_boardView);
 
             ChangeToBoardWaitingState();
+            
+            m_signalController.CreateSignal(new SignalSetUp
+            {
+                dir = Signal.Direction.Right,
+                energy = 3,
+                pos = new BoardPosition(2,2)
+            });
+            
+            m_signalController.Reset();
+            m_signalController.Start();
             //Debug.Log(m_board);
         }
 
         public InputManager GetInputManager() => m_inputManager;
         public ModuleLib GetModuleLib() =>  m_moduleLib;
+        public SignalController GetSignalController() => m_signalController;
+
+        public void Update()
+        {
+            m_signalController.Update(UnityEngine.Time.deltaTime);
+        }
 
         public void ChangeToBoardWaitingState()
         {

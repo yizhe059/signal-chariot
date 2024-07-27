@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using World.Signals;
 
 namespace World.Effects
@@ -7,6 +8,12 @@ namespace World.Effects
     {
         public Signal signal;
         public Time time;
+
+        public void Clean()
+        {
+            signal = null;
+            
+        }
     }
     [System.Serializable]
     public abstract class Effect
