@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="panel" style="flex-grow: 1;">
+        <ui:Label tabindex="-1" text="Signal Chariot" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title" style="-unity-text-align: middle-center; font-size: 100px; -unity-font-style: bold; height: 70%; color: rgb(255, 255, 255);" />
+        <ui:VisualElement name="buttons" style="flex-grow: 1; flex-direction: row; -unity-text-align: upper-left; justify-content: space-around; align-self: auto; align-items: center; color: rgb(255, 255, 255); height: 30%;">
+            <ui:Button text="New Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="newGame" style="font-size: 30px; -unity-font-style: bold;" />
+            <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quit" style="font-size: 30px; -unity-font-style: bold;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

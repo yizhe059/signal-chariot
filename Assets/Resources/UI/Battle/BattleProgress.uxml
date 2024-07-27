@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="panel" style="flex-grow: 1; max-height: 100px; align-items: center; justify-content: space-around; flex-direction: row; font-size: 20px;">
+        <ui:VisualElement name="time" style="flex-grow: 1; flex-direction: row;">
+            <ui:Label tabindex="-1" text="Time" parse-escape-sequences="true" display-tooltip-when-elided="true" name="name" style="justify-content: center; -unity-font-style: bold; color: rgb(255, 255, 255);" />
+            <ui:ProgressBar value="33" title="30s/90s" style="justify-content: center; color: rgb(0, 0, 0); -unity-font-style: bold; width: 80%;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="enemy" style="flex-grow: 1; flex-direction: row;">
+            <ui:Label tabindex="-1" text="Enemy" parse-escape-sequences="true" display-tooltip-when-elided="true" name="name" style="justify-content: center; -unity-font-style: bold; color: rgb(255, 255, 255);" />
+            <ui:ProgressBar value="15" title="15/100" style="justify-content: center; color: rgb(0, 0, 0); -unity-font-style: bold; width: 80%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
