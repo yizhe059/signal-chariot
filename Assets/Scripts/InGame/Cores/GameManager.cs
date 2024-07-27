@@ -46,13 +46,14 @@ namespace InGame.Cores
             
             ChangeToBoardWaitingState();
             
-            m_signalController.CreateSignal(new SignalSetUp
-            {
-                dir = Signal.Direction.Right,
-                energy = 3,
-                pos = new BoardPosition(2,2)
-            });
-            
+            // m_signalController.CreateSignal(new SignalSetUp
+            // {
+            //     dir = Signal.Direction.Right,
+            //     energy = 3,
+            //     pos = new BoardPosition(2,2)
+            // });
+            m_timeEffectManager.Reset();
+            m_timeEffectManager.Start();
             m_signalController.Reset();
             m_signalController.Start();
             //Debug.Log(m_board);

@@ -1,17 +1,25 @@
 ﻿using System.Collections.Generic;
+using InGame.Boards;
+using InGame.Boards.Modules;
 using InGame.Boards.Signals;
 
 namespace InGame.Effects
 {
     public class EffectBlackBoard
     {
+        // signal Effect
         public Signal signal;
         public Time time;
-
+        
+        //placing effect
+        public Slot slot;
+        public Module module;
         public void Clean()
         {
             signal = null;
-            
+
+            slot = null;
+            module = null;
         }
     }
     [System.Serializable]

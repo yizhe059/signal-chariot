@@ -1,4 +1,5 @@
 ﻿using System;
+using InGame.Boards.Modules;
 using InGame.Views;
 using SetUps;
 using UnityEngine;
@@ -105,6 +106,30 @@ namespace InGame.Boards.Signals
                 Direction.Down => new Vector3(0, -1),
                 Direction.Right => new Vector3(1, 0),
                 _ => throw new ArgumentOutOfRangeException(nameof(dir), dir, null)
+            };
+        }
+        
+        // To DO: maybe use a universal 2D direction
+        public static Direction OrientationToDirection(Module.Orientation o, Direction dir)
+        {
+            int rotate = dir switch
+            {
+                Direction.Up => 0,
+                Direction.Down => 2,
+                Direction.Right => 1,
+                Direction.Left => 3,
+                _ => 0
+            };
+
+            for (int i = 0; i < rotate; i++) o = Module.RotateClockwise(o);
+            
+            return o switch
+            {
+                Module.Orientation.Down => Direction.Down,
+                Module.Orientation.Up => Direction.Up,
+                Module.Orientation.Right => Direction.Right,
+                Module.Orientation.Left => Direction.Left,
+                _ => throw new ArgumentOutOfRangeException(nameof(o), o, null)
             };
         }
     }

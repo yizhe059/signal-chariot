@@ -40,7 +40,7 @@ namespace InGame.Cores
         {
             foreach (var timeEffect in m_effects)
             {
-                timeEffect.accumulatedTime = 0;
+                timeEffect.accumulatedTime = timeEffect.triggerInterval;
                 timeEffect.usage = timeEffect.maxUsage;
             }
 
@@ -51,6 +51,7 @@ namespace InGame.Cores
         
         public void Update(float deltaTime, float newTime)
         {
+            
             if (!m_isOn) return;
             
             for (int i = m_effects.Count - 1; i >= 0; i --)

@@ -21,6 +21,8 @@ namespace InGame.Boards
             y = 0
         };
 
+        public BoardPosition pos => new BoardPosition(m_position);
+
         public ModuleSlot moduleSlot { get; set; }
 
         public Slot()

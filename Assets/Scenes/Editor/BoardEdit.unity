@@ -197,7 +197,7 @@ MonoBehaviour:
       y: 4
     moduleID: 2
     moduleName: Module 3
-    orientation: 0
+    orientation: 3
   - pos:
       x: 3
       y: 2

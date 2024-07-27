@@ -550,7 +550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coolDown: 3
   signalStrength: 4
-  dir: 2
+  dir: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

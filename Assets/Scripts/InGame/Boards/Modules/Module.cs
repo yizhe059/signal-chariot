@@ -249,6 +249,11 @@ namespace InGame.Boards.Modules
         {
             return GetRotationDegree(m_orientation);
         }
+
+        public void SetOrientation(Orientation newOrientation)
+        {
+            m_orientation = newOrientation;
+        }
         #endregion
         
         #region EffectFunction
@@ -374,7 +379,7 @@ namespace InGame.Boards.Modules
             if (m_prefab == null) return null;
 
             m_moduleView = ModuleView.CreateModuleView(m_prefab, parent, this,
-                Quaternion.Euler(0, GetRotationDegree(m_orientation), 0));
+                Quaternion.Euler(0, 0, GetRotationDegree(m_orientation)));
             return m_moduleView;
         }
         

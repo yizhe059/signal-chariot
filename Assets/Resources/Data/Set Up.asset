@@ -44,7 +44,7 @@ MonoBehaviour:
         y: 4
       moduleID: 2
       moduleName: Module 3
-      orientation: 0
+      orientation: 3
     - pos:
         x: 3
         y: 2
@@ -96,7 +96,14 @@ MonoBehaviour:
     maxUses: 0
     energyConsumption: 0
     coolDown: 0
-    placingEffects: []
+    placingEffects:
+    - rid: 8366252776295235587
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 8366252776295235587
+      type: {class: SignalActiveGenerationEffect, ns: InGame.Effects, asm: Assembly-CSharp}
+      data:
+        m_coolDown: 3
+        m_signalStrength: 4
+        m_dir: 0

@@ -91,7 +91,7 @@ namespace InGame.Boards
             foreach (var activeModule in setUp.modules)
             {
                 var module = GameManager.Instance.GetModuleLib().GenerateModule(activeModule.moduleID);
-
+                module.SetOrientation(activeModule.orientation);
                 PlaceModule(module, activeModule.pos);
 
             }
@@ -135,6 +135,12 @@ namespace InGame.Boards
                 SetModuleSlot(boardPos.x, boardPos.y, moduleSlot);
                 SetSlotStatus(boardPos.x, boardPos.y, SlotStatus.Occupied);
             }
+            
+            module.TriggerPlacingEffect(new EffectBlackBoard
+            {
+                slot = GetValue(pivotPos.x, pivotPos.y),
+                module = module
+            });
 
             return true;
         }
@@ -158,6 +164,8 @@ namespace InGame.Boards
                 SetModuleSlot(pos.x, pos.y, null);
                 SetSlotStatus(pos.x, pos.y, SlotStatus.Empty);
             }
+            
+            module.UnTriggerPlacingEffect(new EffectBlackBoard{slot = GetValue(x, y)});
 
             return module;
         }

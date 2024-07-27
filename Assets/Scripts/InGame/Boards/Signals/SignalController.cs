@@ -2,6 +2,7 @@
 using InGame.Effects;
 using InGame.Views;
 using SetUps;
+using UnityEngine;
 using Utils;
 
 namespace InGame.Boards.Signals
@@ -65,6 +66,10 @@ namespace InGame.Boards.Signals
 
 
             m_signals[id] = signalPack;
+            m_boardView.CreateSignalView(signalPack.signal);
+            if (m_isOn) signal.Start();
+            else signal.Stop();
+            
             return signal;
         }
 
@@ -94,7 +99,7 @@ namespace InGame.Boards.Signals
 
             foreach (var signalPack in m_signals)
             {
-                m_boardView.CreateSignalView(signalPack.signal);
+                
                 signalPack.signal.Start();
             }
         }
