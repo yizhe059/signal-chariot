@@ -24,6 +24,7 @@ namespace World.SetUps
         public List<BoardPosition> openSlots;
         public List<ActiveModule> modules;
         public SlotView slotPrefab;
+        public SignalView signalPrefab;
         public Transform horizontalBorderPrefab, verticalBorderPrefab;
     }
 }

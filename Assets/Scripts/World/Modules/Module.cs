@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using World.Effects;
 using World.SetUps;
 using World.Views;
 using Object = UnityEngine.Object;
@@ -44,6 +46,11 @@ namespace World.Modules
             };
             return slot;
         }
+
+        public void TriggerEffect(EffectBlackBoard bb)
+        {
+            module.TriggerSignalEffect(bb);
+        }
     }
 
     public class Module
@@ -62,14 +69,27 @@ namespace World.Modules
         private ModuleView m_prefab;
         private ModuleView m_moduleView;
         
+        #region Shape
         private ModulePosition m_pivot;
         private bool[,] m_slotMap =null; 
         private ModuleSlot[,] m_moduleSlots=null;
         private int m_width, m_height;
+        #endregion
+        
         public string name { get; protected set; }
+        public string desc { get; protected set; }
+        
+        #region Effect
+
+        private SignalEffects m_signalEffects;
+
+        private PlacingEffects m_placingEffects;
+        #endregion
+        
         public ModuleView moduleView => m_moduleView;
         public Orientation orientation => m_orientation;
 
+        #region ModuleSlot
         private void CreateSlotMap(List<ModulePosition> positions)
         {
             ModulePosition min = new ModulePosition
@@ -113,28 +133,6 @@ namespace World.Modules
                 m_slotMap[pos.x - min.x, pos.y - min.y] = true;
             }
         }
-        
-        #region Offset
-        private ModulePosition GetOffset(int x, int y)
-        {
-            return GetRotatedPos(new ModulePosition
-            {
-                x = x - m_pivot.x,
-                y = y - m_pivot.y
-            }, m_orientation);
-        }
-        
-        private ModulePosition GetOffset(ModulePosition pos)
-        {
-            return GetOffset(pos.x, pos.y);
-        }
-        
-        public ModulePosition GetOffset(ModuleSlot slot)
-        {
-            return GetOffset(slot.position.x, slot.position.y);
-        }
-        #endregion
-        
         public List<ModuleSlot> GetModuleSlots()
         {
             List<ModuleSlot> slots = new List<ModuleSlot>();
@@ -176,7 +174,29 @@ namespace World.Modules
             
             return slots;
         }
-
+        #endregion
+        
+        #region Offset
+        private ModulePosition GetOffset(int x, int y)
+        {
+            return GetRotatedPos(new ModulePosition
+            {
+                x = x - m_pivot.x,
+                y = y - m_pivot.y
+            }, m_orientation);
+        }
+        
+        private ModulePosition GetOffset(ModulePosition pos)
+        {
+            return GetOffset(pos.x, pos.y);
+        }
+        
+        public ModulePosition GetOffset(ModuleSlot slot)
+        {
+            return GetOffset(slot.position.x, slot.position.y);
+        }
+        #endregion
+        
         #region BoardPosition
         public BoardPosition GetBoardPosition(ModuleSlot slot, BoardPosition pivotPos)
         {
@@ -222,6 +242,7 @@ namespace World.Modules
         }
         #endregion
         
+        #region Orientation
         public void Rotate()
         {
             m_orientation = RotateClockwise(m_orientation);
@@ -231,6 +252,26 @@ namespace World.Modules
         {
             return GetRotationDegree(m_orientation);
         }
+        #endregion
+        
+        #region EffectFunction
+
+        public void TriggerSignalEffect(EffectBlackBoard bb)
+        {
+            m_signalEffects.Trigger(bb);
+        }
+
+        public void TriggerPlacingEffect(EffectBlackBoard bb)
+        {
+            m_placingEffects.Trigger(bb);
+        }
+
+        public void UnTriggerPlacingEffect(EffectBlackBoard bb)
+        {
+            m_placingEffects.UnTrigger(bb);
+        }
+        
+        #endregion
         
         #region static method
         public static Orientation RotateClockwise(Orientation current)
@@ -282,10 +323,28 @@ namespace World.Modules
 
         public static Module CreateModule(ModuleSetUp setUp)
         {
+            
+            
+            var signalEffects = new List<Effect>();
+            foreach (var eff in setUp.signalEffects)
+            {
+                signalEffects.Add(eff.CreateCopy());
+            }
+
+            var placingEffects = new List<Effect>();
+            foreach (var eff in setUp.placingEffects)
+            {
+                placingEffects.Add(eff.CreateCopy());
+            }
+            if (placingEffects.Count != 0) Debug.Log("Hello");
             var newModule = new Module
             {
                 name = setUp.name,
-                m_prefab = setUp.prefab
+                desc = setUp.desc,
+                m_prefab = setUp.prefab,
+                m_signalEffects = SignalEffects.CreateSignalEffects(signalEffects, setUp.maxUses, setUp.energyConsumption, setUp.coolDown),
+                m_placingEffects = PlacingEffects.CreatePlacingEffects(placingEffects)
+                
             };
             
             newModule.CreateSlotMap(setUp.otherPositions);
@@ -295,6 +354,7 @@ namespace World.Modules
 
         public static Module CreateModule(Module other)
         {
+            
             var newModule = new Module
             {
                 m_height = other.m_height,
@@ -303,7 +363,10 @@ namespace World.Modules
                 m_pivot = other.m_pivot,
                 m_prefab = other.m_prefab,
                 m_slotMap = other.m_slotMap,
-                name = other.name
+                name = other.name,
+                desc = other.desc,
+                m_signalEffects = SignalEffects.CreateSignalEffects(other.m_signalEffects),
+                m_placingEffects = PlacingEffects.CreatePlacingEffects(other.m_placingEffects)
             };
 
             return newModule;

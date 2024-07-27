@@ -1,4 +1,5 @@
-﻿using World.Modules;
+﻿using World.Effects;
+using World.Modules;
 
 namespace World
 {
@@ -39,8 +40,12 @@ namespace World
                 y = y
             };
         }
-        
 
+        public void TriggerEffect(EffectBlackBoard blackBoard)
+        {
+            moduleSlot?.TriggerEffect(blackBoard);
+        }
+        
         public static Slot GenerateSlot(int x, int y, SlotStatus status)
         {
             return new Slot

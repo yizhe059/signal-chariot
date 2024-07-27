@@ -52,10 +52,12 @@ MonoBehaviour:
       moduleName: Module 2
       orientation: 0
     slotPrefab: {fileID: 6622818502655049371, guid: 80c85fcaea6536748bb67591b4fc60b2, type: 3}
+    signalPrefab: {fileID: 7786143621109699157, guid: e7f648ad21042b64ca742ba22438c585, type: 3}
     horizontalBorderPrefab: {fileID: 5301742505494614779, guid: bcf6e11ec71a8824abb63c5b40fe37fc, type: 3}
     verticalBorderPrefab: {fileID: 7963412977830916438, guid: 5a56758ef5e6eb94c9f6af23bbebbe0a, type: 3}
   moduleLibrary:
   - name: Module 1
+    desc: 
     otherPositions:
     - x: 1
       y: 0
@@ -66,7 +68,13 @@ MonoBehaviour:
     - x: -1
       y: 0
     prefab: {fileID: -5447537739969293526, guid: 780332fa93134cc499d3148c3d2857d8, type: 3}
+    signalEffects: []
+    maxUses: 0
+    energyConsumption: 0
+    coolDown: 0
+    placingEffects: []
   - name: Module 2
+    desc: 
     otherPositions:
     - x: 1
       y: 0
@@ -75,6 +83,24 @@ MonoBehaviour:
     - x: -1
       y: 0
     prefab: {fileID: 4244946465113611698, guid: 7dfda94a13c9d414db28b5c2e8ea0fac, type: 3}
+    signalEffects: []
+    maxUses: 0
+    energyConsumption: 0
+    coolDown: 0
+    placingEffects: []
   - name: Module 3
+    desc: 
     otherPositions: []
     prefab: {fileID: -341302883647983323, guid: 4f4f9e8cbb7996e41b35cf4c51cf482e, type: 3}
+    signalEffects: []
+    maxUses: 0
+    energyConsumption: 0
+    coolDown: 0
+    placingEffects:
+    - rid: 8366252711848443904
+  references:
+    version: 2
+    RefIds:
+    - rid: 8366252711848443904
+      type: {class: SignalActiveGenerationEffect, ns: World.Effects, asm: Assembly-CSharp}
+      data: 

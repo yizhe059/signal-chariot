@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using Editors.Effects;
 using UnityEngine;
 using UnityEngine.Experimental.AI;
+using World.Effects;
 using World.Modules;
 using World.SetUps;
 using World.Views;
@@ -10,6 +12,7 @@ namespace Editors.Board
     public class ModuleEdit: MonoBehaviour
     {
         public new string name ="";
+        public string desc = "";
         public ModuleView prefab;
         public List<ModulePosition> otherPositions;
         
@@ -43,11 +46,21 @@ namespace Editors.Board
 
         public ModuleSetUp CreateSetUp()
         {
+            var signalEffectEdits = GetComponentInChildren<SignalEffectEdit>();
+            var placingEffectEdits = GetComponentInChildren<PlacingEffectEdit>();
+            
             return new ModuleSetUp
             {
                 name = name,
+                desc = desc,
                 otherPositions = new List<ModulePosition>(otherPositions),
-                prefab = prefab
+                prefab = prefab,
+                signalEffects = signalEffectEdits.CreateEffects(),
+                coolDown = signalEffectEdits.coolDown,
+                energyConsumption = signalEffectEdits.energyConsumption,
+                maxUses = signalEffectEdits.maxUses,
+                placingEffects = placingEffectEdits.CreateEffects()
+                
             };
         }
     }
