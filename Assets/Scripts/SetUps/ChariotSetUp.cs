@@ -10,5 +10,7 @@ namespace SetUps
         public float maxHealth = 100;
 
         public float armor = 0;
+
+        public float speed = 1f;
     }
 }

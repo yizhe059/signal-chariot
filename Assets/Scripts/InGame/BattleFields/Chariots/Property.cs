@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Chariots
+namespace InGame.BattleFields.Chariots
 {
     public enum PropertyType
     {
         Health, 
-        Armor, 
+        Armor,
+        Speed,
     }
 
     public class UnlimitedProperty

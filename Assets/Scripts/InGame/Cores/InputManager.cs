@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
@@ -8,9 +9,11 @@ namespace InGame.Cores
     {
         private PlayerInput m_playerInput;
 
-        private UnityEvent<Vector2> m_onClicked = new UnityEvent<Vector2>();
-        private UnityEvent<Vector2> m_onMouseMove = new UnityEvent<Vector2>();
-        private UnityEvent m_onRotatePressed = new UnityEvent();
+        private UnityEvent<Vector2> m_onMouseLeftClicked = new();
+        private UnityEvent<Vector2> m_onMouseMove = new();
+        private UnityEvent m_onRotatePressed = new();
+        private UnityEvent<Vector2> m_onMoveKeyPressed = new();
+        private UnityEvent<Vector2> m_onMoveKeyReleased = new();
 
         public InputManager(PlayerInput input)
         {
@@ -18,17 +21,20 @@ namespace InGame.Cores
             m_playerInput.actions["Click"].started += OnClicked;
             m_playerInput.actions["MousePos"].performed += OnMouseMove;
             m_playerInput.actions["Rotate"].started += OnRotate;
-        }
-        
 
+            m_playerInput.actions["Move"].performed += OnMoveKeyPressed;
+            m_playerInput.actions["Move"].canceled += OnMoveKeyReleased;
+        }
+
+        #region Event Listeners
         public void RegisterClickEvent(UnityAction<Vector2> act)
         {
-            m_onClicked.AddListener(act);
+            m_onMouseLeftClicked.AddListener(act);
         }
         
         public void UnregisterClickEvent(UnityAction<Vector2> act)
         {
-            m_onClicked.RemoveListener(act);
+            m_onMouseLeftClicked.RemoveListener(act);
         }
         
         public void RegisterMouseMoveEvent(UnityAction<Vector2> act)
@@ -50,7 +56,21 @@ namespace InGame.Cores
         {
             m_onRotatePressed.RemoveListener(act);
         }
+
+        public void RegisterMoveEvent(UnityAction<Vector2> act)
+        {
+            m_onMoveKeyPressed.AddListener(act);
+            m_onMoveKeyReleased.AddListener(act);
+        }
+
+        public void UnregisterMoveEvent(UnityAction<Vector2> act)
+        {
+            m_onMoveKeyPressed.RemoveListener(act);
+            m_onMoveKeyReleased.RemoveListener(act);
+        }
+        #endregion
         
+        #region Events
         private void OnClicked(InputAction.CallbackContext context)
         {
             var mousePosition = context.ReadValue<Vector2>();
@@ -61,7 +81,7 @@ namespace InGame.Cores
             }
             Vector2 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-            m_onClicked.Invoke(worldPosition);
+            m_onMouseLeftClicked.Invoke(worldPosition);
         }
         
         private void OnMouseMove(InputAction.CallbackContext context)
@@ -73,15 +93,25 @@ namespace InGame.Cores
                 return;
             }
             Vector2 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            //Debug.Log(worldPosition);
 
             m_onMouseMove.Invoke(worldPosition);
         }
         
         private void OnRotate(InputAction.CallbackContext context)
         {
-
             m_onRotatePressed.Invoke();
         }
+
+        private void OnMoveKeyPressed(InputAction.CallbackContext context)
+        {
+            var inputDirection = context.ReadValue<Vector2>();
+            m_onMoveKeyPressed.Invoke(inputDirection);
+        }
+
+        private void OnMoveKeyReleased(InputAction.CallbackContext context)
+        {
+            m_onMoveKeyReleased.Invoke(Vector2.zero);
+        }
+        #endregion
     }
 }
