@@ -4,7 +4,6 @@
         <ui:VisualElement name="buttons" style="flex-grow: 1; flex-direction: row; -unity-text-align: upper-left; justify-content: space-around; align-self: auto; align-items: center; color: rgb(255, 255, 255); height: 30%;">
             <ui:Button text="New Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="start" style="font-size: 30px; -unity-font-style: bold;" />
             <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quit" style="font-size: 30px; -unity-font-style: bold;" />
-            <ui:Button text="Test" parse-escape-sequences="true" display-tooltip-when-elided="true" name="test" style="font-size: 30px; -unity-font-style: bold;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -24,6 +24,7 @@ namespace InGame
         {
             _instance = this;
             SceneManager.LoadScene(Constants.LEVEL1);
+            // SceneManager.LoadScene(Constants.TEST);
         }
 
         public override void Exit()

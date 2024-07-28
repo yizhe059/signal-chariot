@@ -26,10 +26,15 @@ namespace InGame.InGameStates
 
         private void OnClicked(Vector2 worldPosition)
         {
+            Debug.Log("hello1");
+            
             if (!m_boardView.GetXY(worldPosition, out int x, out int y)) return;
-
+            
+            Debug.Log("hello2");
+            
             if (m_board.GetSlotStatus(x, y) == SlotStatus.Occupied)
             {
+                Debug.Log("hello3");
                 var module = m_board.RemoveModule(x, y);
 
                 GameManager.Instance.ChangeToModulePlacingState(module);

@@ -60,7 +60,6 @@ namespace InGame.Cores
                 return;
             }
             Vector2 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            //Debug.Log(worldPosition);
 
             m_onClicked.Invoke(worldPosition);
         }
