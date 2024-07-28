@@ -23,8 +23,8 @@ namespace InGame
         public override void Enter(GameState last)
         {
             _instance = this;
-            SceneManager.LoadScene(Constants.LEVEL1);
-            // SceneManager.LoadScene(Constants.TEST);
+            // SceneManager.LoadScene(Constants.LEVEL1);
+            SceneManager.LoadScene(Constants.LEVEL0);
         }
 
         public override void Exit()

@@ -7,8 +7,8 @@ namespace Utils
 
         public const string MAIN_MENU = "MainMenu";
 
-        public const string TEST = "Test";
-        public const string LEVEL1 = "BattleField";
+        public const string LEVEL0 = "Level0";
+        public const string LEVEL1 = "Level1";
 
         public const float SLOT_DEPTH = 0;
         public const float MODULE_DEPTH = -0.2f;

@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="panel" style="flex-grow: 1; flex-direction: row; max-height: 10%; font-size: 20px; -unity-font-style: bold; color: rgb(255, 255, 255);">
+    <ui:VisualElement name="panel" style="flex-grow: 1; flex-direction: row; max-height: 5%; font-size: 20px; -unity-font-style: bold; color: rgb(255, 255, 255);">
         <ui:Button text="Exit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="exit" />
         <ui:Button text="Board" parse-escape-sequences="true" display-tooltip-when-elided="true" name="board" />
         <ui:Button text="Manufacture" parse-escape-sequences="true" display-tooltip-when-elided="true" name="manufacture" />
