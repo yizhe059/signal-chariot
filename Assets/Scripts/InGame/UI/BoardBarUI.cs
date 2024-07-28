@@ -11,8 +11,8 @@ public class BoardBarUI : MonoSingleton<BoardBarUI>, IHidable
 {
     [SerializeField] private UIDocument m_doc;
     private VisualElement m_root;
-    private Button m_testButton;
-    private Button m_addButton;
+    private Button m_signalButton;
+    private Button m_slotButton;
 
     private void Awake()
     {
@@ -22,38 +22,38 @@ public class BoardBarUI : MonoSingleton<BoardBarUI>, IHidable
 
     private void Register()
     {
-        m_testButton = m_root.Q<Button>("test");
-        m_addButton = m_root.Q<Button>("add");
+        m_signalButton = m_root.Q<Button>("test");
+        m_slotButton = m_root.Q<Button>("add");
 
-        m_testButton.clicked += () => {
-            OnTestClicked();
+        m_signalButton.clicked += () => {
+            OnSignalClicked();
         };
 
-        m_addButton.clicked += () => {
-            OnAddClicked();
+        m_slotButton.clicked += () => {
+            OnSlotClicked();
         };
     }
 
-    private void OnTestClicked()
+    private void OnSignalClicked()
     {   
-        // if(Game.Instance.currentState == InGameStateType.BoardBattleState){
-            // m_testButton.text = "Test Signal";
-            // GameManager.Instance.ChangeToBoardWaitingState();
-        // }else{
-            m_testButton.text = "Stop Signal";
+        if(GameManager.Instance.GetCurrentInGameState() == InGameStateType.BoardBattleState){
+            m_signalButton.text = "Test Signal";
+            GameManager.Instance.ChangeToBoardWaitingState();
+        }else{
+            m_signalButton.text = "Stop Signal";
             GameManager.Instance.ChangeToBoardBattleState();
-        // }
+        }
     }
 
-    private void OnAddClicked()
+    private void OnSlotClicked()
     {
-        // if(is AddState){
-            // m_testButton.text = "Add Slot";
-            // GameManager.Instance.ChangeToAddSlotState();
-        // }else{
-            m_testButton.text = "Exit Slot";
+        if(GameManager.Instance.GetCurrentInGameState() == InGameStateType.AddSlotState){
+            m_slotButton.text = "Add Slot";
             GameManager.Instance.ChangeToBoardWaitingState();
-        // }
+        }else{
+            m_slotButton.text = "Exit Slot";
+            GameManager.Instance.ChangeToAddSlotState();
+        }
     }
     
     public void Hide()
@@ -63,6 +63,6 @@ public class BoardBarUI : MonoSingleton<BoardBarUI>, IHidable
 
     public void Show()
     {
-        m_root.style.display = DisplayStyle.Flex;
+        m_doc.rootVisualElement.style.display = DisplayStyle.Flex;
     }
 }

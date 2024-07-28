@@ -43,7 +43,7 @@ namespace InGame.Cores
             m_boardView.Init(m_board, m_setUp.boardSetUp);
             m_signalController = SignalController.CreateSignalController(m_board, m_boardView);
         
-            ChangeToBoardWaitingState();
+            ChangeToBoardWaitingState(); // initial state is board preparation
         }
 
         public InputManager GetInputManager() => m_inputManager;
@@ -79,9 +79,19 @@ namespace InGame.Cores
             WorldState.instance.nextState = BoardBattleState.CreateState(m_timeEffectManager, m_signalController);
         }
 
+        public void ChangeToBattleState()
+        {
+            WorldState.instance.nextState = BattleState.CreateState();
+        }
+
         public void ChangeToNullState()
         {
             WorldState.instance.nextState = null;
+        }
+
+        public InGameStateType GetCurrentInGameState()
+        {
+            return WorldState.instance.currentState.type;
         }
     }
 }

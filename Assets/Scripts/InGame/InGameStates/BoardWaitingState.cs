@@ -36,7 +36,6 @@ namespace InGame.InGameStates
             BoardBarUI.Instance.Hide();
         }
 
-
         private void OnClicked(Vector2 worldPosition)
         {
             Debug.Log("hello 1");

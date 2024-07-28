@@ -22,7 +22,7 @@ namespace InGame.UI
 
         public void Show()
         {
-            m_root.style.display = DisplayStyle.Flex;
+            m_doc.rootVisualElement.style.display = DisplayStyle.Flex;
         }
     }
 }

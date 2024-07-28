@@ -8,7 +8,8 @@ namespace InGame.InGameStates
         AddSlotState,
         BoardWaitingState,
         ModulePlacingState,
-        BoardBattleState
+        BoardBattleState,
+        BattleState,
     }
     public abstract class InGameState : IState<InGameState>
     {
