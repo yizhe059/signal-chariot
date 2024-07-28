@@ -1,38 +1,39 @@
 ﻿using System;
+
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+using Chariots;
 using InGame.Boards;
 using InGame.Boards.Modules;
 using InGame.Boards.Signals;
 using InGame.InGameStates;
 using InGame.Views;
 using SetUps;
-using UnityEngine;
-using UnityEngine.InputSystem;
 using Utils.Common;
 
 namespace InGame.Cores
 {
     public class GameManager: MonoSingleton<GameManager>
-    {
-        [SerializeField]
-        private PlayerInput m_playerInput;
-        
+    {        
+        private Chariot m_chariot;
         private InputManager m_inputManager;
 
-        private ModuleLib m_moduleLib;
-
-        private SignalController m_signalController;
-
-        private TimeEffectManager m_timeEffectManager;
-        
-        [SerializeField] private SetUp m_setUp;
         private Board m_board;
+        private ModuleLib m_moduleLib;
+        private SignalController m_signalController;
+        private TimeEffectManager m_timeEffectManager;
 
-        [SerializeField]
-        private BoardView m_boardView;
+        [SerializeField] private PlayerInput m_playerInput;
+        [SerializeField] private SetUp m_setUp;
+        [SerializeField] private BoardView m_boardView;
 
         protected override void Init()
         {
+            m_chariot = new Chariot(m_setUp.chariotSetUp);
+            
             m_inputManager = new InputManager(m_playerInput);
+
             m_timeEffectManager = TimeEffectManager.CreateTimeEffectManager();
             
             m_moduleLib = new ModuleLib();
@@ -40,7 +41,7 @@ namespace InGame.Cores
 
             m_board = new Board(m_setUp.boardSetUp);
             m_boardView.Init(m_board, m_setUp.boardSetUp);
-            
+
             m_signalController = SignalController.CreateSignalController(m_board, m_boardView);
             
             
@@ -55,9 +56,6 @@ namespace InGame.Cores
             
             m_signalController.Reset();
             m_signalController.Start();
-            //Debug.Log(m_board);
-            
-            
         }
 
         public InputManager GetInputManager() => m_inputManager;

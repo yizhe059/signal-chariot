@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playerInput: {fileID: 6064313950855995092}
-  m_setUp: {fileID: 11400000, guid: e1088c30eca7f444e84dba6fbcacc1f6, type: 2}
-  m_boardView: {fileID: 0}
+  m_setUp: {fileID: 11400000, guid: 01b1065d17b32e74dace4bbbdf6637cd, type: 2}
+  m_boardView: {fileID: 5452476414675404644, guid: 9a1500a14499d42f8a09b5029259fe1c, type: 3}
 --- !u!114 &6064313950855995092
 MonoBehaviour:
   m_ObjectHideFlags: 0

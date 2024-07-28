@@ -8,8 +8,7 @@ namespace MainMenu
     {
         public override void Enter(GameState last)
         {
-
-            SceneManager.LoadScene(Constants.Main_MENU);
+            SceneManager.LoadScene(Constants.MAIN_MENU);
         }
     }
 }

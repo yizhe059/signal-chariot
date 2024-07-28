@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3647151545547071574}
   - component: {fileID: 743006595051540175}
+  - component: {fileID: 3370005131070448489}
   m_Layer: 5
   m_Name: ChariotStatus
   m_TagString: Untagged
@@ -48,3 +49,15 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: e06b0a08575514e099b2a5929d6716ca, type: 3}
   m_SortingOrder: 0
+--- !u!114 &3370005131070448489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578711642404958385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cb1767b66133495d84b8cf5686ad3c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

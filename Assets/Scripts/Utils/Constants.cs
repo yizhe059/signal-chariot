@@ -5,9 +5,10 @@ namespace Utils
         #region Scene Name
         public const string MAIN_SCENE = "Main";
 
-        public const string Main_MENU = "MainMenu";
+        public const string MAIN_MENU = "MainMenu";
 
         public const string TEST = "Test";
+        public const string LEVEL1 = "BattleField";
 
         public const float SLOT_DEPTH = 0;
         public const float MODULE_DEPTH = -0.2f;

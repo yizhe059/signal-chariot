@@ -97,6 +97,10 @@ MonoBehaviour:
     energyConsumption: 0
     coolDown: 0
     placingEffects: []
+  chariotSetUp:
+    initialHealth: 50
+    maxHealth: 100
+    armor: 0
   references:
     version: 2
     RefIds: []
