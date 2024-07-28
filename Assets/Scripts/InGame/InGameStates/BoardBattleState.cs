@@ -23,12 +23,19 @@ namespace InGame.InGameStates
             BattleResultUI.Instance.Hide();
             ChariotStatusUI.Instance.Show();
             NavigationBarUI.Instance.Show();
+            BoardBarUI.Instance.Show();
         }
 
         public override void Exit()
         {
             m_timeEffectManager.Stop();
             m_signalController.Stop();
+
+            BattleProgressUI.Instance.Show();
+            BattleResultUI.Instance.Show();
+            ChariotStatusUI.Instance.Hide();
+            NavigationBarUI.Instance.Hide();
+            BoardBarUI.Instance.Hide();
         }
 
         public static BoardBattleState CreateState(TimeEffectManager timeEffectManager, SignalController signalController)

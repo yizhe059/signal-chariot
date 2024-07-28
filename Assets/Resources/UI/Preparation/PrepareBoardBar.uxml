@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="panel" style="flex-grow: 1; flex-direction: row; max-height: 5%; -unity-font-style: bold; font-size: 20px; top: 5%; color: rgb(255, 255, 255);">
+        <ui:Button text="Test Signal" parse-escape-sequences="true" display-tooltip-when-elided="true" name="test" />
+        <ui:Button text="Add Slot" parse-escape-sequences="true" display-tooltip-when-elided="true" name="add" />
+    </ui:VisualElement>
+</ui:UXML>

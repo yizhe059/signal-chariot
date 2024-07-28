@@ -31,6 +31,7 @@ namespace InGame.InGameStates
             BattleResultUI.Instance.Hide();
             ChariotStatusUI.Instance.Show();
             NavigationBarUI.Instance.Show();
+            BoardBarUI.Instance.Show();
         }
 
         public override void Exit()
@@ -40,6 +41,12 @@ namespace InGame.InGameStates
             GameManager.Instance.GetInputManager().UnregisterMouseMoveEvent(OnMouseMove);
             GameManager.Instance.GetInputManager().UnregisterRotateEvent(OnRotatePressed);
             GameManager.Instance.GetInputManager().UnregisterClickEvent(OnClick);
+
+            BattleProgressUI.Instance.Show();
+            BattleResultUI.Instance.Show();
+            ChariotStatusUI.Instance.Hide();
+            NavigationBarUI.Instance.Hide();
+            BoardBarUI.Instance.Hide();
         }
 
         private void OnMouseMove(Vector2 worldPos)

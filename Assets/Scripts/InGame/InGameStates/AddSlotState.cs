@@ -37,6 +37,7 @@ namespace InGame.InGameStates
             BattleResultUI.Instance.Hide();
             ChariotStatusUI.Instance.Show();
             NavigationBarUI.Instance.Show();
+            BoardBarUI.Instance.Show();
         }
 
         public override void Exit()
@@ -51,6 +52,12 @@ namespace InGame.InGameStates
             
             m_selectableSlots.Clear();
             Debug.Log("Exit AddSlot");
+
+            BattleProgressUI.Instance.Show();
+            BattleResultUI.Instance.Show();
+            ChariotStatusUI.Instance.Hide();
+            NavigationBarUI.Instance.Hide();
+            BoardBarUI.Instance.Hide();
         }
 
         private void OnClicked(Vector2 worldPosition)

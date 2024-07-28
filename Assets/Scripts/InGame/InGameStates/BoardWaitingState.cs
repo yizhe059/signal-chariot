@@ -21,6 +21,7 @@ namespace InGame.InGameStates
             BattleResultUI.Instance.Hide();
             ChariotStatusUI.Instance.Show();
             NavigationBarUI.Instance.Show();
+            BoardBarUI.Instance.Show();
         }
 
         public override void Exit()
@@ -28,6 +29,11 @@ namespace InGame.InGameStates
             Debug.Log("Exit board waiting");
             GameManager.Instance.GetInputManager().UnregisterClickEvent(OnClicked);
             
+            BattleProgressUI.Instance.Show();
+            BattleResultUI.Instance.Show();
+            ChariotStatusUI.Instance.Hide();
+            NavigationBarUI.Instance.Hide();
+            BoardBarUI.Instance.Hide();
         }
 
 
