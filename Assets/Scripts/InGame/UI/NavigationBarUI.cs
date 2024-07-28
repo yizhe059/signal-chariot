@@ -5,7 +5,7 @@ using Utils.Common;
 
 namespace InGame.UI
 {
-    public class ChariotStatusUI : MonoSingleton<ChariotStatusUI>, IHidable
+    public class NavigationBarUI : MonoSingleton<NavigationBarUI>, IHidable
     {
         [SerializeField] private UIDocument m_doc;
         private VisualElement m_root;
@@ -19,7 +19,6 @@ namespace InGame.UI
         {
             m_root.style.display = DisplayStyle.None;
         }
-
         public void Show()
         {
             m_root.style.display = DisplayStyle.Flex;

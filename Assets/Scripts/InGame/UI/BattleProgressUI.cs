@@ -5,11 +5,11 @@ using Utils.Common;
 
 namespace InGame.UI
 {
-    public class ChariotStatusUI : MonoSingleton<ChariotStatusUI>, IHidable
+    public class BattleProgressUI : MonoSingleton<BattleProgressUI>, IHidable
     {
         [SerializeField] private UIDocument m_doc;
         private VisualElement m_root;
-        
+
         private void Awake()
         {
             m_root = m_doc.rootVisualElement;
