@@ -76,7 +76,7 @@ namespace InGame.Cores
 
         public void ChangeToBoardBattleState()
         {
-            WorldState.instance.nextState = BoardBattleState.CreateState(m_timeEffectManager, m_signalController);
+            WorldState.instance.nextState = BoardTestState.CreateState(m_timeEffectManager, m_signalController);
         }
 
         public void ChangeToNullState()

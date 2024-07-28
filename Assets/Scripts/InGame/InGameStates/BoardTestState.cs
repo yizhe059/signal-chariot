@@ -4,9 +4,9 @@ using InGame.Cores;
 
 namespace InGame.InGameStates
 {
-    public class BoardBattleState: InGameState
+    public class BoardTestState: InGameState
     {
-        public override InGameStateType type => InGameStateType.BoardBattleState;
+        public override InGameStateType type => InGameStateType.BoardTestState;
 
         private TimeEffectManager m_timeEffectManager;
         private SignalController m_signalController;
@@ -31,9 +31,9 @@ namespace InGame.InGameStates
             m_signalController.Stop();
         }
 
-        public static BoardBattleState CreateState(TimeEffectManager timeEffectManager, SignalController signalController)
+        public static BoardTestState CreateState(TimeEffectManager timeEffectManager, SignalController signalController)
         {
-            return new BoardBattleState
+            return new BoardTestState
             {
                 m_timeEffectManager = timeEffectManager,
                 m_signalController = signalController
