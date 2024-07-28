@@ -40,7 +40,7 @@ namespace InGame.InGameStates
         {
             if (m_exiting) return;
             var pos = new Vector3(worldPos.x, worldPos.y, Constants.PLACING_MODULE_DEPTH);
-            m_moduleView.SetWorldPos(pos);
+            m_moduleView.SetGlobalWorldPos(pos);
         }
 
         private void OnClick(Vector2 worldPos)

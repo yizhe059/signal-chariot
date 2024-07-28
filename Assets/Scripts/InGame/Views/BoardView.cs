@@ -35,6 +35,7 @@ namespace InGame.Views
 
             m_slotTransform = new GameObject("[Slots]").transform;
             m_slotTransform.parent = transform;
+            m_slotTransform.localPosition = Vector3.zero;
             for (int x = 0; x < m_board.width; x++)
             {
                 for (int y = 0; y < m_board.height; y++)
@@ -51,6 +52,7 @@ namespace InGame.Views
             
             m_modulesTransform = new GameObject("[Modules]").transform;
             m_modulesTransform.parent = transform;
+            m_modulesTransform.localPosition = Vector3.zero;
             foreach (var activeModules in boardSetUp.modules)
             {
                 var pos = activeModules.pos;
@@ -64,6 +66,7 @@ namespace InGame.Views
             m_signalsTransform = new GameObject("[Signals]").transform;
             m_signalsTransform.parent = transform;
             m_signalPrefab = boardSetUp.signalPrefab;
+            m_signalsTransform.localPosition = Vector3.zero;
 
         }
 
