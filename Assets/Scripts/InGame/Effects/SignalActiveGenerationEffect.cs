@@ -1,10 +1,8 @@
 ﻿using InGame.Boards;
-using InGame.Boards.Modules;
 using InGame.Boards.Signals;
 using InGame.Cores;
 using SetUps;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace InGame.Effects
 {
@@ -22,20 +20,21 @@ namespace InGame.Effects
         
         private TimeEffect m_createSignalTimeEffect;
         
-        public override void Trigger(EffectBlackBoard blackBoard)
+        public override void OnTrigger(EffectBlackBoard blackBoard)
         {
             var timeEffectManager = GameManager.Instance.GetTimeEffectManager();
             m_createSignalTimeEffect = timeEffectManager.AddTimeEffect(
-                TimeEffectManager.InfiniteUsage, 
+                TimeEffectManager.InfiniteUsage,
                 m_coolDown,
                 (time) =>
                 {
                     CreateSignal(new BoardPosition(blackBoard.slot.pos));
-                }, 
-                () => { m_createSignalTimeEffect = null;});
+                },
+                () => { m_createSignalTimeEffect = null; },
+                true);
         }
 
-        public override void UnTrigger(EffectBlackBoard blackBoard)
+        public override void OnUnTrigger(EffectBlackBoard blackBoard)
         {
             Debug.Assert(m_createSignalTimeEffect != null);
             var manager = GameManager.Instance.GetTimeEffectManager();
@@ -55,10 +54,7 @@ namespace InGame.Effects
 
         private void CreateSignal(BoardPosition pos)
         {
-            if (m_module == null)
-            {
-                var x = 1 + 1;
-            }
+
             Debug.Assert(m_module != null);
             var signalController = GameManager.Instance.GetSignalController();
 

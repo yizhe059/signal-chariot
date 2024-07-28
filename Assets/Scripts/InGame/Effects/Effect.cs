@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using InGame.Boards;
 using InGame.Boards.Modules;
 using InGame.Boards.Signals;
@@ -16,6 +17,9 @@ namespace InGame.Effects
         //placing effect
         public Slot slot;
         public Module module;
+        
+        // test
+        public bool isTest = false;
         public void Clean()
         {
             signal = null;
@@ -28,14 +32,27 @@ namespace InGame.Effects
     public abstract class Effect
     {
         protected Module m_module;
+
+        protected virtual bool canEffectByTest => false;
             
         public void SetModule(Module module) => m_module = module;
 
         public Module GetModule(Module module) => m_module;
-        
-        public abstract void Trigger(EffectBlackBoard blackBoard);
 
-        public virtual void UnTrigger(EffectBlackBoard blackBoard)
+        public void Trigger(EffectBlackBoard blackBoard)
+        {
+            if (blackBoard.isTest && !canEffectByTest) return;
+            OnTrigger(blackBoard);
+        }
+        
+        public abstract void OnTrigger(EffectBlackBoard blackBoard);
+
+        public void UnTrigger(EffectBlackBoard blackBoard)
+        {
+            OnUnTrigger(blackBoard);
+        }
+        
+        public virtual void OnUnTrigger(EffectBlackBoard blackBoard)
         {
         }
 

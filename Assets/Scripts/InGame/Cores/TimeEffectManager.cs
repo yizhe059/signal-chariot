@@ -21,12 +21,15 @@ namespace InGame.Cores
         public UnityAction<float> action;
         public UnityAction finishAction;
         public TimeEffectStatus status;
+        public bool canOneTimeTrigger = false;
     }
 
 
     public class TimeEffectManager
     {
         public static readonly int InfiniteUsage = -1;
+
+        public static readonly float OneTimeTriggerTime = float.NaN;
         
         private float m_lastRecordedTime;
 
@@ -50,6 +53,14 @@ namespace InGame.Cores
         public void Start() => m_isOn = true;
 
         public void Stop() => m_isOn = false;
+
+        public void TriggerAllOneTimeTriggerEffect()
+        {
+            foreach (var timeEffect in m_effects)
+            {
+                if(timeEffect.canOneTimeTrigger) timeEffect.action.Invoke(OneTimeTriggerTime);
+            }
+        }
         
         public void Update(float deltaTime, float newTime)
         {
@@ -98,6 +109,15 @@ namespace InGame.Cores
             return newEffect;
         }
 
+        public TimeEffect AddTimeEffect(int usage, float triggerInterval, UnityAction<float> action,
+            UnityAction finishAction,
+            bool canOneTimeTrigger)
+        {
+            var timeEffect = AddTimeEffect(usage, triggerInterval, action, finishAction);
+            timeEffect.canOneTimeTrigger = canOneTimeTrigger;
+            return timeEffect;
+        }
+        
         public void RemoveTimeEffect(TimeEffect effect)
         {
             m_effects.Remove(effect);
