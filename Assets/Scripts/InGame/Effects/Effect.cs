@@ -2,6 +2,8 @@
 using InGame.Boards;
 using InGame.Boards.Modules;
 using InGame.Boards.Signals;
+using UnityEngine;
+using Time = InGame.Boards.Signals.Time;
 
 namespace InGame.Effects
 {
@@ -25,6 +27,12 @@ namespace InGame.Effects
     [System.Serializable]
     public abstract class Effect
     {
+        protected Module m_module;
+            
+        public void SetModule(Module module) => m_module = module;
+
+        public Module GetModule(Module module) => m_module;
+        
         public abstract void Trigger(EffectBlackBoard blackBoard);
 
         public virtual void UnTrigger(EffectBlackBoard blackBoard)
@@ -88,11 +96,23 @@ namespace InGame.Effects
             var signal = blackBoard.signal;
             var time = blackBoard.time;
             // cool down not finished
-            if (time - m_prevTriggerTime < m_coolDown) return;
+            if (time - m_prevTriggerTime < m_coolDown)
+            {
+                Debug.Log($"coolDown not passed {time - m_prevTriggerTime} and {m_coolDown}");
+                return;
+            }
 
-            if (m_maxUses != -1 && m_remainUses <= 0) return;
+            if (m_maxUses != -1 && m_remainUses <= 0)
+            {
+                Debug.Log("Uses not passed");
+                return;
+            }
 
-            if (signal.energy < m_energyConsumption) return;
+            if (signal.energy < m_energyConsumption)
+            {
+                Debug.Log("Energy not passed");
+                return;
+            }
 
             m_remainUses--;
             signal.ConsumeEnergy(m_energyConsumption);
@@ -103,6 +123,11 @@ namespace InGame.Effects
                 effect.Trigger(blackBoard);
             }
             
+        }
+
+        public void SetModule(Module module)
+        {
+            foreach(var effect in m_effects) effect.SetModule(module);
         }
     }
 
@@ -146,6 +171,11 @@ namespace InGame.Effects
             {
                 effect.UnTrigger(blackBoard);
             }
+        }
+        
+        public void SetModule(Module module)
+        {
+            foreach(var effect in m_effects) effect.SetModule(module);
         }
     }
 }

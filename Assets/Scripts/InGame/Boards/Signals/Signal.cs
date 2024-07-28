@@ -56,6 +56,8 @@ namespace InGame.Boards.Signals
             m_energy -= amount;
         }
 
+        public void IncreaseEnergy(int amount) => m_energy += amount;
+
         public void Start()
         {
             m_view?.StartMoving();
@@ -84,6 +86,11 @@ namespace InGame.Boards.Signals
             
             
             
+        }
+
+        public override string ToString()
+        {
+            return $"id: {m_id}, dir: {dir}, pos: {m_pos}, energy: {m_energy}";
         }
 
         public static BoardPosition GetDirVector(Direction dir)

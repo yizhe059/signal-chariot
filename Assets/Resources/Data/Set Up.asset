@@ -42,20 +42,56 @@ MonoBehaviour:
     - pos:
         x: 4
         y: 4
-      moduleID: 2
-      moduleName: Module 3
+      moduleID: 0
+      moduleName: "\u4FE1\u53F7\u6E90"
       orientation: 3
     - pos:
-        x: 3
+        x: 2
         y: 2
       moduleID: 1
-      moduleName: Module 2
+      moduleName: "\u589E\u5E45\u5668"
       orientation: 0
+    - pos:
+        x: 2
+        y: 4
+      moduleID: 2
+      moduleName: "\u8F6C\u5411\u5668"
+      orientation: 2
     slotPrefab: {fileID: 6622818502655049371, guid: 80c85fcaea6536748bb67591b4fc60b2, type: 3}
     signalPrefab: {fileID: 7786143621109699157, guid: e7f648ad21042b64ca742ba22438c585, type: 3}
     horizontalBorderPrefab: {fileID: 5301742505494614779, guid: bcf6e11ec71a8824abb63c5b40fe37fc, type: 3}
     verticalBorderPrefab: {fileID: 7963412977830916438, guid: 5a56758ef5e6eb94c9f6af23bbebbe0a, type: 3}
   moduleLibrary:
+  - name: "\u4FE1\u53F7\u6E90"
+    desc: 
+    otherPositions: []
+    prefab: {fileID: -341302883647983323, guid: 4f4f9e8cbb7996e41b35cf4c51cf482e, type: 3}
+    signalEffects: []
+    maxUses: 0
+    energyConsumption: 0
+    coolDown: 0
+    placingEffects:
+    - rid: 8366252776295235591
+  - name: "\u589E\u5E45\u5668"
+    desc: 
+    otherPositions: []
+    prefab: {fileID: 6219216261471928466, guid: ddab373e8e7f09a4c82d8f5654d9c978, type: 3}
+    signalEffects:
+    - rid: 8366252776295235592
+    maxUses: -1
+    energyConsumption: 0
+    coolDown: 0
+    placingEffects: []
+  - name: "\u8F6C\u5411\u5668"
+    desc: 
+    otherPositions: []
+    prefab: {fileID: 7680782621330569741, guid: 71a7ea6be685de642aef0c89bab4fbd5, type: 3}
+    signalEffects:
+    - rid: 8366252776295235593
+    maxUses: -1
+    energyConsumption: 0
+    coolDown: 0
+    placingEffects: []
   - name: Module 1
     desc: 
     otherPositions:
@@ -88,22 +124,19 @@ MonoBehaviour:
     energyConsumption: 0
     coolDown: 0
     placingEffects: []
-  - name: Module 3
-    desc: 
-    otherPositions: []
-    prefab: {fileID: -341302883647983323, guid: 4f4f9e8cbb7996e41b35cf4c51cf482e, type: 3}
-    signalEffects: []
-    maxUses: 0
-    energyConsumption: 0
-    coolDown: 0
-    placingEffects:
-    - rid: 8366252776295235587
   references:
     version: 2
     RefIds:
-    - rid: 8366252776295235587
+    - rid: 8366252776295235591
       type: {class: SignalActiveGenerationEffect, ns: InGame.Effects, asm: Assembly-CSharp}
       data:
-        m_coolDown: 3
-        m_signalStrength: 4
+        m_coolDown: 4
+        m_signalStrength: 2
         m_dir: 0
+    - rid: 8366252776295235592
+      type: {class: EnergyAmplifyEffect, ns: InGame.Effects, asm: Assembly-CSharp}
+      data:
+        amplifiedAmount: 1
+    - rid: 8366252776295235593
+      type: {class: SignalDirectionChangeEffect, ns: InGame.Effects, asm: Assembly-CSharp}
+      data: 

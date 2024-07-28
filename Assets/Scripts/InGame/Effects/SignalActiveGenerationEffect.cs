@@ -21,18 +21,16 @@ namespace InGame.Effects
         private Signal.Direction m_dir;
         
         private TimeEffect m_createSignalTimeEffect;
-        private Module m_module;
         
         public override void Trigger(EffectBlackBoard blackBoard)
         {
-            m_module = blackBoard.module;
             var timeEffectManager = GameManager.Instance.GetTimeEffectManager();
             m_createSignalTimeEffect = timeEffectManager.AddTimeEffect(
                 TimeEffectManager.InfiniteUsage, 
                 m_coolDown,
                 (time) =>
                 {
-                    CreateSignal(blackBoard.slot.pos);
+                    CreateSignal(new BoardPosition(blackBoard.slot.pos));
                 }, 
                 () => { m_createSignalTimeEffect = null;});
         }
@@ -43,7 +41,6 @@ namespace InGame.Effects
             var manager = GameManager.Instance.GetTimeEffectManager();
             manager.RemoveTimeEffect(m_createSignalTimeEffect);
             m_createSignalTimeEffect = null;
-            m_module = null;
         }
 
         public override Effect CreateCopy()
@@ -58,6 +55,10 @@ namespace InGame.Effects
 
         private void CreateSignal(BoardPosition pos)
         {
+            if (m_module == null)
+            {
+                var x = 1 + 1;
+            }
             Debug.Assert(m_module != null);
             var signalController = GameManager.Instance.GetSignalController();
 

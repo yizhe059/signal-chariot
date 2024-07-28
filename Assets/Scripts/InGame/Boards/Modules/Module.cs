@@ -369,6 +369,9 @@ namespace InGame.Boards.Modules
                 m_signalEffects = SignalEffects.CreateSignalEffects(other.m_signalEffects),
                 m_placingEffects = PlacingEffects.CreatePlacingEffects(other.m_placingEffects)
             };
+            newModule.m_signalEffects.SetModule(newModule);
+            newModule.m_placingEffects.SetModule(newModule);
+            
 
             return newModule;
         }

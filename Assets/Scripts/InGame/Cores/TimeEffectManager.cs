@@ -48,10 +48,11 @@ namespace InGame.Cores
         }
 
         public void Start() => m_isOn = true;
+
+        public void Stop() => m_isOn = false;
         
         public void Update(float deltaTime, float newTime)
         {
-            
             if (!m_isOn) return;
             
             for (int i = m_effects.Count - 1; i >= 0; i --)
