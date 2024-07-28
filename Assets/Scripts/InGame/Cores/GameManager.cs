@@ -50,10 +50,12 @@ namespace InGame.Cores
         public ModuleLib GetModuleLib() =>  m_moduleLib;
         public SignalController GetSignalController() => m_signalController;
         public TimeEffectManager GetTimeEffectManager() => m_timeEffectManager;
+
+        public Board GetBoard() => m_board;
         
         public void Update()
         {
-            m_signalController?.Update(UnityEngine.Time.deltaTime);
+            m_signalController?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
             m_timeEffectManager?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
         }
 
@@ -70,6 +72,11 @@ namespace InGame.Cores
         public void ChangeToModulePlacingState(Module module)
         {
             WorldState.instance.nextState = ModulePlacingState.CreateState(m_board, m_boardView, module);
+        }
+
+        public void ChangeToBoardBattleState()
+        {
+            WorldState.instance.nextState = BoardBattleState.CreateState(m_timeEffectManager, m_signalController);
         }
 
         public void ChangeToNullState()

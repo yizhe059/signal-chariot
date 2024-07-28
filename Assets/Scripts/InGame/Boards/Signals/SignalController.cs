@@ -2,13 +2,11 @@
 using InGame.Effects;
 using InGame.Views;
 using SetUps;
+using UnityEngine;
 using Utils;
 
 namespace InGame.Boards.Signals
 {
-
-    
-    
     public class SignalController
     {
         private class SignalPack
@@ -65,6 +63,10 @@ namespace InGame.Boards.Signals
 
 
             m_signals[id] = signalPack;
+            m_boardView.CreateSignalView(signalPack.signal);
+            if (m_isOn) signal.Start();
+            else signal.Stop();
+            
             return signal;
         }
 
@@ -84,6 +86,7 @@ namespace InGame.Boards.Signals
         {
             foreach (var signalPack in m_signals)
             {
+                if (signalPack == null) continue;
                 signalPack.timer = 0;
             }
         }
@@ -94,12 +97,21 @@ namespace InGame.Boards.Signals
 
             foreach (var signalPack in m_signals)
             {
-                m_boardView.CreateSignalView(signalPack.signal);
+                if (signalPack == null) continue;
                 signalPack.signal.Start();
             }
         }
 
-        public void Update(float deltaTime)
+        public void Stop()
+        {
+            m_isOn = false;
+            for (int i = 0; i < m_signals.Count; i++)
+            {
+                RemoveSignal(i);
+            }
+        }
+
+        public void Update(float deltaTime, float currentTime)
         {
             if (!m_isOn) return;
 
@@ -108,11 +120,11 @@ namespace InGame.Boards.Signals
                 var signalPack = m_signals[i];
                 if (signalPack == null) continue;
                 signalPack.timer += deltaTime;
-                signalPack.blackBoard.time += new Time(deltaTime);
+                
 
                 while (signalPack.timer >= Constants.SIGNAL_MOVING_DURATION)
                 {
-                    
+                    signalPack.blackBoard.time = new Time(currentTime);
                     signalPack.timer -= Constants.SIGNAL_MOVING_DURATION;
                     MoveSignal(signalPack.signal, signalPack.blackBoard, out signalPack.isDead);
                 }
@@ -150,6 +162,8 @@ namespace InGame.Boards.Signals
             {
                 isDead = false;
             }
+            
+            Debug.Log(signal);
             
         }
         

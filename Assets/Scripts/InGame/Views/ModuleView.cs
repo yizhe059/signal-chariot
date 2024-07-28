@@ -9,6 +9,11 @@ namespace InGame.Views
 
         public void SetWorldPos(Vector3 pos)
         {
+            transform.localPosition = pos;
+        }
+
+        public void SetGlobalWorldPos(Vector3 pos)
+        {
             transform.position = pos;
         }
 
