@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2de9e00e9447d581317c60030e041f, type: 3}
   m_Name: Set Up
   m_EditorClassIdentifier: 
+  chariotSetUp:
+    initialHealth: 50
+    maxHealth: 100
+    armor: 0
   boardSetUp:
     width: 7
     height: 7
@@ -96,11 +100,11 @@ MonoBehaviour:
     maxUses: 0
     energyConsumption: 0
     coolDown: 0
-    placingEffects: []
-  chariotSetUp:
-    initialHealth: 50
-    maxHealth: 100
-    armor: 0
+    placingEffects:
+    - rid: 75770181048336384
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 75770181048336384
+      type: {class: SignalActiveGenerationEffect, ns: InGame.Effects, asm: Assembly-CSharp}
+      data: 

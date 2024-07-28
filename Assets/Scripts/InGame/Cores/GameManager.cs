@@ -41,21 +41,9 @@ namespace InGame.Cores
 
             m_board = new Board(m_setUp.boardSetUp);
             m_boardView.Init(m_board, m_setUp.boardSetUp);
-
             m_signalController = SignalController.CreateSignalController(m_board, m_boardView);
-            
-            
+        
             ChangeToBoardWaitingState();
-            
-            m_signalController.CreateSignal(new SignalSetUp
-            {
-                dir = Signal.Direction.Right,
-                energy = 3,
-                pos = new BoardPosition(2,2)
-            });
-            
-            m_signalController.Reset();
-            m_signalController.Start();
         }
 
         public InputManager GetInputManager() => m_inputManager;
@@ -65,8 +53,8 @@ namespace InGame.Cores
         
         public void Update()
         {
-            m_signalController.Update(UnityEngine.Time.deltaTime);
-            m_timeEffectManager.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
+            m_signalController?.Update(UnityEngine.Time.deltaTime);
+            m_timeEffectManager?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
         }
 
         public void ChangeToBoardWaitingState()

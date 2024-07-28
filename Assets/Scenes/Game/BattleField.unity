@@ -333,6 +333,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2496734501301619399, guid: 0d43f0953e3db48c1a202fd16a3b76d5, type: 3}
+      propertyPath: m_boardView
+      value: 
+      objectReference: {fileID: 1850919201}
     - target: {fileID: 3364285549268338012, guid: 0d43f0953e3db48c1a202fd16a3b76d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -565,6 +569,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a1500a14499d42f8a09b5029259fe1c, type: 3}
+--- !u!114 &1850919201 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5452476414675404644, guid: 9a1500a14499d42f8a09b5029259fe1c, type: 3}
+  m_PrefabInstance: {fileID: 1850919200}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 648b2202730b426985b8eb03f279776a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1161615389014937082
 PrefabInstance:
   m_ObjectHideFlags: 0

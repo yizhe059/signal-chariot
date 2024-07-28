@@ -6,7 +6,8 @@ namespace InGame.Views
     public class SlotView : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer m_renderer;
-        [SerializeField] private Sprite m_selectableSprite, m_emptySprite;
+        private Sprite m_selectableSprite;
+        private Sprite m_emptySprite;
         
         private BoardPosition m_position;
         private BoardView m_boardView;
@@ -34,6 +35,10 @@ namespace InGame.Views
             m_boardView = boardView;
             m_position = position;
             transform.localPosition = worldPosition;
+
+            m_selectableSprite = Resources.Load<Sprite>("Arts/SelectableSlot");
+            m_emptySprite = Resources.Load<Sprite>("Arts/EmptySlot");
+
             OnStatusChanged(status);
         }
 
