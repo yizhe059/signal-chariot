@@ -37,9 +37,11 @@ public class BoardBarUI : MonoSingleton<BoardBarUI>, IHidable
     private void OnSignalClicked()
     {   
         if(GameManager.Instance.GetCurrentInGameState() == InGameStateType.BoardTestState){
+            m_slotButton.text = "Add Slot";
             m_signalButton.text = "Test Signal";
             GameManager.Instance.ChangeToBoardWaitingState();
         }else{
+            m_slotButton.text = "Add Slot";
             m_signalButton.text = "Stop Signal";
             GameManager.Instance.ChangeToBoardBattleState();
         }
@@ -49,9 +51,11 @@ public class BoardBarUI : MonoSingleton<BoardBarUI>, IHidable
     {
         if(GameManager.Instance.GetCurrentInGameState() == InGameStateType.AddSlotState){
             m_slotButton.text = "Add Slot";
+            m_signalButton.text = "Test Signal";
             GameManager.Instance.ChangeToBoardWaitingState();
         }else{
             m_slotButton.text = "Exit Slot";
+            m_signalButton.text = "Test Signal";
             GameManager.Instance.ChangeToAddSlotState();
         }
     }
