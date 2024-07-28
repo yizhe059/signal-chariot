@@ -2,6 +2,7 @@
 using InGame.Boards;
 using InGame.Cores;
 using InGame.Views;
+using InGame.UI;
 using UnityEngine;
 
 namespace InGame.InGameStates
@@ -32,6 +33,10 @@ namespace InGame.InGameStates
             // register the on click event for the board
             GameManager.Instance.GetInputManager().RegisterClickEvent(OnClicked);
 
+            BattleProgressUI.Instance.Hide();
+            BattleResultUI.Instance.Hide();
+            ChariotStatusUI.Instance.Show();
+            NavigationBarUI.Instance.Show();
         }
 
         public override void Exit()

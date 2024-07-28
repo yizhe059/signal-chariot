@@ -17,7 +17,7 @@ namespace InGame.UI
 
         public void Hide()
         {
-            m_root.style.display = DisplayStyle.None;
+            m_doc.rootVisualElement.style.display = DisplayStyle.None;
         }
 
         public void Show()

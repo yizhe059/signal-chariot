@@ -1,4 +1,5 @@
 ﻿using InGame.Boards.Signals;
+using InGame.UI;
 using InGame.Cores;
 
 namespace InGame.InGameStates
@@ -17,6 +18,11 @@ namespace InGame.InGameStates
             
             m_timeEffectManager.Start();
             m_signalController.Start();
+
+            BattleProgressUI.Instance.Hide();
+            BattleResultUI.Instance.Hide();
+            ChariotStatusUI.Instance.Show();
+            NavigationBarUI.Instance.Show();
         }
 
         public override void Exit()

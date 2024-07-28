@@ -2,6 +2,7 @@
 using InGame.Boards.Modules;
 using InGame.Cores;
 using InGame.Views;
+using InGame.UI;
 using UnityEngine;
 using Utils;
 
@@ -25,6 +26,11 @@ namespace InGame.InGameStates
             GameManager.Instance.GetInputManager().RegisterMouseMoveEvent(OnMouseMove);
             GameManager.Instance.GetInputManager().RegisterRotateEvent(OnRotatePressed);
             GameManager.Instance.GetInputManager().RegisterClickEvent(OnClick);
+
+            BattleProgressUI.Instance.Hide();
+            BattleResultUI.Instance.Hide();
+            ChariotStatusUI.Instance.Show();
+            NavigationBarUI.Instance.Show();
         }
 
         public override void Exit()

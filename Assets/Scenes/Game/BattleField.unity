@@ -919,7 +919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3771438629443876248, guid: da47b063ebe894afaaa8fee2b82c91a3, type: 3}
       propertyPath: m_Name
-      value: BattleResults
+      value: BattleResult
       objectReference: {fileID: 0}
     - target: {fileID: 3771438629443876248, guid: da47b063ebe894afaaa8fee2b82c91a3, type: 3}
       propertyPath: m_IsActive
