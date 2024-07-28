@@ -5,11 +5,14 @@ namespace InGame.InGameStates
     public enum InGameStateType
     {
         None,
+        // Preparation Sub-states
         AddSlotState,
         BoardWaitingState,
         ModulePlacingState,
         BoardTestState,
+        // Battle Sub-states
         BattleState,
+        BattleResultState,
     }
     public abstract class InGameState : IState<InGameState>
     {
