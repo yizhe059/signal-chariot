@@ -92,7 +92,9 @@ namespace InGame.Views
 
         public bool GetXY(Vector2 worldPosition, out int x, out int y)
         {
-            m_slots.GetXY(worldPosition, out x, out y);
+            Vector2 boardWorldPosition = transform.position;
+            Vector2 localPosition = worldPosition - boardWorldPosition;
+            m_slots.GetXY(localPosition, out x, out y);
             
             if ((x >= 0 && x < m_slots.width) && (y >= 0 && y < m_slots.height))
             {
@@ -106,6 +108,8 @@ namespace InGame.Views
         
         public bool GetBoardPosition(Vector2 worldPosition, out BoardPosition boardPos)
         {
+            Vector2 boardWorldPosition = transform.position;
+            Vector2 localPosition = worldPosition - boardWorldPosition;
             m_slots.GetXY(worldPosition, out int x, out int y);
             boardPos.x = x;
             boardPos.y = y;
