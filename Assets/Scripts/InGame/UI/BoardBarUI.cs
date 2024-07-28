@@ -36,7 +36,7 @@ public class BoardBarUI : MonoSingleton<BoardBarUI>, IHidable
 
     private void OnSignalClicked()
     {   
-        if(GameManager.Instance.GetCurrentInGameState() == InGameStateType.BoardBattleState){
+        if(GameManager.Instance.GetCurrentInGameState() == InGameStateType.BoardTestState){
             m_signalButton.text = "Test Signal";
             GameManager.Instance.ChangeToBoardWaitingState();
         }else{
