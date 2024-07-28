@@ -1,11 +1,12 @@
 using SetUps;
 
-namespace Chariots
+namespace InGame.BattleFields.Chariots
 {
     public class Chariot
     {
         private LimitedProperty m_health;
         private UnlimitedProperty m_armor;
+        private UnlimitedProperty m_speed;
 
         public Chariot(ChariotSetUp setUp)
         {
@@ -18,6 +19,11 @@ namespace Chariots
             m_armor = new UnlimitedProperty(
                 setUp.armor,
                 PropertyType.Armor
+            );
+
+            m_speed = new UnlimitedProperty(
+                setUp.speed,
+                PropertyType.Speed
             );
         }
 
@@ -62,6 +68,25 @@ namespace Chariots
         public void DecreaseArmor(int delta)
         {
             m_armor.current -= delta;
+        }
+        #endregion
+
+        #region Speed
+        public float GetSpeed()
+        {
+            return m_speed.current;
+        }
+        public void SetSpeed(int val)
+        {
+            m_speed.current = val;
+        }
+        public void IncreaseSpeed(int delta)
+        {
+            m_speed.current += delta;
+        }
+        public void DecreaseSpeed(int delta)
+        {
+            m_speed.current -= delta;
         }
         #endregion
     }

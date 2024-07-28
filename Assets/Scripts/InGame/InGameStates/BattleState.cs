@@ -2,17 +2,21 @@ using UnityEngine;
 
 using InGame.Cores;
 using InGame.UI;
+using InGame.Views;
+using InGame.BattleFields.Chariots;
 
 namespace InGame.InGameStates
 {
     public class BattleState : InGameState
     {
         public override InGameStateType type => InGameStateType.BattleState;
+        private ChariotView m_chariotView;
+        private Chariot m_chariot;
 
         public override void Enter(InGameState last)
         {
             Debug.Log("Enter battle");
-            GameManager.Instance.GetInputManager().RegisterClickEvent(OnClicked);
+            GameManager.Instance.GetInputManager().RegisterMoveEvent(OnMoveKeyPressed);
 
             BattleProgressUI.Instance.Show();
             BattleResultUI.Instance.Hide();
@@ -26,7 +30,7 @@ namespace InGame.InGameStates
         public override void Exit()
         {
             Debug.Log("Exit battle");
-            GameManager.Instance.GetInputManager().UnregisterClickEvent(OnClicked);
+            GameManager.Instance.GetInputManager().UnregisterClickEvent(OnMoveKeyPressed);
 
             BattleProgressUI.Instance.Hide();
             BattleResultUI.Instance.Show();
@@ -37,16 +41,24 @@ namespace InGame.InGameStates
             // TODO restore board view
         }
         
-        private void OnClicked(Vector2 worldPosition)
+        private void OnMoveKeyPressed(Vector2 inputDirection)
         {
+            float x = inputDirection.x;
+            float y = inputDirection.y;
 
+            m_chariotView.moveDirection = new Vector3(
+                x * Mathf.Sqrt(1 - y * y * 0.5f), 
+                y * Mathf.Sqrt(1 - x * x * 0.5f), 
+                0
+            ) * Time.deltaTime * m_chariot.GetSpeed();
         }
 
-        public static BattleState CreateState()
+        public static BattleState CreateState(Chariot chariot, ChariotView chariotView)
         {
             var state = new BattleState
             {
-
+                m_chariot = chariot,
+                m_chariotView = chariotView,
             };
             return state;
         }

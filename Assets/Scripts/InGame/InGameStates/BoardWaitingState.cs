@@ -59,7 +59,6 @@ namespace InGame.InGameStates
             {
                 m_board = board,
                 m_boardView = boardView,
-
             };
             return state;
         }

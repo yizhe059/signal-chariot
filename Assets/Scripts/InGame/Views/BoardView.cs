@@ -67,7 +67,6 @@ namespace InGame.Views
             m_signalsTransform.parent = transform;
             m_signalPrefab = boardSetUp.signalPrefab;
             m_signalsTransform.localPosition = Vector3.zero;
-
         }
 
         public void CreateModuleView(Module module, Vector3 pos)
