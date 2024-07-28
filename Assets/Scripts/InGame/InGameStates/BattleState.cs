@@ -43,14 +43,7 @@ namespace InGame.InGameStates
         
         private void OnMoveKeyPressed(Vector2 inputDirection)
         {
-            float x = inputDirection.x;
-            float y = inputDirection.y;
-
-            m_chariotView.moveDirection = new Vector3(
-                x * Mathf.Sqrt(1 - y * y * 0.5f), 
-                y * Mathf.Sqrt(1 - x * x * 0.5f), 
-                0
-            ) * Time.deltaTime * m_chariot.GetSpeed();
+            m_chariotView.SetMoveDirection(inputDirection);
         }
 
         public static BattleState CreateState(Chariot chariot, ChariotView chariotView)

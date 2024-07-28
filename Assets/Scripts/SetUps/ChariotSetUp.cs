@@ -11,6 +11,6 @@ namespace SetUps
 
         public float armor = 0;
 
-        public float speed = 0.5f;
+        public float speed = 1f;
     }
 }

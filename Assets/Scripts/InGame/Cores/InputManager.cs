@@ -22,7 +22,7 @@ namespace InGame.Cores
             m_playerInput.actions["MousePos"].performed += OnMouseMove;
             m_playerInput.actions["Rotate"].started += OnRotate;
 
-            m_playerInput.actions["Move"].started += OnMoveKeyPressed;
+            m_playerInput.actions["Move"].performed += OnMoveKeyPressed;
             m_playerInput.actions["Move"].canceled += OnMoveKeyReleased;
         }
 

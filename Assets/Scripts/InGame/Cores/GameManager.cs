@@ -52,6 +52,7 @@ namespace InGame.Cores
             GameObject chariotPref = Resources.Load<GameObject>("Prefabs/3C/ChariotView");
             GameObject chariotGO = Instantiate(chariotPref);
             m_chariotView = chariotGO.GetComponent<ChariotView>();
+            m_chariotView.Init(m_chariot);
         }
 
         private void InitBoard()
