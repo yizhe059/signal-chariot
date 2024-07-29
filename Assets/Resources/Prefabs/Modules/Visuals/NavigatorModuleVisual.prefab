@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4780830958738539662}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NavigatorModuleVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 720285416348908909}
   - component: {fileID: 5196708137194271616}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: image
   m_TagString: Untagged
   m_Icon: {fileID: 0}

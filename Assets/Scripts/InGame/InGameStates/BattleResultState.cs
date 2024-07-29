@@ -11,6 +11,11 @@ namespace InGame.InGameStates
 
         public override void Enter(InGameState last)
         {
+            var cameraManager = GameManager.Instance.GetCameraManager();
+            cameraManager.BoardCameraSetActive(false);
+            cameraManager.MiniBoardCameraSetActive(false);
+            cameraManager.BattleCameraSetActive(true);
+            
             Debug.Log("Enter battle result");
 
             BattleProgressUI.Instance.Show();

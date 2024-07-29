@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6229461674277738196}
   - component: {fileID: 6168380196666671742}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 590443367952920239}
   - component: {fileID: 6622818502655049371}
   - component: {fileID: 1627041530734466060}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EmptySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,8 +131,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_renderer: {fileID: 6168380196666671742}
-  m_selectableSprite: {fileID: 21300000, guid: 10d7b8332791993459af367627b2be2d, type: 3}
-  m_emptySprite: {fileID: 21300000, guid: 2b4edcf7dcb8045b1aa8af1f61a19285, type: 3}
 --- !u!61 &1627041530734466060
 BoxCollider2D:
   m_ObjectHideFlags: 0

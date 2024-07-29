@@ -15,6 +15,12 @@ namespace InGame.InGameStates
         public override void Enter(InGameState last)
         {
             Debug.Log("Enter BoardTest State");
+            
+            var cameraManager = GameManager.Instance.GetCameraManager();
+            cameraManager.BoardCameraSetActive(true);
+            cameraManager.MiniBoardCameraSetActive(false);
+            cameraManager.BattleCameraSetActive(false);
+            
             m_timeEffectManager.Reset();
             m_signalController.Reset();
             

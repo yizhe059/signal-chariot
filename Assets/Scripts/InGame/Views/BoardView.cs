@@ -87,6 +87,32 @@ namespace InGame.Views
             return GetSlotCenterWorldPosition(boardPos.x, boardPos.y);
         }
 
+        public void GetActiveBoardCornerPos(out Vector3 minPos, out Vector3 maxPos)
+        {
+            BoardPosition min = new BoardPosition(m_slots.width, m_slots.height);
+            BoardPosition max = new BoardPosition(-1, -1);
+            
+            for (int x = 0; x < m_slots.width; x++)
+            {
+                for (int y = 0; y < m_slots.height; y++)
+                {
+                    var status = m_board.GetSlotStatus(x, y);
+                    if (status is SlotStatus.Empty or SlotStatus.Occupied)
+                    {
+                        if (x < min.x) min.x = x;
+                        if (y < min.y) min.y = y;
+                        if (x > max.x) max.x = x;
+                        if (y > max.y) max.y = y;
+
+                    }
+                }
+            }
+
+            maxPos = m_slots.GetWorldPosition(max.x, max.y) + new Vector3(1,1,0) * m_slots.cellSize;
+            minPos = m_slots.GetWorldPosition(min.x, min.y);
+            
+        }
+        
         private void OnSlotStatusChanged(int x, int y, SlotStatus status)
         {
             m_slots.GetValue(x, y).OnStatusChanged(status);
@@ -136,5 +162,7 @@ namespace InGame.Views
             var view = signal.view;
             view.SelfDestroy();
         }
+        
+        
     }
 }

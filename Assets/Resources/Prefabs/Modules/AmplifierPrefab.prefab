@@ -10,7 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2357851555678894876, guid: 1736ed262d4c17445b4665d042388a63, type: 3}
       propertyPath: m_Name
-      value: Amplifier Variant
+      value: AmplifierPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 2357851555678894876, guid: 1736ed262d4c17445b4665d042388a63, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6567514327051405123, guid: 1736ed262d4c17445b4665d042388a63, type: 3}
       propertyPath: m_LocalPosition.x
@@ -113,9 +117,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 840446881484242770, guid: 64f2c1776a5fe414da08628915696bf2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5205289163105402052, guid: 64f2c1776a5fe414da08628915696bf2, type: 3}
       propertyPath: m_Name
       value: AmplifierVisual
+      objectReference: {fileID: 0}
+    - target: {fileID: 5205289163105402052, guid: 64f2c1776a5fe414da08628915696bf2, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

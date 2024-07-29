@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1197727892850291727}
   - component: {fileID: -341302883647983323}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SignalGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,9 +93,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6402268240623234331, guid: 594afc219f23c9c46a91f3585facb097, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6660651901213758261, guid: 594afc219f23c9c46a91f3585facb097, type: 3}
       propertyPath: m_Name
       value: Module3Visual
+      objectReference: {fileID: 0}
+    - target: {fileID: 6660651901213758261, guid: 594afc219f23c9c46a91f3585facb097, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

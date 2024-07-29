@@ -7,6 +7,7 @@ using InGame.Boards;
 using InGame.Boards.Modules;
 using InGame.Boards.Signals;
 using InGame.BattleFields.Chariots;
+using InGame.Cameras;
 using InGame.InGameStates;
 using InGame.Views;
 
@@ -23,6 +24,7 @@ namespace InGame.Cores
         [Header("Managers")]
         private InputManager m_inputManager;
         private TimeEffectManager m_timeEffectManager;
+        private CameraManager m_cameraManager;
 
         [Header("Chariot")]
         private Chariot m_chariot;
@@ -41,6 +43,7 @@ namespace InGame.Cores
 
             InitChariot();
             InitBoard();
+            InitCamera();
 
             ChangeToBoardWaitingState(); // initial state is board preparation
         }
@@ -70,6 +73,16 @@ namespace InGame.Cores
             m_signalController = SignalController.CreateSignalController(m_board, m_boardView);
         }
 
+        private void InitCamera()
+        {
+            var cameraPrefab = Resources.Load<CameraManager>("Prefabs/3C/CameraManager");
+            m_cameraManager = Instantiate(cameraPrefab);
+            m_cameraManager.transform.position = Vector3.zero;
+            
+            m_cameraManager.SetMiniBoardCameraPosition(m_boardView.transform.position);
+            m_cameraManager.SetBoardCameraPosition(m_boardView.transform.position);
+        }
+
         public void Update()
         {
             m_signalController?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
@@ -77,13 +90,17 @@ namespace InGame.Cores
         }
 
         #region Getters
+
+        public CameraManager GetCameraManager() => m_cameraManager;
         public InputManager GetInputManager() => m_inputManager;
         public ModuleLib GetModuleLib() =>  m_moduleLib;
         public SignalController GetSignalController() => m_signalController;
         public TimeEffectManager GetTimeEffectManager() => m_timeEffectManager;
         public Board GetBoard() => m_board;
+        public BoardView GetBoardView() => m_boardView;
         public Chariot GetChariot() => m_chariot;
         public InGameStateType GetCurrentInGameState() => WorldState.instance.currentState.type;
+        
         #endregion
 
         #region World State Machine
