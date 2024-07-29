@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using SetUps;
 
 namespace InGame.BattleFields.Chariots
@@ -7,6 +8,7 @@ namespace InGame.BattleFields.Chariots
         private LimitedProperty m_health;
         private UnlimitedProperty m_armor;
         private UnlimitedProperty m_speed;
+        private List<Tower> m_towers;
 
         public Chariot(ChariotSetUp setUp)
         {

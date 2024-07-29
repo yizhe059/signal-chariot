@@ -49,7 +49,7 @@ namespace InGame.Cores
         {
             m_chariot = new Chariot(m_setUp.chariotSetUp);
             
-            GameObject chariotPref = Resources.Load<GameObject>("Prefabs/3C/ChariotView");
+            GameObject chariotPref = Resources.Load<GameObject>("Prefabs/BattleField/ChariotView");
             GameObject chariotGO = Instantiate(chariotPref);
             m_chariotView = chariotGO.GetComponent<ChariotView>();
             m_chariotView.Init(m_chariot);

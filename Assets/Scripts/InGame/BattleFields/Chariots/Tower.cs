@@ -1,7 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using SetUps;
+using InGame.Effects;
+using System.Reflection;
 
 namespace InGame.BattleFields.Chariots
 {
@@ -18,14 +17,26 @@ namespace InGame.BattleFields.Chariots
         private UnlimitedProperty m_bulletCount;
         private SeekMode m_seekMode;
 
-        public Tower()
+        private Module m_module;
+
+        public static Tower CreateTower(TowerSetUp towerSetUp, Module module)
+        {
+            return new Tower();
+        }
+
+        public static void DestroyTower(Tower tower)
         {
 
         }
 
-        public void GenerateBullet()
+        public void Effect()
         {
             
+        }
+
+        public void GenerateBullet()
+        {
+
         }
     }
 
