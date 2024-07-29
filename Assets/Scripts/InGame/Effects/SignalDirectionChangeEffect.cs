@@ -5,8 +5,9 @@ namespace InGame.Effects
 {
     public class SignalDirectionChangeEffect: Effect
     {
-        
-        public override void Trigger(EffectBlackBoard blackBoard)
+        protected override bool canEffectByTest => true;
+
+        public override void OnTrigger(EffectBlackBoard blackBoard)
         {
             
             // new direction only depend on the orientation of the module

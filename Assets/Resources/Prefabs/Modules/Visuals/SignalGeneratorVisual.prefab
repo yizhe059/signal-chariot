@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 374471190008219982}
   - component: {fileID: 2354339243883499050}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5015189208427931695}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SignalGeneratorVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

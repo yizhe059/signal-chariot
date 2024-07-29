@@ -16,6 +16,24 @@ namespace InGame.InGameStates
         public override void Enter(InGameState last)
         {
             Debug.Log("Enter battle");
+
+            var boardView = GameManager.Instance.GetBoardView();
+            boardView.GetActiveBoardCornerPos(out var minPos, out var maxPos);
+
+            var center = (minPos + maxPos) / 2;
+            var delta = maxPos - minPos;
+            var length = Mathf.Max(delta.x, delta.y);
+            
+            var cameraManager = GameManager.Instance.GetCameraManager();
+            cameraManager.BoardCameraSetActive(false);
+            
+            cameraManager.MiniBoardCameraSetActive(true);
+            cameraManager.SetMiniBoardCameraPosition(center);
+            cameraManager.SetMiniBoardCameraSize(length / 2);
+            
+            cameraManager.BattleCameraSetActive(true);
+            
+            
             GameManager.Instance.GetInputManager().RegisterMoveEvent(OnMoveKeyPressed);
 
             BattleProgressUI.Instance.Show();
@@ -30,7 +48,7 @@ namespace InGame.InGameStates
         public override void Exit()
         {
             Debug.Log("Exit battle");
-            GameManager.Instance.GetInputManager().UnregisterClickEvent(OnMoveKeyPressed);
+            GameManager.Instance.GetInputManager().UnregisterMoveEvent(OnMoveKeyPressed);
 
             BattleProgressUI.Instance.Hide();
             BattleResultUI.Instance.Show();

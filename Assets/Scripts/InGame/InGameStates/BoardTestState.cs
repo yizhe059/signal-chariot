@@ -1,6 +1,7 @@
 ﻿using InGame.Boards.Signals;
 using InGame.UI;
 using InGame.Cores;
+using UnityEngine;
 
 namespace InGame.InGameStates
 {
@@ -13,11 +14,18 @@ namespace InGame.InGameStates
         
         public override void Enter(InGameState last)
         {
+            Debug.Log("Enter BoardTest State");
+            
+            var cameraManager = GameManager.Instance.GetCameraManager();
+            cameraManager.BoardCameraSetActive(true);
+            cameraManager.MiniBoardCameraSetActive(false);
+            cameraManager.BattleCameraSetActive(false);
+            
             m_timeEffectManager.Reset();
             m_signalController.Reset();
             
-            m_timeEffectManager.Start();
-            m_signalController.Start();
+            m_timeEffectManager.TriggerAllOneTimeTriggerEffect();
+            m_signalController.TestStart(OnNoSignal);
 
             BattleProgressUI.Instance.Hide();
             BattleResultUI.Instance.Hide();
@@ -28,14 +36,19 @@ namespace InGame.InGameStates
 
         public override void Exit()
         {
-            m_timeEffectManager.Stop();
-            m_signalController.Stop();
+            Debug.Log("Exit BoardTest State");
+            m_signalController.TestStop(OnNoSignal);
 
             BattleProgressUI.Instance.Show();
             BattleResultUI.Instance.Show();
             ChariotStatusUI.Instance.Hide();
             NavigationBarUI.Instance.Hide();
             BoardBarUI.Instance.Hide();
+        }
+
+        private void OnNoSignal()
+        {
+            GameManager.Instance.ChangeToBoardWaitingState();
         }
 
         public static BoardTestState CreateState(TimeEffectManager timeEffectManager, SignalController signalController)

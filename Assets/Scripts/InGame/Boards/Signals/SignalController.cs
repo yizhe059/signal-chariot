@@ -3,6 +3,7 @@ using InGame.Effects;
 using InGame.Views;
 using SetUps;
 using UnityEngine;
+using UnityEngine.Events;
 using Utils;
 
 namespace InGame.Boards.Signals
@@ -19,6 +20,9 @@ namespace InGame.Boards.Signals
         
         private List<SignalPack> m_signals = new List<SignalPack>();
         private bool m_isOn = false;
+        private bool m_isTest = false;
+        private UnityEvent m_onNoSignal = new UnityEvent();
+        
         private Board m_board;
         private BoardView m_boardView;
 
@@ -51,7 +55,8 @@ namespace InGame.Boards.Signals
             var blackBoard = new EffectBlackBoard
             {
                 signal = signal,
-                time = new Time(0f)
+                time = new Time(0f),
+                isTest = m_isTest
             };
             
             var signalPack = new SignalPack
@@ -94,21 +99,55 @@ namespace InGame.Boards.Signals
         public void Start()
         {
             m_isOn = true;
+            m_isTest = false;
 
             foreach (var signalPack in m_signals)
             {
                 if (signalPack == null) continue;
+                signalPack.blackBoard.isTest = m_isTest;
                 signalPack.signal.Start();
             }
         }
-
+        
         public void Stop()
         {
             m_isOn = false;
+            m_isTest = false;
             for (int i = 0; i < m_signals.Count; i++)
             {
                 RemoveSignal(i);
             }
+        }
+        
+        public void TestStart(UnityAction noSignalCallBack)
+        {
+            m_isOn = true;
+            m_isTest = true;
+            m_onNoSignal.AddListener(noSignalCallBack);
+            foreach (var signalPack in m_signals)
+            {
+                if (signalPack == null) continue;
+                signalPack.blackBoard.isTest = m_isTest;
+                signalPack.signal.Start();
+            }
+        }
+
+        public void TestStop(UnityAction noSignalCallBack)
+        {
+            m_isOn = false;
+            m_isTest = false;
+            m_onNoSignal.RemoveListener(noSignalCallBack);
+        }
+
+        public int GetSignalCount()
+        {
+            int count = 0;
+            foreach (var signal in m_signals)
+            {
+                if (signal != null) count++;
+            }
+
+            return count;
         }
 
         public void Update(float deltaTime, float currentTime)
@@ -131,6 +170,11 @@ namespace InGame.Boards.Signals
 
                 if (signalPack.isDead) RemoveSignal(i);
                  
+            }
+
+            if (m_isTest && GetSignalCount() == 0)
+            {
+                m_onNoSignal.Invoke();
             }
 
             

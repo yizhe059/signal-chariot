@@ -5,6 +5,7 @@ using InGame.Views;
 using InGame.UI;
 using UnityEngine;
 using Utils;
+using Utils.Common;
 
 namespace InGame.InGameStates
 {
@@ -23,9 +24,16 @@ namespace InGame.InGameStates
             Debug.Log("Enter Module placing state");
             m_moduleView = m_module.moduleView;
             m_exiting = false;
-            GameManager.Instance.GetInputManager().RegisterMouseMoveEvent(OnMouseMove);
+            
+            var cameraManager = GameManager.Instance.GetCameraManager();
+            cameraManager.BoardCameraSetActive(true);
+            cameraManager.MiniBoardCameraSetActive(false);
+            cameraManager.BattleCameraSetActive(false);
+            
+            var boardCamera = cameraManager.boardCamera;
+            GameManager.Instance.GetInputManager().RegisterMouseMoveEvent(boardCamera, OnMouseMove);
             GameManager.Instance.GetInputManager().RegisterRotateEvent(OnRotatePressed);
-            GameManager.Instance.GetInputManager().RegisterClickEvent(OnClick);
+            GameManager.Instance.GetInputManager().RegisterClickEvent(boardCamera, OnClick);
 
             BattleProgressUI.Instance.Hide();
             BattleResultUI.Instance.Hide();
@@ -37,10 +45,10 @@ namespace InGame.InGameStates
         public override void Exit()
         {
             Debug.Log("Exit Module placing state");
-            
-            GameManager.Instance.GetInputManager().UnregisterMouseMoveEvent(OnMouseMove);
+            var boardCamera = GameManager.Instance.GetCameraManager().boardCamera;
+            GameManager.Instance.GetInputManager().UnregisterMouseMoveEvent(boardCamera, OnMouseMove);
             GameManager.Instance.GetInputManager().UnregisterRotateEvent(OnRotatePressed);
-            GameManager.Instance.GetInputManager().UnregisterClickEvent(OnClick);
+            GameManager.Instance.GetInputManager().UnregisterClickEvent(boardCamera, OnClick);
 
             BattleProgressUI.Instance.Show();
             BattleResultUI.Instance.Show();

@@ -19,6 +19,11 @@ namespace InGame.InGameStates
         public override void Enter(InGameState last)
         {
             Debug.Log("Enter AddSlot");
+            var cameraManager = GameManager.Instance.GetCameraManager();
+            cameraManager.BoardCameraSetActive(true);
+            cameraManager.MiniBoardCameraSetActive(false);
+            cameraManager.BattleCameraSetActive(false);
+            
             // change all the adjacent slot to selectable
             m_selectableSlots = m_board.GetAdjacentSlots();
 
@@ -31,7 +36,8 @@ namespace InGame.InGameStates
             if (m_amount == 0) GameManager.Instance.ChangeToNullState();
             
             // register the on click event for the board
-            GameManager.Instance.GetInputManager().RegisterClickEvent(OnClicked);
+            var boardCamera = GameManager.Instance.GetCameraManager().boardCamera;
+            GameManager.Instance.GetInputManager().RegisterClickEvent(boardCamera, OnClicked);
 
             BattleProgressUI.Instance.Hide();
             BattleResultUI.Instance.Hide();
@@ -42,7 +48,8 @@ namespace InGame.InGameStates
 
         public override void Exit()
         {
-            GameManager.Instance.GetInputManager().UnregisterClickEvent(OnClicked);
+            var boardCamera = GameManager.Instance.GetCameraManager().boardCamera;
+            GameManager.Instance.GetInputManager().UnregisterClickEvent(boardCamera, OnClicked);
             
             foreach (var pos in m_selectableSlots)
             {

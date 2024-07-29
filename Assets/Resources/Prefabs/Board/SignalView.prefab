@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2846170345859393049}
   - component: {fileID: 2263918977170097479}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3979450343961972948}
   - component: {fileID: 7786143621109699157}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SignalView
   m_TagString: Untagged
   m_Icon: {fileID: 0}

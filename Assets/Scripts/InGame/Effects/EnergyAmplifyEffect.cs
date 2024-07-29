@@ -6,7 +6,7 @@ namespace InGame.Effects
     {
         public int amplifiedAmount;
         
-        public override void Trigger(EffectBlackBoard blackBoard)
+        public override void OnTrigger(EffectBlackBoard blackBoard)
         {
             var signal = blackBoard.signal;
             Debug.Assert(signal != null);
