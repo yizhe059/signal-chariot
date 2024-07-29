@@ -41,13 +41,12 @@ namespace InGame.InGameStates
             ChariotStatusUI.Instance.Show();
             NavigationBarUI.Instance.Hide();
             BoardBarUI.Instance.Hide();
-
-            // TODO minimise board view
         }
         
         public override void Exit()
         {
             Debug.Log("Exit battle");
+            
             GameManager.Instance.GetInputManager().UnregisterMoveEvent(OnMoveKeyPressed);
 
             BattleProgressUI.Instance.Hide();
@@ -55,8 +54,6 @@ namespace InGame.InGameStates
             ChariotStatusUI.Instance.Hide();
             NavigationBarUI.Instance.Show();
             BoardBarUI.Instance.Show();
-
-            // TODO restore board view
         }
         
         private void OnMoveKeyPressed(Vector2 inputDirection)

@@ -1,15 +1,18 @@
 using System.Collections.Generic;
+using InGame.Views;
 using SetUps;
 
 namespace InGame.BattleFields.Chariots
 {
     public class Chariot
     {
+        private ChariotView m_chariotView;
+        
         private LimitedProperty m_health;
         private UnlimitedProperty m_armor;
         private UnlimitedProperty m_speed;
         private List<Tower> m_towers;
-
+        
         public Chariot(ChariotSetUp setUp)
         {
             m_health = new LimitedProperty(
@@ -29,66 +32,35 @@ namespace InGame.BattleFields.Chariots
             );
         }
 
-        #region Health
-        public float GetHealth()
-        {
-            return m_health.current;
-        }
-
-        public void SetHealth(int val)
-        {
-            m_health.current = val;
-        }
-
-        public void IncreaseHealth(int delta)
-        {
-            m_health.current += delta;
-        }
-
-        public void DecreaseHealth(int delta)
-        {
-            m_health.current -= delta;
-        }
+        #region Properties
+        public LimitedProperty health { get { return m_health;}}
+        public UnlimitedProperty armor { get { return m_armor;}}
+        public UnlimitedProperty speed { get { return m_speed;}}
         #endregion
 
-        #region Armor
-        public float GetArmor()
+        #region Towers
+        public List<Tower> GetTowers() => m_towers;
+        
+        public void CopyTowers(List<Tower> towers)
         {
-            return m_armor.current;
+            m_towers = towers;
         }
 
-        public void SetArmor(int val)
+        public void AddTower(Tower tower)
         {
-            m_armor.current = val;
+            m_towers.Add(tower);
+            // TODO: add towerView to chariotView
         }
 
-        public void IncreaseArmor(int delta)
+        public void RemoveTower(Tower tower)
         {
-            m_armor.current += delta;
+            m_towers.Remove(tower);
+            // TODO: remove towerView from chariotView
         }
 
-        public void DecreaseArmor(int delta)
+        public void TowerEffect()
         {
-            m_armor.current -= delta;
-        }
-        #endregion
 
-        #region Speed
-        public float GetSpeed()
-        {
-            return m_speed.current;
-        }
-        public void SetSpeed(int val)
-        {
-            m_speed.current = val;
-        }
-        public void IncreaseSpeed(int delta)
-        {
-            m_speed.current += delta;
-        }
-        public void DecreaseSpeed(int delta)
-        {
-            m_speed.current -= delta;
         }
         #endregion
     }

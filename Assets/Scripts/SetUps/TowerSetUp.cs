@@ -1,13 +1,15 @@
+using UnityEngine;
+
 using InGame.BattleFields.Chariots;
 
 namespace SetUps
 {
     public class TowerSetUp
     {
-        private Bullet m_bullet;
-        private float m_bulletCount;
-        private float m_attack;
-        private SeekMode m_seekMode;
-        private Tower tower;
+        public Sprite sprite;
+        public BulletSetUp bulletSetUp;
+        public float bulletCount;
+        public SeekMode seekMode;
+        public float attackMultipler;
     }
 }

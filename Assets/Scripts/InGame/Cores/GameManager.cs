@@ -7,6 +7,7 @@ using InGame.Boards;
 using InGame.Boards.Modules;
 using InGame.Boards.Signals;
 using InGame.BattleFields.Chariots;
+using InGame.BattleFields.Enemies;
 using InGame.Cameras;
 using InGame.InGameStates;
 using InGame.Views;
@@ -35,6 +36,9 @@ namespace InGame.Cores
         private BoardView m_boardView;
         private ModuleLib m_moduleLib;
         private SignalController m_signalController;
+        
+        [Header("Enemy")]
+        private EnemyManager m_enemyManager;
 
         protected override void Init()
         {
@@ -90,7 +94,6 @@ namespace InGame.Cores
         }
 
         #region Getters
-
         public CameraManager GetCameraManager() => m_cameraManager;
         public InputManager GetInputManager() => m_inputManager;
         public ModuleLib GetModuleLib() =>  m_moduleLib;
@@ -100,7 +103,6 @@ namespace InGame.Cores
         public BoardView GetBoardView() => m_boardView;
         public Chariot GetChariot() => m_chariot;
         public InGameStateType GetCurrentInGameState() => WorldState.instance.currentState.type;
-        
         #endregion
 
         #region World State Machine
@@ -119,7 +121,7 @@ namespace InGame.Cores
             WorldState.instance.nextState = ModulePlacingState.CreateState(m_board, m_boardView, module);
         }
 
-        public void ChangeToBoardBattleState()
+        public void ChangeToBoardTestState()
         {
             WorldState.instance.nextState = BoardTestState.CreateState(m_timeEffectManager, m_signalController);
         }

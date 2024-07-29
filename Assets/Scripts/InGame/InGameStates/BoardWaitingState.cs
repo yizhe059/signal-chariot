@@ -46,9 +46,7 @@ namespace InGame.InGameStates
 
         private void OnClicked(Vector2 worldPosition)
         {
-            
             if (!m_boardView.GetXY(worldPosition, out int x, out int y)) return;
-            
             
             if (m_board.GetSlotStatus(x, y) == SlotStatus.Occupied)
             {

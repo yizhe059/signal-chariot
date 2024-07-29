@@ -9,7 +9,7 @@ namespace InGame.Views
 {
     public class ChariotView : MonoBehaviour
     {
-        private Vector3 m_moveDirection = new Vector3(0,0,0);
+        private Vector3 m_moveDirection = new(0,0,0);
         private Chariot m_chariot;
 
         public void Init(Chariot chariot)
@@ -36,7 +36,7 @@ namespace InGame.Views
                 x * Mathf.Sqrt(1 - y * y * 0.5f), 
                 y * Mathf.Sqrt(1 - x * x * 0.5f), 
                 0
-            ) * Time.deltaTime * m_chariot.GetSpeed();
+            ) * Time.deltaTime * m_chariot.speed.value;
         }
     }
 }

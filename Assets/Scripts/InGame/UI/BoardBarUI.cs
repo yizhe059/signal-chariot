@@ -43,7 +43,7 @@ public class BoardBarUI : MonoSingleton<BoardBarUI>, IHidable
         }else{
             m_slotButton.text = "Add Slot";
             m_signalButton.text = "Stop Signal";
-            GameManager.Instance.ChangeToBoardBattleState();
+            GameManager.Instance.ChangeToBoardTestState();
         }
     }
 
