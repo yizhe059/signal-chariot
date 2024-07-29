@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2323527059265833758}
   - component: {fileID: 3362860566789392551}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5725255756043695274}
   - component: {fileID: 2029615853284298330}
   - component: {fileID: 365710731080578806}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ChariotView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
