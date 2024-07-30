@@ -1,9 +1,12 @@
+using System;
+
+using UnityEngine;
+
 using SetUps;
 using InGame.Cores;
 using InGame.Views;
 using InGame.Boards.Modules;
-
-using UnityEngine;
+using InGame.BattleFields.Common;
 
 namespace InGame.BattleFields.Chariots
 {
@@ -15,27 +18,38 @@ namespace InGame.BattleFields.Chariots
 
     public class Tower
     {
+        [Header("View")]
         private TowerView m_towerView;
 
+        [Header("Properties")]
+        private UnlimitedProperty m_damageMultiplier;
+        
+        [Header("Bullet")]
         private BulletSetUp m_bulletSetUp;
         private UnlimitedProperty m_bulletCount;
         private SeekMode m_seekMode;
-        private UnlimitedProperty m_attackMultiplier;
+        
+        [Header("Module")]
         private Module m_module;
+        public Module module { get { return m_module;}}
 
+        #region Life Cycle
         public static Tower CreateTower(TowerSetUp towerSetUp, Module module)
         {
             UnlimitedProperty bulletCount = new(towerSetUp.bulletCount, PropertyType.BulletCount);
+            UnlimitedProperty attakMultiplier  = new(towerSetUp.damageMultipler, PropertyType.Multiplier);
             
             Tower tower = new()
             {
+                m_damageMultiplier = attakMultiplier,
                 m_bulletSetUp = towerSetUp.bulletSetUp,
                 m_bulletCount = bulletCount,
                 m_seekMode = towerSetUp.seekMode,
-                m_module = module
+                m_module = module,               
             };
             
             GameManager.Instance.GetChariot().AddTower(tower);
+            tower.CreateView();
 
             return tower;
         }
@@ -43,6 +57,15 @@ namespace InGame.BattleFields.Chariots
         public static void DestroyTower(Tower tower)
         {
             GameManager.Instance.GetChariot().RemoveTower(tower);
+        }
+        #endregion
+
+        private void CreateView()
+        {
+            GameObject towerPref = Resources.Load<GameObject>("Prefabs/BattleField/TowerView");
+            GameObject towerGO = GameObject.Instantiate(towerPref);
+            m_towerView = towerGO.GetComponent<TowerView>();
+            m_towerView.Init(this);
         }
 
         public void Effect()
@@ -56,7 +79,7 @@ namespace InGame.BattleFields.Chariots
             
             for(int i = 0; i < m_bulletCount.value; i++)
             {
-                new Bullet(m_bulletSetUp, target);
+                Bullet bullet = new(m_bulletSetUp, target, m_damageMultiplier.value);
             }
         }
 

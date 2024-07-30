@@ -179,6 +179,7 @@ MonoBehaviour:
   m_boardCamera: {fileID: 1842252410422755935}
   m_battleCamera: {fileID: 1163668498271188895}
   m_miniBoardCamera: {fileID: 5925833667066839654}
+  m_battleVirtualCamera: {fileID: 7302969138994297402}
 --- !u!1 &5156874556526978143
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,7 +323,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 4.5
+    OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -537,7 +538,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.5
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

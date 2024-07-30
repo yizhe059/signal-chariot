@@ -5,9 +5,19 @@ using InGame.UI;
 
 namespace InGame.InGameStates
 {
+    public enum BattleResultType
+    {
+        WaveWin,
+        BattleWin,
+        GameWin,
+        Fail
+    }
+
     public class BattleResultState : InGameState
     {
         public override InGameStateType type => InGameStateType.BattleResultState;
+
+        private BattleResultType m_resultType;
 
         public override void Enter(InGameState last)
         {
@@ -19,7 +29,10 @@ namespace InGame.InGameStates
             Debug.Log("Enter battle result");
 
             BattleProgressUI.Instance.Show();
+
             BattleResultUI.Instance.Show();
+            BattleResultUI.Instance.Switch(m_resultType);
+
             ChariotStatusUI.Instance.Show();
             NavigationBarUI.Instance.Hide();
             BoardBarUI.Instance.Hide();
@@ -39,11 +52,11 @@ namespace InGame.InGameStates
             // TODO restore board view
         }
 
-        public static BattleResultState CreateState()
+        public static BattleResultState CreateState(BattleResultType resultType)
         {
             var state = new BattleResultState
             {
-
+                m_resultType = resultType,
             };
             return state;
         }
