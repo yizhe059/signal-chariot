@@ -17,6 +17,7 @@ MonoBehaviour:
     maxHealth: 100
     armor: 0
     speed: 1
+    mod: 0
   boardSetUp:
     width: 7
     height: 7
@@ -72,7 +73,13 @@ MonoBehaviour:
     cellSize: 1
     originPosition: {x: 0.5, y: -4, z: 0}
     openSlots: []
-    modules: []
+    modules:
+    - pos:
+        x: 0
+        y: 7
+      moduleID: 3
+      moduleName: "\u673A\u70AE"
+      orientation: 0
     slotPrefab: {fileID: 6622818502655049371, guid: 80c85fcaea6536748bb67591b4fc60b2, type: 3}
     signalPrefab: {fileID: 7786143621109699157, guid: e7f648ad21042b64ca742ba22438c585, type: 3}
     horizontalBorderPrefab: {fileID: 5301742505494614779, guid: bcf6e11ec71a8824abb63c5b40fe37fc, type: 3}
@@ -87,13 +94,13 @@ MonoBehaviour:
     energyConsumption: 0
     coolDown: 0
     placingEffects:
-    - rid: 8366252776295235591
+    - rid: 8366252850089033732
   - name: "\u589E\u5E45\u5668"
     desc: 
     otherPositions: []
     prefab: {fileID: 6219216261471928466, guid: ddab373e8e7f09a4c82d8f5654d9c978, type: 3}
     signalEffects:
-    - rid: 8366252776295235592
+    - rid: 8366252850089033733
     maxUses: -1
     energyConsumption: 0
     coolDown: 0
@@ -103,11 +110,24 @@ MonoBehaviour:
     otherPositions: []
     prefab: {fileID: 7680782621330569741, guid: 71a7ea6be685de642aef0c89bab4fbd5, type: 3}
     signalEffects:
-    - rid: 8366252776295235593
+    - rid: 8366252850089033734
     maxUses: -1
     energyConsumption: 0
     coolDown: 0
     placingEffects: []
+  - name: "\u673A\u70AE"
+    desc: 
+    otherPositions:
+    - x: 1
+      y: 0
+    prefab: {fileID: 1402701477217004034, guid: 17646af2c7a669e49bb57947bbd60d0a, type: 3}
+    signalEffects:
+    - rid: 8366252850089033735
+    maxUses: -1
+    energyConsumption: 1
+    coolDown: 0
+    placingEffects:
+    - rid: 8366252850089033736
   - name: Module 1
     desc: 
     otherPositions:
@@ -143,16 +163,31 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 8366252776295235591
+    - rid: 8366252850089033732
       type: {class: SignalActiveGenerationEffect, ns: InGame.Effects, asm: Assembly-CSharp}
       data:
         m_coolDown: 4
         m_signalStrength: 2
         m_dir: 0
-    - rid: 8366252776295235592
+    - rid: 8366252850089033733
       type: {class: EnergyAmplifyEffect, ns: InGame.Effects, asm: Assembly-CSharp}
       data:
         amplifiedAmount: 1
-    - rid: 8366252776295235593
+    - rid: 8366252850089033734
       type: {class: SignalDirectionChangeEffect, ns: InGame.Effects, asm: Assembly-CSharp}
       data: 
+    - rid: 8366252850089033735
+      type: {class: TowerShootEffect, ns: InGame.Effects, asm: Assembly-CSharp}
+      data: 
+    - rid: 8366252850089033736
+      type: {class: PlacingTowerEffect, ns: InGame.Effects, asm: Assembly-CSharp}
+      data:
+        setUp:
+          sprite: {fileID: 21300000, guid: 7753e655875224145bc90d1a18485416, type: 3}
+          damageMultipler: 0
+          bulletSetUp:
+            sprite: {fileID: 21300000, guid: 494c2058d61db45a89aa442c3fa2acfb, type: 3}
+            damage: 0
+            speed: 0
+          bulletCount: 4
+          seekMode: 0
