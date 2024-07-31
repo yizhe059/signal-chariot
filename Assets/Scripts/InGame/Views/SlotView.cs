@@ -27,6 +27,10 @@ namespace InGame.Views
             {
                 gameObject.SetActive(true);
                 m_renderer.sprite = m_selectableSprite;
+            }else if (status == SlotStatus.Extra)
+            {
+                gameObject.SetActive(true);
+                m_renderer.sprite = m_emptySprite;
             }
         }
         
@@ -41,10 +45,6 @@ namespace InGame.Views
 
             OnStatusChanged(status);
         }
-
-        public void OnSlotClicked()
-        {
-            Debug.Log($"Slot {m_position} is clicked");
-        }
+        
     }
 }

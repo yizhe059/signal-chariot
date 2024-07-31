@@ -33,6 +33,7 @@ namespace InGame.Cores
 
         [Header("Board")]
         private Board m_board;
+        private Board m_extraBoard;
         private BoardView m_boardView;
         private ModuleLib m_moduleLib;
         private SignalController m_signalController;
@@ -68,11 +69,13 @@ namespace InGame.Cores
             m_moduleLib.Init(m_setUp.moduleLibrary);
 
             m_board = new Board(m_setUp.boardSetUp);
+
+            m_extraBoard = new Board(m_setUp.extraBoardSetUp, SlotStatus.Empty, true);
             
             GameObject boardPref = Resources.Load<GameObject>("Prefabs/Board/BoardView");
             GameObject boardGO = Instantiate(boardPref);
             m_boardView = boardGO.GetComponent<BoardView>();
-            m_boardView.Init(m_board, m_setUp.boardSetUp);
+            m_boardView.Init(m_board, m_extraBoard, m_setUp.boardSetUp, m_setUp.extraBoardSetUp);
             
             m_signalController = SignalController.CreateSignalController(m_board, m_boardView);
         }
@@ -108,7 +111,7 @@ namespace InGame.Cores
         #region World State Machine
         public void ChangeToBoardWaitingState()
         {
-            WorldState.instance.nextState = BoardWaitingState.CreateState(m_board, m_boardView);
+            WorldState.instance.nextState = BoardWaitingState.CreateState(m_board, m_extraBoard, m_boardView);
         }
         
         public void ChangeToAddSlotState()
@@ -118,7 +121,7 @@ namespace InGame.Cores
 
         public void ChangeToModulePlacingState(Module module)
         {
-            WorldState.instance.nextState = ModulePlacingState.CreateState(m_board, m_boardView, module);
+            WorldState.instance.nextState = ModulePlacingState.CreateState(m_board, m_extraBoard, m_boardView, module);
         }
 
         public void ChangeToBoardTestState()

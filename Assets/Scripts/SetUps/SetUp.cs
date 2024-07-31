@@ -8,6 +8,7 @@ namespace SetUps
     {
         public ChariotSetUp chariotSetUp;
         public BoardSetUp boardSetUp;
+        public BoardSetUp extraBoardSetUp;
         public List<ModuleSetUp> moduleLibrary;
     }
 }

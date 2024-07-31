@@ -12,11 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2de9e00e9447d581317c60030e041f, type: 3}
   m_Name: Set Up
   m_EditorClassIdentifier: 
+  chariotSetUp:
+    initialHealth: 50
+    maxHealth: 100
+    armor: 0
+    speed: 1
   boardSetUp:
     width: 7
     height: 7
     cellSize: 1
-    originPosition: {x: -3.5, y: -3.5, z: 0}
+    originPosition: {x: -7.5, y: -3.5, z: 0}
     openSlots:
     - x: 2
       y: 2
@@ -57,6 +62,17 @@ MonoBehaviour:
       moduleID: 2
       moduleName: "\u8F6C\u5411\u5668"
       orientation: 2
+    slotPrefab: {fileID: 6622818502655049371, guid: 80c85fcaea6536748bb67591b4fc60b2, type: 3}
+    signalPrefab: {fileID: 7786143621109699157, guid: e7f648ad21042b64ca742ba22438c585, type: 3}
+    horizontalBorderPrefab: {fileID: 5301742505494614779, guid: bcf6e11ec71a8824abb63c5b40fe37fc, type: 3}
+    verticalBorderPrefab: {fileID: 7963412977830916438, guid: 5a56758ef5e6eb94c9f6af23bbebbe0a, type: 3}
+  extraBoardSetUp:
+    width: 7
+    height: 8
+    cellSize: 1
+    originPosition: {x: 0.5, y: -4, z: 0}
+    openSlots: []
+    modules: []
     slotPrefab: {fileID: 6622818502655049371, guid: 80c85fcaea6536748bb67591b4fc60b2, type: 3}
     signalPrefab: {fileID: 7786143621109699157, guid: e7f648ad21042b64ca742ba22438c585, type: 3}
     horizontalBorderPrefab: {fileID: 5301742505494614779, guid: bcf6e11ec71a8824abb63c5b40fe37fc, type: 3}

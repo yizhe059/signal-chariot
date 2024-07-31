@@ -27,5 +27,6 @@ namespace SetUps
         public SlotView slotPrefab;
         public SignalView signalPrefab;
         public Transform horizontalBorderPrefab, verticalBorderPrefab;
+        
     }
 }

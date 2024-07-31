@@ -8,7 +8,8 @@ namespace InGame.Boards
         Hidden,
         Empty,
         Occupied,
-        Selectable
+        Selectable,
+        Extra
     }
     
     [System.Serializable]

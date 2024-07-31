@@ -46,6 +46,10 @@ namespace InGame.Boards
 
         private List<Module> m_modules = new List<Module>();
 
+        private bool m_noEffectTrigger = false;
+        
+        public bool SetNoEffectTrigger(bool val) => m_noEffectTrigger = val;
+
         #region Constructors
 
         private Board(int width, int height, float cellSize, Vector3 originPosition) : base(width, height, cellSize,
@@ -97,6 +101,28 @@ namespace InGame.Boards
             }
         }
 
+        public Board(BoardSetUp setUp, SlotStatus status, bool noEffectTrigger): base(setUp.width, setUp.height, setUp.cellSize, setUp.originPosition,
+            (grid, x, y) => Slot.GenerateSlot(x, y))
+        {
+            m_noEffectTrigger = noEffectTrigger;
+            
+            for (int x = 0; x < m_width; x++)
+            {
+                for (int y = 0; y < m_height; y++)
+                {
+                    SetSlotStatus(x, y, status);
+                }
+            }
+            
+            foreach (var activeModule in setUp.modules)
+            {
+                var module = GameManager.Instance.GetModuleLib().GenerateModule(activeModule.moduleID);
+                module.SetOrientation(activeModule.orientation);
+                PlaceModule(module, activeModule.pos);
+
+            }
+        }
+
         public static Board GenerateBoard(int width, int height, float cellSize, Vector3 originPosition)
         {
             return new Board(width, height, cellSize, originPosition);
@@ -135,12 +161,16 @@ namespace InGame.Boards
                 SetModuleSlot(boardPos.x, boardPos.y, moduleSlot);
                 SetSlotStatus(boardPos.x, boardPos.y, SlotStatus.Occupied);
             }
-            
-            module.TriggerPlacingEffect(new EffectBlackBoard
+
+            if (!m_noEffectTrigger)
             {
-                slot = GetValue(pivotPos.x, pivotPos.y),
-                module = module
-            });
+                module.TriggerPlacingEffect(new EffectBlackBoard
+                {
+                    slot = GetValue(pivotPos.x, pivotPos.y),
+                    module = module
+                });
+            }
+            
 
             return true;
         }
@@ -164,8 +194,13 @@ namespace InGame.Boards
                 SetModuleSlot(pos.x, pos.y, null);
                 SetSlotStatus(pos.x, pos.y, SlotStatus.Empty);
             }
+
+            if (!m_noEffectTrigger)
+            {
+                module.UnTriggerPlacingEffect(new EffectBlackBoard{slot = GetValue(x, y)});
+            }
+
             
-            module.UnTriggerPlacingEffect(new EffectBlackBoard{slot = GetValue(x, y)});
 
             return module;
         }

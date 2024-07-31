@@ -207,7 +207,7 @@ namespace InGame.Boards.Signals
                 isDead = false;
             }
             
-            Debug.Log(signal);
+            //Debug.Log(signal);
             
         }
         

@@ -15,7 +15,7 @@ namespace InGame.InGameStates
 
         private Module m_module;
         private ModuleView m_moduleView;
-        private Board m_board;
+        private Board m_board, m_extraBoard;
         private BoardView m_boardView;
         private bool m_exiting;
 
@@ -66,21 +66,23 @@ namespace InGame.InGameStates
 
         private void OnClick(Vector2 worldPos)
         {
-            if (!m_boardView.GetXY(worldPos, out int x, out int y)) return;
+            if (!m_boardView.GetXY(worldPos, out int x, out int y, out bool isNormal)) return;
 
             BoardPosition pivotPos;
             pivotPos.x = x;
             pivotPos.y = y;
 
-            if (m_board.PlaceModule(m_module, pivotPos))
+            var board = isNormal ? m_board : m_extraBoard;
+
+            if (board.PlaceModule(m_module, pivotPos))
             {
                 m_exiting = true;
-                var pos = m_boardView.GetSlotCenterWorldPosition(pivotPos);
+                var pos = m_boardView.GetSlotCenterWorldPosition(pivotPos, isNormal);
                 pos.z = Constants.MODULE_DEPTH;
                 
                 m_moduleView.SetWorldPos(pos);
                 GameManager.Instance.ChangeToBoardWaitingState();
-                Debug.Log(m_board);
+                //Debug.Log(m_board);
             }
             else
             {
@@ -93,11 +95,12 @@ namespace InGame.InGameStates
             m_moduleView.Rotate();
         }
 
-        public static ModulePlacingState CreateState(Board board, BoardView boardView, Module module)
+        public static ModulePlacingState CreateState(Board board, Board extraBoard, BoardView boardView, Module module)
         {
             return new ModulePlacingState
             {
                 m_board = board,
+                m_extraBoard = extraBoard,
                 m_boardView = boardView,
                 m_module = module
             };

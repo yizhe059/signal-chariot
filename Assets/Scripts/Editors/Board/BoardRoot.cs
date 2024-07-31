@@ -15,6 +15,13 @@ namespace Editors.Board
         {
             var board= transform.Find("Board").GetComponent<BoardEdit>();
             setUp.boardSetUp = board.GenerateBoardSetUp();
+            
+            var extraBoard= transform.Find("ExtraBoard").GetComponent<BoardEdit>();
+            setUp.extraBoardSetUp = extraBoard.GenerateBoardSetUp();
+            
+            // force they all have the same cell size
+            setUp.extraBoardSetUp.cellSize = setUp.boardSetUp.cellSize;
+            
             EditorUtility.SetDirty(setUp);
             Debug.Log("Save Asset");
 
