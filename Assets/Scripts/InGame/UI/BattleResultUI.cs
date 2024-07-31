@@ -3,6 +3,7 @@ using UnityEngine.UIElements;
 
 using InGame.InGameStates;
 using Utils.Common;
+using Utils;
 
 namespace InGame.UI
 {
@@ -16,9 +17,9 @@ namespace InGame.UI
 
         private void Awake()
         {
-            m_waveWin = Resources.Load<VisualTreeAsset>("UI/Battle/WaveWin");
-            m_battleWin = Resources.Load<VisualTreeAsset>("UI/Battle/BattleWin");
-            m_fail = Resources.Load<VisualTreeAsset>("UI/Battle/BattleFail");
+            m_waveWin = Resources.Load<VisualTreeAsset>(Constants.UI_WAVE_WIN_PATH);
+            m_battleWin = Resources.Load<VisualTreeAsset>(Constants.UI_BATTLE_WIN_PATH);
+            m_fail = Resources.Load<VisualTreeAsset>(Constants.UI_FAIL_PATH);
         }
 
         public void Hide()

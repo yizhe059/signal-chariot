@@ -6,6 +6,8 @@ using InGame.Views;
 using InGame.Boards.Modules;
 using InGame.BattleFields.Common;
 using SetUps;
+using Utils;
+using UnityEngine.Events;
 
 namespace InGame.BattleFields.Chariots
 {
@@ -18,6 +20,7 @@ namespace InGame.BattleFields.Chariots
         private LimitedProperty m_health;
         private UnlimitedProperty m_armor;
         private UnlimitedProperty m_speed;
+        private UnlimitedProperty m_mod;
 
         [Header("Tower")]
         private List<Tower> m_towers;
@@ -27,17 +30,22 @@ namespace InGame.BattleFields.Chariots
             m_health = new LimitedProperty(
                 setUp.maxHealth, 
                 setUp.initialHealth, 
-                PropertyType.Health
+                LimitedPropertyType.Health
             );
 
             m_armor = new UnlimitedProperty(
                 setUp.armor,
-                PropertyType.Armor
+                UnlimitedPropertyType.Armor
             );
 
             m_speed = new UnlimitedProperty(
                 setUp.speed,
-                PropertyType.Speed
+                UnlimitedPropertyType.Speed
+            );
+
+            m_mod = new UnlimitedProperty(
+                setUp.mod,
+                UnlimitedPropertyType.Mod
             );
 
             CreateView();
@@ -48,8 +56,10 @@ namespace InGame.BattleFields.Chariots
 
         private void CreateView()
         {
-            GameObject chariotPref = Resources.Load<GameObject>("Prefabs/BattleField/ChariotView");
+            GameObject chariotPref = Resources.Load<GameObject>(Constants.GO_CHARIOT_PATH);
             GameObject chariotGO = GameObject.Instantiate(chariotPref);
+            chariotGO.transform.position = new(0, 0, Constants.CHARIOT_DEPTH);
+
             m_chariotView = chariotGO.GetComponent<ChariotView>();
             m_chariotView.Init(this);
         }
@@ -59,6 +69,61 @@ namespace InGame.BattleFields.Chariots
         public LimitedProperty health { get { return m_health;}}
         public UnlimitedProperty armor { get { return m_armor;}}
         public UnlimitedProperty speed { get { return m_speed;}}
+        public UnlimitedProperty mod { get { return m_mod;}}
+
+        public void RegisterLimitedPropertyEvent(LimitedPropertyType type, 
+                                                UnityAction<float, float> call)
+        {
+            LimitedProperty property = GetLimitedProperty(type);
+            Debug.Assert(property != null, "LimitedProperty Type does not exist");
+            property.onValueChanged.AddListener(call);
+            property.onValueChanged.Invoke(property.current, property.max);
+        }
+
+        public void UnregisterLimitedPropertyEvent(LimitedPropertyType type, 
+                                                UnityAction<float, float> call)
+        {
+            LimitedProperty property = GetLimitedProperty(type);
+            Debug.Assert(property != null, "LimitedProperty Type does not exist");
+            property.onValueChanged.RemoveListener(call);
+        }
+
+        public void RegisterUnlimitedPropertyEvent(UnlimitedPropertyType type, 
+                                                UnityAction<float> call)
+        {
+            UnlimitedProperty property = GetUnlimitedProperty(type);
+            Debug.Assert(property != null, "UnlimitedProperty Type does not exist");
+            property.onValueChanged.AddListener(call);
+            property.onValueChanged.Invoke(property.value);
+        }
+
+        public void UnregisterUnlimitedPropertyEvent(UnlimitedPropertyType type, 
+                                                    UnityAction<float> call)
+        {
+            UnlimitedProperty property = GetUnlimitedProperty(type);
+            Debug.Assert(property != null, "UnlimitedProperty Type does not exist");
+            property.onValueChanged.RemoveListener(call);
+        }
+
+        private LimitedProperty GetLimitedProperty(LimitedPropertyType type)
+        {
+            return type switch
+            {
+                LimitedPropertyType.Health => m_health,
+                _ => null
+            };
+        }
+
+        private UnlimitedProperty GetUnlimitedProperty(UnlimitedPropertyType type)
+        {
+            return type switch
+            {
+                UnlimitedPropertyType.Armor => m_armor,
+                UnlimitedPropertyType.Mod => m_mod,
+                UnlimitedPropertyType.Speed => m_speed,
+                _ => null
+            };
+        }
         #endregion
 
         #region Towers

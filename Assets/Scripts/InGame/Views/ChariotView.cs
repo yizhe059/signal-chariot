@@ -28,6 +28,7 @@ namespace InGame.Views
 
         public void Die()
         {
+            Destroy(gameObject);
             GameManager.Instance.ChangeToBattleResultState(BattleResultType.Fail);
         }
         #endregion
