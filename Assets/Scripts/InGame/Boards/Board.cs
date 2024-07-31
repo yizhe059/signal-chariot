@@ -175,6 +175,27 @@ namespace InGame.Boards
             return true;
         }
 
+        public bool PlaceModule(Module module, out int resultX, out int resultY)
+        {
+            for (int x = 0; x < m_width; x++)
+            {
+                for (int y = 0; y < m_height; y++)
+                {
+
+                    if (PlaceModule(module, new BoardPosition(x, y)))
+                    {
+                        resultX = x;
+                        resultY = y;
+                        return true;
+                    }
+                }
+            }
+
+            resultX = -1;
+            resultY = -1;
+            return false;
+        }
+        
         public Module RemoveModule(int x, int y)
         {
             if (GetSlotStatus(x, y) != SlotStatus.Occupied) return null;

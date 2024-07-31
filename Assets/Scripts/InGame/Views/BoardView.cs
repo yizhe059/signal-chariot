@@ -121,11 +121,17 @@ namespace InGame.Views
             #endregion
         }
 
-        public void CreateModuleView(Module module, Vector3 pos)
+        private void CreateModuleView(Module module, Vector3 pos)
         {
             pos.z = Constants.MODULE_DEPTH;
             var moduleView = module.CreateModuleView(m_modulesTransform);
             moduleView.SetWorldPos(pos);
+        }
+
+        public void CreateModuleView(Module module, BoardPosition pos, bool isNormal)
+        {
+            var slots = isNormal ? m_slots : m_extraSlots;
+            CreateModuleView(module, GetSlotCenterWorldPosition(pos.x, pos.y, slots));
         }
         
         private Vector3 GetSlotCenterWorldPosition(int x, int y)

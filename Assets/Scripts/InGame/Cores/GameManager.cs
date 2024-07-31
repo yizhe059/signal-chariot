@@ -15,6 +15,7 @@ using InGame.Views;
 using SetUps;
 using Utils.Common;
 using Utils;
+using Time = InGame.Boards.Signals.Time;
 
 namespace InGame.Cores
 {
@@ -33,14 +34,19 @@ namespace InGame.Cores
         private ChariotView m_chariotView;
 
         [Header("Board")]
-        private Board m_board;
-        private Board m_extraBoard;
-        private BoardView m_boardView;
+        // private Board m_board;
+        // private Board m_extraBoard;
+        // private BoardView m_boardView;
+        private GeneralBoard m_generalBoard;
+        
         private ModuleLib m_moduleLib;
         private SignalController m_signalController;
         
         [Header("Enemy")]
         private EnemyManager m_enemyManager;
+
+        private int idx = 0;
+        private float time = 0f;
 
         protected override void Init()
         {
@@ -65,16 +71,18 @@ namespace InGame.Cores
             m_moduleLib = new ModuleLib();
             m_moduleLib.Init(m_setUp.moduleLibrary);
 
-            m_board = new Board(m_setUp.boardSetUp);
+            var board = new Board(m_setUp.boardSetUp);
 
-            m_extraBoard = new Board(m_setUp.extraBoardSetUp, SlotStatus.Empty, true);
+            var extraBoard = new Board(m_setUp.extraBoardSetUp, SlotStatus.Empty, true);
             
             GameObject boardPref = Resources.Load<GameObject>(Constants.GO_BOARD_PATH);
             GameObject boardGO = Instantiate(boardPref);
-            m_boardView = boardGO.GetComponent<BoardView>();
-            m_boardView.Init(m_board, m_extraBoard, m_setUp.boardSetUp, m_setUp.extraBoardSetUp);
+            var boardView = boardGO.GetComponent<BoardView>();
+            boardView.Init(board, extraBoard, m_setUp.boardSetUp, m_setUp.extraBoardSetUp);
             
-            m_signalController = SignalController.CreateSignalController(m_board, m_boardView);
+            m_signalController = SignalController.CreateSignalController(board, boardView);
+
+            m_generalBoard = GeneralBoard.CreateGeneralBoard(board, extraBoard, boardView);
         }
 
         private void InitCamera()
@@ -85,14 +93,17 @@ namespace InGame.Cores
 
             m_cameraManager.SetBattleCameraFollow(m_chariotView?.gameObject);
             
-            m_cameraManager.SetMiniBoardCameraPosition(m_boardView.transform.position);
-            m_cameraManager.SetBoardCameraPosition(m_boardView.transform.position);
+            m_cameraManager.SetMiniBoardCameraPosition(GetBoardView().transform.position);
+            m_cameraManager.SetBoardCameraPosition(GetBoardView().transform.position);
         }
 
         public void Update()
         {
             m_signalController?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
             m_timeEffectManager?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
+
+            time += UnityEngine.Time.deltaTime;
+
         }
 
         #region Getters
@@ -101,8 +112,11 @@ namespace InGame.Cores
         public ModuleLib GetModuleLib() =>  m_moduleLib;
         public SignalController GetSignalController() => m_signalController;
         public TimeEffectManager GetTimeEffectManager() => m_timeEffectManager;
-        public Board GetBoard() => m_board;
-        public BoardView GetBoardView() => m_boardView;
+        public Board GetBoard() => m_generalBoard.board;
+        public Board GetExtraBoard() => m_generalBoard.extraBoard;
+        public GeneralBoard GetGeneralBoard() => m_generalBoard;
+        public BoardView GetBoardView() => m_generalBoard.boardView;
+        
         public Chariot GetChariot() => m_chariot;
         public InGameStateType GetCurrentInGameState() => WorldState.instance.currentState.type;
         #endregion
@@ -110,17 +124,17 @@ namespace InGame.Cores
         #region World State Machine
         public void ChangeToBoardWaitingState()
         {
-            WorldState.instance.nextState = BoardWaitingState.CreateState(m_board, m_extraBoard, m_boardView);
+            WorldState.instance.nextState = BoardWaitingState.CreateState(GetBoard(), GetExtraBoard(), GetBoardView());
         }
         
         public void ChangeToAddSlotState()
         {
-            WorldState.instance.nextState = AddSlotState.CreateAddSlotState(m_boardView, m_board, Int32.MaxValue);
+            WorldState.instance.nextState = AddSlotState.CreateAddSlotState(GetBoardView(), GetBoard(), Int32.MaxValue);
         }
 
         public void ChangeToModulePlacingState(Module module)
         {
-            WorldState.instance.nextState = ModulePlacingState.CreateState(m_board, m_extraBoard, m_boardView, module);
+            WorldState.instance.nextState = ModulePlacingState.CreateState(GetBoard(), GetExtraBoard(), GetBoardView(), module);
         }
 
         public void ChangeToBoardTestState()
