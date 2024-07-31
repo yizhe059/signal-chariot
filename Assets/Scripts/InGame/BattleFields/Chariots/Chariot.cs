@@ -134,10 +134,11 @@ namespace InGame.BattleFields.Chariots
             m_towers = towers;
         }
 
-        public void AddTower(TowerSetUp towerSetUp, Module module)
+        public Tower AddTower(TowerSetUp towerSetUp, Module module)
         {
             Tower tower = new(towerSetUp, module);
             m_towers.Add(tower);
+            return tower;
         }
 
         public void RemoveTower(Tower tower)

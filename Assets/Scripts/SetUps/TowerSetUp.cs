@@ -17,5 +17,15 @@ namespace SetUps
         public int bulletCount;
         public SeekMode seekMode;
         #endregion
+
+        public TowerSetUp(TowerSetUp other)
+        {
+            sprite = other.sprite;
+            damageMultipler = other.damageMultipler;
+
+            bulletSetUp = new BulletSetUp(other.bulletSetUp);
+            bulletCount = other.bulletCount;
+            seekMode = other.seekMode;
+        }
     }
 }
