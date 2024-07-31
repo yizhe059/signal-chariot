@@ -3,9 +3,14 @@ using UnityEngine.Events;
 
 namespace InGame.BattleFields.Common
 {
-    public enum PropertyType
+    public enum LimitedPropertyType
     {
-        Health, 
+        Health,
+    }
+
+    public enum UnlimitedPropertyType
+    {
+        Mod,
         Armor,
         Speed,
         BulletCount,
@@ -15,8 +20,8 @@ namespace InGame.BattleFields.Common
 
     public class UnlimitedProperty
     {
-        public UnityEvent<PropertyType, float> onValueChanged = new();
-        public PropertyType type { get; private set; }
+        public UnityEvent<float> onValueChanged = new();
+        public UnlimitedPropertyType type { get; private set; }
 
         private float m_value;
         public float value
@@ -26,7 +31,7 @@ namespace InGame.BattleFields.Common
             {
                 if(value <= 0) m_value = 0;
                 else m_value = value;
-                onValueChanged.Invoke(type, m_value);
+                onValueChanged.Invoke(m_value);
             }
         }
 
@@ -45,13 +50,13 @@ namespace InGame.BattleFields.Common
             value -= delta;
         }
 
-        public UnlimitedProperty(PropertyType type)
+        public UnlimitedProperty(UnlimitedPropertyType type)
         {
             this.value = 0;
             this.type = type;
         }
 
-        public UnlimitedProperty(float initial, PropertyType type)
+        public UnlimitedProperty(float initial, UnlimitedPropertyType type)
         {
             this.value = initial;
             this.type = type;
@@ -60,8 +65,8 @@ namespace InGame.BattleFields.Common
 
     public class LimitedProperty
     {
-        public UnityEvent<PropertyType, float, float> onValueChanged = new();
-        public PropertyType type { get; private set; }
+        public UnityEvent<float, float> onValueChanged = new();
+        public LimitedPropertyType type { get; private set; }
 
         private float m_current;
         public float current
@@ -70,7 +75,7 @@ namespace InGame.BattleFields.Common
             private set
             {
                 m_current = Mathf.Clamp(value, 0, m_max);
-                onValueChanged.Invoke(type, m_current, m_max);
+                onValueChanged.Invoke(m_current, m_max);
             }
         }
 
@@ -81,7 +86,7 @@ namespace InGame.BattleFields.Common
             private set
             {
                 m_max = Mathf.Min(0, value);
-                onValueChanged.Invoke(type, m_current, m_max);
+                onValueChanged.Invoke(m_current, m_max);
             }
         }
 
@@ -115,14 +120,14 @@ namespace InGame.BattleFields.Common
             max -= delta;
         }
 
-        public LimitedProperty(float max, PropertyType type)
+        public LimitedProperty(float max, LimitedPropertyType type)
         {
             this.m_max = max;
             this.m_current = max;
             this.type = type;
         }
 
-        public LimitedProperty(float max, float initial, PropertyType type)
+        public LimitedProperty(float max, float initial, LimitedPropertyType type)
         {
             this.m_max = max;
             this.current = initial;

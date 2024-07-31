@@ -22,7 +22,7 @@ namespace InGame.Views
 
         private void Die()
         {
-
+            Destroy(gameObject);
         }
         #endregion
 

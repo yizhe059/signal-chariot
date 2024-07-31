@@ -1,5 +1,6 @@
 using UnityEngine;
 
+using Utils;
 using Utils.Common;
 using InGame.BattleFields.Chariots;
 
@@ -9,7 +10,6 @@ namespace InGame.Views
 {
     public class BulletView : MonoBehaviour, IDamager
     {
-        [SerializeField] private float COLLIDE_OFFSET = 0.1f;
         private Bullet m_bullet;
 
         #region LifeCycle
@@ -26,7 +26,7 @@ namespace InGame.Views
 
         private void Die()
         {
-
+            Destroy(gameObject);
         }
         #endregion
 
@@ -34,7 +34,7 @@ namespace InGame.Views
         private void Move()
         {
             float distance = Vector3.Distance(this.transform.position, m_bullet.target);
-            if(distance <= COLLIDE_OFFSET) return;
+            if(distance <= Constants.COLLIDE_OFFSET) return;
 
             transform.DOMove(m_bullet.target, distance / m_bullet.speed.value)
                     .SetEase(Ease.OutCubic);
@@ -42,12 +42,18 @@ namespace InGame.Views
         #endregion
         
         #region Interaction
+        public void OnCollisionEnter(Collision other)
+        {
+            if(other.gameObject.CompareTag(Constants.CHARIOT_TAG)) return;
+            IDamageable target = other.gameObject.GetComponent<IDamageable>();
+            if(target != null) DealDamage(target, m_bullet.damage.value);
+        }
+
         public void DealDamage(IDamageable target, float dmg)
         {
             target.TakeDamage(dmg);
             Die();
         }
-
         #endregion
     }
 }

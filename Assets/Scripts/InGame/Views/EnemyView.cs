@@ -1,15 +1,16 @@
 using UnityEngine;
 
+using Utils;
 using Utils.Common;
 using InGame.BattleFields.Enemies;
 
 using DG.Tweening;
+using Unity.VisualScripting;
 
 namespace InGame.Views
 {
     public class EnemyView : MonoBehaviour, IDamager, IDamageable
     {
-        [SerializeField] private float COLLIDE_OFFSET = 0.1f;
         private Enemy m_enemy;
         private Vector3 m_target = Vector3.zero;
 
@@ -35,7 +36,7 @@ namespace InGame.Views
         private void Move()
         {
             float distance = Vector3.Distance(this.transform.position, m_target);
-            if(distance <= COLLIDE_OFFSET) return;
+            if(distance <= Constants.COLLIDE_OFFSET) return;
             transform.DOMove(m_target, distance / m_enemy.speed.value)
                     .SetEase(Ease.InOutQuad);
         }
@@ -43,6 +44,11 @@ namespace InGame.Views
         #endregion
 
         #region Interaction
+        public void OnCollisionEnter(Collision other)
+        {
+            IDamageable target = other.gameObject.GetComponent<IDamageable>();
+            if(target != null) DealDamage(target, m_enemy.damage.value);
+        }
 
         public void TakeDamage(float dmg)
         {

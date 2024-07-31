@@ -1,5 +1,6 @@
 ﻿using InGame.Boards;
 using UnityEngine;
+using Utils;
 
 namespace InGame.Views
 {
@@ -36,8 +37,8 @@ namespace InGame.Views
             m_position = position;
             transform.localPosition = worldPosition;
 
-            m_selectableSprite = Resources.Load<Sprite>("Arts/SelectableSlot");
-            m_emptySprite = Resources.Load<Sprite>("Arts/EmptySlot");
+            m_selectableSprite = Resources.Load<Sprite>(Constants.SPRITE_SELECTABLE_SLOT_PATH);
+            m_emptySprite = Resources.Load<Sprite>(Constants.SPRITE_EMPTY_SLOT_PATH);
 
             OnStatusChanged(status);
         }

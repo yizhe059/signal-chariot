@@ -14,6 +14,7 @@ using InGame.Views;
 
 using SetUps;
 using Utils.Common;
+using Utils;
 
 namespace InGame.Cores
 {
@@ -65,7 +66,7 @@ namespace InGame.Cores
 
             m_board = new Board(m_setUp.boardSetUp);
             
-            GameObject boardPref = Resources.Load<GameObject>("Prefabs/Board/BoardView");
+            GameObject boardPref = Resources.Load<GameObject>(Constants.GO_BOARD_PATH);
             GameObject boardGO = Instantiate(boardPref);
             m_boardView = boardGO.GetComponent<BoardView>();
             m_boardView.Init(m_board, m_setUp.boardSetUp);
@@ -75,7 +76,7 @@ namespace InGame.Cores
 
         private void InitCamera()
         {
-            var cameraPrefab = Resources.Load<CameraManager>("Prefabs/3C/CameraManager");
+            var cameraPrefab = Resources.Load<CameraManager>(Constants.GO_CAMERA_PATH);
             m_cameraManager = Instantiate(cameraPrefab);
             m_cameraManager.transform.position = Vector3.zero;
 

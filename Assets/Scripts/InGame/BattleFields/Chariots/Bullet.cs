@@ -3,6 +3,7 @@ using UnityEngine;
 using InGame.BattleFields.Common;
 using InGame.Views;
 using SetUps;
+using Utils;
 
 namespace InGame.BattleFields.Chariots
 {
@@ -22,8 +23,8 @@ namespace InGame.BattleFields.Chariots
 
         public Bullet(BulletSetUp bulletSetUp, Vector3 target, float damageMultiplier)
         {
-            UnlimitedProperty dmg = new(bulletSetUp.damage * damageMultiplier, PropertyType.Attack);
-            UnlimitedProperty spd = new(bulletSetUp.speed, PropertyType.Speed);
+            UnlimitedProperty dmg = new(bulletSetUp.damage * damageMultiplier, UnlimitedPropertyType.Attack);
+            UnlimitedProperty spd = new(bulletSetUp.speed, UnlimitedPropertyType.Speed);
             m_target = target;            
             m_damage = dmg;
             m_speed = spd;
@@ -33,8 +34,10 @@ namespace InGame.BattleFields.Chariots
 
         private void CreateView()
         {
-            GameObject bulletPref = Resources.Load<GameObject>("Prefabs/BattleField/BulletView");
+            GameObject bulletPref = Resources.Load<GameObject>(Constants.GO_BULLET_PATH);
             GameObject bulletGO = GameObject.Instantiate(bulletPref);
+            bulletGO.transform.position = new(0, 0, Constants.BULLET_DEPTH);
+
             m_bulletView = bulletGO.GetComponent<BulletView>();
             m_bulletView.Init(this);
         }
