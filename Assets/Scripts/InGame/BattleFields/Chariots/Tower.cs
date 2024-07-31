@@ -35,32 +35,25 @@ namespace InGame.BattleFields.Chariots
         public Module module { get { return m_module;}}
 
         #region Life Cycle
-        public static Tower CreateTower(TowerSetUp towerSetUp, Module module)
+        public Tower(TowerSetUp towerSetUp, Module module)
         {
             UnlimitedProperty bulletCount = new(towerSetUp.bulletCount, UnlimitedPropertyType.BulletCount);
             UnlimitedProperty attakMultiplier  = new(towerSetUp.damageMultipler, UnlimitedPropertyType.Multiplier);
             
-            Tower tower = new()
-            {
-                m_damageMultiplier = attakMultiplier,
-                m_bulletSetUp = towerSetUp.bulletSetUp,
-                m_bulletCount = bulletCount,
-                m_seekMode = towerSetUp.seekMode,
-                m_module = module,               
-            };
+            m_damageMultiplier = attakMultiplier;
+            m_bulletSetUp = towerSetUp.bulletSetUp;
+            m_bulletCount = bulletCount;
+            m_seekMode = towerSetUp.seekMode;
+            m_module = module;              
             
-            GameManager.Instance.GetChariot().AddTower(tower);
-            tower.CreateView();
-
-            return tower;
+            CreateView();
         }
 
-        public static void DestroyTower(Tower tower)
+        public void Die()
         {
-            GameManager.Instance.GetChariot().RemoveTower(tower);
+            
         }
-        #endregion
-
+        
         private void CreateView()
         {
             GameObject towerPref = Resources.Load<GameObject>(Constants.GO_TOWER_PATH);
@@ -71,6 +64,7 @@ namespace InGame.BattleFields.Chariots
             m_towerView = towerGO.GetComponent<TowerView>();
             m_towerView.Init(this);
         }
+        #endregion
 
         public void Effect()
         {

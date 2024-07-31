@@ -134,15 +134,15 @@ namespace InGame.BattleFields.Chariots
             m_towers = towers;
         }
 
-        public void AddTower(Tower tower)
+        public void AddTower(TowerSetUp towerSetUp, Module module)
         {
+            Tower tower = new(towerSetUp, module);
             m_towers.Add(tower);
         }
 
         public void RemoveTower(Tower tower)
         {
             m_towers.Remove(tower);
-            // TODO: remove towerView from chariotView
         }
 
         public void TowerEffect(Module module)
