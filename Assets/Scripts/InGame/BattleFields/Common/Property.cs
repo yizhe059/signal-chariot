@@ -15,7 +15,9 @@ namespace InGame.BattleFields.Common
         Speed,
         BulletCount,
         Attack,
-        Multiplier
+        Multiplier,
+        Range,
+        Interval,
     }
 
     public class UnlimitedProperty

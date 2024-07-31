@@ -30,7 +30,7 @@ namespace InGame.Views
 
         private void Rotate()
         {
-
+            // TODO
         }
 
         #endregion

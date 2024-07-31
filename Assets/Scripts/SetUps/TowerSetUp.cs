@@ -15,6 +15,7 @@ namespace SetUps
         #region Bullet
         public BulletSetUp bulletSetUp;
         public int bulletCount;
+        public float bulletShootInterval;
         public SeekMode seekMode;
         #endregion
 
@@ -25,6 +26,7 @@ namespace SetUps
 
             bulletSetUp = new BulletSetUp(other.bulletSetUp);
             bulletCount = other.bulletCount;
+            bulletShootInterval = other.bulletShootInterval;
             seekMode = other.seekMode;
         }
     }

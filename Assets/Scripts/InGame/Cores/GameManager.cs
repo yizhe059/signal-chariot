@@ -45,9 +45,6 @@ namespace InGame.Cores
         [Header("Enemy")]
         private EnemyManager m_enemyManager;
 
-        private int idx = 0;
-        private float time = 0f;
-
         protected override void Init()
         {
             m_inputManager = new InputManager(m_playerInput);
@@ -81,7 +78,6 @@ namespace InGame.Cores
             boardView.Init(board, extraBoard, m_setUp.boardSetUp, m_setUp.extraBoardSetUp);
             
             m_signalController = SignalController.CreateSignalController(board, boardView);
-
             m_generalBoard = GeneralBoard.CreateGeneralBoard(board, extraBoard, boardView);
         }
 
@@ -101,9 +97,6 @@ namespace InGame.Cores
         {
             m_signalController?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
             m_timeEffectManager?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
-
-            time += UnityEngine.Time.deltaTime;
-
         }
 
         #region Getters

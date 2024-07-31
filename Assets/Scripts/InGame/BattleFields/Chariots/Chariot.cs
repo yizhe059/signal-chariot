@@ -48,6 +48,8 @@ namespace InGame.BattleFields.Chariots
                 UnlimitedPropertyType.Mod
             );
 
+            m_towers = new();
+
             CreateView();
         }
 

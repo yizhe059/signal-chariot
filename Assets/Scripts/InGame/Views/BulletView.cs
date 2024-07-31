@@ -11,12 +11,16 @@ namespace InGame.Views
     public class BulletView : MonoBehaviour, IDamager
     {
         private Bullet m_bullet;
+        private Vector3 m_originPosition;
+        private float m_distance;
 
         #region LifeCycle
         public void Init(Bullet bullet)
         {
             // TODO: set sprite
             m_bullet = bullet;
+            m_originPosition = this.transform.position;
+            m_distance = Vector3.Distance(this.transform.position, m_bullet.target);
         }
 
         private void Update()
@@ -33,11 +37,18 @@ namespace InGame.Views
         #region Action
         private void Move()
         {
-            float distance = Vector3.Distance(this.transform.position, m_bullet.target);
-            if(distance <= Constants.COLLIDE_OFFSET) return;
+            if(MoveOutOfRange()) Die();
 
-            transform.DOMove(m_bullet.target, distance / m_bullet.speed.value)
+            float currDistance = Vector3.Distance(this.transform.position, m_bullet.target);
+            if(currDistance <= Constants.COLLIDE_OFFSET) return;
+
+            transform.DOMove(m_bullet.target, m_distance / m_bullet.speed.value)
                     .SetEase(Ease.OutCubic);
+        }
+
+        private bool MoveOutOfRange()
+        {
+            return Vector3.Distance(this.transform.position, m_originPosition) >= m_bullet.range.value;
         }
         #endregion
         
