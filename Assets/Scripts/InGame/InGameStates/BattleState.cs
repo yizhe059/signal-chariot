@@ -36,6 +36,14 @@ namespace InGame.InGameStates
             
             GameManager.Instance.GetInputManager().RegisterMoveEvent(OnMoveKeyPressed);
 
+            var timeEffectManager = GameManager.Instance.GetTimeEffectManager();
+            var signalController = GameManager.Instance.GetSignalController();
+            timeEffectManager.Reset();
+            signalController.Reset();
+            
+            timeEffectManager.Start();
+            signalController.Start();
+
             BattleProgressUI.Instance.Show();
             BattleResultUI.Instance.Hide();
             ChariotStatusUI.Instance.Show();
@@ -48,6 +56,11 @@ namespace InGame.InGameStates
             Debug.Log("Exit battle");
             
             GameManager.Instance.GetInputManager().UnregisterMoveEvent(OnMoveKeyPressed);
+            
+            var timeEffectManager = GameManager.Instance.GetTimeEffectManager();
+            var signalController = GameManager.Instance.GetSignalController();
+            timeEffectManager.Stop();
+            signalController.Stop();
 
             BattleProgressUI.Instance.Hide();
             BattleResultUI.Instance.Show();
