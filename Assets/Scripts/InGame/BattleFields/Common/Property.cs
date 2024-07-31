@@ -1,9 +1,7 @@
-using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace InGame.BattleFields.Chariots
+namespace InGame.BattleFields.Common
 {
     public enum PropertyType
     {
@@ -12,6 +10,7 @@ namespace InGame.BattleFields.Chariots
         Speed,
         BulletCount,
         Attack,
+        Multiplier
     }
 
     public class UnlimitedProperty

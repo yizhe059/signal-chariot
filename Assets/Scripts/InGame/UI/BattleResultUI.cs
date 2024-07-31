@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
+using InGame.InGameStates;
 using Utils.Common;
 
 namespace InGame.UI
@@ -28,6 +29,27 @@ namespace InGame.UI
         public void Show()
         {
             m_doc.rootVisualElement.style.display = DisplayStyle.Flex;
+        }
+
+        public void Switch(BattleResultType type)
+        {
+            VisualElement root = m_doc.rootVisualElement;
+            root.Clear();
+
+            switch (type)
+            {
+                case BattleResultType.WaveWin:
+                    root.Add(m_waveWin.Instantiate());
+                    break;
+                case BattleResultType.BattleWin:
+                    root.Add(m_battleWin.Instantiate());
+                    break;
+                case BattleResultType.GameWin:
+                    break;
+                case BattleResultType.Fail:
+                    root.Add(m_fail.Instantiate());
+                    break;
+            }
         }
     }
 }

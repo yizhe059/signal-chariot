@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
 
 namespace SetUps
 {   
-    [System.Serializable]
+    [Serializable]
     public class ChariotSetUp
     {
         public float initialHealth = 50;

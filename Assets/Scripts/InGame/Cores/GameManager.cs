@@ -56,11 +56,7 @@ namespace InGame.Cores
         private void InitChariot()
         {
             m_chariot = new Chariot(m_setUp.chariotSetUp);
-            
-            GameObject chariotPref = Resources.Load<GameObject>("Prefabs/BattleField/ChariotView");
-            GameObject chariotGO = Instantiate(chariotPref);
-            m_chariotView = chariotGO.GetComponent<ChariotView>();
-            m_chariotView.Init(m_chariot);
+            m_chariotView = m_chariot.chariotView;
         }
 
         private void InitBoard()
@@ -85,6 +81,8 @@ namespace InGame.Cores
             var cameraPrefab = Resources.Load<CameraManager>("Prefabs/3C/CameraManager");
             m_cameraManager = Instantiate(cameraPrefab);
             m_cameraManager.transform.position = Vector3.zero;
+
+            m_cameraManager.SetBattleCameraFollow(m_chariotView?.gameObject);
             
             m_cameraManager.SetMiniBoardCameraPosition(m_boardView.transform.position);
             m_cameraManager.SetBoardCameraPosition(m_boardView.transform.position);
@@ -134,9 +132,9 @@ namespace InGame.Cores
             WorldState.instance.nextState = BattleState.CreateState(m_chariot, m_chariotView);
         }
         
-        public void ChangeToBattleResultState()
+        public void ChangeToBattleResultState(BattleResultType resultType)
         {
-            WorldState.instance.nextState = BattleResultState.CreateState();
+            WorldState.instance.nextState = BattleResultState.CreateState(resultType);
         }
 
         public void ChangeToNullState()

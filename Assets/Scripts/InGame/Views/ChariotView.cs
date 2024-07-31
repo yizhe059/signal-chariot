@@ -3,15 +3,19 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+using Utils.Common;
+using InGame.InGameStates;
 using InGame.BattleFields.Chariots;
+using InGame.Cores;
 
 namespace InGame.Views
 {
-    public class ChariotView : MonoBehaviour
+    public class ChariotView : MonoBehaviour, IDamageable
     {
-        private Vector3 m_moveDirection = new(0,0,0);
+        private Vector3 m_moveDirection = Vector3.zero;
         private Chariot m_chariot;
 
+        #region Life Cycle
         public void Init(Chariot chariot)
         {
             m_chariot = chariot;
@@ -22,6 +26,13 @@ namespace InGame.Views
             MoveChariot();
         }
 
+        public void Die()
+        {
+            GameManager.Instance.ChangeToBattleResultState(BattleResultType.Fail);
+        }
+        #endregion
+
+        #region Action
         private void MoveChariot()
         {
             if (m_moveDirection == Vector3.zero) return;
@@ -38,5 +49,17 @@ namespace InGame.Views
                 0
             ) * Time.deltaTime * m_chariot.speed.value;
         }
+
+        // TODO: add and remove towerview
+
+        #endregion
+
+        #region Interaction
+        public void TakeDamage(float dmg)
+        {
+            m_chariot.health.DecreaseCurrent(dmg);
+            if(m_chariot.health.current <= 0) Die();
+        }
+        #endregion
     }
 }
