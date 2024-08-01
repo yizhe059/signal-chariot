@@ -69,7 +69,7 @@ namespace InGame.Views
             direction.z = 0;
             
             float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            Debug.Log("angle " + targetAngle);
+            //Debug.Log("angle " + targetAngle);
             Tween rotateTween = transform.DORotate(new Vector3(0, 0, targetAngle), m_tower.seekInterval.value);
 
             yield return rotateTween.WaitForCompletion();

@@ -11,6 +11,11 @@ namespace InGame.Effects
             GameManager.Instance.GetChariot().armor.Increase(delta);
         }
 
+        public override void OnUnTrigger(EffectBlackBoard blackBoard)
+        {
+            GameManager.Instance.GetChariot().armor.Decrease(delta);
+        }
+
         public override Effect CreateCopy()
         {
             return new ChangeShieldEffect { delta = this.delta };
