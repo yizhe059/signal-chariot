@@ -12,6 +12,7 @@ namespace InGame.Views
     public class TowerView : MonoBehaviour
     {
         private Tower m_tower;
+        private Vector3 m_target;
 
         #region Life Cycle
         public void Init(Tower tower)
@@ -39,25 +40,36 @@ namespace InGame.Views
             spriteRenderer.sprite = m_tower.sprite;
         }
 
-        private void Die()
+        private void Update()
+        {
+            Aim();
+        }
+
+        public void Die()
         {
             Destroy(gameObject);
         }
         #endregion
 
-        #region Action
-
-        public void Aim(Vector3 target)
+        public void SetTarget(Vector3 value)
         {
-            StartCoroutine(RotateTowards(target));
+            m_target = value;
         }
 
-        public IEnumerator RotateTowards(Vector3 target)
+        #region Action
+
+        public void Aim()
         {
-            Vector3 direction = target - transform.position;
-            direction.y = 0;
+            StartCoroutine(RotateTowards());
+        }
+
+        public IEnumerator RotateTowards()
+        {
+            Vector3 direction = m_target - transform.position;
+            direction.z = 0;
             
             float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            Debug.Log("angle " + targetAngle);
             Tween rotateTween = transform.DORotate(new Vector3(0, 0, targetAngle), m_tower.seekInterval.value);
 
             yield return rotateTween.WaitForCompletion();

@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3298350877506242195}
   m_Layer: 6
-  m_Name: TowerModuleVisual
+  m_Name: AutoCannonVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

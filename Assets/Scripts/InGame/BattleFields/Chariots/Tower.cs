@@ -61,7 +61,7 @@ namespace InGame.BattleFields.Chariots
 
         public void Die()
         {
-            
+            m_towerView.Die();
         }
         
         private void CreateView()
@@ -86,7 +86,6 @@ namespace InGame.BattleFields.Chariots
         private async Task ShootBullet()
         {
             Vector3 target = FindTarget();
-            m_towerView.Aim(target);
             
             for(int i = 0; i < m_bulletCount.value; i++)
             {

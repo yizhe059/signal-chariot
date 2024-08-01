@@ -41,7 +41,8 @@ namespace Utils
         #endregion
 
         #region Positions
-        // Board
+        // Positive is deeper, Negative is shallower
+        // Board 
         public const float SLOT_DEPTH = 0;
         public const float MODULE_DEPTH = -0.5f;
         public const float PLACING_MODULE_DEPTH = -1f;
@@ -49,10 +50,12 @@ namespace Utils
         public const float SIGNAL_MOVING_DURATION = 1f;
 
         // Battlefield
+        public const float SCENE_DEPTH = 1f;
         public const float CHARIOT_DEPTH = 0;
         public const float ENEMY_DEPTH = 0;
         public const float BULLET_DEPTH = -0.5f;
         public const float TOWER_DEPTH = -1f;
+        
         #endregion
         
         #region Interactions

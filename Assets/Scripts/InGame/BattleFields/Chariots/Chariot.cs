@@ -146,6 +146,7 @@ namespace InGame.BattleFields.Chariots
         public void RemoveTower(Tower tower)
         {
             m_towers.Remove(tower);
+            tower.Die();
         }
 
         public void TowerEffect(Module module)
