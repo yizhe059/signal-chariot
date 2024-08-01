@@ -17,10 +17,27 @@ namespace InGame.Views
         #region LifeCycle
         public void Init(Bullet bullet)
         {
-            // TODO: set sprite
             m_bullet = bullet;
             m_originPosition = this.transform.position;
             m_distance = Vector3.Distance(this.transform.position, m_bullet.target);
+            SetSprite();
+        }
+
+        public void SetSprite()
+        {
+            Transform model = transform.Find(Constants.MODEL);
+            if(model == null)
+            {
+                Debug.LogError("No model under this game object!");
+                return;
+            }
+            SpriteRenderer spriteRenderer = model.GetComponent<SpriteRenderer>();
+            if(spriteRenderer == null)
+            {
+                Debug.LogError("No sprite renderer under model!");
+                return;
+            }
+            spriteRenderer.sprite = m_bullet.sprite;
         }
 
         private void Update()
@@ -43,7 +60,7 @@ namespace InGame.Views
             if(currDistance <= Constants.COLLIDE_OFFSET) return;
 
             transform.DOMove(m_bullet.target, m_distance / m_bullet.speed.value)
-                    .SetEase(Ease.OutCubic);
+                    .SetEase(Ease.OutQuad);
         }
 
         private bool MoveOutOfRange()

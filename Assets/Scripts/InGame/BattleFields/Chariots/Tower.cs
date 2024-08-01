@@ -21,6 +21,8 @@ namespace InGame.BattleFields.Chariots
     {
         [Header("View")]
         private TowerView m_towerView;
+        private Sprite m_sprite;
+        public Sprite sprite { get { return m_sprite; } }
 
         [Header("Properties")]
         private UnlimitedProperty m_damageMultiplier;
@@ -28,8 +30,10 @@ namespace InGame.BattleFields.Chariots
         [Header("Bullet")]
         private BulletSetUp m_bulletSetUp;
         private UnlimitedProperty m_bulletCount;
-        private UnlimitedProperty m_bulletShootInterval;
+        private UnlimitedProperty m_shootInterval;
         private SeekMode m_seekMode;
+        private UnlimitedProperty m_seekInterval;
+        public UnlimitedProperty seekInterval { get { return m_seekInterval;}}
         
         [Header("Module")]
         private Module m_module;
@@ -40,14 +44,17 @@ namespace InGame.BattleFields.Chariots
         {
             UnlimitedProperty bulletCount = new(towerSetUp.bulletCount, UnlimitedPropertyType.BulletCount);
             UnlimitedProperty attakMultiplier  = new(towerSetUp.damageMultipler, UnlimitedPropertyType.Multiplier);
-            UnlimitedProperty bulletShootInterval = new(towerSetUp.bulletShootInterval, UnlimitedPropertyType.Interval);
+            UnlimitedProperty shootInterval = new(towerSetUp.shootInterval, UnlimitedPropertyType.Interval);
+            UnlimitedProperty seekInterval = new(towerSetUp.seekInterval, UnlimitedPropertyType.Speed);
             
             m_damageMultiplier = attakMultiplier;
             m_bulletSetUp = towerSetUp.bulletSetUp;
             m_bulletCount = bulletCount;
-            m_bulletShootInterval = bulletShootInterval;
+            m_shootInterval = shootInterval;
             m_seekMode = towerSetUp.seekMode;
+            m_seekInterval = seekInterval;
             m_module = module;              
+            m_sprite = towerSetUp.sprite;
             
             CreateView();
         }
@@ -79,11 +86,12 @@ namespace InGame.BattleFields.Chariots
         private async Task ShootBullet()
         {
             Vector3 target = FindTarget();
+            m_towerView.Aim(target);
             
             for(int i = 0; i < m_bulletCount.value; i++)
             {
                 new Bullet(m_bulletSetUp, target, m_damageMultiplier.value);
-                float intervalInMS = m_bulletShootInterval.value * 1000;
+                float intervalInMS = m_shootInterval.value * 1000;
                 await Task.Delay((int)intervalInMS);
             }
         }

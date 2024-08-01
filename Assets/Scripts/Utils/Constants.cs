@@ -3,12 +3,18 @@ namespace Utils
     public static class Constants 
     {
         #region Scene Name
+
         public const string MAIN_SCENE = "Main";
-
         public const string MAIN_MENU = "MainMenu";
-
         public const string LEVEL0 = "Level0";
         public const string LEVEL1 = "Level1";
+
+        #endregion
+
+        #region Game Object
+
+        public const string MODEL = "Model";
+
         #endregion
 
         #region Resources Path
@@ -29,7 +35,9 @@ namespace Utils
         #endregion
 
         #region Tag and Layer
+
         public const string CHARIOT_TAG = "Player";
+
         #endregion
 
         #region Positions
@@ -48,7 +56,9 @@ namespace Utils
         #endregion
         
         #region Interactions
+
         public const float COLLIDE_OFFSET = 0.1f;
+
         #endregion
     }
 }

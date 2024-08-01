@@ -12,11 +12,12 @@ namespace SetUps
         public Sprite sprite;
         public float damageMultipler;
 
-        #region Bullet
-        public BulletSetUp bulletSetUp;
-        public int bulletCount;
-        public float bulletShootInterval;
+        #region Attack
+        public float seekInterval;
         public SeekMode seekMode;
+        public float shootInterval;
+        public int bulletCount;
+        public BulletSetUp bulletSetUp;
         #endregion
 
         public TowerSetUp(TowerSetUp other)
@@ -26,7 +27,8 @@ namespace SetUps
 
             bulletSetUp = new BulletSetUp(other.bulletSetUp);
             bulletCount = other.bulletCount;
-            bulletShootInterval = other.bulletShootInterval;
+            seekInterval = other.seekInterval;
+            shootInterval = other.shootInterval;
             seekMode = other.seekMode;
         }
     }
