@@ -3,12 +3,18 @@ namespace Utils
     public static class Constants 
     {
         #region Scene Name
+
         public const string MAIN_SCENE = "Main";
-
         public const string MAIN_MENU = "MainMenu";
-
         public const string LEVEL0 = "Level0";
         public const string LEVEL1 = "Level1";
+
+        #endregion
+
+        #region Game Object
+
+        public const string MODEL = "Model";
+
         #endregion
 
         #region Resources Path
@@ -29,11 +35,14 @@ namespace Utils
         #endregion
 
         #region Tag and Layer
+
         public const string CHARIOT_TAG = "Player";
+
         #endregion
 
         #region Positions
-        // Board
+        // Positive is deeper, Negative is shallower
+        // Board 
         public const float SLOT_DEPTH = 0;
         public const float MODULE_DEPTH = -0.5f;
         public const float PLACING_MODULE_DEPTH = -1f;
@@ -41,14 +50,18 @@ namespace Utils
         public const float SIGNAL_MOVING_DURATION = 1f;
 
         // Battlefield
+        public const float SCENE_DEPTH = 1f;
         public const float CHARIOT_DEPTH = 0;
         public const float ENEMY_DEPTH = 0;
         public const float BULLET_DEPTH = -0.5f;
         public const float TOWER_DEPTH = -1f;
+        
         #endregion
         
         #region Interactions
+
         public const float COLLIDE_OFFSET = 0.1f;
+
         #endregion
     }
 }
