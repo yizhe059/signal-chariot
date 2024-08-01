@@ -99,6 +99,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "3483c2a7-49d6-4102-a82b-c186ca41165b",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "wasd",
                     "id": "080edbcd-342a-4041-9756-246c04cb6652",
                     "path": "2DVector(mode=1)",

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,7 +22,7 @@ namespace InGame.Cores
         public UnityAction<float> action;
         public UnityAction finishAction;
         public TimeEffectStatus status;
-        public bool canOneTimeTrigger = false;
+        public bool canTriggerInTest = false;
     }
 
 
@@ -38,6 +39,7 @@ namespace InGame.Cores
         private readonly List<TimeEffect> m_effects = new List<TimeEffect>();
 
         private bool m_isOn = false;
+        private bool m_isTest = false;
 
         public void Reset()
         {
@@ -48,18 +50,21 @@ namespace InGame.Cores
             }
 
             m_isOn = false;
+            m_isTest = false;
         }
 
-        public void Start() => m_isOn = true;
+        public void Start()
+        {
+            m_isOn = true;
+            m_isTest = false;
+        }
 
         public void Stop() => m_isOn = false;
 
-        public void TriggerAllOneTimeTriggerEffect()
+        public void TestStart()
         {
-            foreach (var timeEffect in m_effects)
-            {
-                if(timeEffect.canOneTimeTrigger) timeEffect.action.Invoke(OneTimeTriggerTime);
-            }
+            m_isOn = true;
+            m_isTest = true;
         }
         
         public void Update(float deltaTime, float newTime)
@@ -68,7 +73,10 @@ namespace InGame.Cores
             
             for (int i = m_effects.Count - 1; i >= 0; i --)
             {
+                
                 var effect = m_effects[i];
+                if (m_isTest && !effect.canTriggerInTest) return;
+                
                 effect.accumulatedTime += deltaTime;
                 while (effect.usage != 0 && effect.accumulatedTime >= effect.triggerInterval)
                 {
@@ -111,10 +119,10 @@ namespace InGame.Cores
 
         public TimeEffect AddTimeEffect(int usage, float triggerInterval, UnityAction<float> action,
             UnityAction finishAction,
-            bool canOneTimeTrigger)
+            bool canTriggerInTest)
         {
             var timeEffect = AddTimeEffect(usage, triggerInterval, action, finishAction);
-            timeEffect.canOneTimeTrigger = canOneTimeTrigger;
+            timeEffect.canTriggerInTest = canTriggerInTest;
             return timeEffect;
         }
         

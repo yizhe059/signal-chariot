@@ -24,8 +24,8 @@ namespace InGame.InGameStates
             m_timeEffectManager.Reset();
             m_signalController.Reset();
             
-            m_timeEffectManager.TriggerAllOneTimeTriggerEffect();
-            m_signalController.TestStart(OnNoSignal);
+            m_timeEffectManager.TestStart();
+            m_signalController.TestStart();
 
             BattleProgressUI.Instance.Hide();
             BattleResultUI.Instance.Hide();
@@ -37,7 +37,7 @@ namespace InGame.InGameStates
         public override void Exit()
         {
             Debug.Log("Exit BoardTest State");
-            m_signalController.TestStop(OnNoSignal);
+            m_signalController.TestStop();
 
             BattleProgressUI.Instance.Show();
             BattleResultUI.Instance.Show();
@@ -45,11 +45,7 @@ namespace InGame.InGameStates
             NavigationBarUI.Instance.Hide();
             BoardBarUI.Instance.Hide();
         }
-
-        private void OnNoSignal()
-        {
-            GameManager.Instance.ChangeToBoardWaitingState();
-        }
+        
 
         public static BoardTestState CreateState(TimeEffectManager timeEffectManager, SignalController signalController)
         {

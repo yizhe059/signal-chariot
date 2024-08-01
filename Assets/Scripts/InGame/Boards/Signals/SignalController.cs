@@ -132,11 +132,34 @@ namespace InGame.Boards.Signals
             }
         }
 
+        public void TestStart()
+        {
+            m_isOn = true;
+            m_isTest = true;
+            foreach (var signalPack in m_signals)
+            {
+                if (signalPack == null) continue;
+                signalPack.blackBoard.isTest = m_isTest;
+                signalPack.signal.Start();
+            }
+        }
+
         public void TestStop(UnityAction noSignalCallBack)
         {
             m_isOn = false;
             m_isTest = false;
             m_onNoSignal.RemoveListener(noSignalCallBack);
+        }
+
+        public void TestStop()
+        {
+            m_isOn = false;
+            m_isTest = false;
+            
+            for (int i = 0; i < m_signals.Count; i++)
+            {
+                RemoveSignal(i);
+            }
         }
 
         public int GetSignalCount()
