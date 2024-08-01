@@ -164,6 +164,7 @@ namespace InGame.Boards
 
             if (!m_noEffectTrigger)
             {
+                
                 module.TriggerPlacingEffect(new EffectBlackBoard
                 {
                     slot = GetValue(pivotPos.x, pivotPos.y),

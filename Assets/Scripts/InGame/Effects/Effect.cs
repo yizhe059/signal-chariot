@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using InGame.Boards;
 using InGame.Boards.Modules;
 using InGame.Boards.Signals;
+using InGame.Effects.PlacingEffectRequirements;
 using UnityEngine;
 using Time = InGame.Boards.Signals.Time;
 
@@ -152,12 +153,14 @@ namespace InGame.Effects
     public class PlacingEffects
     {
         private List<Effect> m_effects;
+        private List<PlacingEffectRequirement> requirements;
 
         public static PlacingEffects CreatePlacingEffects(List<Effect> effect)
         {
             return new PlacingEffects
             {
-                m_effects = new List<Effect>(effect)
+                m_effects = new List<Effect>(effect),
+                requirements = new List<PlacingEffectRequirement>()
             };
         }
         
