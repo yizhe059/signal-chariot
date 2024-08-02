@@ -86,6 +86,7 @@ namespace InGame.BattleFields.Chariots
         private async Task ShootBullet()
         {
             Vector3 target = FindTarget();
+            m_towerView.SetTarget(target);
             
             for(int i = 0; i < m_bulletCount.value; i++)
             {

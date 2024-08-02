@@ -16,7 +16,6 @@ namespace InGame.BattleFields.Enemies
                 var setUp = setUps[i];
                 m_enemies.Add(Enemy.CreateEnemy(setUp, i));
             }
-            
         }
 
         public Enemy CreateEnemy(int id)
