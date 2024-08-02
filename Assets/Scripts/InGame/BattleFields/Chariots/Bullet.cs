@@ -5,6 +5,8 @@ using InGame.Views;
 using SetUps;
 using Utils;
 using InGame.Cores;
+using Unity.VisualScripting;
+using Utils.Common;
 
 namespace InGame.BattleFields.Chariots
 {
@@ -54,6 +56,17 @@ namespace InGame.BattleFields.Chariots
 
             m_bulletView = bulletGO.GetComponent<BulletView>();
             m_bulletView.Init(this);
+        }
+
+        public void Die()
+        {
+            m_bulletView.Die();
+        }
+
+        public void DealDamage(IDamageable target, float dmg)
+        {
+            target.TakeDamage(dmg);
+            this.Die();
         }
     }
 }

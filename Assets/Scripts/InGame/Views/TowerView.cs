@@ -63,6 +63,11 @@ namespace InGame.Views
             StartCoroutine(RotateTowards());
         }
 
+        public void Shoot()
+        {
+            StartCoroutine(m_tower.ShootBullet());
+        }
+
         public IEnumerator RotateTowards()
         {
             Vector3 direction = m_target - transform.position;

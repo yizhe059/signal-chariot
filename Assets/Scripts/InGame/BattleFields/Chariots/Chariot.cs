@@ -25,9 +25,8 @@ namespace InGame.BattleFields.Chariots
         private UnlimitedProperty m_speed;
         private UnlimitedProperty m_mod;
 
-        [Header("Management")]
+        [Header("Tower")]
         private TowerManager m_towerManager;
-        private BulletManager m_bulletManager;
         
         public Chariot(ChariotSetUp setUp)
         {
@@ -58,7 +57,6 @@ namespace InGame.BattleFields.Chariots
             );
 
             m_towerManager = new();
-            m_bulletManager = new();
 
             CreateView();
         }
