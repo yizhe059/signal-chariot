@@ -5,6 +5,11 @@ namespace InGame.BattleFields.Enemies
     using Enemies = KeyValuePair<Enemy, int>;
     using EnemyGroups = KeyValuePair<EnemyGroup, int>;
 
+    public enum SpawnLogic
+    {
+        Random
+    }
+
     public class EnemyGroup
     {
         private List<Enemies> m_enemyGroup;

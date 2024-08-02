@@ -63,6 +63,7 @@ namespace InGame.Cores
         private void InitEnemy()
         {
             m_enemyLib = new EnemyLib(m_setUp.enemyLibrary);
+            m_enemyManager = new EnemyManager(m_setUp.enemySpawns);
         }
 
         private void InitChariot()
