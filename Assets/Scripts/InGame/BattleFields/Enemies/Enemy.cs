@@ -34,6 +34,7 @@ namespace InGame.BattleFields.Enemies
             if (m_view != null) return m_view;
 
             m_view = GameObject.Instantiate(m_viewPrefab);
+            m_view.Init(this);
             return m_view;
         }
         
