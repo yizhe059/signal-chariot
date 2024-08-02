@@ -10,5 +10,6 @@ namespace SetUps
         public BoardSetUp boardSetUp;
         public BoardSetUp extraBoardSetUp;
         public List<ModuleSetUp> moduleLibrary;
+        public List<EnemySetUp> enemyLibrary;
     }
 }

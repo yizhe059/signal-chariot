@@ -184,6 +184,15 @@ MonoBehaviour:
     coolDown: 0
     placingEffects: []
     requirements: []
+  enemyLibrary:
+  - name: "\u666E\u901A\u602A"
+    maxHealth: 2
+    defense: 0
+    attack: 1
+    attackDuration: 1
+    attackRadius: 0.2
+    speed: 1.5
+    enemyPrefab: {fileID: 384623106758148936, guid: 30739d031fe43c04d8e7bdb9fcad132d, type: 3}
   references:
     version: 2
     RefIds:
