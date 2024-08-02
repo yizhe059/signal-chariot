@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using SetUps;
-using UnityEngine;
+using Utils.Common;
 
 namespace Editors.Enemies
 {
-    public class EnemyLevelsEdit: MonoBehaviour
+    public class EnemyLevelsEdit: MonoSingleton<EnemyLevelsEdit>
     {
         public List<EnemyPlainLevelBlk> GetBlks()
         {

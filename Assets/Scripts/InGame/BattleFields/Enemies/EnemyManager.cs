@@ -50,7 +50,7 @@ namespace InGame.BattleFields.Enemies
         public void Prepare()
         {
             var waveBlk = GetWaveBlk(m_currentLevel, m_currentWave);
-            m_duration = waveBlk.duration;
+            //m_duration = waveBlk.duration;
             m_groups.Clear();
             
             

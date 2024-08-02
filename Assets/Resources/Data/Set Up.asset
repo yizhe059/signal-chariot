@@ -195,21 +195,25 @@ MonoBehaviour:
     speed: 1.5
     enemyPrefab: {fileID: 384623106758148936, guid: 30739d031fe43c04d8e7bdb9fcad132d, type: 3}
   enemySpawnGroups:
-  - enemies:
+  - enemiesPool:
     - enemyID: 0
       enemyName: "\u666E\u901A\u602A"
-      count: 2
-      spawnLogic: 0
+    eachSpawnCount: 4
+    spawnInterval: 5
+    minEnemies: 1
+    maxEnemies: 15
+    locationSpawnLogic: 0
   enemySpawnWaves:
   - groups:
     - range:
         start: 0
-        end: 10
+        end: 60
       spawnGroupID: 0
+    duration: 0
+    groupsMustBeat: 
   enemySpawnLevels:
   - waves:
-    - duration: 30
-      waveID: 0
+    - waveID: 0
   references:
     version: 2
     RefIds:
