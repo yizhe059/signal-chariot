@@ -15,6 +15,7 @@ namespace InGame.BattleFields.Chariots
     {
         None,
         Nearest,
+        Random,
     }
 
     public class Tower
@@ -103,6 +104,8 @@ namespace InGame.BattleFields.Chariots
             {
                 case SeekMode.Nearest:
                     target = new(10, 10, 0);
+                    break;
+                case SeekMode.Random:
                     break;
                 default:
                     break;

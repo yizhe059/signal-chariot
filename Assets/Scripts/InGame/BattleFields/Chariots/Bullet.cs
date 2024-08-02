@@ -29,7 +29,7 @@ namespace InGame.BattleFields.Chariots
         public Bullet(BulletSetUp bulletSetUp, Vector3 target, float damageMultiplier)
         {
             UnlimitedProperty dmg = new(bulletSetUp.damage * damageMultiplier, 
-                                        UnlimitedPropertyType.Attack);
+                                        UnlimitedPropertyType.Damage);
             UnlimitedProperty spd = new(bulletSetUp.speed, UnlimitedPropertyType.Speed);
             UnlimitedProperty rng = new(bulletSetUp.range, UnlimitedPropertyType.Range);
 
