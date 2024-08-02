@@ -16,6 +16,7 @@ MonoBehaviour:
     initialHealth: 50
     maxHealth: 100
     armor: 0
+    defence: 0
     speed: 1
     mod: 0
   boardSetUp:
@@ -193,7 +194,22 @@ MonoBehaviour:
     attackRadius: 0.2
     speed: 1.5
     enemyPrefab: {fileID: 384623106758148936, guid: 30739d031fe43c04d8e7bdb9fcad132d, type: 3}
-  enemySpawns: []
+  enemySpawnGroups:
+  - enemies:
+    - enemyID: 0
+      enemyName: "\u666E\u901A\u602A"
+      count: 2
+      spawnLogic: 0
+  enemySpawnWaves:
+  - groups:
+    - range:
+        start: 0
+        end: 10
+      spawnGroupID: 0
+  enemySpawnLevels:
+  - waves:
+    - duration: 30
+      waveID: 0
   references:
     version: 2
     RefIds:

@@ -6,16 +6,20 @@ namespace Editors.Enemies
 {
     public class EnemySpawnLevelEdit: MonoBehaviour
     {
-        public EnemySpawnLevelSetUp CreteLevelSetUp()
+        public List<EnemySpawnWaveBlk> waves; 
+        public EnemyPlainLevelBlk CreteBlk()
         {
-            var waveEdits = transform.GetComponentsInChildren<EnemySpawnWaveEdit>();
-            var waveBlks = new List<EnemySpawnWaveBlk>();
-            foreach (var waveEdit in waveEdits)
+            
+            var level = new EnemyPlainLevelBlk
             {
-                waveBlks.Add(waveEdit.CreateEnemySpawnWaveBlk());
+                waves = new List<EnemySpawnWaveBlk>()
+            };
+            foreach (var blk in waves)
+            {
+                level.waves.Add(blk);
             }
 
-            return new EnemySpawnLevelSetUp { waves = waveBlks };
+            return level;
         }
     }
 }

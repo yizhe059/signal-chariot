@@ -8,14 +8,14 @@ namespace InGame.BattleFields.Enemies
 {
     public class EnemyManager
     {
-        private readonly List<EnemySpawnLevelSetUp> m_spawnSetUps;
+        private readonly List<EnemyPlainLevelBlk> m_spawnSetUps;
         private int m_currentLevel;
         private int m_currentWave;
 
         private float m_duration;
         private List<EnemyGroup> m_groups = new();
         
-        public EnemyManager(List<EnemySpawnLevelSetUp> spawnSetUp)
+        public EnemyManager(List<EnemyPlainLevelBlk> spawnSetUp)
         {
             m_spawnSetUps = spawnSetUp;
             m_currentLevel = 0;

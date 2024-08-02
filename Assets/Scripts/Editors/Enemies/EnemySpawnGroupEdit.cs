@@ -1,48 +1,48 @@
-﻿using System;
-using InGame.BattleFields.Enemies;
+﻿using System.Collections.Generic;
 using SetUps;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Editors.Enemies
 {
+    
     public class EnemySpawnGroupEdit: MonoBehaviour
     {
-        [Min(0f)]
-        public float start, end;
-        public int enemyID;
-        public string enemyName;
-        [Min(1)]
-        public int count;
-
-        public SpawnLogic spawnLogic;
-
-        private int prevID = -1; 
+        public List<EnemySpawningBlock> enemies;
         public void OnValidate()
         {
 
             var enemyLib = EnemyRoot.Instance.setUp.enemyLibrary;
 
-            if (enemyID >= 0 && enemyID < enemyLib.Count)
+            if (enemies == null) return;
+            foreach (var blk in enemies)
             {
-                enemyName = enemyLib[enemyID].name;
-            }
-            else
-            {
-                enemyName = "Invalid ID";
-            }
+                
+                if (blk.enemyID >= 0 && blk.enemyID < enemyLib.Count)
+                {
+                    blk.enemyName = enemyLib[blk.enemyID].name;
+                }
+                else
+                {
+                    blk.enemyName = "Invalid ID";
+                }
 
-            if (end < start) end = start;
+            }
+            
+            
 
         }
 
-        public EnemySpawnGroupBlk CreateSpawnGroupBlk()
+        public EnemyPlainGroupSpawnBlk CreateSpawnGroupBlks()
         {
-            return new EnemySpawnGroupBlk
+            var newList = new List<EnemySpawningBlock>();
+
+            foreach (var blk in enemies)
             {
-                range = new SpawningRange { start = start, end = end },
-                spawningBlock = new EnemySpawningBlock { count = count, enemyID = enemyID },
-                spawnLogic = spawnLogic
-            };
+                newList.Add(new EnemySpawningBlock(blk));
+            }
+
+            return new EnemyPlainGroupSpawnBlk{enemies = newList};
         }
     }
 }

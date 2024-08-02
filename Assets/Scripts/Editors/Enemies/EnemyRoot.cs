@@ -22,13 +22,30 @@ namespace Editors.Enemies
                 setUp.enemyLibrary.Add(edit.CreateEnemySetUp());
             }
             
-            setUp.enemySpawns.Clear();
-            var enemySpawnEdit = transform.GetComponentInChildren<EnemySpawnEdit>();
-            var list = enemySpawnEdit.CreateSetUp();
-            foreach (var spawnSetUp in list)
+            setUp.enemySpawnGroups.Clear();
+            var groupEdit= transform.GetComponentInChildren<EnemyGroupsEdit>();
+            var list = groupEdit.GetBlks();
+            foreach (var group in list)
             {
-                setUp.enemySpawns.Add(spawnSetUp);
+                setUp.enemySpawnGroups.Add(group);
             }
+            
+            setUp.enemySpawnWaves.Clear();
+            var waveEdit= transform.GetComponentInChildren<EnemyWavesEdit>();
+            var waveList = waveEdit.GetBlks();
+            foreach (var wave in waveList)
+            {
+                setUp.enemySpawnWaves.Add(wave);
+            }
+            
+            setUp.enemySpawnLevels.Clear();
+            var levelEdit= transform.GetComponentInChildren<EnemyLevelsEdit>();
+            var levelList = levelEdit.GetBlks();
+            foreach (var level in levelList)
+            {
+                setUp.enemySpawnLevels.Add(level);
+            }
+
             EditorUtility.SetDirty(setUp);
             Debug.Log("Save Asset");
 

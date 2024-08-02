@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Editors.Enemies
 {
-    public class EnemySpawnEdit: MonoBehaviour
+    public class EnemyLevelsEdit: MonoBehaviour
     {
-        public List<EnemyPlainLevelBlk> CreateSetUp()
+        public List<EnemyPlainLevelBlk> GetBlks()
         {
             var levelEdits = transform.GetComponentsInChildren<EnemySpawnLevelEdit>();
             var levels = new List<EnemyPlainLevelBlk>();
