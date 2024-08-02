@@ -28,6 +28,15 @@ namespace InGame.BattleFields.Enemies
         private EnemyView m_viewPrefab;
         private EnemyView m_view = null;
 
+        public EnemyView CreateView()
+        {
+            if (m_viewPrefab == null) return null;
+            if (m_view != null) return m_view;
+
+            m_view = GameObject.Instantiate(m_viewPrefab);
+            return m_view;
+        }
+        
         public static Enemy CreateEnemy(Enemy other)
         {
             return new Enemy
