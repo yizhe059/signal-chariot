@@ -67,7 +67,8 @@ namespace InGame.InGameStates
             var signalController = GameManager.Instance.GetSignalController();
             timeEffectManager.Stop();
             signalController.Stop();
-
+            
+            m_chariotView.SetMoveDirection(Vector2.zero);
             m_enemySpawnController.UnregisterWaveFinishCallBack(OnWaveFinished);
             m_enemySpawnController.Stop();
             
