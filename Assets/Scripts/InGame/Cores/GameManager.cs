@@ -8,6 +8,7 @@ using InGame.Boards.Modules;
 using InGame.Boards.Signals;
 using InGame.BattleFields.Chariots;
 using InGame.BattleFields.Enemies;
+using InGame.BattleFields.Common;
 using InGame.Cameras;
 using InGame.InGameStates;
 using InGame.Views;
@@ -58,6 +59,13 @@ namespace InGame.Cores
             InitEnemy();
 
             ChangeToBoardWaitingState(); // initial state is board preparation
+
+            {
+                // test
+                new Mod(5, new Vector2(3, 2));
+                new Mod(5, new Vector2(-3, -2));
+                new Mod(10, new Vector2(2, -3));
+            }
         }
 
         private void InitEnemy()

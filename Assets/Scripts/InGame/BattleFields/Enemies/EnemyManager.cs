@@ -14,6 +14,7 @@ namespace InGame.BattleFields.Enemies
 
         private float m_duration;
         private List<EnemyGroup> m_groups = new();
+        private List<Enemy> m_currEnemies = new();
         
         public EnemyManager(List<EnemyPlainLevelBlk> spawnSetUp)
         {

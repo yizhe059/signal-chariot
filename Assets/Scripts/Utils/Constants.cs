@@ -22,6 +22,8 @@ namespace Utils
         public const string GO_BULLET_PATH = "Prefabs/BattleField/BulletView";
         public const string GO_CHARIOT_PATH = "Prefabs/BattleField/ChariotView";
         public const string GO_TOWER_PATH = "Prefabs/BattleField/TowerView";
+        public const string GO_MOD_PATH = "Prefabs/BattleField/ModView";
+
         public const string GO_BOARD_PATH = "Prefabs/Board/BoardView";
         public const string GO_CAMERA_PATH = "Prefabs/3C/CameraManager";
 
@@ -53,6 +55,7 @@ namespace Utils
         public const float SCENE_DEPTH = 1f;
         public const float CHARIOT_DEPTH = 0;
         public const float ENEMY_DEPTH = 0;
+        public const float MOD_DEPTH = 0;
         public const float BULLET_DEPTH = -0.5f;
         public const float TOWER_DEPTH = -1f;
         
