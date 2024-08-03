@@ -45,7 +45,7 @@ namespace InGame.Views
         #endregion
 
         #region Interaction
-        public void OnCollisionEnter(Collision other)
+        public void OnTriggerEnter(Collider other)
         {
             IDamageable target = other.gameObject.GetComponent<IDamageable>();
             if(target != null) DealDamage(target, m_enemy.Get(UnlimitedPropertyType.Damage));

@@ -22,12 +22,8 @@ namespace InGame.Views
 
         public void OnTriggerEnter(Collider other)
         {
-            Debug.Log("collide");
             if (other.gameObject.CompareTag(Constants.CHARIOT_TAG))
-            {
-                Debug.Log("player");
-                m_mod.Consume();
-            }
+                m_mod.Pickedup();
         }
     }
 }

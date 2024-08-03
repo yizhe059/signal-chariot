@@ -10,6 +10,7 @@ namespace InGame.BattleFields.Enemies
     {
         Random
     }
+
     public class EnemySpawnController
     {
         private EnemySpawnLib m_spawnLib;
@@ -101,7 +102,6 @@ namespace InGame.BattleFields.Enemies
         
         public Enemy GenerateEnemy(int enemyIdx)
         {
-            
             Debug.Log($"Generate Enemy with ID {enemyIdx}");
             return null;
         }
@@ -361,7 +361,6 @@ namespace InGame.BattleFields.Enemies
                 m_numOfEnemies++;
                 Debug.Log($"Enemy Spawn. ID: {m_ID}, total: {m_enemies.Count}, {m_timer}");
             }
-
         }
 
         private void EnemyIsDead(int idx)

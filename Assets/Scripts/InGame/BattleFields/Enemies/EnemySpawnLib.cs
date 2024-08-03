@@ -11,8 +11,6 @@ namespace InGame.BattleFields.Enemies
         private readonly List<EnemyPlainLevelBlk> m_levelsSetUp;
         private readonly List<EnemyPlainWaveBlk> m_wavesSetUp;
         private readonly List<EnemyPlainGroupSpawnBlk> m_groupsSetUp;
-
-
         
         public EnemySpawnLib(EnemySpawnSetUp setUp)
         {

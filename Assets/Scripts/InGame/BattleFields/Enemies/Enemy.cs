@@ -9,7 +9,6 @@ namespace InGame.BattleFields.Enemies
 {
     public class Enemy
     {
-        
         private LimitedProperty m_health;
         private UnlimitedProperty m_speed;
         private UnlimitedProperty m_damage;
@@ -17,6 +16,8 @@ namespace InGame.BattleFields.Enemies
         private UnlimitedProperty m_attackInterval;
 
         private UnityEvent m_dieCallBack = new UnityEvent();
+        private int m_modQuantity;
+        private int m_modQuality;
 
         public string name { get; private set; }
         public int typeID { get; private set; }
@@ -37,7 +38,7 @@ namespace InGame.BattleFields.Enemies
         
         public static Enemy CreateEnemy(Enemy other)
         {
-            return new Enemy
+            Enemy enemy = new Enemy
             {
                 name = other.name,
                 typeID = other.typeID,
@@ -61,13 +62,18 @@ namespace InGame.BattleFields.Enemies
                 m_speed = new UnlimitedProperty(
                     other.Get(UnlimitedPropertyType.Speed), 
                     UnlimitedPropertyType.Speed
-                )
+                ),
+                m_modQuality = other.m_modQuality,
+                m_modQuantity = other.m_modQuantity,
             };
+
+            enemy.RegisterDieCallBack(enemy.GenerateMod);
+            return enemy;
         }
         
         public static Enemy CreateEnemy(EnemySetUp setUp, int typeID)
         {
-            return new Enemy
+            Enemy enemy = new Enemy
             {
                 name = setUp.name,
                 typeID = typeID,
@@ -76,8 +82,13 @@ namespace InGame.BattleFields.Enemies
                 m_damage = new UnlimitedProperty(setUp.attack, UnlimitedPropertyType.Damage),
                 m_range = new UnlimitedProperty(setUp.attackRadius, UnlimitedPropertyType.Range),
                 m_attackInterval = new UnlimitedProperty(setUp.attackDuration, UnlimitedPropertyType.Interval),
-                m_speed = new UnlimitedProperty(setUp.speed, UnlimitedPropertyType.Speed)
+                m_speed = new UnlimitedProperty(setUp.speed, UnlimitedPropertyType.Speed),
+                m_modQuality = setUp.modQuality,
+                m_modQuantity = setUp.modQuantity,
             };
+
+            enemy.RegisterDieCallBack(enemy.GenerateMod);
+            return enemy;
         }
 
         public void Die()
@@ -111,6 +122,7 @@ namespace InGame.BattleFields.Enemies
                 UnlimitedPropertyType.Speed => m_speed.value,
                 UnlimitedPropertyType.Range => m_range.value,
                 UnlimitedPropertyType.Interval => m_attackInterval.value,
+                _ => throw new System.NotImplementedException(),
             };
         }
 
@@ -128,10 +140,23 @@ namespace InGame.BattleFields.Enemies
             m_dieCallBack.RemoveListener(act);
         }
         
+        #region Action
         public void TakeDamage(float dmg)
         {
             this.m_health.current -= dmg;
             if(this.m_health.current <= 0) Die();
         }
+
+        private void GenerateMod()
+        {
+            Vector3 position = m_view.transform.position;
+            for(int i = 0; i < m_modQuantity; i++)
+            {
+                float x = position.x + Random.Range(-1, 1);
+                float y = position.y + Random.Range(-1, 1);
+                new Mod(m_modQuantity, new Vector2(x, y));
+            }
+        }
+        #endregion
     }
 }
