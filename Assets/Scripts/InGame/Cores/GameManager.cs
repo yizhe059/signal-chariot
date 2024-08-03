@@ -44,9 +44,10 @@ namespace InGame.Cores
         private SignalController m_signalController;
         
         [Header("Enemy")]
-        private EnemyManager m_enemyManager;
+        private EnemySpawnLib m_enemySpawnLib;
 
         private EnemyLib m_enemyLib;
+        private EnemySpawnController m_enemySpawnController;
 
         protected override void Init()
         {
@@ -71,7 +72,8 @@ namespace InGame.Cores
         private void InitEnemy()
         {
             m_enemyLib = new EnemyLib(m_setUp.enemyLibrary);
-            m_enemyManager = new EnemyManager(m_setUp.enemySpawnLevels);
+            m_enemySpawnLib = new EnemySpawnLib(m_setUp.enemySpawnSetUp);
+            m_enemySpawnController = new EnemySpawnController(m_enemySpawnLib, m_enemyLib);
         }
 
         private void InitChariot()

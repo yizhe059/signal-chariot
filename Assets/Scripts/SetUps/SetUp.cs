@@ -12,8 +12,6 @@ namespace SetUps
         public BoardSetUp extraBoardSetUp;
         public List<ModuleSetUp> moduleLibrary;
         public List<EnemySetUp> enemyLibrary;
-        public List<EnemyPlainGroupSpawnBlk> enemySpawnGroups;
-        public List<EnemyPlainWaveBlk> enemySpawnWaves;
-        public List<EnemyPlainLevelBlk> enemySpawnLevels;
+        public EnemySpawnSetUp enemySpawnSetUp;
     }
 }

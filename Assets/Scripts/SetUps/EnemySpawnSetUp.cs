@@ -1,15 +1,29 @@
 ﻿using System.Collections.Generic;
 using InGame.BattleFields.Enemies;
-using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace SetUps
 {
     [System.Serializable]
+    public class EnemySpawnSetUp
+    {
+        public List<EnemyPlainGroupSpawnBlk> enemySpawnGroups;
+        public List<EnemyPlainWaveBlk> enemySpawnWaves;
+        public List<EnemyPlainLevelBlk> enemySpawnLevels;
+    }
+    
+    [System.Serializable]
     public class EnemyPlainLevelBlk
     {
         public List<EnemySpawnWaveBlk> waves;
+
+        public EnemyPlainLevelBlk CreateCopy()
+        {
+            return new EnemyPlainLevelBlk
+            {
+                waves = new List<EnemySpawnWaveBlk>(waves)
+            };
+        }
     }
     
     [System.Serializable]
@@ -61,7 +75,19 @@ namespace SetUps
         public int maxEnemies;
         [Tooltip("怪物刷新位置的逻辑")]
         public SpawnLogic locationSpawnLogic;
-        
+
+        public EnemyPlainGroupSpawnBlk CreateCopy()
+        {
+            return new EnemyPlainGroupSpawnBlk
+            {
+                enemiesPool = new List<EnemySpawningBlock>(enemiesPool),
+                eachSpawnCount = eachSpawnCount,
+                spawnInterval = spawnInterval,
+                minEnemies = minEnemies,
+                maxEnemies = maxEnemies,
+                locationSpawnLogic = locationSpawnLogic
+            };
+        }
     }
     
     [System.Serializable]
@@ -69,8 +95,7 @@ namespace SetUps
     {
         public int enemyID;
         public string enemyName;
-       
-
+        
         public EnemySpawningBlock()
         {
         }
@@ -80,6 +105,8 @@ namespace SetUps
             enemyID = other.enemyID;
             enemyName = other.enemyName;
         }
+
+        
     }
 
     [System.Serializable]
