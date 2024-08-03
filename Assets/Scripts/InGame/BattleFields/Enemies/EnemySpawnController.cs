@@ -20,12 +20,15 @@ namespace InGame.BattleFields.Enemies
         private EnemyWaveSpawnController m_currentWaveController;
         private bool m_isOn = false;
 
+        public List<Enemy> currentEnemies { get; private set; }
+
         private UnityEvent m_waveFinishCallBack = new();
 
         public EnemySpawnController(EnemySpawnLib spawnLib, EnemyLib enemyLib)
         {
             m_spawnLib = spawnLib;
             m_enemyLib = enemyLib;
+            currentEnemies = new();
         }
 
         public void Init(int levelIdx)
@@ -105,11 +108,31 @@ namespace InGame.BattleFields.Enemies
             Debug.Log($"Generate Enemy with ID {enemyIdx}");
             return null;
         }
+
+        public Enemy GetClosestEnemy(Vector3 position)
+        {   
+            Enemy closest = null;
+            float distance = float.MaxValue;
+            Vector2 pos = new Vector2(position.x, position.y);
+
+            foreach(Enemy enemy in currentEnemies)
+            {
+                float prevDistance = distance;
+                Vector2 enemyPos = new Vector2(
+                    enemy.GetView().transform.position.x, 
+                    enemy.GetView().transform.position.y
+                );
+
+                distance = Mathf.Min(distance, Vector2.Distance(pos, enemyPos));
+                if(distance < prevDistance) closest = enemy;
+            }
+
+            return closest;
+        }
     }
 
     public class EnemyWaveSpawnController
-    {
-        
+    {   
         private class EnemyGroup
         {
             public EnemyGroupSpawnController controller;

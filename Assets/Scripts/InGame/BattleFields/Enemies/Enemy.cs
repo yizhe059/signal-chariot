@@ -24,6 +24,7 @@ namespace InGame.BattleFields.Enemies
 
         private EnemyView m_viewPrefab;
         private EnemyView m_view = null;
+        public EnemyView GetView() => m_view;
 
         #region Life Cycle
         public EnemyView CreateView()

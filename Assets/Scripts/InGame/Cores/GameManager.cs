@@ -8,15 +8,14 @@ using InGame.Boards.Modules;
 using InGame.Boards.Signals;
 using InGame.BattleFields.Chariots;
 using InGame.BattleFields.Enemies;
-using InGame.BattleFields.Common;
 using InGame.Cameras;
 using InGame.InGameStates;
 using InGame.Views;
 
 using SetUps;
+
 using Utils.Common;
 using Utils;
-using Time = InGame.Boards.Signals.Time;
 
 namespace InGame.Cores
 {
@@ -123,8 +122,8 @@ namespace InGame.Cores
         public Board GetExtraBoard() => m_generalBoard.extraBoard;
         public GeneralBoard GetGeneralBoard() => m_generalBoard;
         public BoardView GetBoardView() => m_generalBoard.boardView;
-
         public Chariot GetChariot() => m_chariot;
+        public EnemySpawnController GetEnemySpawnController() => m_enemySpawnController;
         public InGameStateType GetCurrentInGameState() => WorldState.instance.currentState.type;
         #endregion
 

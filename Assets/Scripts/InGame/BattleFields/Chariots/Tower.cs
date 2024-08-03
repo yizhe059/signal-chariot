@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using System.Collections;
 
 using UnityEngine;
 
@@ -6,16 +6,17 @@ using SetUps;
 using InGame.Cores;
 using InGame.Views;
 using InGame.Boards.Modules;
+using InGame.BattleFields.Enemies;
 using InGame.BattleFields.Common;
+
 using Utils;
-using System.Collections;
 
 namespace InGame.BattleFields.Chariots
 {
     public enum SeekMode
     {
         None,
-        Nearest,
+        Closest,
         Random,
     }
 
@@ -108,15 +109,27 @@ namespace InGame.BattleFields.Chariots
             Vector3 target = Vector3.zero;
             switch(m_seekMode)
             {
-                case SeekMode.Nearest:
-                    target = new(10, 10, 0);
+                case SeekMode.Closest:
+                    Enemy closest = GameManager.Instance.GetEnemySpawnController().
+                                    GetClosestEnemy(this.m_towerView.transform.position);
+                    if(closest != null) target = closest.GetView().transform.position;
+                    else target = RandomPosition();
                     break;
                 case SeekMode.Random:
+                    target = RandomPosition();
                     break;
                 default:
                     break;
             }
+            target.z = Constants.BULLET_DEPTH;
             return target;
+        }
+
+        private Vector3 RandomPosition()
+        {
+            float x = Random.Range(50, 100);
+            float y = Random.Range(50, 100);
+            return new Vector3(x, y, 0);
         }
     }
 
