@@ -210,7 +210,7 @@ MonoBehaviour:
     enemySpawnGroups:
     - enemiesPool:
       - enemyID: 0
-        enemyName: "\u666E\u901A\u602A"
+        enemyName: "\u767D\u8840\u7403"
       eachSpawnCount: 4
       spawnInterval: 5
       minEnemies: 1
@@ -220,13 +220,9 @@ MonoBehaviour:
     - groups:
       - range:
           start: 0
-          end: 30
+          end: 60
         spawnGroupID: 0
-      - range:
-          start: 40
-          end: 50
-        spawnGroupID: 0
-      duration: 50
+      duration: 60
       groupsMustBeat: 
     enemySpawnLevels:
     - waves:
