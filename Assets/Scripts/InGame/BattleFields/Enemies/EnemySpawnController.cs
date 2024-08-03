@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using SetUps;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,6 +12,10 @@ namespace InGame.BattleFields.Enemies
 
     public class EnemySpawnController
     {
+        private class EnemyBlk
+        {
+            public Enemy enemy;
+        }
         private EnemySpawnLib m_spawnLib;
         private EnemyLib m_enemyLib;
         private int m_currentWaveIdx;
@@ -20,9 +23,8 @@ namespace InGame.BattleFields.Enemies
         private EnemyWaveSpawnController m_currentWaveController;
         private bool m_isOn = false;
 
-        public List<Enemy> currentEnemies { get; private set; }
-
-        private UnityEvent m_waveFinishCallBack = new();
+        private readonly UnityEvent m_waveFinishCallBack = new();
+        private readonly List<EnemyBlk> m_enemies = new List<EnemyBlk>();
 
         public EnemySpawnController(EnemySpawnLib spawnLib, EnemyLib enemyLib)
         {
@@ -105,8 +107,18 @@ namespace InGame.BattleFields.Enemies
         
         public Enemy GenerateEnemy(int enemyIdx)
         {
+
+            var enemy = m_enemyLib.CreateEnemy(enemyIdx);
+            var enemyBlk = new EnemyBlk
+            {
+                enemy = enemy
+            };
+            
+            m_enemies.Add(enemyBlk);
+            
+            
             Debug.Log($"Generate Enemy with ID {enemyIdx}");
-            return null;
+            return enemy;
         }
 
         public Enemy GetClosestEnemy(Vector3 position)
@@ -115,12 +127,12 @@ namespace InGame.BattleFields.Enemies
             float distance = float.MaxValue;
             Vector2 pos = new Vector2(position.x, position.y);
 
-            foreach(Enemy enemy in currentEnemies)
+            foreach(EnemyBlk enemyBlk in m_enemies)
             {
                 float prevDistance = distance;
                 Vector2 enemyPos = new Vector2(
-                    enemy.GetView().transform.position.x, 
-                    enemy.GetView().transform.position.y
+                    enemyBlk.enemy.GetView().transform.position.x, 
+                    enemyBlk.enemy.GetView().transform.position.y
                 );
 
                 distance = Mathf.Min(distance, Vector2.Distance(pos, enemyPos));
