@@ -30,7 +30,6 @@ namespace InGame.BattleFields.Enemies
         {
             m_spawnLib = spawnLib;
             m_enemyLib = enemyLib;
-            currentEnemies = new();
         }
 
         public void Init(int levelIdx)
@@ -123,20 +122,22 @@ namespace InGame.BattleFields.Enemies
 
         public Enemy GetClosestEnemy(Vector3 position)
         {   
-            Enemy closest = null;
             float distance = float.MaxValue;
+            float prevDistance;
+
+            Enemy closest = null;
             Vector2 pos = new Vector2(position.x, position.y);
 
             foreach(EnemyBlk enemyBlk in m_enemies)
             {
-                float prevDistance = distance;
                 Vector2 enemyPos = new Vector2(
                     enemyBlk.enemy.GetView().transform.position.x, 
                     enemyBlk.enemy.GetView().transform.position.y
                 );
 
+                prevDistance = distance;
                 distance = Mathf.Min(distance, Vector2.Distance(pos, enemyPos));
-                if(distance < prevDistance) closest = enemy;
+                if(distance < prevDistance) closest = enemyBlk.enemy;
             }
 
             return closest;
