@@ -3,6 +3,7 @@ using UnityEngine;
 using InGame.BattleFields.Common;
 using InGame.Views;
 using SetUps;
+using UnityEngine.Events;
 
 namespace InGame.BattleFields.Enemies
 {
@@ -14,6 +15,8 @@ namespace InGame.BattleFields.Enemies
         private UnlimitedProperty m_damage;
         private UnlimitedProperty m_range;
         private UnlimitedProperty m_attackInterval;
+
+        private UnityEvent m_dieCallBack = new UnityEvent();
 
         public string name { get; private set; }
         public int typeID { get; private set; }
@@ -80,6 +83,7 @@ namespace InGame.BattleFields.Enemies
         public void Die()
         {
             m_view.Die();
+            m_dieCallBack.Invoke();
         }
 
         #endregion
@@ -111,6 +115,18 @@ namespace InGame.BattleFields.Enemies
         }
 
         #endregion
+
+        public void RegisterDieCallBack(UnityAction act)
+        {
+            if (act == null) return;
+            m_dieCallBack.AddListener(act);
+        }
+        
+        public void UnregisterDieCallBack(UnityAction act)
+        {
+            if (act == null) return;
+            m_dieCallBack.RemoveListener(act);
+        }
         
         public void TakeDamage(float dmg)
         {

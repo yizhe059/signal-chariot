@@ -57,8 +57,10 @@ namespace InGame.Cores
             InitBoard();
             InitCamera();
             InitEnemy();
-
+            
+           
             ChangeToBoardWaitingState(); // initial state is board preparation
+            
         }
 
         private void InitEnemy()
@@ -108,6 +110,7 @@ namespace InGame.Cores
         {
             m_signalController?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
             m_timeEffectManager?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
+            m_enemySpawnController?.Update(UnityEngine.Time.deltaTime);
         }
 
         #region Getters

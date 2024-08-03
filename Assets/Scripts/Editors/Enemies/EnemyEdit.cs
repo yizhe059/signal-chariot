@@ -8,7 +8,7 @@ namespace Editors.Enemies
 {
     public class EnemyEdit: MonoBehaviour
     {
-        public string name = "";
+        public new string name = "";
         
         [Min(1)]
         public float maxHealth;
