@@ -24,5 +24,16 @@ namespace InGame.BattleFields.Enemies
 
             return Enemy.CreateEnemy(m_enemies[id]);
         }
+
+        public void DestroyEnemy(Enemy enemy)
+        {
+            if (enemy == null)
+            {
+                Debug.LogError("Enemy is null");
+                return;
+            }
+            enemy.SelfDestroy();
+            
+        }
     }
 }

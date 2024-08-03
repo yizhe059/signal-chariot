@@ -4,6 +4,7 @@ using InGame.Cores;
 using InGame.UI;
 using InGame.Views;
 using InGame.BattleFields.Chariots;
+using InGame.BattleFields.Enemies;
 
 namespace InGame.InGameStates
 {
@@ -11,6 +12,7 @@ namespace InGame.InGameStates
     {
         public override InGameStateType type => InGameStateType.BattleState;
         private ChariotView m_chariotView;
+        private EnemySpawnController m_enemySpawnController;
 
         public override void Enter(InGameState last)
         {
@@ -42,6 +44,11 @@ namespace InGame.InGameStates
             
             timeEffectManager.Start();
             signalController.Start();
+            
+            m_enemySpawnController.GoNextWave();
+            m_enemySpawnController.RegisterWaveFinishCallBack(OnWaveFinished);
+            m_enemySpawnController.Start();
+            
 
             BattleProgressUI.Instance.Show();
             BattleResultUI.Instance.Hide();
@@ -61,6 +68,9 @@ namespace InGame.InGameStates
             timeEffectManager.Stop();
             signalController.Stop();
 
+            m_enemySpawnController.UnregisterWaveFinishCallBack(OnWaveFinished);
+            m_enemySpawnController.Stop();
+            
             BattleProgressUI.Instance.Hide();
             BattleResultUI.Instance.Show();
             ChariotStatusUI.Instance.Hide();
@@ -73,11 +83,17 @@ namespace InGame.InGameStates
             m_chariotView.SetMoveDirection(inputDirection);
         }
 
-        public static BattleState CreateState(Chariot chariot, ChariotView chariotView)
+        private void OnWaveFinished()
+        {
+            GameManager.Instance.ChangeToBattleResultState(BattleResultType.WaveWin);
+        }
+
+        public static BattleState CreateState(Chariot chariot, ChariotView chariotView, EnemySpawnController enemySpawnController)
         {
             var state = new BattleState
             {
                 m_chariotView = chariotView,
+                m_enemySpawnController = enemySpawnController
             };
             return state;
         }

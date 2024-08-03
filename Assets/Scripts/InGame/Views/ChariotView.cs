@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 using Utils.Common;
@@ -58,5 +58,10 @@ namespace InGame.Views
             m_chariot.TakeDamage(dmg);
         }
         #endregion
+
+        public Vector2 GetPosition()
+        {
+            return new Vector2(transform.position.x, transform.position.y);
+        }
     }
 }

@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -228,6 +228,11 @@ namespace InGame.BattleFields.Chariots
             if(m_health.current <= 0) Die();
         }
 
-        #endregion 
+        #endregion
+
+        public Vector2 GetPosition()
+        {
+            return m_chariotView.GetPosition();
+        }
     }
 }

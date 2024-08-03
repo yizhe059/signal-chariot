@@ -57,7 +57,7 @@ namespace InGame.Cores
             InitBoard();
             InitCamera();
             InitEnemy();
-
+            
             ChangeToBoardWaitingState(); // initial state is board preparation
         }
 
@@ -150,7 +150,7 @@ namespace InGame.Cores
 
         public void ChangeToBattleState()
         {
-            WorldState.instance.nextState = BattleState.CreateState(m_chariot, m_chariotView);
+            WorldState.instance.nextState = BattleState.CreateState(m_chariot, m_chariotView, m_enemySpawnController);
         }
 
         public void ChangeToBattleResultState(BattleResultType resultType)

@@ -43,7 +43,7 @@ namespace InGame.Views
         }
 
         #endregion
-
+        
         #region Interaction
         public void OnTriggerEnter(Collider other)
         {
@@ -62,5 +62,12 @@ namespace InGame.Views
         }
 
         #endregion
+
+        public void SetPosition(Vector2 pos)
+        {
+            Vector3 worldPos = pos;
+            worldPos.z = Constants.ENEMY_DEPTH;
+            transform.position = worldPos;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using InGame.Cores;
 using SetUps;
 using UnityEngine;
 using UnityEngine.Events;
@@ -15,6 +16,7 @@ namespace InGame.BattleFields.Enemies
         private class EnemyBlk
         {
             public Enemy enemy;
+            public UnityAction dieCallback;
         }
         private EnemySpawnLib m_spawnLib;
         private EnemyLib m_enemyLib;
@@ -104,22 +106,53 @@ namespace InGame.BattleFields.Enemies
             
         }
         
+        /// <summary>
+        /// Create an enemy
+        /// </summary>
+        /// <param name="enemyIdx">Enemy Type Idx</param>
+        /// <returns></returns>
         public Enemy GenerateEnemy(int enemyIdx)
         {
-
-            var enemy = m_enemyLib.CreateEnemy(enemyIdx);
-            var enemyBlk = new EnemyBlk
+            int idx;
+            for (idx = 0; idx < m_enemies.Count; idx++)
             {
-                enemy = enemy
-            };
+                var blk = m_enemies[idx];
+                if (blk.enemy == null)
+                {
+                    break;
+                }
+                
+            }
+
+            EnemyBlk enemyBlk;
+            if (idx == m_enemies.Count)
+            {
+                enemyBlk = new EnemyBlk();
+                m_enemies.Add(enemyBlk);
+            }
+            else
+            {
+                enemyBlk = m_enemies[idx];
+            }
+
+            enemyBlk.dieCallback = () => { DestroyEnemyCallBack(idx); };
+            var enemy = m_enemyLib.CreateEnemy(enemyIdx);
+            enemy.RegisterDieCallBack(enemyBlk.dieCallback);
             
-            m_enemies.Add(enemyBlk);
-            
-            
-            Debug.Log($"Generate Enemy with ID {enemyIdx}");
+            enemyBlk.enemy = enemy;
+
             return enemy;
         }
 
+        private void DestroyEnemyCallBack(int idx)
+        {
+            var blk = m_enemies[idx];
+            blk.enemy.UnregisterDieCallBack(blk.dieCallback);
+            m_enemyLib.DestroyEnemy(blk.enemy);
+            blk.enemy = null;
+            blk.dieCallback = null;
+        }
+        
         public Enemy GetClosestEnemy(Vector3 position)
         {   
             float distance = float.MaxValue;
@@ -391,9 +424,12 @@ namespace InGame.BattleFields.Enemies
                     isDead = false,
                     callBack = () => EnemyIsDead(idx)
                 };
-                
-                enemy?.RegisterDieCallBack(enemyBlk.callBack);
+
+                enemy.SetPosition(GenerateSpawningLocation());
+                    
+                enemy.RegisterDieCallBack(enemyBlk.callBack);
                 m_enemies.Add(enemyBlk);
+                
                 m_numOfEnemies++;
                 Debug.Log($"Enemy Spawn. ID: {m_ID}, total: {m_enemies.Count}, {m_timer}");
             }
@@ -414,7 +450,34 @@ namespace InGame.BattleFields.Enemies
                 if (!enemyBlock.isDead) return;
             }
             
+           
+            
             m_parent?.GroupBeatenCallBack(m_ID);
+        }
+
+        private Vector2 GenerateSpawningLocation()
+        {
+            // To Do Generate the location in a location manager
+            Vector2 min = new Vector2(-9f, -9f), max = new Vector2(9f, 9f);
+            var playerPos = GameManager.Instance.GetChariot().GetPosition();
+            var minPlayer = playerPos - new Vector2(3, 3);
+            var maxPlayer = playerPos + new Vector2(3, 3);
+
+            Vector2 location;
+            int count = 0;
+            do
+            {
+                count++;
+                location.x = Random.Range(min.x, max.x);
+                location.y = Random.Range(min.y, max.y);
+                
+                //prevent infinite loop
+                if (count > 100) break;
+            } while (location.x > minPlayer.x && location.y > minPlayer.y && location.x < maxPlayer.x && location.y < maxPlayer.y);
+            
+            if (count > 100) {Debug.LogError("Can find the location");}
+
+            return location;
         }
     }
 }

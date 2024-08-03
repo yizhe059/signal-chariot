@@ -31,7 +31,9 @@ namespace InGame.BattleFields.Enemies
         {
             if (m_viewPrefab == null) return null;
             if (m_view != null) return m_view;
-
+            
+            
+            // TO DO: maybe also create the view in Enemy Lib?
             m_view = GameObject.Instantiate(m_viewPrefab);
             m_view.Init(this);
             return m_view;
@@ -67,7 +69,8 @@ namespace InGame.BattleFields.Enemies
                 m_modQuality = other.m_modQuality,
                 m_modQuantity = other.m_modQuantity,
             };
-
+            
+            enemy.CreateView();
             enemy.RegisterDieCallBack(enemy.GenerateMod);
             return enemy;
         }
@@ -87,15 +90,23 @@ namespace InGame.BattleFields.Enemies
                 m_modQuality = setUp.modQuality,
                 m_modQuantity = setUp.modQuantity,
             };
-
+            
+            
             enemy.RegisterDieCallBack(enemy.GenerateMod);
             return enemy;
         }
 
         public void Die()
         {
-            m_view.Die();
             m_dieCallBack.Invoke();
+            
+        }
+
+        public void SelfDestroy()
+        {
+            m_view.Die();
+            m_view = null;
+            m_dieCallBack.RemoveAllListeners();
         }
 
         #endregion
@@ -140,7 +151,11 @@ namespace InGame.BattleFields.Enemies
             if (act == null) return;
             m_dieCallBack.RemoveListener(act);
         }
-        
+
+        public void SetPosition(Vector2 pos)
+        {
+            m_view.SetPosition(pos);
+        }
         #region Action
         public void TakeDamage(float dmg)
         {
