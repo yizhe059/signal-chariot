@@ -8,6 +8,7 @@ using InGame.Boards.Modules;
 using InGame.Boards.Signals;
 using InGame.BattleFields.Chariots;
 using InGame.BattleFields.Enemies;
+using InGame.BattleFields.Common;
 using InGame.Cameras;
 using InGame.InGameStates;
 using InGame.Views;
@@ -20,7 +21,7 @@ using Time = InGame.Boards.Signals.Time;
 namespace InGame.Cores
 {
     public class GameManager: MonoSingleton<GameManager>
-    {   
+    {
         [SerializeField] private PlayerInput m_playerInput;
         [SerializeField] private SetUp m_setUp;
 
@@ -38,10 +39,10 @@ namespace InGame.Cores
         // private Board m_extraBoard;
         // private BoardView m_boardView;
         private GeneralBoard m_generalBoard;
-        
+
         private ModuleLib m_moduleLib;
         private SignalController m_signalController;
-        
+
         [Header("Enemy")]
         private EnemySpawnLib m_enemySpawnLib;
 
@@ -57,10 +58,16 @@ namespace InGame.Cores
             InitBoard();
             InitCamera();
             InitEnemy();
-            
-           
+
+
             ChangeToBoardWaitingState(); // initial state is board preparation
-            
+
+            {
+                // test
+                new Mod(5, new Vector2(3, 2));
+                new Mod(5, new Vector2(-3, -2));
+                new Mod(10, new Vector2(2, -3));
+            }
         }
 
         private void InitEnemy()
@@ -84,12 +91,12 @@ namespace InGame.Cores
             var board = new Board(m_setUp.boardSetUp);
 
             var extraBoard = new Board(m_setUp.extraBoardSetUp, SlotStatus.Empty, true);
-            
+
             GameObject boardPref = Resources.Load<GameObject>(Constants.GO_BOARD_PATH);
             GameObject boardGO = Instantiate(boardPref);
             var boardView = boardGO.GetComponent<BoardView>();
             boardView.Init(board, extraBoard, m_setUp.boardSetUp, m_setUp.extraBoardSetUp);
-            
+
             m_signalController = SignalController.CreateSignalController(board, boardView);
             m_generalBoard = GeneralBoard.CreateGeneralBoard(board, extraBoard, boardView);
         }
@@ -101,7 +108,7 @@ namespace InGame.Cores
             m_cameraManager.transform.position = Vector3.zero;
 
             m_cameraManager.SetBattleCameraFollow(m_chariotView?.gameObject);
-            
+
             m_cameraManager.SetMiniBoardCameraPosition(GetBoardView().transform.position);
             m_cameraManager.SetBoardCameraPosition(GetBoardView().transform.position);
         }
@@ -123,7 +130,7 @@ namespace InGame.Cores
         public Board GetExtraBoard() => m_generalBoard.extraBoard;
         public GeneralBoard GetGeneralBoard() => m_generalBoard;
         public BoardView GetBoardView() => m_generalBoard.boardView;
-        
+
         public Chariot GetChariot() => m_chariot;
         public InGameStateType GetCurrentInGameState() => WorldState.instance.currentState.type;
         #endregion
@@ -133,7 +140,7 @@ namespace InGame.Cores
         {
             WorldState.instance.nextState = BoardWaitingState.CreateState(GetBoard(), GetExtraBoard(), GetBoardView());
         }
-        
+
         public void ChangeToAddSlotState()
         {
             WorldState.instance.nextState = AddSlotState.CreateAddSlotState(GetBoardView(), GetBoard(), Int32.MaxValue);
@@ -153,7 +160,7 @@ namespace InGame.Cores
         {
             WorldState.instance.nextState = BattleState.CreateState(m_chariot, m_chariotView);
         }
-        
+
         public void ChangeToBattleResultState(BattleResultType resultType)
         {
             WorldState.instance.nextState = BattleResultState.CreateState(resultType);
