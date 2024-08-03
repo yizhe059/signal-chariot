@@ -8,13 +8,13 @@ namespace InGame.BattleFields.Common
 {
     public class Mod
     {
-        private int m_count;
+        private int m_quality;
         private Vector3 m_position;
         private ModView m_view;
 
-        public Mod(int count, Vector2 position)
+        public Mod(int quality, Vector2 position)
         {
-            m_count = count;
+            m_quality = quality;
             m_position = position;
             CreateView();
         }
@@ -33,9 +33,9 @@ namespace InGame.BattleFields.Common
             m_view.Die();
         }
 
-        public void Consume()
+        public void Pickedup()
         {
-            GameManager.Instance.GetChariot().Increase(UnlimitedPropertyType.Mod, m_count);
+            GameManager.Instance.GetChariot().Increase(UnlimitedPropertyType.Mod, m_quality);
             this.Die();
         }
     }

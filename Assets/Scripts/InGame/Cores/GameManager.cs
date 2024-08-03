@@ -59,15 +59,7 @@ namespace InGame.Cores
             InitCamera();
             InitEnemy();
 
-
             ChangeToBoardWaitingState(); // initial state is board preparation
-
-            {
-                // test
-                new Mod(5, new Vector2(3, 2));
-                new Mod(5, new Vector2(-3, -2));
-                new Mod(10, new Vector2(2, -3));
-            }
         }
 
         private void InitEnemy()
@@ -75,6 +67,7 @@ namespace InGame.Cores
             m_enemyLib = new EnemyLib(m_setUp.enemyLibrary);
             m_enemySpawnLib = new EnemySpawnLib(m_setUp.enemySpawnSetUp);
             m_enemySpawnController = new EnemySpawnController(m_enemySpawnLib, m_enemyLib);
+            m_enemySpawnController.Init(0);
         }
 
         private void InitChariot()

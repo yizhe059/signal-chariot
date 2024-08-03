@@ -50,8 +50,6 @@ namespace InGame.Views
             ) * Time.deltaTime * m_chariot.Get(UnlimitedPropertyType.Speed);
         }
 
-        // TODO: add and remove towerview
-
         #endregion
 
         #region Interaction

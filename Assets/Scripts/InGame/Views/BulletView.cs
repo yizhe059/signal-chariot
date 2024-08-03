@@ -70,7 +70,7 @@ namespace InGame.Views
         #endregion
         
         #region Interaction
-        public void OnCollisionEnter(Collision other)
+        public void OnTriggerEnter(Collider other)
         {
             if(other.gameObject.CompareTag(Constants.CHARIOT_TAG)) return;
             IDamageable target = other.gameObject.GetComponent<IDamageable>();

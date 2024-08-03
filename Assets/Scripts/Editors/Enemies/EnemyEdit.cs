@@ -28,6 +28,12 @@ namespace Editors.Enemies
         [Min(0)]
         public float speed;
 
+        [Min(1)]
+        public int modQuantity;
+
+        [Min(1)]
+        public int modQuality;
+
         public EnemyView enemyPrefab;
         
         private string m_prevName = "";
@@ -39,11 +45,7 @@ namespace Editors.Enemies
                 m_prevName = name;
                 gameObject.name = name != "" ? name : "No name";
             }
-
-
         }
-
-
 
         public EnemySetUp CreateEnemySetUp()
         {
@@ -56,6 +58,8 @@ namespace Editors.Enemies
                 defense = defense,
                 maxHealth = maxHealth,
                 speed = speed,
+                modQuantity = modQuantity,
+                modQuality = modQuality,
                 enemyPrefab = enemyPrefab
             };
         }

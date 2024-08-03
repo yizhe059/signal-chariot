@@ -11,7 +11,6 @@ namespace InGame.InGameStates
     {
         public override InGameStateType type => InGameStateType.BattleState;
         private ChariotView m_chariotView;
-        private Chariot m_chariot;
 
         public override void Enter(InGameState last)
         {
@@ -78,7 +77,6 @@ namespace InGame.InGameStates
         {
             var state = new BattleState
             {
-                m_chariot = chariot,
                 m_chariotView = chariotView,
             };
             return state;

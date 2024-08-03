@@ -105,6 +105,7 @@ namespace InGame.BattleFields.Chariots
                 UnlimitedPropertyType.Mod => m_mod.value,
                 UnlimitedPropertyType.Speed => m_speed.value,
                 UnlimitedPropertyType.Defence => m_defence.value,
+                _ => throw new NotImplementedException(),
             };
         }
 

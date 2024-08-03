@@ -12,12 +12,13 @@ namespace SetUps
         public float defense;
 
         public float attack;
-
         public float attackDuration;
-
         public float attackRadius;
 
         public float speed;
+
+        public int modQuantity;
+        public int modQuality;
 
         public EnemyView enemyPrefab;
     }
