@@ -2,11 +2,12 @@ using UnityEngine;
 
 using Utils;
 using Utils.Common;
+using InGame.Cores;
 using InGame.BattleFields.Enemies;
+using InGame.BattleFields.Chariots;
+using InGame.BattleFields.Common;
 
 using DG.Tweening;
-using Unity.VisualScripting;
-using InGame.BattleFields.Common;
 
 namespace InGame.Views
 {
@@ -36,10 +37,22 @@ namespace InGame.Views
 
         private void Move()
         {
+            SetTarget();
             float distance = Vector3.Distance(this.transform.position, m_target);
             if(distance <= Constants.COLLIDE_OFFSET) return;
-            transform.DOMove(m_target, distance / m_enemy.Get(UnlimitedPropertyType.Speed))
-                    .SetEase(Ease.InOutQuad);
+            // transform.DOMove(m_target, distance / m_enemy.Get(UnlimitedPropertyType.Speed))
+                    // .SetEase(Ease.InOutQuad);
+            Vector3 direction = (m_target - this.transform.position) 
+                                * Time.deltaTime * m_enemy.Get(UnlimitedPropertyType.Speed);
+            this.transform.Translate(direction, Space.World);
+        }
+
+        private void SetTarget()
+        {
+            Chariot chariot = GameManager.Instance.GetChariot();
+            if(chariot == null) return;
+            m_target = chariot.chariotView.transform.position;
+            m_target.z = Constants.ENEMY_DEPTH;
         }
 
         #endregion
