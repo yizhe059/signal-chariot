@@ -110,7 +110,8 @@ namespace InGame.Views
 
         private void Block(Transform obstacleTrans)
         {
-            m_obstacleDirection = (this.transform.position - obstacleTrans.position).normalized;
+            Vector3 collisionPoint = gameObject.GetComponent<Collider>().ClosestPoint(obstacleTrans.position);
+            m_obstacleDirection = (this.transform.position - collisionPoint).normalized;
             m_obstacleDirection.z = 0;
         }
 
