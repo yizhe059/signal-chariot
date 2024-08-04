@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
+using InGame.Cores;
 using InGame.InGameStates;
 using Utils.Common;
 using Utils;
@@ -11,15 +12,39 @@ namespace InGame.UI
     {
         [SerializeField] private UIDocument m_doc;
 
-        private VisualTreeAsset m_waveWin;
-        private VisualTreeAsset m_battleWin;
-        private VisualTreeAsset m_fail;
+        private VisualElement m_waveWin;
+        private VisualElement m_battleWin;
+        private VisualElement m_fail;
 
         private void Awake()
         {
-            m_waveWin = Resources.Load<VisualTreeAsset>(Constants.UI_WAVE_WIN_PATH);
-            m_battleWin = Resources.Load<VisualTreeAsset>(Constants.UI_BATTLE_WIN_PATH);
-            m_fail = Resources.Load<VisualTreeAsset>(Constants.UI_FAIL_PATH);
+            m_waveWin = Resources.Load<VisualTreeAsset>(Constants.UI_WAVE_WIN_PATH).Instantiate();
+            m_battleWin = Resources.Load<VisualTreeAsset>(Constants.UI_BATTLE_WIN_PATH).Instantiate();
+            m_fail = Resources.Load<VisualTreeAsset>(Constants.UI_FAIL_PATH).Instantiate();
+
+            Register();
+        }
+
+        private void Register()
+        {
+            Button waveWinContinue = m_waveWin.Q<Button>("continue");
+            Button battleWinContinue = m_battleWin.Q<Button>("continue");
+            Button failContinue = m_fail.Q<Button>("continue");
+
+            waveWinContinue.clicked += () => 
+            {
+                GameManager.Instance.ChangeToBoardWaitingState(); // TODO: Go to next wave
+            };
+
+            battleWinContinue.clicked += () => 
+            {
+                GameManager.Instance.ChangeToBoardWaitingState(); // TODO: Go to next level
+            };
+
+            failContinue.clicked += () => 
+            {
+                GameManager.Instance.Restart(); 
+            };
         }
 
         public void Hide()
@@ -40,15 +65,15 @@ namespace InGame.UI
             switch (type)
             {
                 case BattleResultType.WaveWin:
-                    root.Add(m_waveWin.Instantiate());
+                    root.Add(m_waveWin);
                     break;
                 case BattleResultType.BattleWin:
-                    root.Add(m_battleWin.Instantiate());
+                    root.Add(m_battleWin);
                     break;
                 case BattleResultType.GameWin:
                     break;
                 case BattleResultType.Fail:
-                    root.Add(m_fail.Instantiate());
+                    root.Add(m_fail);
                     break;
             }
         }

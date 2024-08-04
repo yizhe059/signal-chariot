@@ -64,14 +64,13 @@ namespace InGame.Views
                 
             }
 
-            m_direction = (m_direction + seperation).normalized;
+            if(m_obstacleDirection != Vector3.zero) m_direction = Vector3.zero;
+
+            m_direction = (m_direction + seperation + m_obstacleDirection).normalized;
             m_direction *= Time.deltaTime * 
                         m_enemy.Get(UnlimitedPropertyType.Speed) * 
                         Constants.SPEED_MULTIPLIER;
-
-            if(m_obstacleDirection != Vector3.zero) 
-                m_direction = m_obstacleDirection;
-
+            
             this.transform.Translate(m_direction, Space.World);
         }
 
@@ -89,7 +88,8 @@ namespace InGame.Views
                     Block(other.transform);
                     break;
                 default:
-                    // TODO: 1. enlarge collider size based on attack range
+                    // TODO: 
+                    // 1. enlarge collider size based on attack range
                     // 2. attack multiple times
                     IDamageable target = other.gameObject.GetComponent<IDamageable>();
                     if(target != null) DealDamage(target, m_enemy.Get(UnlimitedPropertyType.Damage));
@@ -110,7 +110,6 @@ namespace InGame.Views
 
         private void Block(Transform obstacleTrans)
         {
-            // TODO
             m_obstacleDirection = (this.transform.position - obstacleTrans.position).normalized;
             m_obstacleDirection.z = 0;
         }

@@ -186,7 +186,7 @@ MonoBehaviour:
     requirements: []
   enemyLibrary:
   - name: "\u767D\u8840\u7403"
-    maxHealth: 3
+    maxHealth: 2
     defense: 0
     attack: 2
     attackDuration: 1
@@ -196,7 +196,7 @@ MonoBehaviour:
     modQuality: 1
     enemyPrefab: {fileID: 384623106758148936, guid: 30739d031fe43c04d8e7bdb9fcad132d, type: 3}
   - name: "\u767D\u8840\u7403\u9886\u961F"
-    maxHealth: 5
+    maxHealth: 4
     defense: 0
     attack: 3
     attackDuration: 1
@@ -218,7 +218,7 @@ MonoBehaviour:
     - enemiesPool:
       - enemyID: 1
         enemyName: "\u767D\u8840\u7403\u9886\u961F"
-      eachSpawnCount: 2
+      eachSpawnCount: 1
       spawnInterval: 10
       minEnemies: 1
       maxEnemies: 5

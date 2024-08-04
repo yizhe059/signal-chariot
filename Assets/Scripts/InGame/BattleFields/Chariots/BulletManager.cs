@@ -27,5 +27,14 @@ namespace InGame.BattleFields.Chariots
             m_bullets.Remove(bullet);
             bullet.Die();
         }
+
+        public void ClearBullet()
+        {
+            foreach(Bullet bullet in m_bullets)
+            {
+                bullet.Die();
+            }
+            m_bullets.Clear();
+        }
     }
 }

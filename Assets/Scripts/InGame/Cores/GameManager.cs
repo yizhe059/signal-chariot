@@ -48,6 +48,7 @@ namespace InGame.Cores
         private EnemyLib m_enemyLib;
         private EnemySpawnController m_enemySpawnController;
 
+        #region Life Cycle
         protected override void Init()
         {
             m_inputManager = new InputManager(m_playerInput);
@@ -111,6 +112,14 @@ namespace InGame.Cores
             m_timeEffectManager?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
             m_enemySpawnController?.Update(UnityEngine.Time.deltaTime);
         }
+
+        public void Restart()
+        {
+            ChangeToBoardWaitingState();
+            m_enemySpawnController.Clear();
+            InitChariot();
+        }
+        #endregion
 
         #region Getters
         public CameraManager GetCameraManager() => m_cameraManager;

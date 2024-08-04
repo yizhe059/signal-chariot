@@ -216,7 +216,7 @@ MonoBehaviour:
     enemiesPool:
     - enemyID: 1
       enemyName: "\u767D\u8840\u7403\u9886\u961F"
-    eachSpawnCount: 2
+    eachSpawnCount: 1
     spawnInterval: 10
     minEnemies: 1
     maxEnemies: 5

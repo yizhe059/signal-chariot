@@ -69,6 +69,7 @@ namespace InGame.BattleFields.Chariots
         public void Die()
         {
             m_towerView.Die();
+            m_bulletManager.ClearBullet();
         }
         
         private void CreateView()

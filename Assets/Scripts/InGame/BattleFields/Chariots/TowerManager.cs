@@ -26,11 +26,22 @@ namespace InGame.BattleFields.Chariots
             m_towers.Add(tower);
             return tower;
         }
+        
         public void RemoveTower(Tower tower)
         {
             m_towers.Remove(tower);
             tower.Die();
         }
+
+        public void ClearTower()
+        {
+            foreach(Tower tower in m_towers)
+            {
+                tower.Die();
+            }
+            m_towers.Clear();
+        }
+
         public void TowerEffect(Module module)
         {
             foreach(Tower tower in m_towers)

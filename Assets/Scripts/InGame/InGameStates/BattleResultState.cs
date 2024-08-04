@@ -37,7 +37,7 @@ namespace InGame.InGameStates
             NavigationBarUI.Instance.Hide();
             BoardBarUI.Instance.Hide();
 
-            // TODO minimise board view
+            // TODO disable battle field interactions
         }
         
         public override void Exit()
@@ -49,7 +49,7 @@ namespace InGame.InGameStates
             NavigationBarUI.Instance.Show();
             BoardBarUI.Instance.Show();
 
-            // TODO restore board view
+            // TODO enable battle field interactions
         }
 
         public static BattleResultState CreateState(BattleResultType resultType)

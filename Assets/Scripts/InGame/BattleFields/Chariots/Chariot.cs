@@ -57,6 +57,7 @@ namespace InGame.BattleFields.Chariots
 
         private void Die()
         {
+            // m_towerManager.ClearTower();
             m_chariotView.Die();
             GameManager.Instance.ChangeToBattleResultState(BattleResultType.Fail);
         }
