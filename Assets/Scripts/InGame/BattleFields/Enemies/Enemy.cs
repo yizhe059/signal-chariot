@@ -99,7 +99,6 @@ namespace InGame.BattleFields.Enemies
         public void Die()
         {
             m_dieCallBack.Invoke();
-            
         }
 
         public void SelfDestroy()
@@ -156,6 +155,7 @@ namespace InGame.BattleFields.Enemies
         {
             m_view.SetPosition(pos);
         }
+
         #region Action
         public void TakeDamage(float dmg)
         {

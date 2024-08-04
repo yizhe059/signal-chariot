@@ -51,6 +51,7 @@ namespace InGame.Views
             Vector3 seperation = Vector3.zero;
             foreach(Enemy otherEnemy in GameManager.Instance.GetEnemySpawnController().GetAllEnemies())
             {
+                if(otherEnemy == null) continue;
                 GameObject otherEnemyGO = otherEnemy.GetView().gameObject;
                 if(otherEnemyGO == this.gameObject) continue;
                 

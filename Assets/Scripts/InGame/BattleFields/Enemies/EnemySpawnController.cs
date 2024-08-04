@@ -163,6 +163,7 @@ namespace InGame.BattleFields.Enemies
 
             foreach(EnemyBlk enemyBlk in m_enemies)
             {
+                if(enemyBlk == null || enemyBlk.enemy == null) continue;
                 Vector2 enemyPos = new Vector2(
                     enemyBlk.enemy.GetView().transform.position.x, 
                     enemyBlk.enemy.GetView().transform.position.y
@@ -249,8 +250,6 @@ namespace InGame.BattleFields.Enemies
                 groupController.Init(groupSetUp.spawnGroupID, m_groups.Count - 1);
 
             }
-            
-            Debug.Log(m_groups.Count);
 
             m_numGroupHasToBeat = setUp.groupsMustBeat.Count;
             foreach (var groupIdx in setUp.groupsMustBeat)
