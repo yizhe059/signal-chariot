@@ -20,7 +20,6 @@ namespace InGame.BattleFields.Chariots
 
         [Header("Properties")]       
         private LimitedProperty m_health;
-        private UnlimitedProperty m_armor;
         private UnlimitedProperty m_defence;
         private UnlimitedProperty m_speed;
         private UnlimitedProperty m_mod;
@@ -34,11 +33,6 @@ namespace InGame.BattleFields.Chariots
                 setUp.maxHealth, 
                 setUp.initialHealth, 
                 LimitedPropertyType.Health
-            );
-
-            m_armor = new UnlimitedProperty(
-                setUp.armor,
-                UnlimitedPropertyType.Armor
             );
 
             m_defence = new UnlimitedProperty(
@@ -101,10 +95,9 @@ namespace InGame.BattleFields.Chariots
         {
             return type switch
             {
-                UnlimitedPropertyType.Armor => m_armor.value,
+                UnlimitedPropertyType.Defence => m_defence.value,
                 UnlimitedPropertyType.Mod => m_mod.value,
                 UnlimitedPropertyType.Speed => m_speed.value,
-                UnlimitedPropertyType.Defence => m_defence.value,
                 _ => throw new NotImplementedException(),
             };
         }
@@ -122,10 +115,9 @@ namespace InGame.BattleFields.Chariots
         {
             return type switch
             {
-                UnlimitedPropertyType.Armor => m_armor,
+                UnlimitedPropertyType.Defence => m_defence,
                 UnlimitedPropertyType.Mod => m_mod,
                 UnlimitedPropertyType.Speed => m_speed,
-                UnlimitedPropertyType.Defence => m_defence,
                 _ => null
             };
         }
@@ -215,16 +207,10 @@ namespace InGame.BattleFields.Chariots
 
         public void TakeDamage(float dmg)
         {
-            if(m_armor.value >= dmg){
-                m_armor.value -= dmg;
-            }else if(m_armor.value > 0){
-                dmg -= m_armor.value;
-                m_armor.value = 0;
-                m_health.current -= dmg;
-            }else{
-                m_health.current -= dmg;
-            }
-
+            dmg -= m_defence.value;
+            dmg = Mathf.Max(dmg, 0);
+            m_health.current -= dmg;
+            
             if(m_health.current <= 0) Die();
         }
 

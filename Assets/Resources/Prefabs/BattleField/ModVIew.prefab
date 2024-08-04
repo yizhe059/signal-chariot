@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5828572497953885055}
   - component: {fileID: 5710609302482849976}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 417594686321437933}
   - component: {fileID: 1246689166496550875}
   - component: {fileID: 5442994974948760143}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: ModVIew
   m_TagString: Untagged
   m_Icon: {fileID: 0}

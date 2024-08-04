@@ -38,7 +38,7 @@ namespace InGame.Views
         private void Move()
         {
             Chariot chariot = GameManager.Instance.GetChariot();
-            if(chariot == null) return;
+            if(chariot == null || chariot.chariotView == null) return;
             
             m_target = chariot.chariotView.transform.position;
             m_target.z = Constants.ENEMY_DEPTH;

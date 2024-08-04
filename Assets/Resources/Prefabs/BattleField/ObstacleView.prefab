@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 519811031669002080}
   - component: {fileID: 31954662910573734}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6995194492126503031}
   - component: {fileID: 1130602911727262421}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: ObstacleView
   m_TagString: Untagged
   m_Icon: {fileID: 0}

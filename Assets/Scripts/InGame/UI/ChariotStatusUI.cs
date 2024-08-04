@@ -13,14 +13,14 @@ namespace InGame.UI
         [SerializeField] private UIDocument m_doc;
         private VisualElement m_root;
         private VisualElement m_health;
-        private VisualElement m_armor;
+        private VisualElement m_defence;
         private VisualElement m_mod;
         
         private void Awake()
         {
             m_root = m_doc.rootVisualElement;
             m_health = m_root.Q("health");
-            m_armor = m_root.Q("armor");
+            m_defence = m_root.Q("defence");
             m_mod = m_root.Q("mod");
         }
 
@@ -28,7 +28,7 @@ namespace InGame.UI
         {
             Chariot chariot = GameManager.Instance.GetChariot();
             chariot.RegisterPropertyEvent(LimitedPropertyType.Health, SetHealthUI);
-            chariot.RegisterPropertyEvent(UnlimitedPropertyType.Armor, SetArmorUI);
+            chariot.RegisterPropertyEvent(UnlimitedPropertyType.Defence, SetDefenceUI);
             chariot.RegisterPropertyEvent(UnlimitedPropertyType.Mod, SetModUI);
         }
 
@@ -40,10 +40,10 @@ namespace InGame.UI
             bar.title = $"{current}/{max}";
         }
 
-        private void SetArmorUI(float current)
+        private void SetDefenceUI(float current)
         {
-            Label content = m_armor.Q<Label>("content");
-            content.text = $"ARMOR: {current}";
+            Label content = m_defence.Q<Label>("content");
+            content.text = $"DEFENCE: {current}";
         }
 
         private void SetModUI(float current)

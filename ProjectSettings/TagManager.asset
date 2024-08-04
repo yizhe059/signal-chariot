@@ -8,15 +8,15 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Chariot
   - Water
   - UI
   - Board
-  - Battle
-  - 
-  - 
-  - 
-  - 
+  - BattleField
+  - Enemy
+  - Bullet
+  - Obstacle
+  - Mod
   - 
   - 
   - 

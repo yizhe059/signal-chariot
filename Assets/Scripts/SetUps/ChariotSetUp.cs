@@ -10,7 +10,6 @@ namespace SetUps
         public float maxHealth = 100;
         #endregion
 
-        public int armor = 0;
         public float defence = 0;
         
         public float speed = 1f;

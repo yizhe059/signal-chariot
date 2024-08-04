@@ -11,7 +11,6 @@ namespace InGame.BattleFields.Common
     public enum UnlimitedPropertyType
     {
         Mod,
-        Armor,
         Defence,
         Speed,
         BulletCount,

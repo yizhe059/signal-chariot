@@ -15,7 +15,6 @@ MonoBehaviour:
   chariotSetUp:
     initialHealth: 10
     maxHealth: 10
-    armor: 0
     defence: 0
     speed: 20
     mod: 0
@@ -187,9 +186,9 @@ MonoBehaviour:
     requirements: []
   enemyLibrary:
   - name: "\u767D\u8840\u7403"
-    maxHealth: 2
+    maxHealth: 3
     defense: 0
-    attack: 1
+    attack: 2
     attackDuration: 1
     attackRadius: 0.2
     speed: 15
@@ -197,9 +196,9 @@ MonoBehaviour:
     modQuality: 1
     enemyPrefab: {fileID: 384623106758148936, guid: 30739d031fe43c04d8e7bdb9fcad132d, type: 3}
   - name: "\u767D\u8840\u7403\u9886\u961F"
-    maxHealth: 4
+    maxHealth: 5
     defense: 0
-    attack: 2
+    attack: 3
     attackDuration: 1
     attackRadius: 0.2
     speed: 10
