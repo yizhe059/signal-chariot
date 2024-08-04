@@ -175,6 +175,16 @@ namespace InGame.BattleFields.Enemies
 
             return closest;
         }
+
+        public List<Enemy> GetAllEnemies()
+        {
+            List<Enemy> enemies = new();
+            foreach(EnemyBlk blk in m_enemies)
+            {
+                enemies.Add(blk.enemy);
+            }
+            return enemies;
+        }
     }
 
     public class EnemyWaveSpawnController

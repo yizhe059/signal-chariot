@@ -63,8 +63,14 @@ namespace Utils
         
         #region Interactions
 
-        public const float COLLIDE_OFFSET = 0.1f;
+        public const float COLLIDE_OFFSET = 0.5f;
+        public const float SEPERATION_DISTANCE = 1f;
+        public const float SEPERATION_FORCE = 1f;
 
         #endregion
+
+        #region Multiplier
+        public const float SPEED_MULTIPLIER = 0.1f;
+        #endregion 
     }
 }

@@ -37,22 +37,37 @@ namespace InGame.Views
 
         private void Move()
         {
-            SetTarget();
-            float distance = Vector3.Distance(this.transform.position, m_target);
-            if(distance <= Constants.COLLIDE_OFFSET) return;
-            // transform.DOMove(m_target, distance / m_enemy.Get(UnlimitedPropertyType.Speed))
-                    // .SetEase(Ease.InOutQuad);
-            Vector3 direction = (m_target - this.transform.position) 
-                                * Time.deltaTime * m_enemy.Get(UnlimitedPropertyType.Speed);
-            this.transform.Translate(direction, Space.World);
-        }
-
-        private void SetTarget()
-        {
             Chariot chariot = GameManager.Instance.GetChariot();
             if(chariot == null) return;
+            
             m_target = chariot.chariotView.transform.position;
             m_target.z = Constants.ENEMY_DEPTH;
+
+            float distance = Vector3.Distance(this.transform.position, m_target);
+            if(distance <= Constants.COLLIDE_OFFSET) return;
+
+            Vector3 direction = (m_target - this.transform.position).normalized;
+            
+            Vector3 seperation = Vector3.zero;
+            foreach(Enemy otherEnemy in GameManager.Instance.GetEnemySpawnController().GetAllEnemies())
+            {
+                GameObject otherEnemyGO = otherEnemy.GetView().gameObject;
+                if(otherEnemyGO == this.gameObject) continue;
+                
+                Vector3 directionToOther = otherEnemyGO.transform.position - transform.position;
+                float distanceToOther = directionToOther.magnitude;
+                if(distanceToOther < Constants.SEPERATION_DISTANCE)
+                    seperation -= (directionToOther / distanceToOther) * 
+                                (Constants.SEPERATION_DISTANCE - distanceToOther) * 
+                                Constants.SEPERATION_FORCE;
+                
+            }
+
+            direction = (direction + seperation).normalized;
+            direction *= Time.deltaTime * 
+                        m_enemy.Get(UnlimitedPropertyType.Speed) * 
+                        Constants.SPEED_MULTIPLIER;
+            this.transform.Translate(direction, Space.World);
         }
 
         #endregion

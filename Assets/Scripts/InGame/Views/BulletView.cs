@@ -72,13 +72,16 @@ namespace InGame.Views
         #region Interaction
         public void OnTriggerEnter(Collider other)
         {
+            Debug.Log("Hit");
             if(other.gameObject.CompareTag(Constants.CHARIOT_TAG)) return;
             IDamageable target = other.gameObject.GetComponent<IDamageable>();
+            Debug.Log("Not player");
             if(target != null) DealDamage(target, m_bullet.damage.value);
         }
 
         public void DealDamage(IDamageable target, float dmg)
         {
+            Debug.Log("Deal Damage!");
             m_bullet.DealDamage(target, dmg);
         }
         #endregion
