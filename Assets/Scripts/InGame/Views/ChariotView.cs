@@ -23,6 +23,7 @@ namespace InGame.Views
 
         private void Update()
         {
+            
             MoveChariot();
         }
 

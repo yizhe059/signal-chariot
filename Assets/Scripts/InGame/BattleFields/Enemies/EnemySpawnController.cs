@@ -182,7 +182,8 @@ namespace InGame.BattleFields.Enemies
             List<Enemy> enemies = new();
             foreach(EnemyBlk blk in m_enemies)
             {
-                enemies.Add(blk.enemy);
+                if (blk != null && blk.enemy != null)
+                    enemies.Add(blk.enemy);
             }
             return enemies;
         }
@@ -440,7 +441,7 @@ namespace InGame.BattleFields.Enemies
                 m_enemies.Add(enemyBlk);
                 
                 m_numOfEnemies++;
-                Debug.Log($"Enemy Spawn. ID: {m_ID}, total: {m_enemies.Count}, {m_timer}");
+                //Debug.Log($"Enemy Spawn. ID: {m_ID}, total: {m_enemies.Count}, {m_timer}");
             }
         }
 
