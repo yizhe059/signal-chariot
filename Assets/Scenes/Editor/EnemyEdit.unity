@@ -357,6 +357,10 @@ MonoBehaviour:
         start: 0
         end: 60
       spawnGroupID: 0
+    - range:
+        start: 0
+        end: 60
+      spawnGroupID: 1
     duration: 60
     groupsMustBeat: 
 --- !u!1 &1029815682
@@ -458,15 +462,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 927000611780892879, guid: 9903f5f16753e7c4b9039d43da447af3, type: 3}
       propertyPath: speed
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 927000611780892879, guid: 9903f5f16753e7c4b9039d43da447af3, type: 3}
       propertyPath: attack
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 927000611780892879, guid: 9903f5f16753e7c4b9039d43da447af3, type: 3}
       propertyPath: maxHealth
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 927000611780892879, guid: 9903f5f16753e7c4b9039d43da447af3, type: 3}
       propertyPath: modQuality
@@ -583,6 +587,8 @@ MonoBehaviour:
     enemiesPool:
     - enemyID: 0
       enemyName: "\u767D\u8840\u7403"
+    - enemyID: 1
+      enemyName: "\u767D\u8840\u7403\u9886\u961F"
     eachSpawnCount: 4
     spawnInterval: 5
     minEnemies: 1
@@ -642,7 +648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 927000611780892879, guid: 9903f5f16753e7c4b9039d43da447af3, type: 3}
       propertyPath: speed
-      value: 5
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 927000611780892879, guid: 9903f5f16753e7c4b9039d43da447af3, type: 3}
       propertyPath: attack
@@ -662,7 +668,7 @@ PrefabInstance:
       objectReference: {fileID: 384623106758148936, guid: 30739d031fe43c04d8e7bdb9fcad132d, type: 3}
     - target: {fileID: 927000611780892879, guid: 9903f5f16753e7c4b9039d43da447af3, type: 3}
       propertyPath: modQuantity
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 927000611780892879, guid: 9903f5f16753e7c4b9039d43da447af3, type: 3}
       propertyPath: attackRadius
