@@ -350,7 +350,7 @@ namespace InGame.BattleFields.Enemies
             
             if (!m_spawnLib.GetGroupSetUp(groupID, out var setUp))
             {
-                Debug.LogError($"Wave Idx out of Bound {groupID}");
+                Debug.LogError($"Group Idx out of Bound {groupID}");
                 return;
             }
 

@@ -210,12 +210,18 @@ MonoBehaviour:
     - enemiesPool:
       - enemyID: 0
         enemyName: "\u767D\u8840\u7403"
-      - enemyID: 1
-        enemyName: "\u767D\u8840\u7403\u9886\u961F"
       eachSpawnCount: 4
       spawnInterval: 5
       minEnemies: 1
       maxEnemies: 15
+      locationSpawnLogic: 0
+    - enemiesPool:
+      - enemyID: 1
+        enemyName: "\u767D\u8840\u7403\u9886\u961F"
+      eachSpawnCount: 2
+      spawnInterval: 10
+      minEnemies: 1
+      maxEnemies: 5
       locationSpawnLogic: 0
     enemySpawnWaves:
     - groups:
@@ -223,6 +229,10 @@ MonoBehaviour:
           start: 0
           end: 60
         spawnGroupID: 0
+      - range:
+          start: 0
+          end: 60
+        spawnGroupID: 1
       duration: 60
       groupsMustBeat: 
     enemySpawnLevels:

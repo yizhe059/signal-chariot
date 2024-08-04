@@ -18,7 +18,7 @@ namespace InGame.BattleFields.Enemies
             m_wavesSetUp = setUp.enemySpawnWaves;
             m_groupsSetUp = setUp.enemySpawnGroups;
             
-            //Debug.Log($"{m_levelsSetUp.Count}, {m_wavesSetUp.Count}, {m_groupsSetUp.Count}");
+            // Debug.Log($"{m_levelsSetUp.Count}, {m_wavesSetUp.Count}, {m_groupsSetUp.Count}");
  
         }
 
@@ -48,7 +48,7 @@ namespace InGame.BattleFields.Enemies
 
         public bool GetGroupSetUp(int groupID, out EnemyPlainGroupSpawnBlk blk)
         {
-            if (groupID < 0 || groupID >= m_wavesSetUp.Count)
+            if (groupID < 0 || groupID >= m_groupsSetUp.Count)
             {
                 blk = default;
                 return false;
