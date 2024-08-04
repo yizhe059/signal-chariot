@@ -95,7 +95,8 @@ namespace InGame.BattleFields.Chariots
         public IEnumerator ShootBullet()
         {
             Vector3 target = FindTarget();
-            m_towerView.SetTarget(target);
+            m_towerView.SetTarget(target); // TODO: 投掷类的子弹有target
+                                           // 射击类的子弹只有direction 
             
             for(int i = 0; i < m_bulletCount.value; i++)
             {

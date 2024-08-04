@@ -89,6 +89,8 @@ namespace InGame.Views
                     Block(other.transform);
                     break;
                 default:
+                    // TODO: 1. enlarge collider size based on attack range
+                    // 2. attack multiple times
                     IDamageable target = other.gameObject.GetComponent<IDamageable>();
                     if(target != null) DealDamage(target, m_enemy.Get(UnlimitedPropertyType.Damage));
                     break;
@@ -108,6 +110,7 @@ namespace InGame.Views
 
         private void Block(Transform obstacleTrans)
         {
+            // TODO
             m_obstacleDirection = (this.transform.position - obstacleTrans.position).normalized;
             m_obstacleDirection.z = 0;
         }
