@@ -59,7 +59,7 @@ namespace InGame.Views
             float currDistance = Vector3.Distance(this.transform.position, m_bullet.target);
             if(currDistance <= Constants.COLLIDE_OFFSET) return;
 
-            transform.DOMove(m_bullet.target, m_distance / m_bullet.speed.value)
+            transform.DOMove(m_bullet.target, m_distance / m_bullet.speed.value / Constants.SPEED_MULTIPLIER)
                     .SetEase(Ease.OutQuad);
         }
 

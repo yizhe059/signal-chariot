@@ -1,8 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 
+using Utils;
 using Utils.Common;
 
 using InGame.BattleFields.Chariots;
@@ -48,7 +46,10 @@ namespace InGame.Views
                 x * Mathf.Sqrt(1 - y * y * 0.5f), 
                 y * Mathf.Sqrt(1 - x * x * 0.5f), 
                 0
-            ) * Time.deltaTime * m_chariot.Get(UnlimitedPropertyType.Speed);
+            );
+            m_moveDirection *= Time.deltaTime *
+                            m_chariot.Get(UnlimitedPropertyType.Speed) *
+                            Constants.SPEED_MULTIPLIER;
         }
 
         #endregion
