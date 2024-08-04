@@ -1,14 +1,12 @@
-using System;
-using System.Collections.Generic;
-
 using UnityEngine;
 
+using Utils.Common;
 using InGame.BattleFields.Common;
-using Utils;
 
 namespace InGame.Views
 {  
-    public class ModView : MonoBehaviour {
+    public class ModView : MonoBehaviour, IPickable
+    {
         private Mod m_mod;
         public void Init(Mod mod)
         {
@@ -20,10 +18,9 @@ namespace InGame.Views
             Destroy(gameObject);
         }
 
-        public void OnTriggerEnter(Collider other)
+        public void PickUp()
         {
-            if (other.gameObject.CompareTag(Constants.CHARIOT_TAG))
-                m_mod.Pickedup();
+            m_mod.Pickup();
         }
     }
 }

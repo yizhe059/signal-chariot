@@ -33,7 +33,7 @@ namespace InGame.BattleFields.Common
             m_view.Die();
         }
 
-        public void Pickedup()
+        public void Pickup()
         {
             GameManager.Instance.GetChariot().Increase(UnlimitedPropertyType.Mod, m_quality);
             this.Die();

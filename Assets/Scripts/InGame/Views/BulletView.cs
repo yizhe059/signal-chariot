@@ -72,9 +72,19 @@ namespace InGame.Views
         #region Interaction
         public void OnTriggerEnter(Collider other)
         {
-            if(other.gameObject.CompareTag(Constants.CHARIOT_TAG)) return;
-            IDamageable target = other.gameObject.GetComponent<IDamageable>();
-            if(target != null) DealDamage(target, m_bullet.damage.value);
+            int layer = other.gameObject.layer;
+            switch(layer)
+            {
+                case Constants.CHARIOT_LAYER:
+                    break;
+                case Constants.OBSTACLE_LAYER:
+                    Die();
+                    break;
+                default:
+                    IDamageable target = other.gameObject.GetComponent<IDamageable>();
+                    if(target != null) DealDamage(target, m_bullet.damage.value);
+                    break;
+            }
         }
 
         public void DealDamage(IDamageable target, float dmg)

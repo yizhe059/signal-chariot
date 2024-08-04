@@ -7,14 +7,14 @@ using InGame.BattleFields.Enemies;
 using InGame.BattleFields.Chariots;
 using InGame.BattleFields.Common;
 
-using DG.Tweening;
-
 namespace InGame.Views
 {
     public class EnemyView : MonoBehaviour, IDamager, IDamageable
     {
         private Enemy m_enemy;
         private Vector3 m_target = Vector3.zero;
+        private Vector3 m_direction = Vector3.zero;
+        private Vector3 m_obstacleDirection = Vector3.zero;
 
         #region Life Cycle
         public void Init(Enemy enemy)
@@ -46,7 +46,7 @@ namespace InGame.Views
             float distance = Vector3.Distance(this.transform.position, m_target);
             if(distance <= Constants.COLLIDE_OFFSET) return;
 
-            Vector3 direction = (m_target - this.transform.position).normalized;
+            m_direction = (m_target - this.transform.position).normalized;
             
             Vector3 seperation = Vector3.zero;
             foreach(Enemy otherEnemy in GameManager.Instance.GetEnemySpawnController().GetAllEnemies())
@@ -58,17 +58,21 @@ namespace InGame.Views
                 Vector3 directionToOther = otherEnemyGO.transform.position - transform.position;
                 float distanceToOther = directionToOther.magnitude;
                 if(distanceToOther < Constants.SEPERATION_DISTANCE)
-                    seperation -= (directionToOther / distanceToOther) * 
+                    seperation -= directionToOther / distanceToOther * 
                                 (Constants.SEPERATION_DISTANCE - distanceToOther) * 
                                 Constants.SEPERATION_FORCE;
                 
             }
 
-            direction = (direction + seperation).normalized;
-            direction *= Time.deltaTime * 
+            m_direction = (m_direction + seperation).normalized;
+            m_direction *= Time.deltaTime * 
                         m_enemy.Get(UnlimitedPropertyType.Speed) * 
                         Constants.SPEED_MULTIPLIER;
-            this.transform.Translate(direction, Space.World);
+
+            if(m_obstacleDirection != Vector3.zero) 
+                m_direction = m_obstacleDirection;
+
+            this.transform.Translate(m_direction, Space.World);
         }
 
         #endregion
@@ -76,8 +80,36 @@ namespace InGame.Views
         #region Interaction
         public void OnTriggerEnter(Collider other)
         {
-            IDamageable target = other.gameObject.GetComponent<IDamageable>();
-            if(target != null) DealDamage(target, m_enemy.Get(UnlimitedPropertyType.Damage));
+            int layer = other.gameObject.layer;
+            switch(layer)
+            {
+                case Constants.ENEMY_LAYER:
+                    break;
+                case Constants.OBSTACLE_LAYER:
+                    Block(other.transform);
+                    break;
+                default:
+                    IDamageable target = other.gameObject.GetComponent<IDamageable>();
+                    if(target != null) DealDamage(target, m_enemy.Get(UnlimitedPropertyType.Damage));
+                    break;
+            }
+        }
+
+        public void OnTriggerExit(Collider other)
+        {
+            int layer = other.gameObject.layer;
+            switch(layer)
+            {
+                case Constants.OBSTACLE_LAYER:
+                    m_obstacleDirection = Vector3.zero;
+                    break;
+            }
+        }
+
+        private void Block(Transform obstacleTrans)
+        {
+            m_obstacleDirection = (this.transform.position - obstacleTrans.position).normalized;
+            m_obstacleDirection.z = 0;
         }
 
         public void TakeDamage(float dmg)
@@ -89,7 +121,6 @@ namespace InGame.Views
         {
             target.TakeDamage(dmg);
         }
-
         #endregion
 
         public void SetPosition(Vector2 pos)

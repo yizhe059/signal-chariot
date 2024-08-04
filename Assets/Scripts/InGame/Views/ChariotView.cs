@@ -59,6 +59,31 @@ namespace InGame.Views
         {
             m_chariot.TakeDamage(dmg);
         }
+
+        public void OnTriggerEnter(Collider other)
+        {
+            int layer = other.gameObject.layer;
+            switch (layer)
+            {
+                case Constants.MOD_LAYER:
+                    PickUp(other.gameObject);
+                    break;
+                case Constants.OBSTACLE_LAYER:
+                    Block(other.transform);
+                    break;
+            }
+        }
+
+        private void PickUp(GameObject item)
+        {   
+            IPickable target = item.GetComponent<IPickable>();
+            if(target != null) target.PickUp();
+        }
+
+        private void Block(Transform obstacleTrans)
+        {
+
+        }
         #endregion
 
         public Vector2 GetPosition()

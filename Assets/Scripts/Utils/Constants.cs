@@ -39,6 +39,14 @@ namespace Utils
         #region Tag and Layer
 
         public const string CHARIOT_TAG = "Player";
+        public const int CHARIOT_LAYER = 3;
+        public const int UI_LAYER = 5;
+        public const int BOARD_LAYER = 6;
+        public const int BATTLEFIELD_LAYER = 7;
+        public const int ENEMY_LAYER = 8;
+        public const int BULLET_LAYER = 9;
+        public const int OBSTACLE_LAYER = 10;
+        public const int MOD_LAYER = 11;
 
         #endregion
 
