@@ -18,6 +18,7 @@ namespace InGame.BattleFields.Enemies
         private UnityEvent m_dieCallBack = new UnityEvent();
         private int m_modQuantity;
         private int m_modQuality;
+        
 
         public string name { get; private set; }
         public int typeID { get; private set; }
@@ -155,7 +156,17 @@ namespace InGame.BattleFields.Enemies
         {
             m_view.SetPosition(pos);
         }
+        
+        public void TurnOn()
+        {
+            m_view?.TurnOn();
+        }
 
+        public void TurnOff()
+        {
+            m_view?.TurnOff();
+        }
+        
         #region Action
         public void TakeDamage(float dmg)
         {
@@ -174,5 +185,6 @@ namespace InGame.BattleFields.Enemies
             }
         }
         #endregion
+        
     }
 }

@@ -15,6 +15,7 @@ namespace InGame.Views
         private Vector3 m_target = Vector3.zero;
         private Vector3 m_direction = Vector3.zero;
         private Vector3 m_obstacleDirection = Vector3.zero;
+        private bool m_isOn = false;
 
         #region Life Cycle
         public void Init(Enemy enemy)
@@ -24,6 +25,7 @@ namespace InGame.Views
 
         private void Update()
         {
+            if (!m_isOn) return;
             Move();
         }
 
@@ -132,5 +134,9 @@ namespace InGame.Views
             worldPos.z = Constants.ENEMY_DEPTH;
             transform.position = worldPos;
         }
+        
+        public void TurnOn() => m_isOn = true;
+
+        public void TurnOff() => m_isOn = false;
     }
 }

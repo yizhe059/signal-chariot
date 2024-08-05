@@ -28,10 +28,13 @@ namespace InGame.BattleFields.Enemies
         private readonly UnityEvent m_waveFinishCallBack = new();
         private readonly List<EnemyBlk> m_enemies = new List<EnemyBlk>();
 
+        
+
         public EnemySpawnController(EnemySpawnLib spawnLib, EnemyLib enemyLib)
         {
             m_spawnLib = spawnLib;
             m_enemyLib = enemyLib;
+            
         }
 
         public void Init(int levelIdx)
@@ -69,11 +72,20 @@ namespace InGame.BattleFields.Enemies
         {
             m_isOn = true;
             m_currentWaveController?.Start();
+
+            foreach (var blk in m_enemies)
+            {
+                blk?.enemy?.TurnOn();
+            }
         }
 
         public void Stop()
         {
             m_isOn = false;
+            foreach (var blk in m_enemies)
+            {
+                blk?.enemy?.TurnOff();
+            }
         }
 
         public void RegisterWaveFinishCallBack(UnityAction act)
@@ -140,7 +152,10 @@ namespace InGame.BattleFields.Enemies
             enemy.RegisterDieCallBack(enemyBlk.dieCallback);
             
             enemyBlk.enemy = enemy;
-
+            
+            if (m_isOn) enemy.TurnOn();
+            else enemy.TurnOff();
+            
             return enemy;
         }
 
@@ -460,7 +475,14 @@ namespace InGame.BattleFields.Enemies
                 if (!enemyBlock.isDead) return;
             }
             
-           
+            //unregister all the callback
+            foreach (var enemyBlock in m_enemies)
+            {
+                if(enemyBlock?.enemy == null) continue;
+                enemyBlock.enemy.UnregisterDieCallBack(enemyBlock.callBack);
+                enemyBlock.enemy = null;
+                enemyBlock.callBack = null;
+            }
             
             m_parent?.GroupBeatenCallBack(m_ID);
         }
