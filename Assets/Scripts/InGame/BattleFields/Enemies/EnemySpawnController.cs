@@ -28,13 +28,10 @@ namespace InGame.BattleFields.Enemies
         private readonly UnityEvent m_waveFinishCallBack = new();
         private readonly List<EnemyBlk> m_enemies = new List<EnemyBlk>();
 
-        
-
         public EnemySpawnController(EnemySpawnLib spawnLib, EnemyLib enemyLib)
         {
             m_spawnLib = spawnLib;
-            m_enemyLib = enemyLib;
-            
+            m_enemyLib = enemyLib;            
         }
 
         public void Init(int levelIdx)
@@ -115,7 +112,6 @@ namespace InGame.BattleFields.Enemies
         {
             Debug.Log("Wave Finished");
             m_waveFinishCallBack.Invoke();
-            
         }
         
         /// <summary>
@@ -133,7 +129,6 @@ namespace InGame.BattleFields.Enemies
                 {
                     break;
                 }
-                
             }
 
             EnemyBlk enemyBlk;
@@ -174,7 +169,7 @@ namespace InGame.BattleFields.Enemies
             float prevDistance;
 
             Enemy closest = null;
-            Vector2 pos = new Vector2(position.x, position.y);
+            Vector2 pos = new(position.x, position.y);
 
             foreach(EnemyBlk enemyBlk in m_enemies)
             {
@@ -213,7 +208,6 @@ namespace InGame.BattleFields.Enemies
             public bool mustBeat;
             public bool isStarted { get; set; }
             
-
             public void SetMustBeat(bool val)
             {
                 mustBeat = val;
@@ -224,10 +218,10 @@ namespace InGame.BattleFields.Enemies
                 isStarted = val;
             }
         }
+
         private EnemySpawnLib m_spawnLib;
         private EnemySpawnController m_spawnController;
         
-
         private List<EnemyGroup> m_groups = new List<EnemyGroup>();
         private float m_duration;
         private float m_timer;
@@ -252,7 +246,6 @@ namespace InGame.BattleFields.Enemies
  
             foreach (var groupSetUp in setUp.groups)
             {
-                
                 var groupController = new EnemyGroupSpawnController(m_spawnLib, m_spawnController, this);
                 m_groups.Add(
                     new EnemyGroup
@@ -264,7 +257,6 @@ namespace InGame.BattleFields.Enemies
                     }
                 );
                 groupController.Init(groupSetUp.spawnGroupID, m_groups.Count - 1);
-
             }
 
             m_numGroupHasToBeat = setUp.groupsMustBeat.Count;
@@ -381,7 +373,6 @@ namespace InGame.BattleFields.Enemies
             }
 
             m_isOn = false;
-
         }
 
         public void Start()

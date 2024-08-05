@@ -34,7 +34,11 @@ namespace InGame.Views
         #region Action
         private void MoveChariot()
         {
-            SetMoveSpeed();
+            m_moveDirection = (m_moveDirection + m_obstacleDirection).normalized;
+            m_moveDirection *= Time.deltaTime *
+                            m_chariot.Get(UnlimitedPropertyType.Speed) *
+                            Constants.SPEED_MULTIPLIER;
+
             if (m_moveDirection == Vector3.zero) return;
             this.transform.Translate(m_moveDirection, Space.World);
         }
@@ -51,14 +55,6 @@ namespace InGame.Views
             );
             
             if(m_obstacleDirection != Vector3.zero) m_moveDirection = Vector3.zero;
-        }
-
-        private void SetMoveSpeed()
-        {
-            m_moveDirection = (m_moveDirection + m_obstacleDirection).normalized;
-            m_moveDirection *= Time.deltaTime *
-                            m_chariot.Get(UnlimitedPropertyType.Speed) *
-                            Constants.SPEED_MULTIPLIER;
         }
 
         #endregion

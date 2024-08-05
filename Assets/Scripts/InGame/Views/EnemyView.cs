@@ -51,32 +51,34 @@ namespace InGame.Views
             float distance = Vector3.Distance(this.transform.position, m_target);
             if(distance <= Constants.COLLIDE_OFFSET) return;
 
-            m_direction = (m_target - this.transform.position).normalized;
+            m_direction = (m_obstacleDirection != Vector3.zero) ? 
+                        Vector3.zero : (m_target - this.transform.position).normalized;
+
+            m_direction = (m_direction + Seperation() + m_obstacleDirection).normalized;
+            m_direction *= Time.deltaTime * 
+                        m_enemy.Get(UnlimitedPropertyType.Speed) * 
+                        Constants.SPEED_MULTIPLIER;
             
+            this.transform.Translate(m_direction, Space.World);
+        }
+
+        private Vector3 Seperation()
+        {
             Vector3 seperation = Vector3.zero;
             foreach(Enemy otherEnemy in GameManager.Instance.GetEnemySpawnController().GetAllEnemies())
             {
                 if(otherEnemy == null) continue;
                 GameObject otherEnemyGO = otherEnemy.GetView().gameObject;
                 if(otherEnemyGO == this.gameObject) continue;
-                
+
                 Vector3 directionToOther = otherEnemyGO.transform.position - transform.position;
                 float distanceToOther = directionToOther.magnitude;
                 if(distanceToOther < Constants.SEPERATION_DISTANCE)
                     seperation -= directionToOther / distanceToOther * 
                                 (Constants.SEPERATION_DISTANCE - distanceToOther) * 
                                 Constants.SEPERATION_FORCE;
-                
             }
-
-            if(m_obstacleDirection != Vector3.zero) m_direction = Vector3.zero;
-
-            m_direction = (m_direction + seperation + m_obstacleDirection).normalized;
-            m_direction *= Time.deltaTime * 
-                        m_enemy.Get(UnlimitedPropertyType.Speed) * 
-                        Constants.SPEED_MULTIPLIER;
-            
-            this.transform.Translate(m_direction, Space.World);
+            return seperation;
         }
 
         #endregion

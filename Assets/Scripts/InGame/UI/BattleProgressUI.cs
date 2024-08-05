@@ -9,10 +9,19 @@ namespace InGame.UI
     {
         [SerializeField] private UIDocument m_doc;
         private VisualElement m_root;
+        private ProgressBar m_time;
+        private ProgressBar m_enemy;
 
         private void Awake()
         {
             m_root = m_doc.rootVisualElement;
+            m_time = m_root.Q<ProgressBar>("timeBar");
+            m_enemy = m_root.Q<ProgressBar>("enemyBar");
+        }
+
+        private void Start()
+        {
+            
         }
 
         public void Hide()
