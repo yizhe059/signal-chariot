@@ -2,6 +2,7 @@ using UnityEngine;
 
 using Utils;
 using Utils.Common;
+using InGame.UI;
 using InGame.Cores;
 using InGame.BattleFields.Enemies;
 using InGame.BattleFields.Chariots;
@@ -16,11 +17,13 @@ namespace InGame.Views
         private Vector3 m_direction = Vector3.zero;
         private Vector3 m_obstacleDirection = Vector3.zero;
         private bool m_isOn = false;
+        private SlideBarUI m_healthBar;
 
         #region Life Cycle
         public void Init(Enemy enemy)
         {
             m_enemy = enemy;
+            m_healthBar = new(transform.Find("Canvas").gameObject);
         }
 
         private void Update()
