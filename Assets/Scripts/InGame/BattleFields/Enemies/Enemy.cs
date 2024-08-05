@@ -1,6 +1,7 @@
 using UnityEngine;
 
 using InGame.BattleFields.Common;
+using InGame.Cores;
 using InGame.Views;
 using SetUps;
 using UnityEngine.Events;
@@ -181,7 +182,8 @@ namespace InGame.BattleFields.Enemies
             {
                 float x = position.x + Random.Range(-1, 1);
                 float y = position.y + Random.Range(-1, 1);
-                new Mod(m_modQuantity, new Vector2(x, y));
+                GameManager.Instance.GetModManager().CreateMod(m_modQuantity, new Vector2(x, y));
+
             }
         }
         #endregion
