@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - waveID: 0
+  - waveID: 0
 --- !u!1 &325115585
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,7 +218,7 @@ MonoBehaviour:
     - enemyID: 1
       enemyName: "\u767D\u8840\u7403\u9886\u961F"
     eachSpawnCount: 1
-    spawnInterval: 10
+    spawnInterval: 5
     minEnemies: 1
     maxEnemies: 5
     locationSpawnLogic: 0
@@ -411,7 +412,7 @@ MonoBehaviour:
         end: 60
       spawnGroupID: 0
     - range:
-        start: 0
+        start: 30
         end: 60
       spawnGroupID: 1
     duration: 60
