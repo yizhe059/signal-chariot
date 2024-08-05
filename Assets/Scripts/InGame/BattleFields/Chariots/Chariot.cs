@@ -10,10 +10,11 @@ using InGame.InGameStates;
 using InGame.BattleFields.Common;
 using SetUps;
 using Utils;
+using Utils.Common;
 
 namespace InGame.BattleFields.Chariots
 {
-    public class Chariot
+    public class Chariot : IPropertyRegisterable
     {
         [Header("View")]
         private ChariotView m_chariotView;

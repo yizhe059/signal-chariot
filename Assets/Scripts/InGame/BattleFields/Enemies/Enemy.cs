@@ -5,10 +5,11 @@ using InGame.Cores;
 using InGame.Views;
 using SetUps;
 using UnityEngine.Events;
+using Utils.Common;
 
 namespace InGame.BattleFields.Enemies
 {
-    public class Enemy
+    public class Enemy : IPropertyRegisterable
     {
         private LimitedProperty m_health;
         private UnlimitedProperty m_speed;
@@ -34,8 +35,7 @@ namespace InGame.BattleFields.Enemies
             if (m_viewPrefab == null) return null;
             if (m_view != null) return m_view;
             
-            
-            // TO DO: maybe also create the view in Enemy Lib?
+            // TODO: maybe also create the view in Enemy Lib?
             m_view = GameObject.Instantiate(m_viewPrefab);
             m_view.Init(this);
             return m_view;
@@ -139,6 +139,15 @@ namespace InGame.BattleFields.Enemies
             };
         }
 
+        private LimitedProperty GetLimitedProperty(LimitedPropertyType type)
+        {
+            return type switch
+            {
+                LimitedPropertyType.Health => m_health,
+                _ => null
+            };
+        }
+
         #endregion
 
         public void RegisterDieCallBack(UnityAction act)
@@ -151,6 +160,35 @@ namespace InGame.BattleFields.Enemies
         {
             if (act == null) return;
             m_dieCallBack.RemoveListener(act);
+        }
+
+        public void RegisterPropertyEvent(LimitedPropertyType type, 
+                                UnityAction<float, float> call)
+        {
+            LimitedProperty property = GetLimitedProperty(type);
+            Debug.Assert(property != null, "LimitedProperty Type does not exist");
+            property.onValueChanged.AddListener(call);
+            property.onValueChanged.Invoke(property.current, property.max);
+        }
+
+        public void UnregisterPropertyEvent(LimitedPropertyType type, 
+                                            UnityAction<float, float> call)
+        {
+            LimitedProperty property = GetLimitedProperty(type);
+            Debug.Assert(property != null, "LimitedProperty Type does not exist");
+            property.onValueChanged.RemoveListener(call);
+        }
+
+        public void RegisterPropertyEvent(UnlimitedPropertyType type, 
+                                        UnityAction<float> call)
+        {
+            throw new System.NotImplementedException();
+        }
+        
+        public void UnregisterPropertyEvent(UnlimitedPropertyType type, 
+                                            UnityAction<float> call)
+        {
+            throw new System.NotImplementedException();
         }
 
         public void SetPosition(Vector2 pos)
@@ -187,6 +225,6 @@ namespace InGame.BattleFields.Enemies
             }
         }
         #endregion
-        
+
     }
 }

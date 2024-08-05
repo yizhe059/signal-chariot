@@ -23,7 +23,7 @@ namespace InGame.Views
         public void Init(Enemy enemy)
         {
             m_enemy = enemy;
-            m_healthBar = new(transform.Find("Canvas").gameObject);
+            m_healthBar = new(gameObject, m_enemy, LimitedPropertyType.Health);
         }
 
         private void Update()
