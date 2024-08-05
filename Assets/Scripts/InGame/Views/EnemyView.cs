@@ -7,6 +7,7 @@ using InGame.Cores;
 using InGame.BattleFields.Enemies;
 using InGame.BattleFields.Chariots;
 using InGame.BattleFields.Common;
+using System.Collections;
 
 namespace InGame.Views
 {
@@ -17,18 +18,18 @@ namespace InGame.Views
         private Vector3 m_direction = Vector3.zero;
         private Vector3 m_obstacleDirection = Vector3.zero;
         private bool m_isOn = false;
-        private SlideBarUI m_healthBar;
+        private IDamageable m_dmgTarget = null;
 
         #region Life Cycle
         public void Init(Enemy enemy)
         {
             m_enemy = enemy;
-            m_healthBar = new(gameObject, m_enemy, LimitedPropertyType.Health);
+            new SlideBarUI(gameObject, m_enemy, LimitedPropertyType.Health);
         }
 
         private void Update()
         {
-            if (!m_isOn) return;
+            if(!m_isOn) return;
             Move();
         }
 
@@ -95,11 +96,8 @@ namespace InGame.Views
                     Block(other.transform);
                     break;
                 default:
-                    // TODO: 
-                    // 1. enlarge collider size based on attack range
-                    // 2. attack multiple times
-                    IDamageable target = other.gameObject.GetComponent<IDamageable>();
-                    if(target != null) DealDamage(target, m_enemy.Get(UnlimitedPropertyType.Damage));
+                    m_dmgTarget = other.gameObject.GetComponent<IDamageable>();
+                    if(m_dmgTarget != null) StartCoroutine(Attack());
                     break;
             }
         }
@@ -111,6 +109,9 @@ namespace InGame.Views
             {
                 case Constants.OBSTACLE_LAYER:
                     m_obstacleDirection = Vector3.zero;
+                    break;
+                default:
+                    m_dmgTarget = null;
                     break;
             }
         }
@@ -125,6 +126,13 @@ namespace InGame.Views
         public void TakeDamage(float dmg)
         {
             m_enemy.TakeDamage(dmg);
+        }
+
+        public IEnumerator Attack()
+        {
+            // TODO: enlarge collider size based on attack range
+            DealDamage(m_dmgTarget, m_enemy.Get(UnlimitedPropertyType.Damage));
+            yield return new WaitForSeconds(m_enemy.Get(UnlimitedPropertyType.Interval));
         }
 
         public void DealDamage(IDamageable target, float dmg)

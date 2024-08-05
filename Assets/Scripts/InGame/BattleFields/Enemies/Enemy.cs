@@ -21,14 +21,12 @@ namespace InGame.BattleFields.Enemies
         private int m_modQuantity;
         private int m_modQuality;
         
-
         public string name { get; private set; }
         public int typeID { get; private set; }
 
         private EnemyView m_viewPrefab;
         private EnemyView m_view = null;
-        public EnemyView GetView() => m_view;
-
+        
         #region Life Cycle
         public EnemyView CreateView()
         {
@@ -92,7 +90,6 @@ namespace InGame.BattleFields.Enemies
                 m_modQuality = setUp.modQuality,
                 m_modQuantity = setUp.modQuantity,
             };
-            
             
             enemy.RegisterDieCallBack(enemy.GenerateMod);
             return enemy;
@@ -190,6 +187,8 @@ namespace InGame.BattleFields.Enemies
         {
             throw new System.NotImplementedException();
         }
+        
+        public EnemyView GetView() => m_view;
 
         public void SetPosition(Vector2 pos)
         {
