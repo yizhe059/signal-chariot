@@ -12,6 +12,8 @@ namespace InGame.BattleFields.Common
         private Vector3 m_position;
         private ModView m_view;
 
+        public ModView view => m_view;
+
         public Mod(int quality, Vector2 position)
         {
             m_quality = quality;

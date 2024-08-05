@@ -7,13 +7,14 @@ using InGame.Boards;
 using InGame.Boards.Modules;
 using InGame.Boards.Signals;
 using InGame.BattleFields.Chariots;
+using InGame.BattleFields.Common;
 using InGame.BattleFields.Enemies;
 using InGame.Cameras;
 using InGame.InGameStates;
 using InGame.Views;
 
 using SetUps;
-
+using UnityEditor;
 using Utils.Common;
 using Utils;
 
@@ -48,6 +49,8 @@ namespace InGame.Cores
         private EnemyLib m_enemyLib;
         private EnemySpawnController m_enemySpawnController;
 
+        private ModManager m_modManager;
+
         #region Life Cycle
         protected override void Init()
         {
@@ -58,10 +61,16 @@ namespace InGame.Cores
             InitBoard();
             InitCamera();
             InitEnemy();
+            InitMod();
             
             ChangeToBoardWaitingState(); // initial state is board preparation
         }
 
+        private void InitMod()
+        {
+            m_modManager = new ModManager();
+        }
+        
         private void InitEnemy()
         {
             m_enemyLib = new EnemyLib(m_setUp.enemyLibrary);
@@ -134,6 +143,7 @@ namespace InGame.Cores
         public Chariot GetChariot() => m_chariot;
         public EnemySpawnController GetEnemySpawnController() => m_enemySpawnController;
         public InGameStateType GetCurrentInGameState() => WorldState.instance.currentState.type;
+        public ModManager GetModManager() => m_modManager;
         #endregion
 
         #region World State Machine
