@@ -118,6 +118,7 @@ namespace InGame.BattleFields.Enemies
             
         }
         
+        //To Do: Maybe have another enmymanager that respond for enemy movement
         /// <summary>
         /// Create an enemy
         /// </summary>
@@ -202,6 +203,18 @@ namespace InGame.BattleFields.Enemies
             }
             return enemies;
         }
+
+        public float GetCurrentWaveTotalDuration()
+        {
+            if (m_currentWaveController == null) return 0f;
+            return m_currentWaveController.duration;
+        }
+
+        public float GetCurrentWaveTimer()
+        {
+            if (m_currentWaveController == null) return 0f;
+            return m_currentWaveController.timer;
+        }
     }
 
     public class EnemyWaveSpawnController
@@ -233,6 +246,9 @@ namespace InGame.BattleFields.Enemies
         private float m_timer;
         private bool m_isOn;
         private int m_numGroupHasToBeat;
+
+        public float duration => m_duration;
+        public float timer => m_timer;
         
         public EnemyWaveSpawnController(EnemySpawnLib spawnLib, EnemySpawnController controller)
         {
