@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using InGame.Cores;
 using SetUps;
 using UnityEngine;
@@ -208,7 +209,7 @@ namespace InGame.BattleFields.Enemies
         public float GetCurrentWaveTimer()
         {
             if (m_currentWaveController == null) return 0f;
-            return m_currentWaveController.timer;
+            return (float)System.Math.Round(m_currentWaveController.timer, 1);
         }
     }
 
