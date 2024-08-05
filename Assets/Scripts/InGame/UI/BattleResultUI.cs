@@ -60,6 +60,7 @@ namespace InGame.UI
         public void Switch(BattleResultType type)
         {
             VisualElement root = m_doc.rootVisualElement;
+            root.style.minHeight = new Length(100, LengthUnit.Percent);
             root.Clear();
 
             switch (type)
