@@ -4,6 +4,7 @@ using InGame.Boards;
 using InGame.Boards.Modules;
 using InGame.Boards.Signals;
 using InGame.Effects.PlacingEffectRequirements;
+using InGame.Effects.TriggerRequirements;
 using UnityEngine;
 using Time = InGame.Boards.Signals.Time;
 
@@ -218,6 +219,32 @@ namespace InGame.Effects
         public void SetModule(Module module)
         {
             foreach(var effect in m_effects) effect.SetModule(module);
+        }
+    }
+
+    public class CustomEffects
+    {
+        private TriggerRequirement m_requirement;
+        private List<Effect> m_effects;
+
+        public void Register(RequirementBlackBoard bb)
+        {
+            m_requirement.RegisterTriggerEvent(Trigger);
+            m_requirement.Register(bb);
+        }
+
+        public void Unregister(RequirementBlackBoard bb)
+        {
+            m_requirement.Unregister(bb);
+            m_requirement.UnregisterTriggerEvent(Trigger);
+        }
+        
+        private void Trigger(EffectBlackBoard blackBoard)
+        {
+            foreach (var effect in m_effects)
+            {
+                effect.Trigger(blackBoard);
+            }
         }
     }
 }

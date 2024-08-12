@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using InGame.Effects;
 using InGame.Effects.PlacingEffectRequirements;
+using InGame.Effects.TriggerRequirements;
 using InGame.Views;
 using SetUps;
 using UnityEngine;
@@ -82,6 +83,8 @@ namespace InGame.Boards.Modules
         private SignalEffects m_signalEffects;
 
         private PlacingEffects m_placingEffects;
+
+        private CustomEffects m_customEffects;
         #endregion
         
         public ModuleView moduleView => m_moduleView;
@@ -273,7 +276,16 @@ namespace InGame.Boards.Modules
         {
             m_placingEffects.UnTrigger(bb);
         }
-        
+
+        public void TriggerCustomEffect(RequirementBlackBoard bb)
+        {
+            m_customEffects?.Register(bb);
+        }
+
+        public void UnTriggerCustomEffect(RequirementBlackBoard bb)
+        {
+            m_customEffects?.Unregister(bb);
+        }
         #endregion
         
         #region static method

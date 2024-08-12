@@ -1,6 +1,6 @@
 ﻿using InGame.Cores;
 
-namespace InGame.Effects
+namespace InGame.Effects.EffectElement
 {
     public class TowerShootEffect: Effect
     {

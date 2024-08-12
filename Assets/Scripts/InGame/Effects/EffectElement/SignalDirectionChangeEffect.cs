@@ -1,7 +1,6 @@
 ﻿using InGame.Boards.Signals;
 
-
-namespace InGame.Effects
+namespace InGame.Effects.EffectElement
 {
     public class SignalDirectionChangeEffect: Effect
     {
