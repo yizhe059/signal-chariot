@@ -1,6 +1,8 @@
 ﻿using SetUps;
-using UnityEditor;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
 
 namespace Editors.Board
 {
@@ -29,3 +31,4 @@ namespace Editors.Board
         }
     }
 }
+#endif

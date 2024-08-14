@@ -3,9 +3,9 @@ using SetUps;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+#if UNITY_EDITOR
 namespace Editors.Enemies
-{
-    
+{    
     public class EnemySpawnGroupEdit: MonoBehaviour
     {
         public EnemyPlainGroupSpawnBlk group;
@@ -46,3 +46,4 @@ namespace Editors.Enemies
         }
     }
 }
+#endif
