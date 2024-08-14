@@ -48,13 +48,8 @@ namespace InGame.Views
             float x = inputDirection.x;
             float y = inputDirection.y;
 
-            m_moveDirection = new Vector3(
-                x * Mathf.Sqrt(1 - y * y * 0.5f), 
-                y * Mathf.Sqrt(1 - x * x * 0.5f), 
-                0
-            );
-            
-            if(m_obstacleDirection != Vector3.zero) m_moveDirection = Vector3.zero;
+            m_moveDirection = (m_obstacleDirection != Vector3.zero) ? Vector3.zero : 
+                new Vector3(x * Mathf.Sqrt(1 - y * y * 0.5f), y * Mathf.Sqrt(1 - x * x * 0.5f), 0);
         }
 
         #endregion
