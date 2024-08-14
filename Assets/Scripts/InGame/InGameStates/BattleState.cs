@@ -3,7 +3,7 @@ using UnityEngine;
 using InGame.Cores;
 using InGame.UI;
 using InGame.Views;
-using InGame.BattleFields.Chariots;
+using InGame.BattleFields.Androids;
 using InGame.BattleFields.Enemies;
 
 namespace InGame.InGameStates
@@ -11,7 +11,7 @@ namespace InGame.InGameStates
     public class BattleState : InGameState
     {
         public override InGameStateType type => InGameStateType.BattleState;
-        private ChariotView m_chariotView;
+        private AndroidView m_androidView;
         private EnemySpawnController m_enemySpawnController;
 
         public override void Enter(InGameState last)
@@ -52,7 +52,7 @@ namespace InGame.InGameStates
 
             BattleProgressUI.Instance.Show();
             BattleResultUI.Instance.Hide();
-            ChariotStatusUI.Instance.Show();
+            AndroidStatusUI.Instance.Show();
             NavigationBarUI.Instance.Hide();
             BoardBarUI.Instance.Hide();
         }
@@ -68,20 +68,20 @@ namespace InGame.InGameStates
             timeEffectManager.Stop();
             signalController.Stop();
             
-            m_chariotView.SetMoveDirection(Vector2.zero);
+            m_androidView.SetMoveDirection(Vector2.zero);
             m_enemySpawnController.UnregisterWaveFinishCallBack(OnWaveFinished);
             m_enemySpawnController.Stop();
             
             BattleProgressUI.Instance.Hide();
             BattleResultUI.Instance.Show();
-            ChariotStatusUI.Instance.Hide();
+            AndroidStatusUI.Instance.Hide();
             NavigationBarUI.Instance.Show();
             BoardBarUI.Instance.Show();
         }
         
         private void OnMoveKeyPressed(Vector2 inputDirection)
         {
-            m_chariotView.SetMoveDirection(inputDirection);
+            m_androidView.SetMoveDirection(inputDirection);
         }
 
         private void OnWaveFinished()
@@ -89,11 +89,11 @@ namespace InGame.InGameStates
             GameManager.Instance.ChangeToBattleResultState(BattleResultType.WaveWin);
         }
 
-        public static BattleState CreateState(Chariot chariot, ChariotView chariotView, EnemySpawnController enemySpawnController)
+        public static BattleState CreateState(Android android, AndroidView androidView, EnemySpawnController enemySpawnController)
         {
             var state = new BattleState
             {
-                m_chariotView = chariotView,
+                m_androidView = androidView,
                 m_enemySpawnController = enemySpawnController
             };
             return state;

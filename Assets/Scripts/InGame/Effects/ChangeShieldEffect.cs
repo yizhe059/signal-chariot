@@ -9,12 +9,12 @@ namespace InGame.Effects
         
         public override void OnTrigger(EffectBlackBoard blackBoard)
         {
-            GameManager.Instance.GetChariot().Increase(UnlimitedPropertyType.Defence, delta);
+            GameManager.Instance.GetAndroid().Increase(UnlimitedPropertyType.Defence, delta);
         }
 
         public override void OnUnTrigger(EffectBlackBoard blackBoard)
         {
-            GameManager.Instance.GetChariot().Decrease(UnlimitedPropertyType.Defence, delta);
+            GameManager.Instance.GetAndroid().Decrease(UnlimitedPropertyType.Defence, delta);
         }
 
         public override Effect CreateCopy()

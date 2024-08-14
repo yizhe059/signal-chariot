@@ -2,7 +2,7 @@ using System;
 
 using UnityEngine;
 
-using InGame.BattleFields.Chariots;
+using InGame.BattleFields.Androids;
 
 namespace SetUps
 {

@@ -29,7 +29,7 @@ namespace InGame.InGameStates
 
             BattleProgressUI.Instance.Hide();
             BattleResultUI.Instance.Hide();
-            ChariotStatusUI.Instance.Show();
+            AndroidStatusUI.Instance.Show();
             NavigationBarUI.Instance.Show();
             BoardBarUI.Instance.Show();
         }
@@ -42,7 +42,7 @@ namespace InGame.InGameStates
 
             BattleProgressUI.Instance.Show();
             BattleResultUI.Instance.Show();
-            ChariotStatusUI.Instance.Hide();
+            AndroidStatusUI.Instance.Hide();
             NavigationBarUI.Instance.Hide();
             BoardBarUI.Instance.Hide();
         }

@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 365710731080578806}
   - component: {fileID: 5428504223972722182}
   m_Layer: 3
-  m_Name: ChariotView
+  m_Name: AndroidView
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

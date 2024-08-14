@@ -33,7 +33,7 @@ namespace InGame.InGameStates
             BattleResultUI.Instance.Show();
             BattleResultUI.Instance.Switch(m_resultType);
 
-            ChariotStatusUI.Instance.Show();
+            AndroidStatusUI.Instance.Show();
             NavigationBarUI.Instance.Hide();
             BoardBarUI.Instance.Hide();
 
@@ -45,7 +45,7 @@ namespace InGame.InGameStates
             Debug.Log("Exit battle result");
             BattleProgressUI.Instance.Hide();
             BattleResultUI.Instance.Hide();
-            ChariotStatusUI.Instance.Hide();
+            AndroidStatusUI.Instance.Hide();
             NavigationBarUI.Instance.Show();
             BoardBarUI.Instance.Show();
 

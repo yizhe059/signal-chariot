@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using SetUps;
 using InGame.Boards.Modules;
 
-namespace InGame.BattleFields.Chariots
+namespace InGame.BattleFields.Androids
 {
     public class TowerManager
     {

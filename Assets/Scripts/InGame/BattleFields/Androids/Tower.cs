@@ -11,7 +11,7 @@ using InGame.BattleFields.Common;
 
 using Utils;
 
-namespace InGame.BattleFields.Chariots
+namespace InGame.BattleFields.Androids
 {
     public enum SeekMode
     {
@@ -76,7 +76,7 @@ namespace InGame.BattleFields.Chariots
         {
             GameObject towerPref = Resources.Load<GameObject>(Constants.GO_TOWER_PATH);
             GameObject towerGO = GameObject.Instantiate(towerPref);
-            towerGO.transform.parent = GameManager.Instance.GetChariot().chariotView.transform;
+            towerGO.transform.parent = GameManager.Instance.GetAndroid().androidView.transform;
             float x = towerGO.transform.parent.position.x;
             float y = towerGO.transform.parent.position.y;
             towerGO.transform.position = new(x, y, Constants.TOWER_DEPTH); 

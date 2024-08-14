@@ -1,4 +1,4 @@
-﻿using InGame.BattleFields.Chariots;
+﻿using InGame.BattleFields.Androids;
 using InGame.Cores;
 using SetUps;
 using UnityEngine;
@@ -13,12 +13,12 @@ namespace InGame.Effects
         
         public override void OnTrigger(EffectBlackBoard blackBoard)
         {
-            m_tower = GameManager.Instance.GetChariot().GetTowerManager().AddTower(setUp, m_module);
+            m_tower = GameManager.Instance.GetAndroid().GetTowerManager().AddTower(setUp, m_module);
         }
 
         public override void OnUnTrigger(EffectBlackBoard blackBoard)
         {
-            GameManager.Instance.GetChariot().GetTowerManager().RemoveTower(m_tower);
+            GameManager.Instance.GetAndroid().GetTowerManager().RemoveTower(m_tower);
         }
 
         public override Effect CreateCopy()

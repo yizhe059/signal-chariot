@@ -12,12 +12,12 @@ using SetUps;
 using Utils;
 using Utils.Common;
 
-namespace InGame.BattleFields.Chariots
+namespace InGame.BattleFields.Androids
 {
-    public class Chariot : IPropertyRegisterable
+    public class Android : IPropertyRegisterable
     {
         [Header("View")]
-        private ChariotView m_chariotView;
+        private AndroidView m_androidView;
 
         [Header("Properties")]       
         private LimitedProperty m_health;
@@ -28,7 +28,7 @@ namespace InGame.BattleFields.Chariots
         [Header("Tower")]
         private TowerManager m_towerManager;
         
-        public Chariot(ChariotSetUp setUp)
+        public Android(AndroidSetUp setUp)
         {
             m_health = new LimitedProperty(
                 setUp.maxHealth, 
@@ -59,21 +59,21 @@ namespace InGame.BattleFields.Chariots
         private void Die()
         {
             // m_towerManager.ClearTower();
-            m_chariotView.Die();
+            m_androidView.Die();
             GameManager.Instance.ChangeToBattleResultState(BattleResultType.Fail);
         }
 
         #region View
-        public ChariotView chariotView { get { return m_chariotView;}}
+        public AndroidView androidView { get { return m_androidView;}}
 
         private void CreateView()
         {
-            GameObject chariotPref = Resources.Load<GameObject>(Constants.GO_CHARIOT_PATH);
-            GameObject chariotGO = GameObject.Instantiate(chariotPref);
-            chariotGO.transform.position = new(0, 0, Constants.CHARIOT_DEPTH);
+            GameObject androidPref = Resources.Load<GameObject>(Constants.GO_ANDROID_PATH);
+            GameObject androidGO = GameObject.Instantiate(androidPref);
+            androidGO.transform.position = new(0, 0, Constants.ANDROID_DEPTH);
 
-            m_chariotView = chariotGO.GetComponent<ChariotView>();
-            m_chariotView.Init(this);
+            m_androidView = androidGO.GetComponent<AndroidView>();
+            m_androidView.Init(this);
         }
         #endregion
 
@@ -220,7 +220,7 @@ namespace InGame.BattleFields.Chariots
 
         public Vector2 GetPosition()
         {
-            return m_chariotView.GetPosition();
+            return m_androidView.GetPosition();
         }
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using InGame.Boards;
 using InGame.Boards.Modules;
 using InGame.Boards.Signals;
-using InGame.BattleFields.Chariots;
+using InGame.BattleFields.Androids;
 using InGame.BattleFields.Common;
 using InGame.BattleFields.Enemies;
 using InGame.Cameras;
@@ -30,9 +30,9 @@ namespace InGame.Cores
         private TimeEffectManager m_timeEffectManager;
         private CameraManager m_cameraManager;
 
-        [Header("Chariot")]
-        private Chariot m_chariot;
-        private ChariotView m_chariotView;
+        [Header("Android")]
+        private Android m_android;
+        private AndroidView m_androidView;
 
         [Header("Board")]
         // private Board m_board;
@@ -57,7 +57,7 @@ namespace InGame.Cores
             m_inputManager = new InputManager(m_playerInput);
             m_timeEffectManager = TimeEffectManager.CreateTimeEffectManager();
 
-            InitChariot();
+            InitAndroid();
             InitBoard();
             InitCamera();
             InitEnemy();
@@ -79,10 +79,10 @@ namespace InGame.Cores
             m_enemySpawnController.Init(0);
         }
 
-        private void InitChariot()
+        private void InitAndroid()
         {
-            m_chariot = new Chariot(m_setUp.chariotSetUp);
-            m_chariotView = m_chariot.chariotView;
+            m_android = new Android(m_setUp.androidSetUp);
+            m_androidView = m_android.androidView;
         }
 
         private void InitBoard()
@@ -109,7 +109,7 @@ namespace InGame.Cores
             m_cameraManager = Instantiate(cameraPrefab);
             m_cameraManager.transform.position = Vector3.zero;
 
-            m_cameraManager.SetBattleCameraFollow(m_chariotView?.gameObject);
+            m_cameraManager.SetBattleCameraFollow(m_androidView?.gameObject);
 
             m_cameraManager.SetMiniBoardCameraPosition(GetBoardView().transform.position);
             m_cameraManager.SetBoardCameraPosition(GetBoardView().transform.position);
@@ -126,7 +126,7 @@ namespace InGame.Cores
         {
             ChangeToBoardWaitingState();
             m_enemySpawnController.Clear();
-            InitChariot();
+            InitAndroid();
         }
         #endregion
 
@@ -140,7 +140,7 @@ namespace InGame.Cores
         public Board GetExtraBoard() => m_generalBoard.extraBoard;
         public GeneralBoard GetGeneralBoard() => m_generalBoard;
         public BoardView GetBoardView() => m_generalBoard.boardView;
-        public Chariot GetChariot() => m_chariot;
+        public Android GetAndroid() => m_android;
         public EnemySpawnController GetEnemySpawnController() => m_enemySpawnController;
         public InGameStateType GetCurrentInGameState() => WorldState.instance.currentState.type;
         public ModManager GetModManager() => m_modManager;
@@ -169,7 +169,7 @@ namespace InGame.Cores
 
         public void ChangeToBattleState()
         {
-            WorldState.instance.nextState = BattleState.CreateState(m_chariot, m_chariotView, m_enemySpawnController);
+            WorldState.instance.nextState = BattleState.CreateState(m_android, m_androidView, m_enemySpawnController);
         }
 
         public void ChangeToBattleResultState(BattleResultType resultType)

@@ -1,4 +1,4 @@
-using InGame.BattleFields.Chariots;
+using InGame.BattleFields.Androids;
 using InGame.BattleFields.Common;
 using InGame.Cores;
 using UnityEngine;
@@ -8,7 +8,7 @@ using Utils.Common;
 
 namespace InGame.UI
 {
-    public class ChariotStatusUI : MonoSingleton<ChariotStatusUI>, IHidable
+    public class AndroidStatusUI : MonoSingleton<AndroidStatusUI>, IHidable
     {
         [SerializeField] private UIDocument m_doc;
         private VisualElement m_root;
@@ -26,10 +26,10 @@ namespace InGame.UI
 
         private void Start()
         {
-            Chariot chariot = GameManager.Instance.GetChariot();
-            chariot.RegisterPropertyEvent(LimitedPropertyType.Health, SetHealthUI);
-            chariot.RegisterPropertyEvent(UnlimitedPropertyType.Defence, SetDefenceUI);
-            chariot.RegisterPropertyEvent(UnlimitedPropertyType.Mod, SetModUI);
+            Android android = GameManager.Instance.GetAndroid();
+            android.RegisterPropertyEvent(LimitedPropertyType.Health, SetHealthUI);
+            android.RegisterPropertyEvent(UnlimitedPropertyType.Defence, SetDefenceUI);
+            android.RegisterPropertyEvent(UnlimitedPropertyType.Mod, SetModUI);
         }
 
         private void SetHealthUI(float current, float max)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 using SetUps;
 
-namespace InGame.BattleFields.Chariots
+namespace InGame.BattleFields.Androids
 {
     public class BulletManager
     {

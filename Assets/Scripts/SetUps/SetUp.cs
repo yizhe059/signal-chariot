@@ -7,7 +7,7 @@ namespace SetUps
     [CreateAssetMenu(fileName = "Set Up", menuName = "Set Up", order = 0)]
     public class SetUp: ScriptableObject
     {
-        public ChariotSetUp chariotSetUp;
+        public AndroidSetUp androidSetUp;
         public BoardSetUp boardSetUp;
         public BoardSetUp extraBoardSetUp;
         public List<ModuleSetUp> moduleLibrary;

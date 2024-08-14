@@ -3,26 +3,26 @@ using UnityEngine;
 using Utils;
 using Utils.Common;
 
-using InGame.BattleFields.Chariots;
+using InGame.BattleFields.Androids;
 using InGame.BattleFields.Common;
 
 namespace InGame.Views
 {
-    public class ChariotView : MonoBehaviour, IDamageable
+    public class AndroidView : MonoBehaviour, IDamageable
     {
         private Vector3 m_moveDirection = Vector3.zero;
         private Vector3 m_obstacleDirection = Vector3.zero;
-        private Chariot m_chariot;
+        private Android m_android;
         
         #region Life Cycle
-        public void Init(Chariot chariot)
+        public void Init(Android android)
         {
-            m_chariot = chariot;
+            m_android = android;
         }
 
         private void Update()
         {
-            MoveChariot();
+            Move();
         }
 
         public void Die()
@@ -32,11 +32,11 @@ namespace InGame.Views
         #endregion
 
         #region Action
-        private void MoveChariot()
+        private void Move()
         {
             m_moveDirection = (m_moveDirection + m_obstacleDirection).normalized;
             m_moveDirection *= Time.deltaTime *
-                            m_chariot.Get(UnlimitedPropertyType.Speed) *
+                            m_android.Get(UnlimitedPropertyType.Speed) *
                             Constants.SPEED_MULTIPLIER;
 
             if (m_moveDirection == Vector3.zero) return;
@@ -62,7 +62,7 @@ namespace InGame.Views
         #region Interaction
         public void TakeDamage(float dmg)
         {
-            m_chariot.TakeDamage(dmg);
+            m_android.TakeDamage(dmg);
         }
 
         public void OnTriggerEnter(Collider other)

@@ -2,7 +2,7 @@ using UnityEngine;
 
 using Utils;
 using Utils.Common;
-using InGame.BattleFields.Chariots;
+using InGame.BattleFields.Androids;
 
 using DG.Tweening;
 
@@ -75,7 +75,7 @@ namespace InGame.Views
             int layer = other.gameObject.layer;
             switch(layer)
             {
-                case Constants.CHARIOT_LAYER:
+                case Constants.ANDROID_LAYER:
                     break;
                 case Constants.OBSTACLE_LAYER:
                     Die();

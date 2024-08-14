@@ -5,7 +5,7 @@ using Utils.Common;
 using InGame.UI;
 using InGame.Cores;
 using InGame.BattleFields.Enemies;
-using InGame.BattleFields.Chariots;
+using InGame.BattleFields.Androids;
 using InGame.BattleFields.Common;
 using System.Collections;
 
@@ -43,10 +43,10 @@ namespace InGame.Views
 
         private void Move()
         {
-            Chariot chariot = GameManager.Instance.GetChariot();
-            if(chariot == null || chariot.chariotView == null) return;
+            Android android = GameManager.Instance.GetAndroid();
+            if(android == null || android.androidView == null) return;
             
-            m_target = chariot.chariotView.transform.position;
+            m_target = android.androidView.transform.position;
             m_target.z = Constants.ENEMY_DEPTH;
 
             float distance = Vector3.Distance(this.transform.position, m_target);

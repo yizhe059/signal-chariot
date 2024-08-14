@@ -20,7 +20,7 @@ namespace Utils
         #region Resources Path
 
         public const string GO_BULLET_PATH = "Prefabs/BattleField/BulletView";
-        public const string GO_CHARIOT_PATH = "Prefabs/BattleField/ChariotView";
+        public const string GO_ANDROID_PATH = "Prefabs/BattleField/AndroidView";
         public const string GO_TOWER_PATH = "Prefabs/BattleField/TowerView";
         public const string GO_MOD_PATH = "Prefabs/BattleField/ModView";
 
@@ -38,8 +38,8 @@ namespace Utils
 
         #region Tag and Layer
 
-        public const string CHARIOT_TAG = "Player";
-        public const int CHARIOT_LAYER = 3;
+        public const string ANDROID_TAG = "Player";
+        public const int ANDROID_LAYER = 3;
         public const int UI_LAYER = 5;
         public const int BOARD_LAYER = 6;
         public const int BATTLEFIELD_LAYER = 7;
@@ -61,7 +61,7 @@ namespace Utils
 
         // Battlefield
         public const float SCENE_DEPTH = 1f;
-        public const float CHARIOT_DEPTH = 0;
+        public const float ANDROID_DEPTH = 0;
         public const float ENEMY_DEPTH = 0;
         public const float MOD_DEPTH = 0;
         public const float BULLET_DEPTH = -0.5f;

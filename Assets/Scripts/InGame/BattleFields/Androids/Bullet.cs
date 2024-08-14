@@ -8,7 +8,7 @@ using InGame.Cores;
 using Unity.VisualScripting;
 using Utils.Common;
 
-namespace InGame.BattleFields.Chariots
+namespace InGame.BattleFields.Androids
 {
     public class Bullet
     {   
@@ -49,8 +49,8 @@ namespace InGame.BattleFields.Chariots
             GameObject bulletPref = Resources.Load<GameObject>(Constants.GO_BULLET_PATH);
             GameObject bulletGO = GameObject.Instantiate(bulletPref);
             
-            float x = GameManager.Instance.GetChariot().chariotView.transform.position.x;
-            float y = GameManager.Instance.GetChariot().chariotView.transform.position.y;
+            float x = GameManager.Instance.GetAndroid().androidView.transform.position.x;
+            float y = GameManager.Instance.GetAndroid().androidView.transform.position.y;
 
             bulletGO.transform.position = new(x, y, Constants.BULLET_DEPTH);
 

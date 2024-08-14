@@ -499,7 +499,7 @@ namespace InGame.BattleFields.Enemies
         {
             // To Do Generate the location in a location manager
             Vector2 min = new Vector2(-9f, -9f), max = new Vector2(9f, 9f);
-            var playerPos = GameManager.Instance.GetChariot().GetPosition();
+            var playerPos = GameManager.Instance.GetAndroid().GetPosition();
             var minPlayer = playerPos - new Vector2(3, 3);
             var maxPlayer = playerPos + new Vector2(3, 3);
 

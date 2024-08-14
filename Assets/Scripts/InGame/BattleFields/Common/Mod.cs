@@ -23,10 +23,10 @@ namespace InGame.BattleFields.Common
 
         private void CreateView()
         {
-            GameObject chariotPref = Resources.Load<GameObject>(Constants.GO_MOD_PATH);
-            GameObject chariotGO = GameObject.Instantiate(chariotPref);
-            chariotGO.transform.position = new(m_position.x, m_position.y, Constants.MOD_DEPTH);
-            m_view = chariotGO.GetComponent<ModView>();
+            GameObject androidPref = Resources.Load<GameObject>(Constants.GO_MOD_PATH);
+            GameObject androidGO = GameObject.Instantiate(androidPref);
+            androidGO.transform.position = new(m_position.x, m_position.y, Constants.MOD_DEPTH);
+            m_view = androidGO.GetComponent<ModView>();
             m_view.Init(this);
         }
 
@@ -37,7 +37,7 @@ namespace InGame.BattleFields.Common
 
         public void Pickup()
         {
-            GameManager.Instance.GetChariot().Increase(UnlimitedPropertyType.Mod, m_quality);
+            GameManager.Instance.GetAndroid().Increase(UnlimitedPropertyType.Mod, m_quality);
             this.Die();
         }
     }

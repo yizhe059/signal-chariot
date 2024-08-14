@@ -3,7 +3,7 @@ using System;
 namespace SetUps
 {   
     [Serializable]
-    public class ChariotSetUp
+    public class AndroidSetUp
     {   
         #region Health
         public float initialHealth = 50;

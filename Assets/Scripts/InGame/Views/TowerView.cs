@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 using Utils;
-using InGame.BattleFields.Chariots;
+using InGame.BattleFields.Androids;
 
 using DG.Tweening;
 
