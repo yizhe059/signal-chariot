@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using InGame.Boards.Modules.ModuleBuffs;
 using InGame.Effects;
 using InGame.Effects.PlacingEffectRequirements;
 using InGame.Effects.TriggerRequirements;
@@ -50,6 +51,16 @@ namespace InGame.Boards.Modules
         {
             module.TriggerSignalEffect(bb);
         }
+
+        public void AddBuff(ModuleBuff buff)
+        {
+            m_module.AddBuff(buff);
+        }
+
+        public void RemoveBuff(ModuleBuff buff)
+        {
+            m_module.RemoveBuff(buff);
+        }
     }
 
     public class Module
@@ -87,6 +98,13 @@ namespace InGame.Boards.Modules
         private CustomEffect m_customEffect;
         #endregion
         
+        #region Buffs
+
+        private ModuleBuffType m_buffMasks;
+
+        private Dictionary<ModuleBuffType, ModuleBuff> m_buffs =
+            new Dictionary<ModuleBuffType, ModuleBuff>();
+        #endregion
         public ModuleView moduleView => m_moduleView;
         public Orientation orientation => m_orientation;
 
@@ -264,28 +282,101 @@ namespace InGame.Boards.Modules
 
         public void TriggerSignalEffect(EffectBlackBoard bb)
         {
+
             m_signalEffects.Trigger(bb);
         }
 
         public void TriggerPlacingEffect(EffectBlackBoard bb)
         {
+        
             m_placingEffects.Trigger(bb);
         }
 
         public void UnTriggerPlacingEffect(EffectBlackBoard bb)
         {
+
             m_placingEffects.UnTrigger(bb);
         }
 
         public void TriggerCustomEffect(RequirementBlackBoard bb)
         {
+            bb.buffs = new List<ModuleBuff>();
+            foreach (var effectPair in m_buffs)
+            {
+                bb.buffs.Add(effectPair.Value);
+            }
+            
             m_customEffect?.Register(bb);
         }
 
         public void UnTriggerCustomEffect(RequirementBlackBoard bb)
         {
+            bb.buffs = new List<ModuleBuff>();
+            foreach (var effectPair in m_buffs)
+            {
+                bb.buffs.Add(effectPair.Value);
+            }
+            
             m_customEffect?.Unregister(bb);
         }
+        #endregion
+        
+        #region BuffFunction
+
+        private void GenerateBuffDictionary()
+        {
+            m_buffs.Clear();
+            var list = ModuleBuff.GetBuffTypeList(m_buffMasks);
+
+            foreach (var type in list)
+            {
+                m_buffs.Add(type, ModuleBuff.CreateEmptyBuff(type));
+            }
+        }
+
+        public void AddBuff(ModuleBuff buff)
+        {
+            if (buff == null)
+            {
+                Debug.LogError("Null");
+                return;
+            }
+
+            if (!m_buffs.ContainsKey(buff.type))
+            {
+                Debug.Log($"Filter {buff.type} on {name}");
+                return;
+            }
+            
+            m_buffs[buff.type].Add(buff);
+            
+            m_signalEffects.AddBuff(buff);
+            m_placingEffects.AddBuff(buff);
+            m_customEffect?.AddBuff(buff);
+        }
+
+        public void RemoveBuff(ModuleBuff buff)
+        {
+            if (buff == null)
+            {
+                Debug.LogError("Null");
+                return;
+            }
+
+            if (!m_buffs.ContainsKey(buff.type))
+            {
+                Debug.Log($"Filter {buff.type} on {name}");
+                return;
+            }
+            
+            m_buffs[buff.type].Minus(buff);
+            
+            m_signalEffects.RemoveBuff(buff);
+            m_placingEffects.RemoveBuff(buff);
+            m_customEffect?.RemoveBuff(buff);
+        }
+
+
         #endregion
         
         #region static method
@@ -377,14 +468,15 @@ namespace InGame.Boards.Modules
             {
                 name = setUp.name,
                 desc = setUp.desc,
+                m_buffMasks = setUp.buffMask,
                 m_prefab = setUp.prefab,
                 m_signalEffects = SignalEffects.CreateSignalEffects(signalEffects, setUp.maxUses, setUp.energyConsumption, setUp.coolDown),
                 m_placingEffects = PlacingEffects.CreatePlacingEffects(placingEffects, placingReqs),
                 m_customEffect = customEffect
             };
             
+            
             newModule.CreateSlotMap(setUp.otherPositions);
-
             return newModule;
         }
 
@@ -401,6 +493,7 @@ namespace InGame.Boards.Modules
                 m_slotMap = other.m_slotMap,
                 name = other.name,
                 desc = other.desc,
+                m_buffMasks = other.m_buffMasks,
                 m_signalEffects = SignalEffects.CreateSignalEffects(other.m_signalEffects),
                 m_placingEffects = PlacingEffects.CreatePlacingEffects(other.m_placingEffects),
                 m_customEffect = CustomEffect.CreateCustomEffect(other.m_customEffect)
@@ -409,7 +502,7 @@ namespace InGame.Boards.Modules
             newModule.m_placingEffects.SetModule(newModule);
             newModule.m_customEffect?.SetModule(newModule);
             
-
+            newModule.GenerateBuffDictionary();
             return newModule;
         }
 

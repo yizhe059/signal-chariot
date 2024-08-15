@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using InGame.Boards;
 using InGame.Boards.Modules;
+using InGame.Boards.Modules.ModuleBuffs;
 using InGame.Boards.Signals;
 using InGame.Effects.PlacingEffectRequirements;
 using InGame.Effects.TriggerRequirements;
@@ -22,6 +22,7 @@ namespace InGame.Effects
         public Slot slot;
         public Module module;
         
+        
         // test
         public bool isTest = false;
         public void Clean()
@@ -36,7 +37,8 @@ namespace InGame.Effects
     public abstract class Effect
     {
         protected Module m_module;
-        
+
+        public virtual ModuleBuffType buffMask => ModuleBuffType.None;        
         // To DO: Maybe move this to the Signal Effect because Only signal effect distinguish this
         protected virtual bool canEffectByTest => false;
             
@@ -60,6 +62,26 @@ namespace InGame.Effects
         public virtual void OnUnTrigger(EffectBlackBoard blackBoard)
         {
         }
+
+        public void AddBuff(ModuleBuff buff)
+        {
+            if (ModuleBuff.IsInMask(buffMask, buff.type))
+            {
+                OnAddBuff(buff);
+            }
+        }
+        
+        public virtual void OnAddBuff(ModuleBuff buff){}
+
+        public void RemoveBuff(ModuleBuff buff)
+        {
+            if (ModuleBuff.IsInMask(buffMask, buff.type))
+            {
+                OnRemoveBuff(buff);
+            }
+        }
+        
+        public virtual void OnRemoveBuff(ModuleBuff buff){}
 
         public abstract Effect CreateCopy();
     }
@@ -147,6 +169,16 @@ namespace InGame.Effects
             
         }
 
+        public void AddBuff(ModuleBuff buff)
+        {
+            foreach(var effect in m_effects) effect.AddBuff(buff);
+        }
+        
+        public void RemoveBuff(ModuleBuff buff)
+        {
+            foreach(var effect in m_effects) effect.RemoveBuff(buff);
+        }
+        
         public void SetModule(Module module)
         {
             foreach(var effect in m_effects) effect.SetModule(module);
@@ -219,6 +251,16 @@ namespace InGame.Effects
             m_isTrigger = false;
         }
         
+        public void AddBuff(ModuleBuff buff)
+        {
+            foreach(var effect in m_effects) effect.AddBuff(buff);
+        }
+        
+        public void RemoveBuff(ModuleBuff buff)
+        {
+            foreach(var effect in m_effects) effect.RemoveBuff(buff);
+        }
+        
         public void SetModule(Module module)
         {
             foreach(var effect in m_effects) effect.SetModule(module);
@@ -229,6 +271,7 @@ namespace InGame.Effects
     {
         private TriggerRequirement m_requirement;
         private List<Effect> m_effects;
+        private Module m_module;
 
         public void Register(RequirementBlackBoard bb)
         {
@@ -244,6 +287,7 @@ namespace InGame.Effects
         
         public void SetModule(Module module)
         {
+            m_module = module;
             m_requirement.SetModule(module);
             foreach(var effect in m_effects) effect.SetModule(module);
         }
@@ -255,7 +299,19 @@ namespace InGame.Effects
                 effect.Trigger(blackBoard);
             }
         }
-
+        
+        public void AddBuff(ModuleBuff buff)
+        {
+            m_requirement.AddBuff(buff);
+            foreach(var effect in m_effects) effect.AddBuff(buff);
+        }
+        
+        public void RemoveBuff(ModuleBuff buff)
+        {
+            m_requirement.RemoveBuff(buff);
+            foreach(var effect in m_effects) effect.RemoveBuff(buff);
+        }
+        
         public static CustomEffect CreateCustomEffect(TriggerRequirement requirement, List<Effect> effects)
         {
             return new CustomEffect

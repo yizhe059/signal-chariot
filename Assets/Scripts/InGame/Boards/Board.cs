@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using InGame.Boards.Modules;
+using InGame.Boards.Modules.ModuleBuffs;
 using InGame.Cores;
 using InGame.Effects;
 using InGame.Effects.TriggerRequirements;
@@ -161,6 +162,8 @@ namespace InGame.Boards
 
                 SetModuleSlot(boardPos.x, boardPos.y, moduleSlot);
                 SetSlotStatus(boardPos.x, boardPos.y, SlotStatus.Occupied);
+                
+                if (!m_noEffectTrigger) GetValue(boardPos.x, boardPos.y).TellModuleYourBuff();
             }
 
             if (!m_noEffectTrigger)
@@ -323,6 +326,32 @@ namespace InGame.Boards
             slot.TriggerEffect(blackBoard);
         }
 
+        #endregion
+        
+        #region Buff
+
+        
+        /// <summary>
+        /// Add the buff to the slot, no matter the status of the slot
+        /// </summary>
+        /// <param name="buff"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void AddBuffToSlot(ModuleBuff buff, int x, int y)
+        {
+            var slot = GetValue(x, y);
+            if (slot == null) return;
+            
+            slot.AddBuff(buff);
+        }
+        
+        public void RemoveBuffFromSlot(ModuleBuff buff, int x, int y)
+        {
+            var slot = GetValue(x, y);
+            if (slot == null) return;
+            
+            slot.RemoveBuff(buff);
+        }
         #endregion
         private bool IsAdjacentSlot(int x, int y)
         {

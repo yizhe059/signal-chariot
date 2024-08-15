@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using InGame.Boards.Modules;
+using InGame.Boards.Modules.ModuleBuffs;
 using InGame.Effects;
 using InGame.Effects.PlacingEffectRequirements;
 using InGame.Effects.TriggerRequirements;
@@ -15,6 +16,7 @@ namespace SetUps
         public string desc = "";
         public List<ModulePosition> otherPositions;
         public ModuleView prefab;
+        public ModuleBuffType buffMask;
         
         #region SignalEffects
 

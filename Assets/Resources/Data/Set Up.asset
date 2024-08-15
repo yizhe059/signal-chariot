@@ -95,6 +95,7 @@ MonoBehaviour:
     desc: 
     otherPositions: []
     prefab: {fileID: -341302883647983323, guid: 4f4f9e8cbb7996e41b35cf4c51cf482e, type: 3}
+    buffMask: 0
     signalEffects: []
     maxUses: 0
     energyConsumption: 0
@@ -103,15 +104,16 @@ MonoBehaviour:
     requirements: []
     hasCustomEffect: 1
     triggerRequirement:
-      rid: 1820470538621943816
+      rid: 1820470538621943840
     customEffects:
-    - rid: 1820470538621943817
+    - rid: 1820470538621943841
   - name: "\u589E\u5E45\u5668"
     desc: 
     otherPositions: []
     prefab: {fileID: 6219216261471928466, guid: ddab373e8e7f09a4c82d8f5654d9c978, type: 3}
+    buffMask: 0
     signalEffects:
-    - rid: 1820470538621943818
+    - rid: 1820470538621943842
     maxUses: -1
     energyConsumption: 0
     coolDown: 0
@@ -125,8 +127,9 @@ MonoBehaviour:
     desc: 
     otherPositions: []
     prefab: {fileID: 7680782621330569741, guid: 71a7ea6be685de642aef0c89bab4fbd5, type: 3}
+    buffMask: 0
     signalEffects:
-    - rid: 1820470538621943819
+    - rid: 1820470538621943843
     maxUses: -1
     energyConsumption: 0
     coolDown: 0
@@ -142,13 +145,14 @@ MonoBehaviour:
     - x: 1
       y: 0
     prefab: {fileID: 1402701477217004034, guid: 17646af2c7a669e49bb57947bbd60d0a, type: 3}
+    buffMask: 1
     signalEffects:
-    - rid: 1820470538621943820
+    - rid: 1820470538621943844
     maxUses: -1
     energyConsumption: 1
     coolDown: 0
     placingEffects:
-    - rid: 1820470538621943821
+    - rid: 1820470538621943845
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
@@ -158,14 +162,15 @@ MonoBehaviour:
     desc: 
     otherPositions: []
     prefab: {fileID: 8876540461052638955, guid: d35de34960652b143a367a5546d1c2ea, type: 3}
+    buffMask: 0
     signalEffects: []
     maxUses: -1
     energyConsumption: 0
     coolDown: 0
     placingEffects:
-    - rid: 1820470538621943822
+    - rid: 1820470538621943846
     requirements:
-    - rid: 1820470538621943823
+    - rid: 1820470538621943847
     hasCustomEffect: 0
     triggerRequirement:
       rid: -2
@@ -182,6 +187,7 @@ MonoBehaviour:
     - x: -1
       y: 0
     prefab: {fileID: -5447537739969293526, guid: 780332fa93134cc499d3148c3d2857d8, type: 3}
+    buffMask: 0
     signalEffects: []
     maxUses: 0
     energyConsumption: 0
@@ -202,6 +208,7 @@ MonoBehaviour:
     - x: -1
       y: 0
     prefab: {fileID: 4244946465113611698, guid: 7dfda94a13c9d414db28b5c2e8ea0fac, type: 3}
+    buffMask: 0
     signalEffects: []
     maxUses: 0
     energyConsumption: 0
@@ -272,26 +279,26 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 1820470538621943816
+    - rid: 1820470538621943840
       type: {class: IntervalTimeTriggerRequirement, ns: InGame.Effects.TriggerRequirements, asm: Assembly-CSharp}
       data:
         interval: 1
         canEffectInTest: 1
-    - rid: 1820470538621943817
+    - rid: 1820470538621943841
       type: {class: SignalGenerationEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         signalStrength: 2
-    - rid: 1820470538621943818
+    - rid: 1820470538621943842
       type: {class: EnergyAmplifyEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         amplifiedAmount: 1
-    - rid: 1820470538621943819
+    - rid: 1820470538621943843
       type: {class: SignalDirectionChangeEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data: 
-    - rid: 1820470538621943820
+    - rid: 1820470538621943844
       type: {class: TowerShootEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data: 
-    - rid: 1820470538621943821
+    - rid: 1820470538621943845
       type: {class: PlacingTowerEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         setUp:
@@ -306,10 +313,10 @@ MonoBehaviour:
             damage: 1
             speed: 40
             range: 10
-    - rid: 1820470538621943822
+    - rid: 1820470538621943846
       type: {class: ChangeShieldEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         delta: 1
-    - rid: 1820470538621943823
+    - rid: 1820470538621943847
       type: {class: BorderRequirement, ns: InGame.Effects.PlacingEffectRequirements, asm: Assembly-CSharp}
       data: 
