@@ -16,12 +16,13 @@ namespace InGame.InGameStates
         {
             Debug.Log("Enter board waiting");
             var cameraManager = GameManager.Instance.GetCameraManager();
+
             cameraManager.BoardCameraSetActive(true);
             cameraManager.MiniBoardCameraSetActive(false);
             cameraManager.BattleCameraSetActive(false);
-            
+
             var boardCamera = cameraManager.boardCamera;
-            
+
             GameManager.Instance.GetInputManager().RegisterClickEvent(boardCamera, OnClicked);
             
             BattleProgressUI.Instance.Hide();

@@ -60,6 +60,7 @@ namespace InGame.InGameStates
             m_selectableSlots.Clear();
             Debug.Log("Exit AddSlot");
 
+            // TODO: 用BitMap代替
             BattleProgressUI.Instance.Show();
             BattleResultUI.Instance.Show();
             AndroidStatusUI.Instance.Hide();

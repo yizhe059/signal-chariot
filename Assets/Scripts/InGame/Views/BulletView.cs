@@ -2,7 +2,7 @@ using UnityEngine;
 
 using Utils;
 using Utils.Common;
-using InGame.BattleFields.Androids;
+using InGame.BattleFields.Bullets;
 
 using DG.Tweening;
 
@@ -19,7 +19,7 @@ namespace InGame.Views
         {
             m_bullet = bullet;
             m_originPosition = this.transform.position;
-            m_distance = Vector3.Distance(this.transform.position, m_bullet.target);
+            // m_distance = Vector3.Distance(this.transform.position, m_bullet.target);
             SetSprite();
         }
 
@@ -54,18 +54,19 @@ namespace InGame.Views
         #region Action
         private void Move()
         {
-            if(MoveOutOfRange()) Die();
+            // if(MoveOutOfRange()) Die();
 
-            float currDistance = Vector3.Distance(this.transform.position, m_bullet.target);
-            if(currDistance <= Constants.COLLIDE_OFFSET) return;
+            // float currDistance = Vector3.Distance(this.transform.position, m_bullet.target);
+            // if(currDistance <= Constants.COLLIDE_OFFSET) return;
 
-            transform.DOMove(m_bullet.target, m_distance / m_bullet.speed.value / Constants.SPEED_MULTIPLIER)
-                    .SetEase(Ease.OutQuad);
+            // transform.DOMove(m_bullet.target, m_distance / m_bullet.speed.value / Constants.SPEED_MULTIPLIER)
+                    // .SetEase(Ease.OutQuad);
         }
 
         private bool MoveOutOfRange()
         {
-            return Vector3.Distance(this.transform.position, m_originPosition) >= m_bullet.range.value;
+            // return Vector3.Distance(this.transform.position, m_originPosition) >= m_bullet.range.value;
+            return false;
         }
         #endregion
         

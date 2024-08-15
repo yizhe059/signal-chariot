@@ -1,4 +1,5 @@
-﻿using InGame.InGameStates;
+﻿using InGame.Cores;
+using InGame.InGameStates;
 using UnityEngine.SceneManagement;
 using Utils;
 using Utils.Common;
@@ -29,6 +30,8 @@ namespace InGame
 
         public override void Exit()
         {
+            m_gameStateMachine.current?.Exit();
+            GameManager.Instance.Clear();
             _instance = null;
         }
 

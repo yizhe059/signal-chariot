@@ -29,6 +29,15 @@ namespace InGame.Cores
             m_playerInput.actions["Move"].canceled += OnMoveKeyReleased;
         }
 
+        public void Clear()
+        {
+            m_playerInput.actions["Click"].started -= OnClicked;
+            m_playerInput.actions["MousePos"].performed -= OnMouseMove;
+            m_playerInput.actions["Rotate"].started -= OnRotate;
+            m_playerInput.actions["Move"].performed -= OnMoveKeyPressed;
+            m_playerInput.actions["Move"].canceled -= OnMoveKeyReleased;
+        }
+
         #region Event Listeners
         public void RegisterClickEvent(Camera camera, UnityAction<Vector2> act)
         {
@@ -39,6 +48,7 @@ namespace InGame.Cores
             }
             evt.AddListener(act);
             //m_onMouseLeftClicked.AddListener(act);
+            Debug.Log("Camera click reg " + camera.name);
         }
         
         public void UnregisterClickEvent(Camera camera, UnityAction<Vector2> act)
@@ -50,6 +60,7 @@ namespace InGame.Cores
             }
             evt.RemoveListener(act);
             //m_onMouseLeftClicked.RemoveListener(act);
+            Debug.Log("Camera click unreg " + camera.name);
         }
         
         public void RegisterMouseMoveEvent(Camera camera, UnityAction<Vector2> act)
@@ -61,6 +72,7 @@ namespace InGame.Cores
             }
             evt.AddListener(act);
             // m_onMouseMove.AddListener(act);
+            Debug.Log("Camera move reg " + camera.name);
         }
         
         public void UnregisterMouseMoveEvent(Camera camera, UnityAction<Vector2> act)
@@ -72,6 +84,7 @@ namespace InGame.Cores
             }
             evt.RemoveListener(act);
             //m_onMouseMove.RemoveListener(act);
+            Debug.Log("Camera move unreg " + camera.name);
         }
 
         public void RegisterRotateEvent(UnityAction act)
@@ -101,6 +114,8 @@ namespace InGame.Cores
         private void OnClicked(InputAction.CallbackContext context)
         {
             var mousePosition = context.ReadValue<Vector2>();
+
+            Debug.Log("number of click events " + m_onMouseLeftClickedEvents.Count);
             
             foreach (var tuple in m_onMouseLeftClickedEvents)
             {
@@ -123,6 +138,8 @@ namespace InGame.Cores
         private void OnMouseMove(InputAction.CallbackContext context)
         {
             var mousePosition = context.ReadValue<Vector2>();
+
+            // Debug.Log("number of move events " + m_onMouseMoveEvents.Count);
 
             foreach (var tuple in m_onMouseMoveEvents)
             {

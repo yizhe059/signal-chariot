@@ -14,9 +14,9 @@ using InGame.InGameStates;
 using InGame.Views;
 
 using SetUps;
-using UnityEditor;
 using Utils.Common;
 using Utils;
+using MainMenu;
 
 namespace InGame.Cores
 {
@@ -122,11 +122,10 @@ namespace InGame.Cores
             m_enemySpawnController?.Update(UnityEngine.Time.deltaTime);
         }
 
-        public void Restart()
+        public void Clear()
         {
-            ChangeToBoardWaitingState();
-            m_enemySpawnController.Clear();
-            InitAndroid();
+            // m_enemySpawnController.Clear();
+            m_inputManager.Clear();
         }
         #endregion
 
@@ -147,6 +146,11 @@ namespace InGame.Cores
         #endregion
 
         #region World State Machine
+        public void ChangeToInitState()
+        {
+            Game.Instance.nextState = new InitState();
+        }
+
         public void ChangeToBoardWaitingState()
         {
             WorldState.instance.nextState = BoardWaitingState.CreateState(GetBoard(), GetExtraBoard(), GetBoardView());

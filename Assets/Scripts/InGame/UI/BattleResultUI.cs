@@ -43,7 +43,7 @@ namespace InGame.UI
 
             failContinue.clicked += () => 
             {
-                GameManager.Instance.Restart(); 
+                GameManager.Instance.ChangeToInitState();
             };
         }
 

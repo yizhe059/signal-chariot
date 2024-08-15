@@ -8,7 +8,7 @@ using InGame.Cores;
 using Unity.VisualScripting;
 using Utils.Common;
 
-namespace InGame.BattleFields.Androids
+namespace InGame.BattleFields.Bullets
 {
     public class Bullet
     {   
@@ -16,29 +16,36 @@ namespace InGame.BattleFields.Androids
         private BulletView m_bulletView;
 
         [Header("Properties")]
-        private Vector3 m_target;
         private Sprite m_sprite;
+        private IMoveStrategy m_moveStrategy;
+        private DamageType m_damageStrategy;
         private UnlimitedProperty m_speed;
         private UnlimitedProperty m_damage;
-        private UnlimitedProperty m_range;
+        private UnlimitedProperty m_lifeTime;
+        private UnlimitedProperty m_reflectTimes;
+        private UnlimitedProperty m_penetrateTimes;
+        private UnlimitedProperty m_splitTimes;
+        
+        // TODO DieEffect
 
-        public Vector3 target { get { return m_target;}}
         public Sprite sprite{ get { return m_sprite;}}
+        public IMoveStrategy moveStrategy { get { return m_moveStrategy;}}
+        public DamageType damageType {get { return m_damageStrategy;}}
         public UnlimitedProperty speed { get { return m_speed;}}
         public UnlimitedProperty damage { get { return m_damage;}}
-        public UnlimitedProperty range { get { return m_range;}}
+        public UnlimitedProperty lifetime { get { return m_lifeTime;}}
+        public UnlimitedProperty reflectTimes { get { return m_reflectTimes;}}
+        public UnlimitedProperty penetrateTimes { get {return m_penetrateTimes;}}
+        public UnlimitedProperty splitTimes { get {return m_splitTimes;}}
 
-        public Bullet(BulletSetUp bulletSetUp, Vector3 target, float damageMultiplier)
+        public Bullet(BulletSetUp bulletSetUp, float damageMultiplier)
         {
             UnlimitedProperty dmg = new(bulletSetUp.damage * damageMultiplier, 
                                         UnlimitedPropertyType.Damage);
             UnlimitedProperty spd = new(bulletSetUp.speed, UnlimitedPropertyType.Speed);
-            UnlimitedProperty rng = new(bulletSetUp.range, UnlimitedPropertyType.Range);
 
-            m_target = target;            
             m_damage = dmg;
             m_speed = spd;
-            m_range = rng;
             m_sprite = bulletSetUp.sprite;
 
             CreateView();

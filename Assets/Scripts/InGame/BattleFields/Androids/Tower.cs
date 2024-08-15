@@ -7,6 +7,7 @@ using InGame.Cores;
 using InGame.Views;
 using InGame.Boards.Modules;
 using InGame.BattleFields.Enemies;
+using InGame.BattleFields.Bullets;
 using InGame.BattleFields.Common;
 
 using Utils;
@@ -101,7 +102,7 @@ namespace InGame.BattleFields.Androids
             
             for(int i = 0; i < m_bulletCount.value; i++)
             {
-                m_bulletManager.AddBullet(m_bulletSetUp, target, m_damageMultiplier.value);
+                m_bulletManager.AddBullet(m_bulletSetUp, m_damageMultiplier.value);
                 yield return new WaitForSeconds(m_shootInterval.value);
             }
         }

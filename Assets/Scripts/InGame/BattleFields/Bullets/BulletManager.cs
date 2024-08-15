@@ -4,7 +4,7 @@ using UnityEngine;
 
 using SetUps;
 
-namespace InGame.BattleFields.Androids
+namespace InGame.BattleFields.Bullets
 {
     public class BulletManager
     {
@@ -15,9 +15,9 @@ namespace InGame.BattleFields.Androids
             m_bullets = new();
         }
 
-        public Bullet AddBullet(BulletSetUp setup, Vector3 target, float dmgMultiplier)
+        public Bullet AddBullet(BulletSetUp setup, float dmgMultiplier)
         {
-            Bullet bullet = new(setup, target, dmgMultiplier);
+            Bullet bullet = new(setup, dmgMultiplier);
             m_bullets.Add(bullet);
             return bullet;
         }
