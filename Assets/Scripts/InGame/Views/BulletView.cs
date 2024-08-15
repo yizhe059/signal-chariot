@@ -11,14 +11,11 @@ namespace InGame.Views
     public class BulletView : MonoBehaviour, IDamager
     {
         private Bullet m_bullet;
-        private Vector3 m_originPosition;
-        private float m_distance;
 
         #region LifeCycle
         public void Init(Bullet bullet)
         {
             m_bullet = bullet;
-            m_originPosition = this.transform.position;
             // m_distance = Vector3.Distance(this.transform.position, m_bullet.target);
             SetSprite();
         }

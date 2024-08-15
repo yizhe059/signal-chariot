@@ -37,6 +37,7 @@ namespace InGame.InGameStates
         public override void Exit()
         {
             Debug.Log("Exit BoardTest State");
+            
             m_signalController.TestStop();
             m_timeEffectManager.TestStop();
 

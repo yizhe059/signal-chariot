@@ -47,8 +47,6 @@ namespace InGame.Cores
                 m_onMouseLeftClickedEvents.Add(camera, evt);
             }
             evt.AddListener(act);
-            //m_onMouseLeftClicked.AddListener(act);
-            Debug.Log("Camera click reg " + camera.name);
         }
         
         public void UnregisterClickEvent(Camera camera, UnityAction<Vector2> act)
@@ -59,8 +57,6 @@ namespace InGame.Cores
                 return;
             }
             evt.RemoveListener(act);
-            //m_onMouseLeftClicked.RemoveListener(act);
-            Debug.Log("Camera click unreg " + camera.name);
         }
         
         public void RegisterMouseMoveEvent(Camera camera, UnityAction<Vector2> act)
@@ -71,8 +67,6 @@ namespace InGame.Cores
                 m_onMouseMoveEvents.Add(camera, evt);
             }
             evt.AddListener(act);
-            // m_onMouseMove.AddListener(act);
-            Debug.Log("Camera move reg " + camera.name);
         }
         
         public void UnregisterMouseMoveEvent(Camera camera, UnityAction<Vector2> act)
@@ -83,8 +77,6 @@ namespace InGame.Cores
                 return;
             }
             evt.RemoveListener(act);
-            //m_onMouseMove.RemoveListener(act);
-            Debug.Log("Camera move unreg " + camera.name);
         }
 
         public void RegisterRotateEvent(UnityAction act)
@@ -114,8 +106,6 @@ namespace InGame.Cores
         private void OnClicked(InputAction.CallbackContext context)
         {
             var mousePosition = context.ReadValue<Vector2>();
-
-            Debug.Log("number of click events " + m_onMouseLeftClickedEvents.Count);
             
             foreach (var tuple in m_onMouseLeftClickedEvents)
             {
@@ -125,21 +115,11 @@ namespace InGame.Cores
                 Vector2 worldPosition = camera.ScreenToWorldPoint(mousePosition);
                 evt.Invoke(worldPosition);
             }
-            // if (Camera.main == null)
-            // {
-            //     Debug.LogError("No camera!");
-            //     return;
-            // }
-            // Vector2 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            //
-            // m_onMouseLeftClicked.Invoke(worldPosition);
         }
         
         private void OnMouseMove(InputAction.CallbackContext context)
         {
             var mousePosition = context.ReadValue<Vector2>();
-
-            // Debug.Log("number of move events " + m_onMouseMoveEvents.Count);
 
             foreach (var tuple in m_onMouseMoveEvents)
             {
@@ -149,14 +129,6 @@ namespace InGame.Cores
                 Vector2 worldPosition = camera.ScreenToWorldPoint(mousePosition);
                 evt.Invoke(worldPosition);
             }
-            // if (Camera.main == null)
-            // {
-            //     Debug.LogError("No camera!");
-            //     return;
-            // }
-            // Vector2 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-
-            //m_onMouseMove.Invoke(worldPosition);
         }
         
         private void OnRotate(InputAction.CallbackContext context)
