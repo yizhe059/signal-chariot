@@ -84,7 +84,7 @@ namespace InGame.Boards.Modules
 
         private PlacingEffects m_placingEffects;
 
-        private CustomEffects m_customEffects;
+        private CustomEffect m_customEffect;
         #endregion
         
         public ModuleView moduleView => m_moduleView;
@@ -279,12 +279,12 @@ namespace InGame.Boards.Modules
 
         public void TriggerCustomEffect(RequirementBlackBoard bb)
         {
-            m_customEffects?.Register(bb);
+            m_customEffect?.Register(bb);
         }
 
         public void UnTriggerCustomEffect(RequirementBlackBoard bb)
         {
-            m_customEffects?.Unregister(bb);
+            m_customEffect?.Unregister(bb);
         }
         #endregion
         
@@ -357,14 +357,30 @@ namespace InGame.Boards.Modules
             {
                 placingReqs.Add(req.CreateCopy());
             }
+
+            CustomEffect customEffect = null;
+            if (setUp.hasCustomEffect)
+            {
+                var customEffectLists = new List<Effect>();
+                var triggerRequirement = setUp.triggerRequirement?.CreateCopy();
+
+                foreach (var effect in setUp.customEffects)
+                {
+                    customEffectLists.Add(effect.CreateCopy());
+                }
+                
+                customEffect = CustomEffect.CreateCustomEffect(triggerRequirement, customEffectLists);
+            }
+            
+            
             var newModule = new Module
             {
                 name = setUp.name,
                 desc = setUp.desc,
                 m_prefab = setUp.prefab,
                 m_signalEffects = SignalEffects.CreateSignalEffects(signalEffects, setUp.maxUses, setUp.energyConsumption, setUp.coolDown),
-                m_placingEffects = PlacingEffects.CreatePlacingEffects(placingEffects, placingReqs)
-                
+                m_placingEffects = PlacingEffects.CreatePlacingEffects(placingEffects, placingReqs),
+                m_customEffect = customEffect
             };
             
             newModule.CreateSlotMap(setUp.otherPositions);
@@ -386,10 +402,12 @@ namespace InGame.Boards.Modules
                 name = other.name,
                 desc = other.desc,
                 m_signalEffects = SignalEffects.CreateSignalEffects(other.m_signalEffects),
-                m_placingEffects = PlacingEffects.CreatePlacingEffects(other.m_placingEffects)
+                m_placingEffects = PlacingEffects.CreatePlacingEffects(other.m_placingEffects),
+                m_customEffect = CustomEffect.CreateCustomEffect(other.m_customEffect)
             };
             newModule.m_signalEffects.SetModule(newModule);
             newModule.m_placingEffects.SetModule(newModule);
+            newModule.m_customEffect?.SetModule(newModule);
             
 
             return newModule;

@@ -2,6 +2,7 @@
 using InGame.Boards.Modules;
 using InGame.Effects;
 using InGame.Effects.PlacingEffectRequirements;
+using InGame.Effects.TriggerRequirements;
 using InGame.Views;
 using UnityEngine;
 
@@ -31,6 +32,16 @@ namespace SetUps
         
         [SerializeReference]
         public List<PlacingEffectRequirement> requirements;
+
+        #endregion
+        
+        #region CustomEffects
+
+        public bool hasCustomEffect;
+        [SerializeReference]
+        public TriggerRequirement triggerRequirement;
+        [SerializeReference]
+        public List<Effect> customEffects;
 
         #endregion
     }

@@ -12,6 +12,8 @@ namespace InGame.Effects
 {
     public class EffectBlackBoard
     {
+        public TriggerType triggerType;
+        
         // signal Effect
         public Signal signal;
         public Time time;
@@ -34,7 +36,8 @@ namespace InGame.Effects
     public abstract class Effect
     {
         protected Module m_module;
-
+        
+        // To DO: Maybe move this to the Signal Effect because Only signal effect distinguish this
         protected virtual bool canEffectByTest => false;
             
         public void SetModule(Module module) => m_module = module;
@@ -132,8 +135,8 @@ namespace InGame.Effects
                 Debug.Log("Energy not passed");
                 return;
             }
-
-            m_remainUses--;
+            
+            if(m_maxUses != -1) m_remainUses--;
             signal.ConsumeEnergy(m_energyConsumption);
             m_prevTriggerTime = time;
             
@@ -222,7 +225,7 @@ namespace InGame.Effects
         }
     }
 
-    public class CustomEffects
+    public class CustomEffect
     {
         private TriggerRequirement m_requirement;
         private List<Effect> m_effects;
@@ -239,12 +242,46 @@ namespace InGame.Effects
             m_requirement.UnregisterTriggerEvent(Trigger);
         }
         
+        public void SetModule(Module module)
+        {
+            m_requirement.SetModule(module);
+            foreach(var effect in m_effects) effect.SetModule(module);
+        }
+        
         private void Trigger(EffectBlackBoard blackBoard)
         {
             foreach (var effect in m_effects)
             {
                 effect.Trigger(blackBoard);
             }
+        }
+
+        public static CustomEffect CreateCustomEffect(TriggerRequirement requirement, List<Effect> effects)
+        {
+            return new CustomEffect
+            {
+                m_requirement = requirement,
+                m_effects = effects
+            };
+        }
+        
+        public static CustomEffect CreateCustomEffect(CustomEffect other)
+        {
+            if (other == null) return null;
+
+            var customEffectLists = new List<Effect>();
+            var triggerRequirement = other.m_requirement.CreateCopy();
+
+            foreach (var effect in other.m_effects)
+            {
+                customEffectLists.Add(effect.CreateCopy());
+            }
+            
+            return new CustomEffect
+            {
+                m_requirement = triggerRequirement,
+                m_effects = customEffectLists
+            };
         }
     }
 }

@@ -47,6 +47,9 @@ namespace Editors.Board
         {
             var signalEffectEdits = GetComponentInChildren<SignalEffectEdit>();
             var placingEffectEdits = GetComponentInChildren<PlacingEffectEdit>();
+            var customEffectEdits = GetComponentInChildren<CustomEffectEdit>();
+            bool hasCustomEffect = 
+                customEffectEdits.CreateCustomEffect(out var req, out var customEffects);
             
             return new ModuleSetUp
             {
@@ -59,7 +62,11 @@ namespace Editors.Board
                 energyConsumption = signalEffectEdits.energyConsumption,
                 maxUses = signalEffectEdits.maxUses,
                 placingEffects = placingEffectEdits.CreateEffects(),
-                requirements = placingEffectEdits.CreateRequirements()
+                requirements = placingEffectEdits.CreateRequirements(),
+                
+                hasCustomEffect = hasCustomEffect,
+                triggerRequirement = req,
+                customEffects = customEffects
             };
         }
     }

@@ -2,6 +2,7 @@
 using InGame.Boards.Modules;
 using InGame.Cores;
 using InGame.Effects;
+using InGame.Effects.TriggerRequirements;
 using SetUps;
 using UnityEngine;
 using UnityEngine.Events;
@@ -170,12 +171,24 @@ namespace InGame.Boards
                     slot = GetValue(pivotPos.x, pivotPos.y),
                     module = module
                 });
+                
+                module.TriggerCustomEffect(new RequirementBlackBoard
+                {
+                    slot = GetValue(pivotPos.x, pivotPos.y)
+                });
             }
             
 
             return true;
         }
-
+        
+        /// <summary>
+        /// Place A module to a first position that is able to placed
+        /// </summary>
+        /// <param name="module"></param>
+        /// <param name="resultX"></param>
+        /// <param name="resultY"></param>
+        /// <returns></returns>
         public bool PlaceModule(Module module, out int resultX, out int resultY)
         {
             for (int x = 0; x < m_width; x++)
@@ -220,6 +233,7 @@ namespace InGame.Boards
             if (!m_noEffectTrigger)
             {
                 module.UnTriggerPlacingEffect(new EffectBlackBoard{slot = GetValue(x, y)});
+                module.UnTriggerCustomEffect(new RequirementBlackBoard{slot = GetValue(x, y)});
             }
 
             
