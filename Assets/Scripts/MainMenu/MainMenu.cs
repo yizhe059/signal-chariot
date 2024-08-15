@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.SceneManagement;
 
 using InGame;
 using Utils;

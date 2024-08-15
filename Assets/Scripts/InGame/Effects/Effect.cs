@@ -82,7 +82,11 @@ namespace InGame.Effects
         }
         
         public virtual void OnRemoveBuff(ModuleBuff buff){}
-
+        
+        public virtual void ClearBuffs(){
+            
+            
+        }
         public abstract Effect CreateCopy();
     }
 
@@ -179,6 +183,11 @@ namespace InGame.Effects
             foreach(var effect in m_effects) effect.RemoveBuff(buff);
         }
         
+        public void ClearBuffs(){
+            foreach(var effect in m_effects) effect.ClearBuffs();
+            
+        }
+        
         public void SetModule(Module module)
         {
             foreach(var effect in m_effects) effect.SetModule(module);
@@ -261,6 +270,11 @@ namespace InGame.Effects
             foreach(var effect in m_effects) effect.RemoveBuff(buff);
         }
         
+        public void ClearBuffs(){
+            foreach(var effect in m_effects) effect.ClearBuffs();
+            
+        }
+        
         public void SetModule(Module module)
         {
             foreach(var effect in m_effects) effect.SetModule(module);
@@ -310,6 +324,13 @@ namespace InGame.Effects
         {
             m_requirement.RemoveBuff(buff);
             foreach(var effect in m_effects) effect.RemoveBuff(buff);
+        }
+        
+        public void ClearBuffs()
+        {
+            m_requirement.ClearBuffs();
+            foreach(var effect in m_effects) effect.ClearBuffs();
+            
         }
         
         public static CustomEffect CreateCustomEffect(TriggerRequirement requirement, List<Effect> effects)

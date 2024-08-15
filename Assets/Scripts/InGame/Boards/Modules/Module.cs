@@ -4,8 +4,10 @@ using InGame.Effects;
 using InGame.Effects.PlacingEffectRequirements;
 using InGame.Effects.TriggerRequirements;
 using InGame.Views;
+using MainMenu;
 using SetUps;
 using UnityEngine;
+using Utils.Common;
 
 namespace InGame.Boards.Modules
 {
@@ -78,6 +80,7 @@ namespace InGame.Boards.Modules
         private Orientation m_orientation = Orientation.Up;
         private ModuleView m_prefab;
         private ModuleView m_moduleView;
+        private BoardPosition m_pos = BoardPosition.invalidPosition;
         
         #region Shape
         private ModulePosition m_pivot;
@@ -217,6 +220,15 @@ namespace InGame.Boards.Modules
         #endregion
         
         #region BoardPosition
+
+        public void SetPivotBoardPosition(BoardPosition pos)
+        {
+            m_pos = pos;
+        }
+
+        public BoardPosition GetPivotBoardPosition() => m_pos;
+        
+        
         public BoardPosition GetBoardPosition(ModuleSlot slot, BoardPosition pivotPos)
         {
             var offset = GetOffset(slot.position.x, slot.position.y);
@@ -236,6 +248,8 @@ namespace InGame.Boards.Modules
                 y = slotBoardPosition.y - offset.y
             };
         }
+        
+        
         public List<BoardPosition> GetBoardPositionList(BoardPosition pivotPos)
         {
             var list = new List<BoardPosition>();
@@ -258,6 +272,18 @@ namespace InGame.Boards.Modules
             }
 
             return list;
+        }
+
+        public List<BoardPosition> GetBoardPositionList()
+        {
+            if (m_pos != BoardPosition.invalidPosition)
+            {
+                return GetBoardPositionList(m_pos);
+            }
+            else
+            {
+                return new List<BoardPosition>();
+            }
         }
         #endregion
         
@@ -374,6 +400,13 @@ namespace InGame.Boards.Modules
             m_signalEffects.RemoveBuff(buff);
             m_placingEffects.RemoveBuff(buff);
             m_customEffect?.RemoveBuff(buff);
+        }
+        
+        public void ClearBuffs(){
+            m_signalEffects.ClearBuffs();
+            m_placingEffects.ClearBuffs();
+            m_customEffect?.ClearBuffs();
+            
         }
 
 
@@ -517,6 +550,18 @@ namespace InGame.Boards.Modules
         }
         
         #endregion
+
+        public static BoardPosition OrientationToBoardPositionOffset(Orientation orientation)
+        {
+            return orientation switch
+            {
+                Orientation.Up => new BoardPosition(0, 1),
+                Orientation.Down => new BoardPosition(0, -1),
+                Orientation.Right => new BoardPosition(1, 0),
+                Orientation.Left => new BoardPosition(-1, 0),
+                _ => new BoardPosition(0, 0) 
+            };
+        }
         public override string ToString()
         {
             string result = "";

@@ -52,6 +52,11 @@ namespace InGame.Effects.TriggerRequirements
         
         public virtual void OnRemoveBuff(ModuleBuff buff){}
         
+        public virtual void ClearBuffs(){
+            
+            
+        }
+        
         public void SetModule(Module module)
         {
             m_module = module;

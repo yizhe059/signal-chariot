@@ -37,6 +37,8 @@ namespace InGame.Boards.Modules.ModuleBuffs
         
         protected abstract void OnMinus(ModuleBuff other);
 
+        public abstract void SetDefault();
+        
         public static List<ModuleBuffType> GetBuffTypeList(ModuleBuffType mask)
         {
             List<ModuleBuffType> selectedOptions = new List<ModuleBuffType>();

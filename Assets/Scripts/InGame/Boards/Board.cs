@@ -34,10 +34,23 @@ namespace InGame.Boards
             return new BoardPosition(a.x + b.x, a.y + b.y);
         }
         
+
+        public static bool operator!=(BoardPosition a, BoardPosition b)
+        {
+            return !(a == b);
+        }
+
+        public static bool operator ==(BoardPosition a, BoardPosition b)
+        {
+            return a.x == b.x && a.y == b.y;
+        }
+
         public override string ToString()
         {
             return $"{x} , {y}";
         }
+
+        public static BoardPosition invalidPosition => new BoardPosition(-1, -1);
     }
     
     //To DO: 可能Board的逻辑是不需要position的，只有boardView才需要，在board里加位置是redundant的
@@ -156,6 +169,8 @@ namespace InGame.Boards
                 if (GetSlotStatus(boardPos) != SlotStatus.Empty) return false;
             }
 
+            module.SetPivotBoardPosition(pivotPos);
+            
             foreach (var moduleSlot in slotList)
             {
                 var boardPos = moduleSlot.GetBoardPosition(pivotPos);
@@ -163,7 +178,6 @@ namespace InGame.Boards
                 SetModuleSlot(boardPos.x, boardPos.y, moduleSlot);
                 SetSlotStatus(boardPos.x, boardPos.y, SlotStatus.Occupied);
                 
-                if (!m_noEffectTrigger) GetValue(boardPos.x, boardPos.y).TellModuleYourBuff();
             }
 
             if (!m_noEffectTrigger)
@@ -179,7 +193,17 @@ namespace InGame.Boards
                 {
                     slot = GetValue(pivotPos.x, pivotPos.y)
                 });
+                
+                // Add all the buff in slots to the module
+                foreach (var moduleSlot in slotList)
+                {
+                    var boardPos = moduleSlot.GetBoardPosition(pivotPos);
+                
+                
+                    GetValue(boardPos.x, boardPos.y).TellModuleYourBuff();
+                }
             }
+            
             
 
             return true;
@@ -235,11 +259,12 @@ namespace InGame.Boards
 
             if (!m_noEffectTrigger)
             {
+                module.ClearBuffs();
                 module.UnTriggerPlacingEffect(new EffectBlackBoard{slot = GetValue(x, y)});
                 module.UnTriggerCustomEffect(new RequirementBlackBoard{slot = GetValue(x, y)});
             }
 
-            
+            module.SetPivotBoardPosition(BoardPosition.invalidPosition);
 
             return module;
         }
