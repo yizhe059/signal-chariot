@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using SetUps;
+using InGame.BattleFields.Androids;
 
 namespace InGame.BattleFields.Bullets
 {
@@ -15,9 +16,9 @@ namespace InGame.BattleFields.Bullets
             m_bullets = new();
         }
 
-        public Bullet AddBullet(BulletSetUp setup, float dmgMultiplier)
+        public Bullet AddBullet(BulletSetUp setup, Tower tower)
         {
-            Bullet bullet = new(setup, dmgMultiplier);
+            Bullet bullet = new(setup, tower);
             m_bullets.Add(bullet);
             return bullet;
         }

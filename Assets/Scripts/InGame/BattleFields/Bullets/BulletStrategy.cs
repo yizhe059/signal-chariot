@@ -1,4 +1,9 @@
 using UnityEngine;
+using DG.Tweening;
+
+using Utils;
+using InGame.BattleFields.Enemies;
+using InGame.Cores;
 
 namespace InGame.BattleFields.Bullets
 {
@@ -9,6 +14,7 @@ namespace InGame.BattleFields.Bullets
         Parabola,
         CircleRound,
         Placement,
+        Random,
     }
     public enum DamageType
     {
@@ -18,56 +24,160 @@ namespace InGame.BattleFields.Bullets
     
     public interface IMoveStrategy
     {
-        void Move(Bullet bullet);
+        void Move();
     }
 
     public class LinearMoveStrategy : IMoveStrategy
     {
-        private Vector3 direction;
+        private Bullet m_bullet;
+        private Transform m_bulletTransform;
+        private Vector3 m_direction;
     
-        public LinearMoveStrategy(Vector3 direction)
+        public LinearMoveStrategy(Bullet bullet)
         {
-            this.direction = direction;
+            this.m_bullet = bullet;
+            this.m_bulletTransform = bullet.bulletView.transform;
+            this.SetTarget();
         }
 
-        public void Move(Bullet bullet)
+        private void SetTarget()
         {
-            // bullet.Position += direction * bullet.Speed * Time.deltaTime;
+            Enemy closest = GameManager.Instance.GetEnemySpawnController().
+                            GetClosestEnemy(m_bulletTransform.position);
+            if(closest != null) m_direction = closest.GetView().transform.position;
+            else m_direction = Utilities.RandomPosition();
+
+            m_bullet.tower.towerView.SetTarget(m_direction);
+
+            m_direction = m_direction - m_bulletTransform.position;
+            m_direction.z = Constants.BULLET_DEPTH;
+            m_direction = m_direction.normalized *
+                        Time.deltaTime * m_bullet.speed.value * 
+                        Constants.SPEED_MULTIPLIER;
+        }
+
+        public void Move()
+        {
+            m_bulletTransform.Translate(m_direction, Space.World);
         }
     }
 
     public class FollowMoveStrategy : IMoveStrategy
     {
-        private Transform target;
+        private Bullet m_bullet;
+        private Transform m_bulletTransform;
+        private Transform m_target;
 
-        public FollowMoveStrategy(Transform target)
+        public FollowMoveStrategy(Bullet bullet)
         {
-            this.target = target;
+            this.m_bullet = bullet;
+            this.m_bulletTransform = bullet.bulletView.transform;
+            this.SetTarget();
         }
 
-        public void Move(Bullet bullet)
+        private void SetTarget()
         {
-            // Vector3 direction = (target.position - bullet.Position).normalized;
-            // bullet.Position += direction * bullet.Speed * Time.deltaTime;
+            Enemy closest = GameManager.Instance.GetEnemySpawnController().
+                            GetClosestEnemy(m_bulletTransform.position);
+            if(closest == null){
+                Debug.LogWarning("No Target to Follow!");
+                return;
+            }
+
+            m_target = closest.GetView().transform;
+            m_target.position = new Vector3(
+                m_target.position.x,
+                m_target.position.y,
+                Constants.BULLET_DEPTH
+            );
+            
+            m_bullet.tower.towerView.SetTarget(m_target.position);
+        }
+
+        public void Move()
+        {
+            if(m_target == null) this.SetTarget();
+            if(m_target == null) return;
+            Vector3 direction = m_target.position - m_bulletTransform.position;
+            direction.z = Constants.BULLET_DEPTH;
+            direction = direction.normalized * 
+                       Time.deltaTime * m_bullet.speed.value * 
+                       Constants.SPEED_MULTIPLIER;
+            m_bulletTransform.Translate(direction, Space.World);
         }
     }
 
     public class ParabolaMoveStrategy : IMoveStrategy
     {
-        private Transform target;
-        private AnimationCurve curve;
+        private Bullet m_bullet;
+        private Transform m_bulletTransform;
+        private Vector3 m_target;
+        private float m_distance;
 
-        public ParabolaMoveStrategy(Transform target, AnimationCurve curve)
+        public ParabolaMoveStrategy(Bullet bullet)
         {
-            this.target = target;
-            this.curve = curve;
+            this.m_bullet = bullet;
+            this.m_bulletTransform = bullet.bulletView.transform;
+            this.SetTarget();
         }
 
-        public void Move(Bullet bullet)
+        private void SetTarget()
         {
-            // float t = bullet.TimeAlive / bullet.TotalTime;
-            // Vector3 direction = (target.position - bullet.Position).normalized;
-            // bullet.Position += direction * bullet.Speed * curve.Evaluate(t) * Time.deltaTime;
+            Enemy closest = GameManager.Instance.GetEnemySpawnController().
+                            GetClosestEnemy(m_bulletTransform.position);
+            if(closest != null) m_target = closest.GetView().transform.position;
+            else m_target = Utilities.RandomPosition();
+
+            m_bullet.tower.towerView.SetTarget(m_target);
+
+            m_target.z = Constants.BULLET_DEPTH;
+            this.m_distance = Vector3.Distance(this.m_bulletTransform.position, this.m_target);
+        }
+
+        public void Move()
+        {
+            float currDistance = Vector3.Distance(m_bulletTransform.position, m_target);
+            if(currDistance <= Constants.COLLIDE_OFFSET) return;
+            m_bulletTransform.DOMove(m_target, 
+                m_distance / m_bullet.speed.value / Constants.SPEED_MULTIPLIER).
+                SetEase(Ease.OutQuad);
+        }
+    }
+
+    public class CircleRoundMoveStrategy : IMoveStrategy
+    {
+        public void Move()
+        {
+            // don't move at all
+        }
+    }
+
+    public class PlacementMoveStrategy : IMoveStrategy
+    {
+        public void Move()
+        {
+            
+        }
+    }
+
+    public class RandomMoveStrategy : IMoveStrategy
+    {  
+        private Bullet m_bullet;
+        private Transform m_bulletTransform;
+        private Vector3 m_direction;
+
+        public RandomMoveStrategy(Bullet bullet)
+        {
+            m_bullet = bullet;
+            m_bulletTransform = m_bullet.bulletView.transform;
+            m_direction = (Utilities.RandomPosition() - m_bulletTransform.position).normalized;
+            m_direction *= Time.deltaTime * m_bullet.speed.value * 
+                          Constants.SPEED_MULTIPLIER;
+        }
+
+        public void Move()
+        {
+            m_bulletTransform.Translate(m_direction, Space.World);
         }
     }
 }

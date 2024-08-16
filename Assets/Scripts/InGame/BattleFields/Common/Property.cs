@@ -6,6 +6,7 @@ namespace InGame.BattleFields.Common
     public enum LimitedPropertyType
     {
         Health,
+        Default,
     }
 
     public enum UnlimitedPropertyType
@@ -18,6 +19,7 @@ namespace InGame.BattleFields.Common
         Multiplier,
         Range,
         Interval,
+        Default,
     }
 
     public class UnlimitedProperty
@@ -41,6 +43,12 @@ namespace InGame.BattleFields.Common
         {
             this.value = 0;
             this.type = type;
+        }
+
+        public UnlimitedProperty(float initial)
+        {
+            this.value = initial;
+            this.type = UnlimitedPropertyType.Default;
         }
 
         public UnlimitedProperty(float initial, UnlimitedPropertyType type)
@@ -77,6 +85,13 @@ namespace InGame.BattleFields.Common
             }
         }
 
+        public LimitedProperty(float max)
+        {
+            this.m_max = max;
+            this.m_current = max;
+            this.type = LimitedPropertyType.Default;
+        }
+
         public LimitedProperty(float max, LimitedPropertyType type)
         {
             this.m_max = max;
@@ -84,10 +99,17 @@ namespace InGame.BattleFields.Common
             this.type = type;
         }
 
+        public LimitedProperty(float max, float initial)
+        {
+            this.m_max = max;
+            this.m_current = initial;
+            this.type = LimitedPropertyType.Default;
+        }
+
         public LimitedProperty(float max, float initial, LimitedPropertyType type)
         {
             this.m_max = max;
-            this.current = initial;
+            this.m_current = initial;
             this.type = type;
         }
     }

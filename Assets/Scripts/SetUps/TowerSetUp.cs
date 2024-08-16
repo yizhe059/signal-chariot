@@ -14,7 +14,6 @@ namespace SetUps
 
         #region Damage
         public float seekInterval;
-        public SeekMode seekMode;
         public float shootInterval;
         public int bulletCount;
         public BulletSetUp bulletSetUp;
@@ -29,7 +28,6 @@ namespace SetUps
             bulletCount = other.bulletCount;
             seekInterval = other.seekInterval;
             shootInterval = other.shootInterval;
-            seekMode = other.seekMode;
         }
     }
 }

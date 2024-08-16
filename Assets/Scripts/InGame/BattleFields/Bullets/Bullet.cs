@@ -7,6 +7,8 @@ using Utils;
 using InGame.Cores;
 using Unity.VisualScripting;
 using Utils.Common;
+using System;
+using InGame.BattleFields.Androids;
 
 namespace InGame.BattleFields.Bullets
 {
@@ -14,6 +16,11 @@ namespace InGame.BattleFields.Bullets
     {   
         [Header("View")]
         private BulletView m_bulletView;
+        public BulletView bulletView {get { return m_bulletView;}}
+
+        [Header("Generator")]
+        private Tower m_tower;
+        public Tower tower {get { return m_tower;}}
 
         [Header("Properties")]
         private Sprite m_sprite;
@@ -38,17 +45,30 @@ namespace InGame.BattleFields.Bullets
         public UnlimitedProperty penetrateTimes { get {return m_penetrateTimes;}}
         public UnlimitedProperty splitTimes { get {return m_splitTimes;}}
 
-        public Bullet(BulletSetUp bulletSetUp, float damageMultiplier)
+        public Bullet(BulletSetUp bulletSetUp, Tower tower)
         {
-            UnlimitedProperty dmg = new(bulletSetUp.damage * damageMultiplier, 
+            m_tower = tower;
+            
+            UnlimitedProperty dmg = new(bulletSetUp.damage * tower.damageMultiplier.value, 
                                         UnlimitedPropertyType.Damage);
             UnlimitedProperty spd = new(bulletSetUp.speed, UnlimitedPropertyType.Speed);
+            UnlimitedProperty lft = new(bulletSetUp.lifeTime);
+            UnlimitedProperty rfl = new(bulletSetUp.reflectTimes);
+            UnlimitedProperty pnt = new(bulletSetUp.penetrateTimes);
+            UnlimitedProperty spl = new(bulletSetUp.splitTimes);
 
             m_damage = dmg;
             m_speed = spd;
-            m_sprite = bulletSetUp.sprite;
+            m_lifeTime = lft;
+            m_reflectTimes = rfl;
+            m_penetrateTimes = pnt;
+            m_splitTimes = spl;
 
+            m_sprite = bulletSetUp.sprite;
             CreateView();
+
+            CreateMoveStrategy(bulletSetUp.moveType);
+            CreateDamageStrategy(bulletSetUp.damageType);
         }
 
         private void CreateView()
@@ -63,6 +83,48 @@ namespace InGame.BattleFields.Bullets
 
             m_bulletView = bulletGO.GetComponent<BulletView>();
             m_bulletView.Init(this);
+        }
+
+        private void CreateMoveStrategy(MoveType moveType)
+        {
+            switch (moveType)
+            {
+                case MoveType.Linear:
+                    m_moveStrategy = new LinearMoveStrategy(this);
+                    break;
+                case MoveType.Follow:
+                    m_moveStrategy = new FollowMoveStrategy(this);
+                    break;
+                case MoveType.Parabola:
+                    m_moveStrategy = new ParabolaMoveStrategy(this);
+                    break;
+                case MoveType.CircleRound:
+                    m_moveStrategy = new CircleRoundMoveStrategy();
+                    break;
+                case MoveType.Placement:
+                    m_moveStrategy = new PlacementMoveStrategy();
+                    break;
+                case MoveType.Random:
+                    m_moveStrategy = new RandomMoveStrategy(this);
+                    break;
+                default:
+                    Debug.LogWarning("No matching move type: " + moveType);
+                    break;
+            }
+        }
+
+        private void CreateDamageStrategy(DamageType damageType)
+        {
+            switch(damageType)
+            {
+                case DamageType.Collide:
+                    break;
+                case DamageType.Range:
+                    break;
+                default:
+                    Debug.LogError("No matching damage type: " + damageType);
+                    break;
+            }
         }
 
         public void Die()
