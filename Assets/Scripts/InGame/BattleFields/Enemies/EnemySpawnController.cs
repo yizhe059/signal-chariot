@@ -315,7 +315,7 @@ namespace InGame.BattleFields.Enemies
                 }
             }
             
-            Debug.Log($"{m_timer}, {m_duration}");
+            // Debug.Log($"{m_timer}, {m_duration}");
             if (m_timer >= m_duration && m_numGroupHasToBeat <= 0)
             {
                 m_spawnController.FinishWaveCallBack();
