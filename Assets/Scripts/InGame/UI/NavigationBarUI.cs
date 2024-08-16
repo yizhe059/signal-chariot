@@ -29,7 +29,7 @@ namespace InGame.UI
             m_marchButton = m_root.Q<Button>("march");
 
             m_exitButton.clicked += () => {
-                // Game.Instance.nextState = 
+                GameManager.Instance.ChangeToInitState();
             };
 
             m_boardButton.clicked += () => {
@@ -37,7 +37,7 @@ namespace InGame.UI
             };
 
             m_manufactureButton.clicked += () => {
-
+                // TODO
             };
 
             m_marchButton.clicked += () => {

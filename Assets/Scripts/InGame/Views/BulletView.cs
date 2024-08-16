@@ -2,28 +2,31 @@ using UnityEngine;
 
 using Utils;
 using Utils.Common;
-using InGame.BattleFields.Androids;
-
-using DG.Tweening;
+using InGame.BattleFields.Bullets;
 
 namespace InGame.Views
 {
     public class BulletView : MonoBehaviour, IDamager
     {
         private Bullet m_bullet;
-        private Vector3 m_originPosition;
-        private float m_distance;
+        private CountdownTimer m_timer;
 
         #region LifeCycle
         public void Init(Bullet bullet)
         {
             m_bullet = bullet;
-            m_originPosition = this.transform.position;
-            m_distance = Vector3.Distance(this.transform.position, m_bullet.target);
             SetSprite();
+            SetTimer();
         }
 
-        public void SetSprite()
+        private void SetTimer()
+        {
+            m_timer = new CountdownTimer(m_bullet.lifetime.value); 
+            m_timer.OnTimerComplete.AddListener(m_bullet.Die);
+            m_timer.StartTimer();
+        }
+
+        private void SetSprite()
         {
             Transform model = transform.Find(Constants.MODEL);
             if(model == null)
@@ -43,10 +46,12 @@ namespace InGame.Views
         private void Update()
         {
             Move();
+            m_timer.Update(Time.deltaTime); 
         }
 
         public void Die()
         {
+            m_timer.OnTimerComplete.RemoveListener(m_bullet.Die);
             Destroy(gameObject);
         }
         #endregion
@@ -54,18 +59,7 @@ namespace InGame.Views
         #region Action
         private void Move()
         {
-            if(MoveOutOfRange()) Die();
-
-            float currDistance = Vector3.Distance(this.transform.position, m_bullet.target);
-            if(currDistance <= Constants.COLLIDE_OFFSET) return;
-
-            transform.DOMove(m_bullet.target, m_distance / m_bullet.speed.value / Constants.SPEED_MULTIPLIER)
-                    .SetEase(Ease.OutQuad);
-        }
-
-        private bool MoveOutOfRange()
-        {
-            return Vector3.Distance(this.transform.position, m_originPosition) >= m_bullet.range.value;
+            m_bullet.moveStrategy.Move();
         }
         #endregion
         

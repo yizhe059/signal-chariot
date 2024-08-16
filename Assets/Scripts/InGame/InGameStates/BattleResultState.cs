@@ -36,8 +36,6 @@ namespace InGame.InGameStates
             AndroidStatusUI.Instance.Show();
             NavigationBarUI.Instance.Hide();
             BoardBarUI.Instance.Hide();
-
-            // TODO disable battle field interactions
         }
         
         public override void Exit()
@@ -48,8 +46,6 @@ namespace InGame.InGameStates
             AndroidStatusUI.Instance.Hide();
             NavigationBarUI.Instance.Show();
             BoardBarUI.Instance.Show();
-
-            // TODO enable battle field interactions
         }
 
         public static BattleResultState CreateState(BattleResultType resultType)
