@@ -1697,11 +1697,11 @@ MonoBehaviour:
   range: 1
   buff:
     bouncingBuff: 0
-    splittingBuff: 3
+    splittingBuff: 0
     penetrationBuff: 0
     numBulletFlatBuff: 0
     speedPercentageBuff: 0
-    damagePercentageBuff: 0
+    damagePercentageBuff: 100
     flatDamageBuff: 0
     bulletSizePercentageBuff: 0
     lifeTimeBuff: 0
