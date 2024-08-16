@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using InGame.BattleFields.Enemies;
 using UnityEngine;
 
@@ -31,6 +32,16 @@ namespace SetUps
     {
         
         public int waveID;
+        public List<int> moduleRewards;
+
+        public EnemySpawnWaveBlk CreateCopy()
+        {
+            return new EnemySpawnWaveBlk
+            {
+                waveID = waveID,
+                moduleRewards = new List<int>(moduleRewards)
+            };
+        }
     }
 
     [System.Serializable]
@@ -43,7 +54,9 @@ namespace SetUps
         [Tooltip("结束条件2: 要把这些组里的所有的怪杀掉就可以结束，" +
                  "int是groups的index")] 
         public List<int> groupsMustBeat;
-
+        
+        
+        
         public EnemyPlainWaveBlk CreateCopy()
         {
             var newBlk = this;
@@ -51,6 +64,8 @@ namespace SetUps
             newBlk.groupsMustBeat = new List<int>(this.groupsMustBeat);
             return newBlk;
         }
+        
+        
     }
     
     [System.Serializable]

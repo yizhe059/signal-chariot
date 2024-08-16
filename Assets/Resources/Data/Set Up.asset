@@ -56,25 +56,7 @@ MonoBehaviour:
       y: 1
     - x: 4
       y: 1
-    modules:
-    - pos:
-        x: 4
-        y: 4
-      moduleID: 0
-      moduleName: "\u4FE1\u53F7\u6E90"
-      orientation: 3
-    - pos:
-        x: 2
-        y: 2
-      moduleID: 1
-      moduleName: "\u589E\u5E45\u5668"
-      orientation: 0
-    - pos:
-        x: 2
-        y: 4
-      moduleID: 2
-      moduleName: "\u8F6C\u5411\u5668"
-      orientation: 2
+    modules: []
     slotPrefab: {fileID: 6622818502655049371, guid: 80c85fcaea6536748bb67591b4fc60b2, type: 3}
     signalPrefab: {fileID: 7786143621109699157, guid: e7f648ad21042b64ca742ba22438c585, type: 3}
     horizontalBorderPrefab: {fileID: 5301742505494614779, guid: bcf6e11ec71a8824abb63c5b40fe37fc, type: 3}
@@ -89,80 +71,20 @@ MonoBehaviour:
     - pos:
         x: 0
         y: 7
+      moduleID: 0
+      moduleName: "\u4FE1\u53F7\u6E90"
+      orientation: 0
+    - pos:
+        x: 3
+        y: 7
       moduleID: 3
       moduleName: "\u673A\u70AE"
       orientation: 0
     - pos:
-        x: 3
-        y: 7
+        x: 0
+        y: 5
       moduleID: 4
       moduleName: "\u52A0\u539A\u62A4\u7532"
-      orientation: 0
-    - pos:
-        x: 6
-        y: 7
-      moduleID: 5
-      moduleName: "\u5F39\u529B\u7EA4\u7EF4"
-      orientation: 0
-    - pos:
-        x: 6
-        y: 5
-      moduleID: 6
-      moduleName: "\u78B3\u5143\u7D20"
-      orientation: 0
-    - pos:
-        x: 4
-        y: 5
-      moduleID: 7
-      moduleName: "\u5206\u88C2\u67AA\u53E3"
-      orientation: 0
-    - pos:
-        x: 2
-        y: 5
-      moduleID: 8
-      moduleName: "\u94C5\u5143\u7D20"
-      orientation: 0
-    - pos:
-        x: 0
-        y: 5
-      moduleID: 9
-      moduleName: "\u53CC\u5411\u5206\u6D41\u5668"
-      orientation: 0
-    - pos:
-        x: 0
-        y: 3
-      moduleID: 10
-      moduleName: "\u7535\u5BB9\u5668"
-      orientation: 0
-    - pos:
-        x: 0
-        y: 2
-      moduleID: 2
-      moduleName: "\u8F6C\u5411\u5668"
-      orientation: 0
-    - pos:
-        x: 1
-        y: 2
-      moduleID: 2
-      moduleName: "\u8F6C\u5411\u5668"
-      orientation: 0
-    - pos:
-        x: 2
-        y: 2
-      moduleID: 2
-      moduleName: "\u8F6C\u5411\u5668"
-      orientation: 0
-    - pos:
-        x: 3
-        y: 2
-      moduleID: 9
-      moduleName: "\u53CC\u5411\u5206\u6D41\u5668"
-      orientation: 0
-    - pos:
-        x: 4
-        y: 2
-      moduleID: 10
-      moduleName: "\u7535\u5BB9\u5668"
       orientation: 0
     slotPrefab: {fileID: 6622818502655049371, guid: 80c85fcaea6536748bb67591b4fc60b2, type: 3}
     signalPrefab: {fileID: 7786143621109699157, guid: e7f648ad21042b64ca742ba22438c585, type: 3}
@@ -491,8 +413,11 @@ MonoBehaviour:
     enemySpawnLevels:
     - waves:
       - waveID: 0
+        moduleRewards: 0600000004000000
       - waveID: 1
+        moduleRewards: 0200000007000000
       - waveID: 2
+        moduleRewards: 08000000
   references:
     version: 2
     RefIds:

@@ -22,11 +22,11 @@ namespace InGame.BattleFields.Enemies
         private EnemySpawnLib m_spawnLib;
         private EnemyLib m_enemyLib;
         private int m_currentWaveIdx;
-        private List<int> m_waves = new List<int>();
+        private List<EnemySpawnWaveBlk> m_waves = new List<EnemySpawnWaveBlk>();
         private EnemyWaveSpawnController m_currentWaveController;
         private bool m_isOn = false;
 
-        private readonly UnityEvent m_waveFinishCallBack = new();
+        private readonly UnityEvent<bool, List<int>> m_waveFinishCallBack = new();
         private readonly List<EnemyBlk> m_enemies = new List<EnemyBlk>();
 
         public EnemySpawnController(EnemySpawnLib spawnLib, EnemyLib enemyLib)
@@ -43,10 +43,11 @@ namespace InGame.BattleFields.Enemies
                 return;
             }
             
-            m_waves = new List<int>();
+            m_waves.Clear();
             foreach (var blk in setUp.waves)
             {
-                m_waves.Add(blk.waveID);
+                
+                m_waves.Add(blk.CreateCopy());
             }
 
             m_currentWaveIdx = -1;
@@ -62,13 +63,12 @@ namespace InGame.BattleFields.Enemies
             if (m_currentWaveIdx >= m_waves.Count) return false;
 
             m_currentWaveController = new EnemyWaveSpawnController(m_spawnLib, this);
-            m_currentWaveController.Init(m_waves[m_currentWaveIdx]);
+            m_currentWaveController.Init(m_waves[m_currentWaveIdx].waveID);
             return true;
         }
 
-        public bool IsLastWave()
+        private bool IsLastWave()
         {
-            Debug.Log($"{m_currentWaveIdx}, {m_waves.Count}");
             return m_currentWaveIdx == m_waves.Count - 1;
         }
 
@@ -92,13 +92,13 @@ namespace InGame.BattleFields.Enemies
             }
         }
 
-        public void RegisterWaveFinishCallBack(UnityAction act)
+        public void RegisterWaveFinishCallBack(UnityAction<bool, List<int>> act)
         {
             if (act == null) return;
             m_waveFinishCallBack.AddListener(act);
         }
 
-        public void UnregisterWaveFinishCallBack(UnityAction act)
+        public void UnregisterWaveFinishCallBack(UnityAction<bool, List<int>> act)
         {
             if (act == null) return;
             m_waveFinishCallBack.RemoveListener(act);
@@ -118,7 +118,7 @@ namespace InGame.BattleFields.Enemies
         public void FinishWaveCallBack()
         {
             Debug.Log("Wave Finished");
-            m_waveFinishCallBack.Invoke();
+            m_waveFinishCallBack.Invoke(IsLastWave(), new List<int>(m_waves[m_currentWaveIdx].moduleRewards));
         }
         
         //To Do: Maybe have another enmymanager that respond for enemy movement
@@ -247,6 +247,7 @@ namespace InGame.BattleFields.Enemies
         private float m_timer;
         private bool m_isOn;
         private int m_numGroupHasToBeat;
+        
 
         public float duration => m_duration;
         public float timer => m_timer;
@@ -315,7 +316,6 @@ namespace InGame.BattleFields.Enemies
                 }
             }
             
-            // Debug.Log($"{m_timer}, {m_duration}");
             if (m_timer >= m_duration && m_numGroupHasToBeat <= 0)
             {
                 m_spawnController.FinishWaveCallBack();
