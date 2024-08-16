@@ -317,7 +317,7 @@ MonoBehaviour:
     damagePercentageBuff: 0
     flatDamageBuff: 0
     bulletSizePercentageBuff: 0
-    lifeTimeBuff: 0
+    lifeTimePercentageBuff: 0
 --- !u!1001 &535214244
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -528,7 +528,7 @@ MonoBehaviour:
     damagePercentageBuff: 0
     flatDamageBuff: 0
     bulletSizePercentageBuff: 100
-    lifeTimeBuff: 10
+    lifeTimePercentageBuff: 50
 --- !u!1 &619894194 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9075689799680712317, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
@@ -1454,7 +1454,7 @@ MonoBehaviour:
     damagePercentageBuff: -50
     flatDamageBuff: 0
     bulletSizePercentageBuff: 0
-    lifeTimeBuff: 0
+    lifeTimePercentageBuff: 0
 --- !u!1 &1734676024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1710,7 +1710,7 @@ MonoBehaviour:
     damagePercentageBuff: 100
     flatDamageBuff: 0
     bulletSizePercentageBuff: 0
-    lifeTimeBuff: 0
+    lifeTimePercentageBuff: 0
 --- !u!1001 &1911935689
 PrefabInstance:
   m_ObjectHideFlags: 0

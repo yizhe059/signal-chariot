@@ -104,17 +104,19 @@ namespace InGame.BattleFields.Androids
             bulletSetUp.bouncingTimes += buff.bouncingBuff;
             bulletSetUp.penetrateTimes += buff.penetrationBuff;
             bulletSetUp.splitTimes += buff.splittingBuff;
-            bulletSetUp.lifeTime += buff.lifeTimeBuff;
 
-            bulletSetUp.speed *= 1 + (float)buff.speedPercentageBuff / 100f;
+            bulletSetUp.lifeTime *= 1 + (float)buff.lifeTimePercentageBuff/100f;
+            bulletSetUp.lifeTime = Mathf.Max(0.001f, bulletSetUp.lifeTime);
+
+            bulletSetUp.speed *= 1 + (float)buff.speedPercentageBuff/100f;
             bulletSetUp.speed = Mathf.Max(0.001f, bulletSetUp.speed);
 
             bulletSetUp.damage *= m_damageMultiplier.value;
-            bulletSetUp.damage *= 1 + (float)buff.damagePercentageBuff / 100f;
+            bulletSetUp.damage *= 1 + (float)buff.damagePercentageBuff/100f;
             bulletSetUp.damage += buff.flatDamageBuff;
             bulletSetUp.damage = Mathf.Max(0.001f, bulletSetUp.damage);
 
-            bulletSetUp.size  *= 1 + (float)buff.bulletSizePercentageBuff / 100f;
+            bulletSetUp.size  *= 1 + (float)buff.bulletSizePercentageBuff/100f;
             bulletSetUp.size = Mathf.Max(0.001f, bulletSetUp.size);
 
             float shootCount = m_shootCount.value + buff.numShotsFlatBuff;
