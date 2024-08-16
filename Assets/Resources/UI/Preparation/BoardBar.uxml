@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="panel" style="flex-grow: 1; flex-direction: column; max-height: 20%; -unity-font-style: bold; font-size: 20px; top: 5%; color: rgb(255, 255, 255); max-width: 20%;">
+        <ui:VisualElement name="buttons" style="flex-grow: 1; flex-direction: row; max-height: 30%;">
+            <ui:Button text="Test Signal" parse-escape-sequences="true" display-tooltip-when-elided="true" name="test" />
+            <ui:Button text="Add Slot" parse-escape-sequences="true" display-tooltip-when-elided="true" name="add" />
+        </ui:VisualElement>
+        <ui:VisualElement name="tutorials" style="flex-grow: 1; max-height: 70%; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
+            <ui:Label tabindex="-1" text="Select: Mouse [Left Click]" parse-escape-sequences="true" display-tooltip-when-elided="true" name="select" />
+            <ui:Label tabindex="-1" text="Move: Mouse [Slide]" parse-escape-sequences="true" display-tooltip-when-elided="true" name="move" />
+            <ui:Label tabindex="-1" text="Rotate: Keyboard [R]" parse-escape-sequences="true" display-tooltip-when-elided="true" name="rotate" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
