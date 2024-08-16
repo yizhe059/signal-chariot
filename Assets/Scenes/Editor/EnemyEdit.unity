@@ -363,17 +363,25 @@ MonoBehaviour:
     groups:
     - range:
         start: 0
-        end: 30
+        end: 45
       spawnGroupID: 0
     - range:
         start: 0
-        end: 30
+        end: 45
       spawnGroupID: 1
     - range:
         start: 0
-        end: 30
+        end: 45
       spawnGroupID: 1
-    duration: 30
+    - range:
+        start: 30
+        end: 45
+      spawnGroupID: 0
+    - range:
+        start: 30
+        end: 45
+      spawnGroupID: 1
+    duration: 45
     groupsMustBeat: 
 --- !u!1 &846067235
 GameObject:
