@@ -4,6 +4,7 @@ namespace InGame.Effects.EffectElement
 {
     public class EnergyAmplifyEffect: Effect
     {
+        protected override bool canEffectByTest => true;
         public int amplifiedAmount;
         
         public override void OnTrigger(EffectBlackBoard blackBoard)
