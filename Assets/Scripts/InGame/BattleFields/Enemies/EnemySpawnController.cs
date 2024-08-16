@@ -66,6 +66,12 @@ namespace InGame.BattleFields.Enemies
             return true;
         }
 
+        public bool IsLastWave()
+        {
+            Debug.Log($"{m_currentWaveIdx}, {m_waves.Count}");
+            return m_currentWaveIdx == m_waves.Count - 1;
+        }
+
         public void Start()
         {
             m_isOn = true;
@@ -308,7 +314,8 @@ namespace InGame.BattleFields.Enemies
                     enemyGroup.controller?.Stop();
                 }
             }
-
+            
+            Debug.Log($"{m_timer}, {m_duration}");
             if (m_timer >= m_duration && m_numGroupHasToBeat <= 0)
             {
                 m_spawnController.FinishWaveCallBack();

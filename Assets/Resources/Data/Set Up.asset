@@ -390,7 +390,7 @@ MonoBehaviour:
     enemySpawnGroups:
     - enemiesPool:
       - enemyID: 0
-        enemyName: Invalid ID
+        enemyName: "\u767D\u8840\u7403"
       eachSpawnCount: 4
       spawnInterval: 5
       minEnemies: 1
@@ -398,7 +398,7 @@ MonoBehaviour:
       locationSpawnLogic: 0
     - enemiesPool:
       - enemyID: 1
-        enemyName: Invalid ID
+        enemyName: "\u767D\u8840\u7403\u9886\u961F"
       eachSpawnCount: 1
       spawnInterval: 5
       minEnemies: 1
@@ -416,10 +416,21 @@ MonoBehaviour:
         spawnGroupID: 1
       duration: 60
       groupsMustBeat: 
+    - groups:
+      - range:
+          start: 0
+          end: 60
+        spawnGroupID: 0
+      - range:
+          start: 30
+          end: 60
+        spawnGroupID: 1
+      duration: 30
+      groupsMustBeat: 
     enemySpawnLevels:
     - waves:
       - waveID: 0
-      - waveID: 0
+      - waveID: 1
   references:
     version: 2
     RefIds:

@@ -5,6 +5,7 @@ using InGame.UI;
 using InGame.Views;
 using InGame.BattleFields.Androids;
 using InGame.BattleFields.Enemies;
+using Utils.Common;
 
 namespace InGame.InGameStates
 {
@@ -86,7 +87,15 @@ namespace InGame.InGameStates
 
         private void OnWaveFinished()
         {
-            GameManager.Instance.ChangeToBattleResultState(BattleResultType.WaveWin);
+            if (GameManager.Instance.GetEnemySpawnController().IsLastWave())
+            {
+                GameManager.Instance.ChangeToBattleResultState(BattleResultType.BattleWin);
+            }
+            else
+            {
+                GameManager.Instance.ChangeToBattleResultState(BattleResultType.WaveWin);
+            }
+            
         }
 
         public static BattleState CreateState(Android android, AndroidView androidView, EnemySpawnController enemySpawnController)
