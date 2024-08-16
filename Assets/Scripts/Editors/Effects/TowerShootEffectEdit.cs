@@ -1,5 +1,5 @@
 ﻿using InGame.Effects;
-using InGame.Effects.EffectElement;
+using TowerShootEffect = InGame.Effects.EffectElement.TowerShootEffect;
 
 namespace Editors.Effects
 {
