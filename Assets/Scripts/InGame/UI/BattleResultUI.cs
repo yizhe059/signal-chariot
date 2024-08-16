@@ -38,7 +38,7 @@ namespace InGame.UI
 
             battleWinContinue.clicked += () => 
             {
-                GameManager.Instance.ChangeToBoardWaitingState(); // TODO: Go to next level
+                GameManager.Instance.ChangeToInitState(); // TODO: Go to next level
             };
 
             failContinue.clicked += () => 

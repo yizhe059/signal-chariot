@@ -90,37 +90,37 @@ MonoBehaviour:
         x: 6
         y: 7
       moduleID: 5
-      moduleName: Module 1
+      moduleName: "\u5F39\u529B\u7EA4\u7EF4"
       orientation: 0
     - pos:
         x: 6
         y: 5
       moduleID: 6
-      moduleName: Module 2
+      moduleName: "\u78B3\u5143\u7D20"
       orientation: 0
     - pos:
         x: 4
         y: 5
       moduleID: 7
-      moduleName: Invalid ID
+      moduleName: "\u5206\u88C2\u67AA\u53E3"
       orientation: 0
     - pos:
         x: 2
         y: 5
       moduleID: 8
-      moduleName: Invalid ID
+      moduleName: "\u94C5\u5143\u7D20"
       orientation: 0
     - pos:
         x: 0
         y: 5
       moduleID: 9
-      moduleName: Invalid ID
+      moduleName: "\u53CC\u5411\u5206\u6D41\u5668"
       orientation: 0
     - pos:
         x: 0
         y: 3
       moduleID: 10
-      moduleName: Invalid ID
+      moduleName: "\u7535\u5BB9\u5668"
       orientation: 0
     slotPrefab: {fileID: 6622818502655049371, guid: 80c85fcaea6536748bb67591b4fc60b2, type: 3}
     signalPrefab: {fileID: 7786143621109699157, guid: e7f648ad21042b64ca742ba22438c585, type: 3}
