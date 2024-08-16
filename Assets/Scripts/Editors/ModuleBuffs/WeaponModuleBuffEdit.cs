@@ -1,4 +1,5 @@
 ﻿using InGame.Boards.Modules.ModuleBuffs;
+using UnityEngine.Serialization;
 
 namespace Editors.ModuleBuffs
 {
@@ -7,8 +8,8 @@ namespace Editors.ModuleBuffs
         public int bouncingBuff = 0;
         public int splittingBuff = 0;
         public int penetrationBuff = 0;
-        public int numBulletFlatBuff = 0;
-
+        public int numShotsFlatBuff = 0;
+        public int numBulletsPerShotFlatBuff = 0;
         public int speedPercentageBuff = 0;
         public int damagePercentageBuff = 0;
         public int flatDamageBuff = 0;
@@ -17,7 +18,7 @@ namespace Editors.ModuleBuffs
         
         public override ModuleBuff CreateBuff()
         {
-            return WeaponBuff.CreateBuff(bouncingBuff, splittingBuff, penetrationBuff, numBulletFlatBuff,
+            return WeaponBuff.CreateBuff(bouncingBuff, splittingBuff, penetrationBuff, numShotsFlatBuff, numBulletsPerShotFlatBuff,
                 speedPercentageBuff, damagePercentageBuff, flatDamageBuff, bulletSizePercentageBuff, lifeTimeBuff);
         }
     }
