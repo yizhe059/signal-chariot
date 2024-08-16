@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -180,6 +180,13 @@ namespace InGame.Cores
         {
             WorldState.instance.nextState = BattleResultState.CreateState(resultType);
         }
+
+        public void ChangeToRewardState(bool isLastWave, List<int> rewards)
+        {
+            WorldState.instance.nextState =
+                RewardState.CreateState(isLastWave, rewards, GetGeneralBoard(), GetModuleLib());
+        }
+            
 
         public void ChangeToNullState()
         {

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 using InGame.Cores;
@@ -85,18 +86,12 @@ namespace InGame.InGameStates
             m_androidView.SetMoveDirection(inputDirection);
         }
 
-        private void OnWaveFinished()
+        private void OnWaveFinished(bool isLastWave, List<int> moduleRewards)
         {
-            if (GameManager.Instance.GetEnemySpawnController().IsLastWave())
-            {
-                GameManager.Instance.ChangeToBattleResultState(BattleResultType.BattleWin);
-            }
-            else
-            {
-                GameManager.Instance.ChangeToBattleResultState(BattleResultType.WaveWin);
-            }
+            GameManager.Instance.ChangeToRewardState(isLastWave, moduleRewards);
             
         }
+        
 
         public static BattleState CreateState(Android android, AndroidView androidView, EnemySpawnController enemySpawnController)
         {

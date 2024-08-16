@@ -168,8 +168,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - waveID: 0
+    moduleRewards:
+    - moduleID: 6
+      moduleName: "\u78B3\u5143\u7D20"
+    - moduleID: 4
+      moduleName: "\u52A0\u539A\u62A4\u7532"
   - waveID: 1
+    moduleRewards:
+    - moduleID: 2
+      moduleName: "\u8F6C\u5411\u5668"
+    - moduleID: 7
+      moduleName: "\u5206\u88C2\u67AA\u53E3"
   - waveID: 2
+    moduleRewards:
+    - moduleID: 8
+      moduleName: "\u94C5\u5143\u7D20"
 --- !u!1 &325115585
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,6 +396,7 @@ MonoBehaviour:
       spawnGroupID: 1
     duration: 45
     groupsMustBeat: 
+    moduleRewards: 
 --- !u!1 &846067235
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,6 +498,7 @@ MonoBehaviour:
       spawnGroupID: 0
     duration: 30
     groupsMustBeat: 
+    moduleRewards: 
 --- !u!1 &1029815682
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,6 +785,7 @@ MonoBehaviour:
       spawnGroupID: 1
     duration: 30
     groupsMustBeat: 
+    moduleRewards: 
 --- !u!1001 &925897920459497451
 PrefabInstance:
   m_ObjectHideFlags: 0

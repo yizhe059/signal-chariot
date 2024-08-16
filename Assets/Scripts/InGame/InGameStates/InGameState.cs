@@ -13,6 +13,7 @@ namespace InGame.InGameStates
         // Battle Sub-states
         BattleState,
         BattleResultState,
+        RewardState
     }
     public abstract class InGameState : IState<InGameState>
     {

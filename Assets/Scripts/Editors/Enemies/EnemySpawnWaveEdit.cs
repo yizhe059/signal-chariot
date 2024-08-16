@@ -6,10 +6,15 @@ using UnityEngine.Serialization;
 
 namespace Editors.Enemies
 {
+
+    
     public class EnemySpawnWaveEdit: MonoBehaviour
     {
-
+        
+        
         public EnemyPlainWaveBlk wave;
+        
+        
         public void OnValidate()
         {
             if (wave.groupsMustBeat == null || wave.groups == null) return;
@@ -23,12 +28,13 @@ namespace Editors.Enemies
                         wave.groupsMustBeat[i] = wave.groups.Count - 1;
                 }
             }
+
+            
             
 
         }
         public EnemyPlainWaveBlk CreateBlk()
         {
-            
 
             return wave.CreateCopy();
         }
