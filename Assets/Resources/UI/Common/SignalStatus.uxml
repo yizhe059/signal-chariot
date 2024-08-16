@@ -1,7 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="panel" style="flex-grow: 1; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; max-height: 15%; max-width: 20%; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; color: rgb(255, 255, 255); top: 65%;">
-        <ui:Label tabindex="-1" text="Signal 1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="signal" style="-unity-font-style: bold; font-size: 25px;" />
-        <ui:Label tabindex="-1" text="Energy: 2" parse-escape-sequences="true" display-tooltip-when-elided="true" name="energy" style="font-size: 20px;" />
-        <ui:Label tabindex="-1" text="Frequency: 1s/2" parse-escape-sequences="true" display-tooltip-when-elided="true" name="frequency" style="font-size: 20px;" />
-    </ui:VisualElement>
-</ui:UXML>
