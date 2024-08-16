@@ -2,6 +2,7 @@
 using System.Text;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.PlayerLoop;
 
 namespace InGame.Cores
 {
@@ -25,6 +26,12 @@ namespace InGame.Cores
         public bool canTriggerInTest = false;
     }
 
+    public class UpdateEffect
+    {
+        public bool canTriggerInTest = false;
+        public UnityAction<float> onUpdate;
+    }
+
 
     public class TimeEffectManager
     {
@@ -37,6 +44,7 @@ namespace InGame.Cores
         private int m_triggerInterval;
 
         private readonly List<TimeEffect> m_effects = new List<TimeEffect>();
+        private readonly List<UpdateEffect> m_updateEffects = new();
 
         private bool m_isOn = false;
         private bool m_isTest = false;
@@ -75,7 +83,15 @@ namespace InGame.Cores
         
         public void Update(float deltaTime, float newTime)
         {
+            
             if (!m_isOn) return;
+            
+            foreach (var updateEffect in m_updateEffects)
+            {
+                if(updateEffect is not { canTriggerInTest: true }) continue;
+
+                updateEffect?.onUpdate(deltaTime);
+            }
             
             for (int i = m_effects.Count - 1; i >= 0; i --)
             {
@@ -105,6 +121,23 @@ namespace InGame.Cores
             
         }
 
+        public UpdateEffect AddUpdateEffect(UnityAction<float> action, bool canTriggerInTest = false)
+        {
+            var newEffect = new UpdateEffect
+            {
+                canTriggerInTest = canTriggerInTest,
+                onUpdate = action
+            };
+            
+            m_updateEffects.Add(newEffect);
+            return newEffect;
+        }
+
+        public void RemoveUpdateEffect(UpdateEffect effect)
+        {
+            m_updateEffects.Remove(effect);
+        }
+        
         public TimeEffect AddTimeEffect(int usage, float triggerInterval, UnityAction<float> action, UnityAction finishAction)
         {
             Debug.Assert(triggerInterval > 0, $"Invalid Trigger Interval{triggerInterval}");

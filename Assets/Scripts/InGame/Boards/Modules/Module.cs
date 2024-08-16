@@ -1,9 +1,13 @@
 ﻿using System.Collections.Generic;
+using InGame.Boards.Modules.ModuleBuffs;
 using InGame.Effects;
 using InGame.Effects.PlacingEffectRequirements;
+using InGame.Effects.TriggerRequirements;
 using InGame.Views;
+using MainMenu;
 using SetUps;
 using UnityEngine;
+using Utils.Common;
 
 namespace InGame.Boards.Modules
 {
@@ -49,6 +53,16 @@ namespace InGame.Boards.Modules
         {
             module.TriggerSignalEffect(bb);
         }
+
+        public void AddBuff(ModuleBuff buff)
+        {
+            m_module.AddBuff(buff);
+        }
+
+        public void RemoveBuff(ModuleBuff buff)
+        {
+            m_module.RemoveBuff(buff);
+        }
     }
 
     public class Module
@@ -66,6 +80,7 @@ namespace InGame.Boards.Modules
         private Orientation m_orientation = Orientation.Up;
         private ModuleView m_prefab;
         private ModuleView m_moduleView;
+        private BoardPosition m_pos = BoardPosition.invalidPosition;
         
         #region Shape
         private ModulePosition m_pivot;
@@ -82,8 +97,17 @@ namespace InGame.Boards.Modules
         private SignalEffects m_signalEffects;
 
         private PlacingEffects m_placingEffects;
+
+        private CustomEffect m_customEffect;
         #endregion
         
+        #region Buffs
+
+        private ModuleBuffType m_buffMasks;
+
+        private Dictionary<ModuleBuffType, ModuleBuff> m_buffs =
+            new Dictionary<ModuleBuffType, ModuleBuff>();
+        #endregion
         public ModuleView moduleView => m_moduleView;
         public Orientation orientation => m_orientation;
 
@@ -196,6 +220,15 @@ namespace InGame.Boards.Modules
         #endregion
         
         #region BoardPosition
+
+        public void SetPivotBoardPosition(BoardPosition pos)
+        {
+            m_pos = pos;
+        }
+
+        public BoardPosition GetPivotBoardPosition() => m_pos;
+        
+        
         public BoardPosition GetBoardPosition(ModuleSlot slot, BoardPosition pivotPos)
         {
             var offset = GetOffset(slot.position.x, slot.position.y);
@@ -215,6 +248,8 @@ namespace InGame.Boards.Modules
                 y = slotBoardPosition.y - offset.y
             };
         }
+        
+        
         public List<BoardPosition> GetBoardPositionList(BoardPosition pivotPos)
         {
             var list = new List<BoardPosition>();
@@ -237,6 +272,18 @@ namespace InGame.Boards.Modules
             }
 
             return list;
+        }
+
+        public List<BoardPosition> GetBoardPositionList()
+        {
+            if (m_pos != BoardPosition.invalidPosition)
+            {
+                return GetBoardPositionList(m_pos);
+            }
+            else
+            {
+                return new List<BoardPosition>();
+            }
         }
         #endregion
         
@@ -261,19 +308,108 @@ namespace InGame.Boards.Modules
 
         public void TriggerSignalEffect(EffectBlackBoard bb)
         {
+
             m_signalEffects.Trigger(bb);
         }
 
         public void TriggerPlacingEffect(EffectBlackBoard bb)
         {
+        
             m_placingEffects.Trigger(bb);
         }
 
         public void UnTriggerPlacingEffect(EffectBlackBoard bb)
         {
+
             m_placingEffects.UnTrigger(bb);
         }
+
+        public void TriggerCustomEffect(RequirementBlackBoard bb)
+        {
+            bb.buffs = new List<ModuleBuff>();
+            foreach (var effectPair in m_buffs)
+            {
+                bb.buffs.Add(effectPair.Value);
+            }
+            
+            m_customEffect?.Register(bb);
+        }
+
+        public void UnTriggerCustomEffect(RequirementBlackBoard bb)
+        {
+            bb.buffs = new List<ModuleBuff>();
+            foreach (var effectPair in m_buffs)
+            {
+                bb.buffs.Add(effectPair.Value);
+            }
+            
+            m_customEffect?.Unregister(bb);
+        }
+        #endregion
         
+        #region BuffFunction
+
+        private void GenerateBuffDictionary()
+        {
+            m_buffs.Clear();
+            var list = ModuleBuff.GetBuffTypeList(m_buffMasks);
+
+            foreach (var type in list)
+            {
+                m_buffs.Add(type, ModuleBuff.CreateEmptyBuff(type));
+            }
+        }
+
+        public void AddBuff(ModuleBuff buff)
+        {
+            if (buff == null)
+            {
+                Debug.LogError("Null");
+                return;
+            }
+
+            if (!m_buffs.ContainsKey(buff.type))
+            {
+                Debug.Log($"Filter {buff.type} on {name}");
+                return;
+            }
+            
+            m_buffs[buff.type].Add(buff);
+            
+            m_signalEffects.AddBuff(buff);
+            m_placingEffects.AddBuff(buff);
+            m_customEffect?.AddBuff(buff);
+        }
+
+        public void RemoveBuff(ModuleBuff buff)
+        {
+            if (buff == null)
+            {
+                Debug.LogError("Null");
+                return;
+            }
+
+            if (!m_buffs.ContainsKey(buff.type))
+            {
+                Debug.Log($"Filter {buff.type} on {name}");
+                return;
+            }
+            
+            m_buffs[buff.type].Minus(buff);
+            
+            m_signalEffects.RemoveBuff(buff);
+            m_placingEffects.RemoveBuff(buff);
+            m_customEffect?.RemoveBuff(buff);
+        }
+        
+        public void ClearBuffs(){
+            m_signalEffects.ClearBuffs();
+            m_placingEffects.ClearBuffs();
+            m_customEffect?.ClearBuffs();
+            
+        }
+
+
         #endregion
         
         #region static method
@@ -345,18 +481,35 @@ namespace InGame.Boards.Modules
             {
                 placingReqs.Add(req.CreateCopy());
             }
+
+            CustomEffect customEffect = null;
+            if (setUp.hasCustomEffect)
+            {
+                var customEffectLists = new List<Effect>();
+                var triggerRequirement = setUp.triggerRequirement?.CreateCopy();
+
+                foreach (var effect in setUp.customEffects)
+                {
+                    customEffectLists.Add(effect.CreateCopy());
+                }
+                
+                customEffect = CustomEffect.CreateCustomEffect(triggerRequirement, customEffectLists);
+            }
+            
+            
             var newModule = new Module
             {
                 name = setUp.name,
                 desc = setUp.desc,
+                m_buffMasks = setUp.buffMask,
                 m_prefab = setUp.prefab,
-                m_signalEffects = SignalEffects.CreateSignalEffects(signalEffects, setUp.maxUses, setUp.energyConsumption, setUp.coolDown),
-                m_placingEffects = PlacingEffects.CreatePlacingEffects(placingEffects, placingReqs)
-                
+                m_signalEffects = SignalEffects.CreateSignalEffects(signalEffects, setUp.maxUses, setUp.consumptionMethod, setUp.energyConsumption, setUp.coolDown),
+                m_placingEffects = PlacingEffects.CreatePlacingEffects(placingEffects, placingReqs),
+                m_customEffect = customEffect
             };
             
+            
             newModule.CreateSlotMap(setUp.otherPositions);
-
             return newModule;
         }
 
@@ -373,13 +526,16 @@ namespace InGame.Boards.Modules
                 m_slotMap = other.m_slotMap,
                 name = other.name,
                 desc = other.desc,
+                m_buffMasks = other.m_buffMasks,
                 m_signalEffects = SignalEffects.CreateSignalEffects(other.m_signalEffects),
-                m_placingEffects = PlacingEffects.CreatePlacingEffects(other.m_placingEffects)
+                m_placingEffects = PlacingEffects.CreatePlacingEffects(other.m_placingEffects),
+                m_customEffect = CustomEffect.CreateCustomEffect(other.m_customEffect)
             };
             newModule.m_signalEffects.SetModule(newModule);
             newModule.m_placingEffects.SetModule(newModule);
+            newModule.m_customEffect?.SetModule(newModule);
             
-
+            newModule.GenerateBuffDictionary();
             return newModule;
         }
 
@@ -394,6 +550,18 @@ namespace InGame.Boards.Modules
         }
         
         #endregion
+
+        public static BoardPosition OrientationToBoardPositionOffset(Orientation orientation)
+        {
+            return orientation switch
+            {
+                Orientation.Up => new BoardPosition(0, 1),
+                Orientation.Down => new BoardPosition(0, -1),
+                Orientation.Right => new BoardPosition(1, 0),
+                Orientation.Left => new BoardPosition(-1, 0),
+                _ => new BoardPosition(0, 0) 
+            };
+        }
         public override string ToString()
         {
             string result = "";

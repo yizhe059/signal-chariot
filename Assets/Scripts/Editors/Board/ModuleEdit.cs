@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using Editors.Effects;
 using InGame.Boards.Modules;
+using InGame.Boards.Modules.ModuleBuffs;
 using InGame.Views;
 using SetUps;
 using UnityEngine;
-using UnityEngine.Experimental.AI;
 
 namespace Editors.Board
 {
@@ -14,6 +14,7 @@ namespace Editors.Board
         public string desc = "";
         public ModuleView prefab;
         public List<ModulePosition> otherPositions;
+        public ModuleBuffType buffMask;
         
         private const float CellSize = 1f;
 
@@ -47,19 +48,28 @@ namespace Editors.Board
         {
             var signalEffectEdits = GetComponentInChildren<SignalEffectEdit>();
             var placingEffectEdits = GetComponentInChildren<PlacingEffectEdit>();
+            var customEffectEdits = GetComponentInChildren<CustomEffectEdit>();
+            bool hasCustomEffect = 
+                customEffectEdits.CreateCustomEffect(out var req, out var customEffects);
             
             return new ModuleSetUp
             {
                 name = name,
                 desc = desc,
                 otherPositions = new List<ModulePosition>(otherPositions),
+                buffMask = buffMask,
                 prefab = prefab,
                 signalEffects = signalEffectEdits.CreateEffects(),
                 coolDown = signalEffectEdits.coolDown,
+                consumptionMethod = signalEffectEdits.consumptionMethod,
                 energyConsumption = signalEffectEdits.energyConsumption,
                 maxUses = signalEffectEdits.maxUses,
                 placingEffects = placingEffectEdits.CreateEffects(),
-                requirements = placingEffectEdits.CreateRequirements()
+                requirements = placingEffectEdits.CreateRequirements(),
+                
+                hasCustomEffect = hasCustomEffect,
+                triggerRequirement = req,
+                customEffects = customEffects
             };
         }
     }

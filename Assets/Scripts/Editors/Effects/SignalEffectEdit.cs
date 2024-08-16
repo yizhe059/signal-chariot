@@ -7,6 +7,7 @@ namespace Editors.Effects
     public class SignalEffectEdit: MonoBehaviour
     {
         public int maxUses;
+        public SignalEffects.EnergyConsumptionMethod consumptionMethod = SignalEffects.EnergyConsumptionMethod.Fixed;
         public int energyConsumption;
         public float coolDown;
         

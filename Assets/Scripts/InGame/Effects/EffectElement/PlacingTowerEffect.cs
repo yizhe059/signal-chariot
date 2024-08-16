@@ -1,9 +1,8 @@
 ﻿using InGame.BattleFields.Androids;
 using InGame.Cores;
 using SetUps;
-using UnityEngine;
 
-namespace InGame.Effects
+namespace InGame.Effects.EffectElement
 {
     public class PlacingTowerEffect: Effect
     {

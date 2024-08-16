@@ -18,7 +18,7 @@ namespace Editors.Board
                 return;
             }
             setUp.moduleLibrary.Clear();
-            var list = transform.GetComponentsInChildren<ModuleEdit>();
+            var list = transform.Find("Modules").GetComponentsInChildren<ModuleEdit>();
 
             foreach (var moduleEdit in list)
             {

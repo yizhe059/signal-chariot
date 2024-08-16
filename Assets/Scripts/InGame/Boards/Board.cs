@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using InGame.Boards.Modules;
+using InGame.Boards.Modules.ModuleBuffs;
 using InGame.Cores;
 using InGame.Effects;
+using InGame.Effects.TriggerRequirements;
 using SetUps;
 using UnityEngine;
 using UnityEngine.Events;
@@ -32,10 +34,23 @@ namespace InGame.Boards
             return new BoardPosition(a.x + b.x, a.y + b.y);
         }
         
+
+        public static bool operator!=(BoardPosition a, BoardPosition b)
+        {
+            return !(a == b);
+        }
+
+        public static bool operator ==(BoardPosition a, BoardPosition b)
+        {
+            return a.x == b.x && a.y == b.y;
+        }
+
         public override string ToString()
         {
             return $"{x} , {y}";
         }
+
+        public static BoardPosition invalidPosition => new BoardPosition(-1, -1);
     }
     
     //To DO: 可能Board的逻辑是不需要position的，只有boardView才需要，在board里加位置是redundant的
@@ -154,12 +169,15 @@ namespace InGame.Boards
                 if (GetSlotStatus(boardPos) != SlotStatus.Empty) return false;
             }
 
+            module.SetPivotBoardPosition(pivotPos);
+            
             foreach (var moduleSlot in slotList)
             {
                 var boardPos = moduleSlot.GetBoardPosition(pivotPos);
 
                 SetModuleSlot(boardPos.x, boardPos.y, moduleSlot);
                 SetSlotStatus(boardPos.x, boardPos.y, SlotStatus.Occupied);
+                
             }
 
             if (!m_noEffectTrigger)
@@ -170,12 +188,34 @@ namespace InGame.Boards
                     slot = GetValue(pivotPos.x, pivotPos.y),
                     module = module
                 });
+                
+                module.TriggerCustomEffect(new RequirementBlackBoard
+                {
+                    slot = GetValue(pivotPos.x, pivotPos.y)
+                });
+                
+                // Add all the buff in slots to the module
+                foreach (var moduleSlot in slotList)
+                {
+                    var boardPos = moduleSlot.GetBoardPosition(pivotPos);
+                
+                
+                    GetValue(boardPos.x, boardPos.y).TellModuleYourBuff();
+                }
             }
+            
             
 
             return true;
         }
-
+        
+        /// <summary>
+        /// Place A module to a first position that is able to placed
+        /// </summary>
+        /// <param name="module"></param>
+        /// <param name="resultX"></param>
+        /// <param name="resultY"></param>
+        /// <returns></returns>
         public bool PlaceModule(Module module, out int resultX, out int resultY)
         {
             for (int x = 0; x < m_width; x++)
@@ -219,10 +259,12 @@ namespace InGame.Boards
 
             if (!m_noEffectTrigger)
             {
+                module.ClearBuffs();
                 module.UnTriggerPlacingEffect(new EffectBlackBoard{slot = GetValue(x, y)});
+                module.UnTriggerCustomEffect(new RequirementBlackBoard{slot = GetValue(x, y)});
             }
 
-            
+            module.SetPivotBoardPosition(BoardPosition.invalidPosition);
 
             return module;
         }
@@ -306,9 +348,36 @@ namespace InGame.Boards
             var slot = GetValue(x, y);
             if (slot == null) return;
 
+            blackBoard.pos = new BoardPosition(x, y);
             slot.TriggerEffect(blackBoard);
         }
 
+        #endregion
+        
+        #region Buff
+
+        
+        /// <summary>
+        /// Add the buff to the slot, no matter the status of the slot
+        /// </summary>
+        /// <param name="buff"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void AddBuffToSlot(ModuleBuff buff, int x, int y)
+        {
+            var slot = GetValue(x, y);
+            if (slot == null) return;
+            
+            slot.AddBuff(buff);
+        }
+        
+        public void RemoveBuffFromSlot(ModuleBuff buff, int x, int y)
+        {
+            var slot = GetValue(x, y);
+            if (slot == null) return;
+            
+            slot.RemoveBuff(buff);
+        }
         #endregion
         private bool IsAdjacentSlot(int x, int y)
         {
