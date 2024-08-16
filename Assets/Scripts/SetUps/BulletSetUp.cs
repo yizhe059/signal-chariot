@@ -17,7 +17,7 @@ namespace SetUps
         public float speed;
         public float lifeTime;
         
-        public int reflectTimes;
+        public int bouncingTimes;
         public int penetrateTimes;
         public int splitTimes;
 
@@ -32,7 +32,7 @@ namespace SetUps
             speed = other.speed;
             lifeTime = other.lifeTime;
 
-            reflectTimes = other.reflectTimes;
+            bouncingTimes = other.bouncingTimes;
             penetrateTimes = other.penetrateTimes;
             splitTimes = other.splitTimes;
         }

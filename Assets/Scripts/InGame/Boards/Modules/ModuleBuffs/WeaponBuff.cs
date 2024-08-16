@@ -7,13 +7,12 @@ namespace InGame.Boards.Modules.ModuleBuffs
     {
         public override ModuleBuffType type => ModuleBuffType.Weapon;
         
-
         public int bouncingBuff = 0;
         public int splittingBuff = 0;
-        public int penetrationBuff = 0;
+        public int penetrationBuff = 0; 
         public int numBulletFlatBuff = 0;
 
-        public int speedPercentageBuff = 0;
+        public int speedPercentageBuff = 0; 
         public int damagePercentageBuff = 0;
         public int flatDamageBuff = 0;
         public int bulletSizePercentageBuff = 0;

@@ -29,7 +29,7 @@ namespace InGame.BattleFields.Bullets
         private UnlimitedProperty m_speed;
         private UnlimitedProperty m_damage;
         private UnlimitedProperty m_lifeTime;
-        private UnlimitedProperty m_reflectTimes;
+        private UnlimitedProperty m_bouncingTimes;
         private UnlimitedProperty m_penetrateTimes;
         private UnlimitedProperty m_splitTimes;
         
@@ -41,7 +41,7 @@ namespace InGame.BattleFields.Bullets
         public UnlimitedProperty speed { get { return m_speed;}}
         public UnlimitedProperty damage { get { return m_damage;}}
         public UnlimitedProperty lifetime { get { return m_lifeTime;}}
-        public UnlimitedProperty reflectTimes { get { return m_reflectTimes;}}
+        public UnlimitedProperty bouncingTimes { get { return m_bouncingTimes;}}
         public UnlimitedProperty penetrateTimes { get {return m_penetrateTimes;}}
         public UnlimitedProperty splitTimes { get {return m_splitTimes;}}
 
@@ -49,18 +49,17 @@ namespace InGame.BattleFields.Bullets
         {
             m_tower = tower;
             
-            UnlimitedProperty dmg = new(bulletSetUp.damage * tower.damageMultiplier.value, 
-                                        UnlimitedPropertyType.Damage);
+            UnlimitedProperty dmg = new(bulletSetUp.damage, UnlimitedPropertyType.Damage);
             UnlimitedProperty spd = new(bulletSetUp.speed, UnlimitedPropertyType.Speed);
             UnlimitedProperty lft = new(bulletSetUp.lifeTime);
-            UnlimitedProperty rfl = new(bulletSetUp.reflectTimes);
+            UnlimitedProperty rfl = new(bulletSetUp.bouncingTimes);
             UnlimitedProperty pnt = new(bulletSetUp.penetrateTimes);
             UnlimitedProperty spl = new(bulletSetUp.splitTimes);
 
             m_damage = dmg;
             m_speed = spd;
             m_lifeTime = lft;
-            m_reflectTimes = rfl;
+            m_bouncingTimes = rfl;
             m_penetrateTimes = pnt;
             m_splitTimes = spl;
 
@@ -135,7 +134,9 @@ namespace InGame.BattleFields.Bullets
         public void DealDamage(IDamageable target, float dmg)
         {
             target.TakeDamage(dmg);
-            this.Die();
+            // TODO
+            if(m_bouncingTimes.value > 0) m_moveStrategy = new LinearMoveStrategy(this);
+            else this.Die();
         }
     }
 }

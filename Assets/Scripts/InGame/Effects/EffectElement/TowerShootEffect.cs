@@ -11,7 +11,8 @@ namespace InGame.Effects.EffectElement
         
         public override void OnTrigger(EffectBlackBoard blackBoard)
         {
-            GameManager.Instance.GetAndroid().GetTowerManager().TowerEffect(m_module);
+            GameManager.Instance.GetAndroid().GetTowerManager().
+            TowerEffect(m_module, m_buff.CreateCopy() as WeaponBuff);
         }
 
         public override void OnAddBuff(ModuleBuff buff)

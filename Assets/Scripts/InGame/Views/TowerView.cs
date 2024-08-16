@@ -4,6 +4,7 @@ using UnityEngine;
 
 using Utils;
 using InGame.BattleFields.Androids;
+using InGame.Boards.Modules.ModuleBuffs;
 
 using DG.Tweening;
 
@@ -63,9 +64,9 @@ namespace InGame.Views
             StartCoroutine(RotateTowards());
         }
 
-        public void Shoot()
+        public void Shoot(WeaponBuff buff)
         {
-            StartCoroutine(m_tower.ShootBullet());
+            StartCoroutine(m_tower.ShootBullet(buff));
         }
 
         public IEnumerator RotateTowards()

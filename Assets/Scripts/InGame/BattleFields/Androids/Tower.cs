@@ -11,6 +11,7 @@ using InGame.BattleFields.Bullets;
 using InGame.BattleFields.Common;
 
 using Utils;
+using InGame.Boards.Modules.ModuleBuffs;
 
 namespace InGame.BattleFields.Androids
 {
@@ -86,14 +87,38 @@ namespace InGame.BattleFields.Androids
 
         public void Effect()
         {
-            m_towerView.Shoot();
+            m_towerView.Shoot(WeaponBuff.CreateEmptyBuff(ModuleBuffType.Weapon) as WeaponBuff);
         }
 
-        public IEnumerator ShootBullet()
+        public void Effect(WeaponBuff buff)
         {
-            for(int i = 0; i < m_bulletCount.value; i++)
+            m_towerView.Shoot(buff);
+        }
+
+        public IEnumerator ShootBullet(WeaponBuff buff)
+        {
+            float bulletCount = m_bulletCount.value + buff.numBulletFlatBuff;
+
+            BulletSetUp bulletSetUp = new BulletSetUp(m_bulletSetUp);
+            bulletSetUp.bouncingTimes += buff.bouncingBuff;
+            bulletSetUp.penetrateTimes += buff.penetrationBuff;
+            bulletSetUp.splitTimes += buff.splittingBuff;
+
+            bulletSetUp.speed *= 1 + (float)buff.speedPercentageBuff / 100f;
+            bulletSetUp.speed = Mathf.Max(0.001f, bulletSetUp.speed);
+
+            bulletSetUp.damage *= m_damageMultiplier.value;
+            bulletSetUp.damage *= 1 + (float)buff.damagePercentageBuff / 100f;
+            bulletSetUp.damage += buff.flatDamageBuff;
+            bulletSetUp.damage = Mathf.Max(0.001f, bulletSetUp.damage);
+
+            // TODO: bullet size percentage
+
+            bulletSetUp.lifeTime += buff.lifeTimeBuff;
+
+            for(int i = 0; i < bulletCount; i++)
             {
-                m_bulletManager.AddBullet(m_bulletSetUp, this);
+                m_bulletManager.AddBullet(bulletSetUp, this);
                 yield return new WaitForSeconds(m_shootInterval.value);
             }
         }
