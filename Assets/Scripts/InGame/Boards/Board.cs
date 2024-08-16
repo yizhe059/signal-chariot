@@ -348,6 +348,7 @@ namespace InGame.Boards
             var slot = GetValue(x, y);
             if (slot == null) return;
 
+            blackBoard.pos = new BoardPosition(x, y);
             slot.TriggerEffect(blackBoard);
         }
 

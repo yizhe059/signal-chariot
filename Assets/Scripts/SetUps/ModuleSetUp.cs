@@ -23,6 +23,7 @@ namespace SetUps
         [SerializeReference]
         public List<Effect> signalEffects;
         public int maxUses;
+        public SignalEffects.EnergyConsumptionMethod consumptionMethod;
         public int energyConsumption;
         public float coolDown;
         #endregion

@@ -16,7 +16,9 @@ namespace InGame.Effects
         
         // signal Effect
         public Signal signal;
+        public BoardPosition pos;
         public Time time;
+        public int energyUsed=0;
         
         //placing effect
         public Slot slot;
@@ -92,35 +94,46 @@ namespace InGame.Effects
 
     public class SignalEffects
     {
+        public enum EnergyConsumptionMethod
+        {
+            Fixed,
+            Stored,
+            All
+        }
         private List<Effect> m_effects;
         private int m_maxUses, m_remainUses;
+
+        private EnergyConsumptionMethod m_consumptionMethod = EnergyConsumptionMethod.Fixed;
         private int m_energyConsumption;
+        private int m_storedEnergy = 0;
         
         private Time m_coolDown;
         private Time m_prevTriggerTime;
 
-        public static SignalEffects CreateSignalEffects(List<Effect> signalEffects, int maxUses, int energyConsumption,
-            float coolDown)
+        public static SignalEffects CreateSignalEffects(List<Effect> signalEffects, int maxUses,
+        EnergyConsumptionMethod consumptionMethod, int energyConsumption, float coolDown)
         {
             return new SignalEffects
             {
                 m_effects = new List<Effect>(signalEffects),
                 m_maxUses = maxUses,
                 m_remainUses = maxUses,
+                m_consumptionMethod = consumptionMethod,
                 m_energyConsumption = energyConsumption,
                 m_coolDown = new Time(coolDown),
                 m_prevTriggerTime = new Time(-coolDown)
             };
         }
         
-        public static SignalEffects CreateSignalEffects(List<Effect> signalEffects, int maxUses, int energyConsumption,
-            Time coolDown)
+        public static SignalEffects CreateSignalEffects(List<Effect> signalEffects, int maxUses, EnergyConsumptionMethod consumptionMethod,
+            int energyConsumption, Time coolDown)
         {
             return new SignalEffects
             {
                 m_effects = new List<Effect>(signalEffects),
                 m_maxUses = maxUses,
                 m_remainUses = maxUses,
+                m_consumptionMethod = consumptionMethod,
                 m_energyConsumption = energyConsumption,
                 m_coolDown = coolDown,
                 m_prevTriggerTime = -coolDown
@@ -136,7 +149,7 @@ namespace InGame.Effects
             }
 
 
-            return CreateSignalEffects(signalEffects, other.m_maxUses, other.m_energyConsumption, other.m_coolDown);
+            return CreateSignalEffects(signalEffects, other.m_maxUses, other.m_consumptionMethod, other.m_energyConsumption, other.m_coolDown);
         }
 
         public void Trigger(EffectBlackBoard blackBoard)
@@ -156,16 +169,42 @@ namespace InGame.Effects
                 return;
             }
 
-            if (signal.energy < m_energyConsumption)
+            int energyUsed;
+            if (m_consumptionMethod == EnergyConsumptionMethod.Fixed)
             {
-                Debug.Log("Energy not passed");
+                if (signal.energy < m_energyConsumption)
+                {
+                    Debug.Log("Energy not passed");
+                    return;
+                }
+                signal.ConsumeEnergy(m_energyConsumption);
+                energyUsed = m_energyConsumption;
+            }else if (m_consumptionMethod == EnergyConsumptionMethod.Stored)
+            {
+                int consumeEnergy = Mathf.Min(m_energyConsumption, signal.energy);
+                signal.ConsumeEnergy(consumeEnergy);
+                m_storedEnergy += consumeEnergy;
+                if (m_storedEnergy < m_energyConsumption) return;
+                
+                energyUsed = m_energyConsumption;
+                m_storedEnergy -= energyUsed;
+            }
+            else if (m_consumptionMethod == EnergyConsumptionMethod.All)
+            {
+                energyUsed = signal.energy;
+                signal.ConsumeEnergy(energyUsed);
+            }
+            else
+            {
                 return;
             }
             
-            if(m_maxUses != -1) m_remainUses--;
-            signal.ConsumeEnergy(m_energyConsumption);
-            m_prevTriggerTime = time;
             
+            if(m_maxUses != -1) m_remainUses--;
+
+            m_prevTriggerTime = time;
+
+            blackBoard.energyUsed = energyUsed;
             foreach (var effect in m_effects)
             {
                 effect.Trigger(blackBoard);
@@ -226,7 +265,8 @@ namespace InGame.Effects
             return new PlacingEffects
             {
                 m_effects = placingEffects,
-                m_requirements = requirements
+                m_requirements = requirements,
+                
             };
         }
         

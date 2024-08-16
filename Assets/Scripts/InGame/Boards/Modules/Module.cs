@@ -503,7 +503,7 @@ namespace InGame.Boards.Modules
                 desc = setUp.desc,
                 m_buffMasks = setUp.buffMask,
                 m_prefab = setUp.prefab,
-                m_signalEffects = SignalEffects.CreateSignalEffects(signalEffects, setUp.maxUses, setUp.energyConsumption, setUp.coolDown),
+                m_signalEffects = SignalEffects.CreateSignalEffects(signalEffects, setUp.maxUses, setUp.consumptionMethod, setUp.energyConsumption, setUp.coolDown),
                 m_placingEffects = PlacingEffects.CreatePlacingEffects(placingEffects, placingReqs),
                 m_customEffect = customEffect
             };

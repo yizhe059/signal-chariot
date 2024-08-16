@@ -13,11 +13,12 @@ namespace Editors.ModuleBuffs
         public int damagePercentageBuff = 0;
         public int flatDamageBuff = 0;
         public int bulletSizePercentageBuff = 0;
+        public int lifeTimeBuff = 0;
         
         public override ModuleBuff CreateBuff()
         {
             return WeaponBuff.CreateBuff(bouncingBuff, splittingBuff, penetrationBuff, numBulletFlatBuff,
-                speedPercentageBuff, damagePercentageBuff, flatDamageBuff, bulletSizePercentageBuff);
+                speedPercentageBuff, damagePercentageBuff, flatDamageBuff, bulletSizePercentageBuff, lifeTimeBuff);
         }
     }
 }

@@ -18,21 +18,20 @@ namespace InGame.Effects.EffectElement
         {
             WeaponBuff weaponBuff = (WeaponBuff) buff;
             m_buff.Add(weaponBuff);
-            Debug.Log($"Buff: {m_buff}");
+            Debug.Log(m_buff);
         }
         
         public override void OnRemoveBuff(ModuleBuff buff)
         {
             WeaponBuff weaponBuff = (WeaponBuff) buff;
             m_buff.Minus(weaponBuff);
-
-            Debug.Log($"Buff: {m_buff}");
+            Debug.Log(m_buff);
         }
 
         public override void ClearBuffs()
         {
             m_buff.SetDefault();
-            Debug.Log($"Buff: {m_buff}");
+            Debug.Log(m_buff);
         }
 
         public override Effect CreateCopy()

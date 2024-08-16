@@ -17,6 +17,7 @@ namespace InGame.Boards.Modules.ModuleBuffs
         public int damagePercentageBuff = 0;
         public int flatDamageBuff = 0;
         public int bulletSizePercentageBuff = 0;
+        public int lifeTimeBuff = 0;
         
         protected override void OnAdd(ModuleBuff other)
         {
@@ -30,6 +31,7 @@ namespace InGame.Boards.Modules.ModuleBuffs
             damagePercentageBuff += otherBuff.damagePercentageBuff;
             flatDamageBuff += otherBuff.flatDamageBuff;
             bulletSizePercentageBuff += otherBuff.bulletSizePercentageBuff;
+            lifeTimeBuff += otherBuff.lifeTimeBuff;
         }
 
         protected override void OnMinus(ModuleBuff other)
@@ -44,6 +46,7 @@ namespace InGame.Boards.Modules.ModuleBuffs
             damagePercentageBuff -= otherBuff.damagePercentageBuff;
             flatDamageBuff -= otherBuff.flatDamageBuff;
             bulletSizePercentageBuff -= otherBuff.bulletSizePercentageBuff;
+            lifeTimeBuff -= otherBuff.lifeTimeBuff;
         }
 
         public override void SetDefault()
@@ -56,6 +59,7 @@ namespace InGame.Boards.Modules.ModuleBuffs
             damagePercentageBuff = 0;
             flatDamageBuff = 0;
             bulletSizePercentageBuff = 0;
+            lifeTimeBuff = 0;
         }
 
         public override ModuleBuff CreateCopy()
@@ -70,7 +74,7 @@ namespace InGame.Boards.Modules.ModuleBuffs
                 damagePercentageBuff = damagePercentageBuff,
                 flatDamageBuff = flatDamageBuff,
                 bulletSizePercentageBuff = bulletSizePercentageBuff,
-                
+                lifeTimeBuff = lifeTimeBuff
             };
         }
 
@@ -79,7 +83,7 @@ namespace InGame.Boards.Modules.ModuleBuffs
             return $"bouncingBuff: {bouncingBuff}, splittingBuff: {splittingBuff}, penetrationBuff, {penetrationBuff}, " +
                    $"numBulletFlatBuff: {numBulletFlatBuff}, speedPercentageBuff: {speedPercentageBuff}, " +
                    $"damagePercentageBuff: {damagePercentageBuff}, flatDamageBuff: {flatDamageBuff}, " +
-                   $"bulletSizePercentageBuff: {bulletSizePercentageBuff}";
+                   $"bulletSizePercentageBuff: {bulletSizePercentageBuff}, lifeTimeBuff: {lifeTimeBuff}";
         }
 
         public static WeaponBuff CreateBuff()
@@ -88,7 +92,7 @@ namespace InGame.Boards.Modules.ModuleBuffs
         }
         
         public static WeaponBuff CreateBuff(int bouncingBuff, int splittingBuff, int penetrationBuff, int numBulletFlatBuff, 
-            int speedPercentageBuff, int damagePercentageBuff, int flatDamageBuff, int bulletSizePercentageBuff)
+            int speedPercentageBuff, int damagePercentageBuff, int flatDamageBuff, int bulletSizePercentageBuff, int lifeTimeBuff)
         {
             return new WeaponBuff
             {
@@ -99,7 +103,8 @@ namespace InGame.Boards.Modules.ModuleBuffs
                 speedPercentageBuff = speedPercentageBuff,
                 damagePercentageBuff = damagePercentageBuff,
                 flatDamageBuff = flatDamageBuff,
-                bulletSizePercentageBuff = bulletSizePercentageBuff
+                bulletSizePercentageBuff = bulletSizePercentageBuff,
+                lifeTimeBuff = lifeTimeBuff
             };
         }
         

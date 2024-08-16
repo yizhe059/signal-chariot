@@ -61,6 +61,7 @@ namespace Editors.Board
                 prefab = prefab,
                 signalEffects = signalEffectEdits.CreateEffects(),
                 coolDown = signalEffectEdits.coolDown,
+                consumptionMethod = signalEffectEdits.consumptionMethod,
                 energyConsumption = signalEffectEdits.energyConsumption,
                 maxUses = signalEffectEdits.maxUses,
                 placingEffects = placingEffectEdits.CreateEffects(),
