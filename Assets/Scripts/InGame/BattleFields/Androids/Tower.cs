@@ -65,7 +65,7 @@ namespace InGame.BattleFields.Androids
         public void Die()
         {
             m_towerView.Die();
-            m_bulletManager.ClearBullet();
+            // m_bulletManager.ClearBullet();
         }
         
         private void CreateView()

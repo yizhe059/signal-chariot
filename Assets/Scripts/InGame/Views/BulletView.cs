@@ -52,7 +52,7 @@ namespace InGame.Views
         public void Die()
         {
             m_timer.OnTimerComplete.RemoveListener(m_bullet.Die);
-            Destroy(gameObject);
+            if(gameObject) Destroy(gameObject);
         }
         #endregion
 
