@@ -40,10 +40,22 @@ MonoBehaviour:
       y: 4
     - x: 3
       y: 4
-    - x: 3
-      y: 4
     - x: 4
       y: 4
+    - x: 5
+      y: 1
+    - x: 5
+      y: 2
+    - x: 5
+      y: 3
+    - x: 5
+      y: 4
+    - x: 2
+      y: 1
+    - x: 3
+      y: 1
+    - x: 4
+      y: 1
     modules:
     - pos:
         x: 4
@@ -122,6 +134,36 @@ MonoBehaviour:
       moduleID: 10
       moduleName: "\u7535\u5BB9\u5668"
       orientation: 0
+    - pos:
+        x: 0
+        y: 2
+      moduleID: 2
+      moduleName: "\u8F6C\u5411\u5668"
+      orientation: 0
+    - pos:
+        x: 1
+        y: 2
+      moduleID: 2
+      moduleName: "\u8F6C\u5411\u5668"
+      orientation: 0
+    - pos:
+        x: 2
+        y: 2
+      moduleID: 2
+      moduleName: "\u8F6C\u5411\u5668"
+      orientation: 0
+    - pos:
+        x: 3
+        y: 2
+      moduleID: 9
+      moduleName: "\u53CC\u5411\u5206\u6D41\u5668"
+      orientation: 0
+    - pos:
+        x: 4
+        y: 2
+      moduleID: 10
+      moduleName: "\u7535\u5BB9\u5668"
+      orientation: 0
     slotPrefab: {fileID: 6622818502655049371, guid: 80c85fcaea6536748bb67591b4fc60b2, type: 3}
     signalPrefab: {fileID: 7786143621109699157, guid: e7f648ad21042b64ca742ba22438c585, type: 3}
     horizontalBorderPrefab: {fileID: 5301742505494614779, guid: bcf6e11ec71a8824abb63c5b40fe37fc, type: 3}
@@ -141,16 +183,16 @@ MonoBehaviour:
     requirements: []
     hasCustomEffect: 1
     triggerRequirement:
-      rid: 6796066344669020205
+      rid: 6796066344669020280
     customEffects:
-    - rid: 6796066344669020206
+    - rid: 6796066344669020281
   - name: "\u589E\u5E45\u5668"
     desc: 
     otherPositions: []
     prefab: {fileID: 6219216261471928466, guid: ddab373e8e7f09a4c82d8f5654d9c978, type: 3}
     buffMask: 0
     signalEffects:
-    - rid: 6796066344669020207
+    - rid: 6796066344669020282
     maxUses: -1
     consumptionMethod: 0
     energyConsumption: 0
@@ -167,7 +209,7 @@ MonoBehaviour:
     prefab: {fileID: 7680782621330569741, guid: 71a7ea6be685de642aef0c89bab4fbd5, type: 3}
     buffMask: 0
     signalEffects:
-    - rid: 6796066344669020208
+    - rid: 6796066344669020283
     maxUses: -1
     consumptionMethod: 0
     energyConsumption: 0
@@ -186,13 +228,13 @@ MonoBehaviour:
     prefab: {fileID: 1402701477217004034, guid: 17646af2c7a669e49bb57947bbd60d0a, type: 3}
     buffMask: 1
     signalEffects:
-    - rid: 6796066344669020209
+    - rid: 6796066344669020284
     maxUses: -1
     consumptionMethod: 0
     energyConsumption: 1
     coolDown: 0
     placingEffects:
-    - rid: 6796066344669020210
+    - rid: 6796066344669020285
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
@@ -209,9 +251,9 @@ MonoBehaviour:
     energyConsumption: 0
     coolDown: 0
     placingEffects:
-    - rid: 6796066344669020211
+    - rid: 6796066344669020286
     requirements:
-    - rid: 6796066344669020212
+    - rid: 6796066344669020287
     hasCustomEffect: 0
     triggerRequirement:
       rid: -2
@@ -227,7 +269,7 @@ MonoBehaviour:
     energyConsumption: 0
     coolDown: 0
     placingEffects:
-    - rid: 6796066344669020213
+    - rid: 6796066344669020288
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
@@ -244,7 +286,7 @@ MonoBehaviour:
     energyConsumption: 0
     coolDown: 0
     placingEffects:
-    - rid: 6796066344669020214
+    - rid: 6796066344669020289
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
@@ -261,7 +303,7 @@ MonoBehaviour:
     energyConsumption: 0
     coolDown: 0
     placingEffects:
-    - rid: 6796066344669020215
+    - rid: 6796066344669020290
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
@@ -273,13 +315,13 @@ MonoBehaviour:
     prefab: {fileID: 730825653244556730, guid: 49d0f8d7babd7e84eb058de10337e464, type: 3}
     buffMask: 0
     signalEffects:
-    - rid: 6796066344669020216
+    - rid: 6796066344669020291
     maxUses: -1
     consumptionMethod: 0
     energyConsumption: 0
     coolDown: 0
     placingEffects:
-    - rid: 6796066344669020217
+    - rid: 6796066344669020292
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
@@ -291,7 +333,7 @@ MonoBehaviour:
     prefab: {fileID: 3218698526865631896, guid: 08ecda914fd6a5a4e825ce70006831d9, type: 3}
     buffMask: 0
     signalEffects:
-    - rid: 6796066344669020218
+    - rid: 6796066344669020293
     maxUses: -1
     consumptionMethod: 0
     energyConsumption: 0
@@ -308,10 +350,10 @@ MonoBehaviour:
     prefab: {fileID: 9128623023197033979, guid: 9f5e39c1a3a76b24f9b4621047d50753, type: 3}
     buffMask: 0
     signalEffects:
-    - rid: 6796066344669020219
+    - rid: 6796066344669020294
     maxUses: -1
     consumptionMethod: 1
-    energyConsumption: 5
+    energyConsumption: 3
     coolDown: 0
     placingEffects: []
     requirements: []
@@ -367,7 +409,7 @@ MonoBehaviour:
     customEffects: []
   enemyLibrary:
   - name: "\u767D\u8840\u7403"
-    maxHealth: 2
+    maxHealth: 4
     defense: 0
     attack: 2
     attackDuration: 2
@@ -377,7 +419,7 @@ MonoBehaviour:
     modQuality: 1
     enemyPrefab: {fileID: 384623106758148936, guid: 30739d031fe43c04d8e7bdb9fcad132d, type: 3}
   - name: "\u767D\u8840\u7403\u9886\u961F"
-    maxHealth: 4
+    maxHealth: 10
     defense: 0
     attack: 3
     attackDuration: 1.5
@@ -408,22 +450,33 @@ MonoBehaviour:
     - groups:
       - range:
           start: 0
-          end: 60
+          end: 30
         spawnGroupID: 0
-      - range:
-          start: 30
-          end: 60
-        spawnGroupID: 1
-      duration: 60
+      duration: 30
       groupsMustBeat: 
     - groups:
       - range:
           start: 0
-          end: 60
+          end: 30
         spawnGroupID: 0
       - range:
-          start: 30
-          end: 60
+          start: 0
+          end: 30
+        spawnGroupID: 1
+      duration: 30
+      groupsMustBeat: 
+    - groups:
+      - range:
+          start: 0
+          end: 30
+        spawnGroupID: 0
+      - range:
+          start: 0
+          end: 30
+        spawnGroupID: 1
+      - range:
+          start: 0
+          end: 30
         spawnGroupID: 1
       duration: 30
       groupsMustBeat: 
@@ -431,31 +484,32 @@ MonoBehaviour:
     - waves:
       - waveID: 0
       - waveID: 1
+      - waveID: 2
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 6796066344669020205
+    - rid: 6796066344669020280
       type: {class: IntervalTimeTriggerRequirement, ns: InGame.Effects.TriggerRequirements, asm: Assembly-CSharp}
       data:
         interval: 1
         canEffectInTest: 1
-    - rid: 6796066344669020206
+    - rid: 6796066344669020281
       type: {class: SignalGenerationEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         signalStrength: 2
-    - rid: 6796066344669020207
+    - rid: 6796066344669020282
       type: {class: EnergyAmplifyEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         amplifiedAmount: 1
-    - rid: 6796066344669020208
+    - rid: 6796066344669020283
       type: {class: SignalDirectionChangeEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data: 
-    - rid: 6796066344669020209
+    - rid: 6796066344669020284
       type: {class: TowerShootEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data: 
-    - rid: 6796066344669020210
+    - rid: 6796066344669020285
       type: {class: PlacingTowerEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         setUp:
@@ -463,25 +517,25 @@ MonoBehaviour:
           damageMultipler: 1
           seekInterval: 0
           shootInterval: 0.05
-          bulletCount: 1
+          bulletCount: 2
           bulletSetUp:
             sprite: {fileID: 21300000, guid: 494c2058d61db45a89aa442c3fa2acfb, type: 3}
             moveType: 0
             damageType: 0
             damage: 1
-            speed: 40
+            speed: 60
             lifeTime: 10
             bouncingTimes: 0
             penetrateTimes: 0
             splitTimes: 0
-    - rid: 6796066344669020211
+    - rid: 6796066344669020286
       type: {class: ChangeShieldEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         delta: 1
-    - rid: 6796066344669020212
+    - rid: 6796066344669020287
       type: {class: BorderRequirement, ns: InGame.Effects.PlacingEffectRequirements, asm: Assembly-CSharp}
       data: 
-    - rid: 6796066344669020213
+    - rid: 6796066344669020288
       type: {class: ApplyWeaponBuff, ns: InGame.Effects.EffectElement.ApplyModuleBuffEffects, asm: Assembly-CSharp}
       data:
         range: 1
@@ -495,7 +549,7 @@ MonoBehaviour:
           flatDamageBuff: 0
           bulletSizePercentageBuff: 0
           lifeTimeBuff: 0
-    - rid: 6796066344669020214
+    - rid: 6796066344669020289
       type: {class: ApplyWeaponBuff, ns: InGame.Effects.EffectElement.ApplyModuleBuffEffects, asm: Assembly-CSharp}
       data:
         range: 1
@@ -509,7 +563,7 @@ MonoBehaviour:
           flatDamageBuff: 0
           bulletSizePercentageBuff: 0
           lifeTimeBuff: 0
-    - rid: 6796066344669020215
+    - rid: 6796066344669020290
       type: {class: ApplyWeaponBuff, ns: InGame.Effects.EffectElement.ApplyModuleBuffEffects, asm: Assembly-CSharp}
       data:
         range: 0
@@ -517,16 +571,16 @@ MonoBehaviour:
           bouncingBuff: 0
           splittingBuff: 0
           penetrationBuff: 0
-          numBulletFlatBuff: 1
+          numBulletFlatBuff: 2
           speedPercentageBuff: 0
           damagePercentageBuff: -50
           flatDamageBuff: 0
           bulletSizePercentageBuff: 0
           lifeTimeBuff: 0
-    - rid: 6796066344669020216
+    - rid: 6796066344669020291
       type: {class: DestroySignalEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data: 
-    - rid: 6796066344669020217
+    - rid: 6796066344669020292
       type: {class: ApplyWeaponBuff, ns: InGame.Effects.EffectElement.ApplyModuleBuffEffects, asm: Assembly-CSharp}
       data:
         range: 1
@@ -540,10 +594,10 @@ MonoBehaviour:
           flatDamageBuff: 0
           bulletSizePercentageBuff: 100
           lifeTimeBuff: 100
-    - rid: 6796066344669020218
+    - rid: 6796066344669020293
       type: {class: SplitSignalEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         splittingDirections: 0300000002000000
-    - rid: 6796066344669020219
+    - rid: 6796066344669020294
       type: {class: SignalGenerationFromUsedEnergyEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data: 
