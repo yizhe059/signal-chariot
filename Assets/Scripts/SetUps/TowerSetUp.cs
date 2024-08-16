@@ -15,6 +15,7 @@ namespace SetUps
         #region Damage
         public float seekInterval;
         public float shootInterval;
+        public int shootCount;
         public int bulletCount;
         public BulletSetUp bulletSetUp;
         #endregion
@@ -26,6 +27,7 @@ namespace SetUps
 
             bulletSetUp = new BulletSetUp(other.bulletSetUp);
             bulletCount = other.bulletCount;
+            shootCount = other.shootCount;
             seekInterval = other.seekInterval;
             shootInterval = other.shootInterval;
         }

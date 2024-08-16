@@ -31,6 +31,7 @@ namespace InGame.BattleFields.Androids
         private BulletManager m_bulletManager;
         private BulletSetUp m_bulletSetUp;
         private UnlimitedProperty m_bulletCount;
+        private UnlimitedProperty m_shootCount;
         private UnlimitedProperty m_shootInterval;
         public UnlimitedProperty shootInterval { get { return m_shootInterval;}}
         private UnlimitedProperty m_seekInterval;
@@ -43,12 +44,12 @@ namespace InGame.BattleFields.Androids
         #region Life Cycle
         public Tower(TowerSetUp towerSetUp, Module module)
         {
-            UnlimitedProperty bulletCount = new(towerSetUp.bulletCount, UnlimitedPropertyType.BulletCount);
+            UnlimitedProperty shootCount = new(towerSetUp.shootCount, UnlimitedPropertyType.BulletCount);
             UnlimitedProperty dmgMtp = new(towerSetUp.damageMultipler, UnlimitedPropertyType.Multiplier);
             UnlimitedProperty shtItv = new(towerSetUp.shootInterval, UnlimitedPropertyType.Interval);
             UnlimitedProperty skItv = new(towerSetUp.seekInterval, UnlimitedPropertyType.Speed);
             
-            m_bulletCount = bulletCount;
+            m_shootCount = shootCount;
             m_damageMultiplier = dmgMtp;
             m_shootInterval = shtItv;
             m_seekInterval = skItv;
@@ -97,9 +98,9 @@ namespace InGame.BattleFields.Androids
 
         public IEnumerator ShootBullet(WeaponBuff buff)
         {
-            float bulletCount = m_bulletCount.value + buff.numBulletFlatBuff;
+            float shootCount = m_shootCount.value + buff.numBulletFlatBuff; // TODO: change num bullet
 
-            BulletSetUp bulletSetUp = new BulletSetUp(m_bulletSetUp);
+            BulletSetUp bulletSetUp = new(m_bulletSetUp);
             bulletSetUp.bouncingTimes += buff.bouncingBuff;
             bulletSetUp.penetrateTimes += buff.penetrationBuff;
             bulletSetUp.splitTimes += buff.splittingBuff;
@@ -116,7 +117,7 @@ namespace InGame.BattleFields.Androids
 
             bulletSetUp.lifeTime += buff.lifeTimeBuff;
 
-            for(int i = 0; i < bulletCount; i++)
+            for(int i = 0; i < shootCount; i++)
             {
                 m_bulletManager.AddBullet(bulletSetUp, this);
                 yield return new WaitForSeconds(m_shootInterval.value);
