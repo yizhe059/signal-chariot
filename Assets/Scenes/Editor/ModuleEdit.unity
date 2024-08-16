@@ -311,7 +311,8 @@ MonoBehaviour:
     bouncingBuff: 2
     splittingBuff: 0
     penetrationBuff: 0
-    numBulletFlatBuff: 0
+    numShotsFlatBuff: 0
+    numBulletsPerShotFlatBuff: 0
     speedPercentageBuff: 0
     damagePercentageBuff: 0
     flatDamageBuff: 0
@@ -521,7 +522,8 @@ MonoBehaviour:
     bouncingBuff: 0
     splittingBuff: 0
     penetrationBuff: 0
-    numBulletFlatBuff: 0
+    numShotsFlatBuff: 0
+    numBulletsPerShotFlatBuff: 0
     speedPercentageBuff: -50
     damagePercentageBuff: 0
     flatDamageBuff: 0
@@ -1444,7 +1446,8 @@ MonoBehaviour:
     bouncingBuff: 0
     splittingBuff: 0
     penetrationBuff: 0
-    numBulletFlatBuff: 2
+    numShotsFlatBuff: 0
+    numBulletsPerShotFlatBuff: 2
     speedPercentageBuff: 0
     damagePercentageBuff: -50
     flatDamageBuff: 0
@@ -1699,7 +1702,8 @@ MonoBehaviour:
     bouncingBuff: 0
     splittingBuff: 0
     penetrationBuff: 0
-    numBulletFlatBuff: 0
+    numShotsFlatBuff: 0
+    numBulletsPerShotFlatBuff: 0
     speedPercentageBuff: 0
     damagePercentageBuff: 100
     flatDamageBuff: 0

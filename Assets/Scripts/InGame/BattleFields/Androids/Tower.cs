@@ -97,7 +97,7 @@ namespace InGame.BattleFields.Androids
 
         public IEnumerator ShootBullet(WeaponBuff buff)
         {
-            float bulletCount = m_bulletCount.value + buff.numBulletFlatBuff;
+            float bulletCount = m_bulletCount.value + buff.numShotsFlatBuff;
 
             BulletSetUp bulletSetUp = new BulletSetUp(m_bulletSetUp);
             bulletSetUp.bouncingTimes += buff.bouncingBuff;

@@ -1,5 +1,7 @@
 ﻿
 
+using UnityEngine.Serialization;
+
 namespace InGame.Boards.Modules.ModuleBuffs
 {
     [System.Serializable]
@@ -10,8 +12,8 @@ namespace InGame.Boards.Modules.ModuleBuffs
         public int bouncingBuff = 0;
         public int splittingBuff = 0;
         public int penetrationBuff = 0; 
-        public int numBulletFlatBuff = 0;
-
+        public int numShotsFlatBuff = 0;
+        public int numBulletsPerShotFlatBuff = 0;
         public int speedPercentageBuff = 0; 
         public int damagePercentageBuff = 0;
         public int flatDamageBuff = 0;
@@ -25,12 +27,13 @@ namespace InGame.Boards.Modules.ModuleBuffs
             bouncingBuff += otherBuff.bouncingBuff;
             splittingBuff += otherBuff.splittingBuff;
             penetrationBuff += otherBuff.penetrationBuff;
-            numBulletFlatBuff += otherBuff.numBulletFlatBuff;
+            numShotsFlatBuff += otherBuff.numShotsFlatBuff;
             speedPercentageBuff += otherBuff.speedPercentageBuff;
             damagePercentageBuff += otherBuff.damagePercentageBuff;
             flatDamageBuff += otherBuff.flatDamageBuff;
             bulletSizePercentageBuff += otherBuff.bulletSizePercentageBuff;
             lifeTimeBuff += otherBuff.lifeTimeBuff;
+            numBulletsPerShotFlatBuff += otherBuff.numBulletsPerShotFlatBuff;
         }
 
         protected override void OnMinus(ModuleBuff other)
@@ -40,12 +43,13 @@ namespace InGame.Boards.Modules.ModuleBuffs
             bouncingBuff -= otherBuff.bouncingBuff;
             splittingBuff -= otherBuff.splittingBuff;
             penetrationBuff -= otherBuff.penetrationBuff;
-            numBulletFlatBuff -= otherBuff.numBulletFlatBuff;
+            numShotsFlatBuff -= otherBuff.numShotsFlatBuff;
             speedPercentageBuff -= otherBuff.speedPercentageBuff;
             damagePercentageBuff -= otherBuff.damagePercentageBuff;
             flatDamageBuff -= otherBuff.flatDamageBuff;
             bulletSizePercentageBuff -= otherBuff.bulletSizePercentageBuff;
             lifeTimeBuff -= otherBuff.lifeTimeBuff;
+            numBulletsPerShotFlatBuff -= otherBuff.numBulletsPerShotFlatBuff;
         }
 
         public override void SetDefault()
@@ -53,12 +57,13 @@ namespace InGame.Boards.Modules.ModuleBuffs
             bouncingBuff = 0;
             splittingBuff = 0;
             penetrationBuff = 0;
-            numBulletFlatBuff = 0;
+            numShotsFlatBuff = 0;
             speedPercentageBuff = 0;
             damagePercentageBuff = 0;
             flatDamageBuff = 0;
             bulletSizePercentageBuff = 0;
             lifeTimeBuff = 0;
+            numBulletsPerShotFlatBuff = 0;
         }
 
         public override ModuleBuff CreateCopy()
@@ -68,19 +73,21 @@ namespace InGame.Boards.Modules.ModuleBuffs
                 bouncingBuff = bouncingBuff,
                 splittingBuff = splittingBuff,
                 penetrationBuff = penetrationBuff,
-                numBulletFlatBuff = numBulletFlatBuff,
+                numShotsFlatBuff = numShotsFlatBuff,
                 speedPercentageBuff = speedPercentageBuff,
                 damagePercentageBuff = damagePercentageBuff,
                 flatDamageBuff = flatDamageBuff,
                 bulletSizePercentageBuff = bulletSizePercentageBuff,
-                lifeTimeBuff = lifeTimeBuff
+                lifeTimeBuff = lifeTimeBuff,
+                numBulletsPerShotFlatBuff = numBulletsPerShotFlatBuff
             };
         }
 
         public override string ToString()
         {
             return $"bouncingBuff: {bouncingBuff}, splittingBuff: {splittingBuff}, penetrationBuff, {penetrationBuff}, " +
-                   $"numBulletFlatBuff: {numBulletFlatBuff}, speedPercentageBuff: {speedPercentageBuff}, " +
+                   $"numShotsFlatBuff: {numShotsFlatBuff}, numBulletsPerShotFlatBuff: {numBulletsPerShotFlatBuff}," +
+                   $" speedPercentageBuff: {speedPercentageBuff}, " +
                    $"damagePercentageBuff: {damagePercentageBuff}, flatDamageBuff: {flatDamageBuff}, " +
                    $"bulletSizePercentageBuff: {bulletSizePercentageBuff}, lifeTimeBuff: {lifeTimeBuff}";
         }
@@ -90,15 +97,17 @@ namespace InGame.Boards.Modules.ModuleBuffs
             return new WeaponBuff();
         }
         
-        public static WeaponBuff CreateBuff(int bouncingBuff, int splittingBuff, int penetrationBuff, int numBulletFlatBuff, 
-            int speedPercentageBuff, int damagePercentageBuff, int flatDamageBuff, int bulletSizePercentageBuff, int lifeTimeBuff)
+        public static WeaponBuff CreateBuff(int bouncingBuff, int splittingBuff, int penetrationBuff, int numShotsFlatBuff,
+            int numBulletsPerShotFlatBuff, int speedPercentageBuff, int damagePercentageBuff, int flatDamageBuff, 
+            int bulletSizePercentageBuff, int lifeTimeBuff)
         {
             return new WeaponBuff
             {
                 bouncingBuff = bouncingBuff,
                 splittingBuff = splittingBuff,
                 penetrationBuff = penetrationBuff,
-                numBulletFlatBuff = numBulletFlatBuff,
+                numShotsFlatBuff = numShotsFlatBuff,
+                numBulletsPerShotFlatBuff = numBulletsPerShotFlatBuff,
                 speedPercentageBuff = speedPercentageBuff,
                 damagePercentageBuff = damagePercentageBuff,
                 flatDamageBuff = flatDamageBuff,
