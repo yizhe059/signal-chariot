@@ -69,7 +69,6 @@ namespace InGame.BattleFields.Enemies
 
         private bool IsLastWave()
         {
-            Debug.Log($"{m_currentWaveIdx}, {m_waves.Count}");
             return m_currentWaveIdx == m_waves.Count - 1;
         }
 
