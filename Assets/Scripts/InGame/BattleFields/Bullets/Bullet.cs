@@ -24,6 +24,7 @@ namespace InGame.BattleFields.Bullets
 
         [Header("Properties")]
         private Sprite m_sprite;
+        private UnlimitedProperty m_size;
         private IMoveStrategy m_moveStrategy;
         private DamageType m_damageStrategy;
         private UnlimitedProperty m_speed;
@@ -36,6 +37,7 @@ namespace InGame.BattleFields.Bullets
         // TODO DieEffect
 
         public Sprite sprite{ get { return m_sprite;}}
+        public UnlimitedProperty size{ get { return m_size;}}
         public IMoveStrategy moveStrategy { get { return m_moveStrategy;}}
         public DamageType damageType {get { return m_damageStrategy;}}
         public UnlimitedProperty speed { get { return m_speed;}}
@@ -55,6 +57,7 @@ namespace InGame.BattleFields.Bullets
             UnlimitedProperty rfl = new(bulletSetUp.bouncingTimes);
             UnlimitedProperty pnt = new(bulletSetUp.penetrateTimes);
             UnlimitedProperty spl = new(bulletSetUp.splitTimes);
+            UnlimitedProperty siz = new(bulletSetUp.size * Constants.BULLET_SIZE_MULTIPLIER);
 
             m_damage = dmg;
             m_speed = spd;
@@ -63,6 +66,7 @@ namespace InGame.BattleFields.Bullets
             m_penetrateTimes = pnt;
             m_splitTimes = spl;
 
+            m_size = siz;
             m_sprite = bulletSetUp.sprite;
             CreateView();
 

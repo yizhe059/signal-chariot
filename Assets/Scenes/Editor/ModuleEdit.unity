@@ -528,7 +528,7 @@ MonoBehaviour:
     damagePercentageBuff: 0
     flatDamageBuff: 0
     bulletSizePercentageBuff: 100
-    lifeTimeBuff: 100
+    lifeTimeBuff: 10
 --- !u!1 &619894194 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9075689799680712317, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
@@ -877,7 +877,7 @@ MonoBehaviour:
     bulletCount: 1
     bulletSetUp:
       sprite: {fileID: 21300000, guid: 494c2058d61db45a89aa442c3fa2acfb, type: 3}
-      size: 0
+      size: 1
       moveType: 0
       damageType: 0
       damage: 1

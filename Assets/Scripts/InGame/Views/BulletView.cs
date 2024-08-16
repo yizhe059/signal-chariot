@@ -34,13 +34,15 @@ namespace InGame.Views
                 Debug.LogError("No model under this game object!");
                 return;
             }
-            SpriteRenderer spriteRenderer = model.GetComponent<SpriteRenderer>();
-            if(spriteRenderer == null)
+            
+            if(!model.TryGetComponent<SpriteRenderer>(out var spriteRenderer))
             {
                 Debug.LogError("No sprite renderer under model!");
                 return;
             }
+
             spriteRenderer.sprite = m_bullet.sprite;
+            model.localScale = new(m_bullet.size.value, m_bullet.size.value, 1);
         }
 
         private void Update()
