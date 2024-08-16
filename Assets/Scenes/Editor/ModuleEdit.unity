@@ -879,7 +879,7 @@ MonoBehaviour:
       damage: 1
       speed: 40
       lifeTime: 10
-      reflectTimes: 0
+      bouncingTimes: 0
       penetrateTimes: 0
       splitTimes: 0
 --- !u!1 &993809584 stripped
@@ -1446,7 +1446,7 @@ MonoBehaviour:
     penetrationBuff: 0
     numBulletFlatBuff: 1
     speedPercentageBuff: 0
-    damagePercentageBuff: -30
+    damagePercentageBuff: -50
     flatDamageBuff: 0
     bulletSizePercentageBuff: 0
     lifeTimeBuff: 0
