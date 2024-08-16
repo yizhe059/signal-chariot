@@ -1,7 +1,7 @@
 ﻿using InGame.BattleFields.Common;
 using InGame.Cores;
 
-namespace InGame.Effects
+namespace InGame.Effects.EffectElement
 {
     public class ChangeShieldEffect: Effect
     {

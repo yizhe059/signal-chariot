@@ -1,4 +1,5 @@
 ﻿using InGame.Effects;
+using InGame.Effects.EffectElement;
 using UnityEngine;
 
 namespace Editors.Effects

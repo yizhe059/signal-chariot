@@ -1084,6 +1084,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChariotStatus
       objectReference: {fileID: 0}
+    - target: {fileID: 3370005131070448489, guid: 7c1b028cf84834cc0ac4bd31baa46e8f, type: 3}
+      propertyPath: m_doc
+      value: 
+      objectReference: {fileID: 2104037769}
     - target: {fileID: 3647151545547071574, guid: 7c1b028cf84834cc0ac4bd31baa46e8f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1134,6 +1138,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3647151545547071574, guid: 7c1b028cf84834cc0ac4bd31baa46e8f, type: 3}
   m_PrefabInstance: {fileID: 2104037767}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2104037769 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 743006595051540175, guid: 7c1b028cf84834cc0ac4bd31baa46e8f, type: 3}
+  m_PrefabInstance: {fileID: 2104037767}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4476693646802986990
 PrefabInstance:
   m_ObjectHideFlags: 0
