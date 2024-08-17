@@ -9,6 +9,7 @@ namespace SetUps
     public class BulletSetUp
     {
         public Sprite sprite;
+        public float size;
 
         public MoveType moveType;
         public DamageType damageType;
@@ -24,6 +25,7 @@ namespace SetUps
         public BulletSetUp(BulletSetUp other)
         {
             sprite = other.sprite;
+            size = other.size;
             
             moveType = other.moveType;
             damageType = other.damageType;

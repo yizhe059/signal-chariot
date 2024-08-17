@@ -4,6 +4,7 @@ using DG.Tweening;
 using Utils;
 using InGame.BattleFields.Enemies;
 using InGame.Cores;
+using Unity.VisualScripting;
 
 namespace InGame.BattleFields.Bullets
 {
@@ -22,56 +23,117 @@ namespace InGame.BattleFields.Bullets
         Range,
     }
     
-    public interface IMoveStrategy
+    public interface IMovable
     {
         void Move();
     }
 
-    public class LinearMoveStrategy : IMoveStrategy
+    public abstract class MoveStrategy
     {
-        private Bullet m_bullet;
-        private Transform m_bulletTransform;
-        private Vector3 m_direction;
-    
-        public LinearMoveStrategy(Bullet bullet)
+        protected Bullet m_bullet;
+        protected Transform m_bulletTransform;
+        protected int m_batchIdx;
+        protected int m_bulletIdx;
+        protected BulletManager m_bulletManager;
+
+        public MoveStrategy(Bullet bullet)
         {
             this.m_bullet = bullet;
             this.m_bulletTransform = bullet.bulletView.transform;
-            this.SetTarget();
+            this.m_batchIdx = bullet.bulletIdx[0];
+            this.m_bulletIdx = bullet.bulletIdx[1];
+            this.m_bulletManager = bullet.tower.bulletManager;
+            if(m_bulletIdx == 0) this.SetBatchInfo();
         }
 
-        private void SetTarget()
+        protected virtual void SetBatchInfo(){}
+    }
+
+    public class LinearMoveStrategy : MoveStrategy, IMovable
+    {
+        private Vector3 m_velocity;
+    
+        public LinearMoveStrategy(Bullet bullet) : base(bullet)
+        {
+            this.SetDirection();
+        }
+
+        protected override void SetBatchInfo()
         {
             Enemy closest = GameManager.Instance.GetEnemySpawnController().
                             GetClosestEnemy(m_bulletTransform.position);
-            if(closest != null) m_direction = closest.GetView().transform.position;
-            else m_direction = Utilities.RandomPosition();
 
-            m_bullet.tower.towerView.SetTarget(m_direction);
+            Vector3 target;
+            if(closest != null) target = closest.GetView().transform.position;
+            else target = Utilities.RandomPosition();
 
-            m_direction = m_direction - m_bulletTransform.position;
-            m_direction.z = Constants.BULLET_DEPTH;
-            m_direction = m_direction.normalized *
-                        Time.deltaTime * m_bullet.speed.value * 
-                        Constants.SPEED_MULTIPLIER;
+            m_bullet.tower.towerView.SetTarget(target);
+
+            Vector3 direction = target - m_bulletTransform.position;
+            direction.z = Constants.BULLET_DEPTH;
+
+            m_bulletManager.SetBatchInfo(direction, m_batchIdx);
+        }
+
+        private void SetDirection()
+        {
+            Vector3 direction = m_bulletManager.GetBatchInfo(m_batchIdx);
+
+            int batchSize = m_bulletManager.GetBatchSize(m_batchIdx);
+            float medium = (batchSize%2 == 0) ? (batchSize/2 - 0.5f) : batchSize/2;
+            float theta = (m_bulletIdx - medium) * Constants.BULLET_BATCH_ROTATION_DEGREE * Mathf.Deg2Rad;
+
+            Vector3 currDirection;
+            currDirection.x = Mathf.Cos(theta) * direction.x - Mathf.Sin(theta) * direction.y;
+            currDirection.y = Mathf.Sin(theta) * direction.x + Mathf.Cos(theta) * direction.y;
+            currDirection.z = direction.z;
+ 
+            m_velocity = Constants.SPEED_MULTIPLIER * m_bullet.speed.value * 
+                        Time.deltaTime * currDirection.normalized;
         }
 
         public void Move()
         {
-            m_bulletTransform.Translate(m_direction, Space.World);
+            m_bulletTransform.Translate(m_velocity, Space.World);
         }
     }
 
-    public class FollowMoveStrategy : IMoveStrategy
+    public class RandomMoveStrategy : MoveStrategy, IMovable
+    {  
+        private Vector3 m_velocity;
+
+        public RandomMoveStrategy(Bullet bullet) : base(bullet)
+        {
+            this.SetDirection();
+        }
+
+        protected override void SetBatchInfo()
+        {
+            Vector3 target = Utilities.RandomPosition();
+            m_bulletManager.SetBatchInfo(target, m_batchIdx);
+            m_bullet.tower.towerView.SetTarget(target);
+        }
+
+        private void SetDirection()
+        {
+            Vector3 target = m_bulletManager.GetBatchInfo(m_batchIdx);
+            Vector3 direction = (target - m_bulletTransform.position).normalized;
+            m_velocity = Constants.SPEED_MULTIPLIER * m_bullet.speed.value * 
+                        Time.deltaTime * direction;
+        }
+
+        public void Move()
+        {
+            m_bulletTransform.Translate(m_velocity, Space.World);
+        }
+    }
+
+    public class FollowMoveStrategy : MoveStrategy, IMovable
     {
-        private Bullet m_bullet;
-        private Transform m_bulletTransform;
         private Transform m_target;
 
-        public FollowMoveStrategy(Bullet bullet)
+        public FollowMoveStrategy(Bullet bullet) : base(bullet)
         {
-            this.m_bullet = bullet;
-            this.m_bulletTransform = bullet.bulletView.transform;
             this.SetTarget();
         }
 
@@ -100,24 +162,19 @@ namespace InGame.BattleFields.Bullets
             if(m_target == null) return;
             Vector3 direction = m_target.position - m_bulletTransform.position;
             direction.z = Constants.BULLET_DEPTH;
-            direction = direction.normalized * 
-                       Time.deltaTime * m_bullet.speed.value * 
-                       Constants.SPEED_MULTIPLIER;
-            m_bulletTransform.Translate(direction, Space.World);
+            Vector3 velocity = Constants.SPEED_MULTIPLIER * m_bullet.speed.value * 
+                                Time.deltaTime * direction.normalized;
+            m_bulletTransform.Translate(velocity, Space.World);
         }
     }
 
-    public class ParabolaMoveStrategy : IMoveStrategy
+    public class ParabolaMoveStrategy : MoveStrategy, IMovable
     {
-        private Bullet m_bullet;
-        private Transform m_bulletTransform;
         private Vector3 m_target;
         private float m_distance;
 
-        public ParabolaMoveStrategy(Bullet bullet)
+        public ParabolaMoveStrategy(Bullet bullet) : base(bullet)
         {
-            this.m_bullet = bullet;
-            this.m_bulletTransform = bullet.bulletView.transform;
             this.SetTarget();
         }
 
@@ -144,40 +201,29 @@ namespace InGame.BattleFields.Bullets
         }
     }
 
-    public class CircleRoundMoveStrategy : IMoveStrategy
+    public class CircleRoundMoveStrategy : MoveStrategy, IMovable
     {
+        public CircleRoundMoveStrategy(Bullet bullet) : base(bullet)
+        {
+            
+        }
+
         public void Move()
         {
             // don't move at all
         }
     }
 
-    public class PlacementMoveStrategy : IMoveStrategy
+    public class PlacementMoveStrategy : MoveStrategy, IMovable
     {
+        public PlacementMoveStrategy(Bullet bullet) : base(bullet)
+        {
+
+        }
+
         public void Move()
         {
             
-        }
-    }
-
-    public class RandomMoveStrategy : IMoveStrategy
-    {  
-        private Bullet m_bullet;
-        private Transform m_bulletTransform;
-        private Vector3 m_direction;
-
-        public RandomMoveStrategy(Bullet bullet)
-        {
-            m_bullet = bullet;
-            m_bulletTransform = m_bullet.bulletView.transform;
-            m_direction = (Utilities.RandomPosition() - m_bulletTransform.position).normalized;
-            m_direction *= Time.deltaTime * m_bullet.speed.value * 
-                          Constants.SPEED_MULTIPLIER;
-        }
-
-        public void Move()
-        {
-            m_bulletTransform.Translate(m_direction, Space.World);
         }
     }
 }

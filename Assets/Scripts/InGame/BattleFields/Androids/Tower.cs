@@ -29,8 +29,10 @@ namespace InGame.BattleFields.Androids
         
         [Header("Bullet")]
         private BulletManager m_bulletManager;
+        public BulletManager bulletManager { get { return m_bulletManager;}}
         private BulletSetUp m_bulletSetUp;
         private UnlimitedProperty m_bulletCount;
+        private UnlimitedProperty m_shootCount;
         private UnlimitedProperty m_shootInterval;
         public UnlimitedProperty shootInterval { get { return m_shootInterval;}}
         private UnlimitedProperty m_seekInterval;
@@ -43,23 +45,25 @@ namespace InGame.BattleFields.Androids
         #region Life Cycle
         public Tower(TowerSetUp towerSetUp, Module module)
         {
-            UnlimitedProperty bulletCount = new(towerSetUp.bulletCount, UnlimitedPropertyType.BulletCount);
-            UnlimitedProperty dmgMtp = new(towerSetUp.damageMultipler, UnlimitedPropertyType.Multiplier);
+            UnlimitedProperty bltCnt = new(towerSetUp.bulletCount, UnlimitedPropertyType.BulletCount);
+            UnlimitedProperty shtCnt = new(towerSetUp.shootCount);
             UnlimitedProperty shtItv = new(towerSetUp.shootInterval, UnlimitedPropertyType.Interval);
             UnlimitedProperty skItv = new(towerSetUp.seekInterval, UnlimitedPropertyType.Speed);
-            
-            m_bulletCount = bulletCount;
-            m_damageMultiplier = dmgMtp;
+            UnlimitedProperty dmgMtp = new(towerSetUp.damageMultipler, UnlimitedPropertyType.Multiplier);
+
+            m_bulletManager = new();
+            m_bulletSetUp = towerSetUp.bulletSetUp;
+
+            m_bulletCount = bltCnt;
+            m_shootCount = shtCnt;
             m_shootInterval = shtItv;
             m_seekInterval = skItv;
 
-            m_bulletSetUp = towerSetUp.bulletSetUp;
-            
+            m_damageMultiplier = dmgMtp;
+
             m_module = module;              
             m_sprite = towerSetUp.sprite;
 
-            m_bulletManager = new();
-            
             CreateView();
         }
 
@@ -97,28 +101,31 @@ namespace InGame.BattleFields.Androids
 
         public IEnumerator ShootBullet(WeaponBuff buff)
         {
-            float bulletCount = m_bulletCount.value + buff.numShotsFlatBuff;
-
-            BulletSetUp bulletSetUp = new BulletSetUp(m_bulletSetUp);
+            BulletSetUp bulletSetUp = new(m_bulletSetUp);
             bulletSetUp.bouncingTimes += buff.bouncingBuff;
             bulletSetUp.penetrateTimes += buff.penetrationBuff;
             bulletSetUp.splitTimes += buff.splittingBuff;
 
-            bulletSetUp.speed *= 1 + (float)buff.speedPercentageBuff / 100f;
+            bulletSetUp.lifeTime *= 1 + (float)buff.lifeTimePercentageBuff/100f;
+            bulletSetUp.lifeTime = Mathf.Max(0.001f, bulletSetUp.lifeTime);
+
+            bulletSetUp.speed *= 1 + (float)buff.speedPercentageBuff/100f;
             bulletSetUp.speed = Mathf.Max(0.001f, bulletSetUp.speed);
 
             bulletSetUp.damage *= m_damageMultiplier.value;
-            bulletSetUp.damage *= 1 + (float)buff.damagePercentageBuff / 100f;
+            bulletSetUp.damage *= 1 + (float)buff.damagePercentageBuff/100f;
             bulletSetUp.damage += buff.flatDamageBuff;
             bulletSetUp.damage = Mathf.Max(0.001f, bulletSetUp.damage);
 
-            // TODO: bullet size percentage
+            bulletSetUp.size  *= 1 + (float)buff.bulletSizePercentageBuff/100f;
+            bulletSetUp.size = Mathf.Max(0.001f, bulletSetUp.size);
 
-            bulletSetUp.lifeTime += buff.lifeTimeBuff;
+            float shootCount = m_shootCount.value + buff.numShotsFlatBuff;
+            float bulletCount = m_bulletCount.value + buff.numBulletsPerShotFlatBuff;
 
-            for(int i = 0; i < bulletCount; i++)
+            for(int i = 0; i < shootCount; i++)
             {
-                m_bulletManager.AddBullet(bulletSetUp, this);
+                m_bulletManager.AddBulletBatch(bulletCount, bulletSetUp, this);
                 yield return new WaitForSeconds(m_shootInterval.value);
             }
         }

@@ -74,13 +74,16 @@ namespace Utils
         public const float COLLIDE_OFFSET = 0.5f;
         public const float SEPERATION_DISTANCE = 1f;
         public const float SEPERATION_FORCE = 1f;
+        public const float SELECT_THRESHOLD = 0.5f;
 
         #endregion
 
         #region Multiplier
+
         public const float SPEED_MULTIPLIER = 0.1f;
-        #endregion 
-        
-        public const float SELECT_THRESHOLD = 0.5f;
+        public const float BULLET_SIZE_MULTIPLIER = .1f;
+        public const float BULLET_BATCH_ROTATION_DEGREE = 10f;
+
+        #endregion
     }
 }

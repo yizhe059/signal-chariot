@@ -35,6 +35,7 @@ namespace InGame.InGameStates
             GameManager.Instance.GetInputManager().RegisterRotateEvent(OnRotatePressed);
             GameManager.Instance.GetInputManager().RegisterClickEvent(boardCamera, OnClick);
 
+            ModuleCardUI.Instance.Hide();
             BattleProgressUI.Instance.Hide();
             BattleResultUI.Instance.Hide();
             AndroidStatusUI.Instance.Show();
@@ -50,6 +51,7 @@ namespace InGame.InGameStates
             GameManager.Instance.GetInputManager().UnregisterRotateEvent(OnRotatePressed);
             GameManager.Instance.GetInputManager().UnregisterClickEvent(boardCamera, OnClick);
 
+            ModuleCardUI.Instance.Show();
             BattleProgressUI.Instance.Show();
             BattleResultUI.Instance.Show();
             AndroidStatusUI.Instance.Hide();

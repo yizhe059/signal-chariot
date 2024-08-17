@@ -4,7 +4,7 @@
             <ui:Button text="Test Signal" parse-escape-sequences="true" display-tooltip-when-elided="true" name="test" />
             <ui:Button text="Add Slot" parse-escape-sequences="true" display-tooltip-when-elided="true" name="add" />
         </ui:VisualElement>
-        <ui:VisualElement name="tutorials" style="flex-grow: 1; max-height: 70%; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
+        <ui:VisualElement name="tutorials" style="flex-grow: 1; max-height: 70%; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; background-color: rgba(0, 0, 0, 0.39);">
             <ui:Label tabindex="-1" text="Select: Mouse [Left Click]" parse-escape-sequences="true" display-tooltip-when-elided="true" name="select" />
             <ui:Label tabindex="-1" text="Move: Mouse [Slide]" parse-escape-sequences="true" display-tooltip-when-elided="true" name="move" />
             <ui:Label tabindex="-1" text="Rotate: Keyboard [R]" parse-escape-sequences="true" display-tooltip-when-elided="true" name="rotate" />
