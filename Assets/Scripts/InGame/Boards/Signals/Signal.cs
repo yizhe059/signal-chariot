@@ -139,5 +139,18 @@ namespace InGame.Boards.Signals
                 _ => throw new ArgumentOutOfRangeException(nameof(o), o, null)
             };
         }
+        
+        public static Direction ReverseDirection(Direction dir)
+        {
+            return dir switch
+            {
+                Direction.Up => Direction.Down,
+                Direction.Down => Direction.Up,
+                Direction.Right => Direction.Left,
+                Direction.Left => Direction.Right,
+                _ => 0
+            };
+            
+        }
     }
 }

@@ -15,7 +15,9 @@ namespace InGame.Effects.EffectElement
         {
             var signal = blackBoard.signal;
             if (signal == null) return;
-
+            var inputDir = Signal.OrientationToDirection(m_module.orientation, Signal.Direction.Up);
+            if (Signal.ReverseDirection(inputDir) != signal.dir) return;
+            
             var count = splittingDirections.Count;
             if (splittingDirections.Count == 0) return;
             
