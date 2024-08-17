@@ -25,6 +25,7 @@ public class ModuleCardUI : MonoSingleton<ModuleCardUI>, IHidable
         m_name.text = name;
         m_panel.style.left = new Length(positon.x, LengthUnit.Pixel);
         m_panel.style.top = new Length(Screen.height - positon.y, LengthUnit.Pixel);
+        // TODO: if ui out of bound, then display in another way
     }
 
     public void Hide()
