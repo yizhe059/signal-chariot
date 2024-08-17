@@ -27,6 +27,7 @@ namespace InGame.InGameStates
             m_timeEffectManager.TestStart();
             m_signalController.TestStart();
 
+            ModuleCardUI.Instance.Hide();
             BattleProgressUI.Instance.Hide();
             BattleResultUI.Instance.Hide();
             AndroidStatusUI.Instance.Show();
@@ -41,6 +42,7 @@ namespace InGame.InGameStates
             m_signalController.TestStop();
             m_timeEffectManager.TestStop();
 
+            ModuleCardUI.Instance.Show();
             BattleProgressUI.Instance.Show();
             BattleResultUI.Instance.Show();
             AndroidStatusUI.Instance.Hide();

@@ -39,6 +39,7 @@ namespace InGame.InGameStates
             var boardCamera = GameManager.Instance.GetCameraManager().boardCamera;
             GameManager.Instance.GetInputManager().RegisterClickEvent(boardCamera, OnClicked);
 
+            ModuleCardUI.Instance.Hide();
             BattleProgressUI.Instance.Hide();
             BattleResultUI.Instance.Hide();
             AndroidStatusUI.Instance.Show();
@@ -61,6 +62,7 @@ namespace InGame.InGameStates
             Debug.Log("Exit AddSlot");
 
             // TODO: 用BitMap代替
+            ModuleCardUI.Instance.Show();
             BattleProgressUI.Instance.Show();
             BattleResultUI.Instance.Show();
             AndroidStatusUI.Instance.Hide();

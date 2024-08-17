@@ -51,7 +51,7 @@ namespace InGame.InGameStates
             m_enemySpawnController.RegisterWaveFinishCallBack(OnWaveFinished);
             m_enemySpawnController.Start();
             
-
+            ModuleCardUI.Instance.Hide();
             BattleProgressUI.Instance.Show();
             BattleResultUI.Instance.Hide();
             AndroidStatusUI.Instance.Show();
@@ -74,6 +74,7 @@ namespace InGame.InGameStates
             m_enemySpawnController.UnregisterWaveFinishCallBack(OnWaveFinished);
             m_enemySpawnController.Stop();
             
+            ModuleCardUI.Instance.Show();
             BattleProgressUI.Instance.Hide();
             BattleResultUI.Instance.Show();
             AndroidStatusUI.Instance.Hide();

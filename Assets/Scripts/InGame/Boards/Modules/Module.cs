@@ -75,8 +75,6 @@ namespace InGame.Boards.Modules
             Left
         }
 
-
-        
         private Orientation m_orientation = Orientation.Up;
         private ModuleView m_prefab;
         private ModuleView m_moduleView;

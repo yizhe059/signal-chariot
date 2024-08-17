@@ -28,6 +28,7 @@ namespace InGame.InGameStates
             
             Debug.Log("Enter battle result");
 
+            ModuleCardUI.Instance.Hide();
             BattleProgressUI.Instance.Show();
 
             BattleResultUI.Instance.Show();
@@ -41,6 +42,8 @@ namespace InGame.InGameStates
         public override void Exit()
         {
             Debug.Log("Exit battle result");
+
+            ModuleCardUI.Instance.Show();
             BattleProgressUI.Instance.Hide();
             BattleResultUI.Instance.Hide();
             AndroidStatusUI.Instance.Hide();

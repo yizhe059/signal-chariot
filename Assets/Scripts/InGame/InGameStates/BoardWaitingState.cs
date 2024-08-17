@@ -38,6 +38,7 @@ namespace InGame.InGameStates
             
             m_displayManager.Start();
             
+            ModuleCardUI.Instance.Hide();
             BattleProgressUI.Instance.Hide();
             BattleResultUI.Instance.Hide();
             AndroidStatusUI.Instance.Show();
@@ -59,6 +60,7 @@ namespace InGame.InGameStates
             }
             m_displayManager.Stop();
             
+            ModuleCardUI.Instance.Show();
             BattleProgressUI.Instance.Show();
             BattleResultUI.Instance.Show();
             AndroidStatusUI.Instance.Hide();
