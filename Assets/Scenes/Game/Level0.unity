@@ -1207,6 +1207,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ModuleInfoCard
       objectReference: {fileID: 0}
+    - target: {fileID: 9060377055981314004, guid: c2aa1647d64bd465b97e769451e86116, type: 3}
+      propertyPath: X_DISPLAY_OFFSET
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 9060377055981314004, guid: c2aa1647d64bd465b97e769451e86116, type: 3}
+      propertyPath: Y_DISPLAY_OFFSET
+      value: 350
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

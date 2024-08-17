@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Set Up
   m_EditorClassIdentifier: 
   androidSetUp:
-    initialHealth: 10
-    maxHealth: 10
+    initialHealth: 20
+    maxHealth: 20
     defence: 0
-    speed: 20
+    speed: 30
     mod: 0
   boardSetUp:
     width: 7
@@ -89,8 +89,8 @@ MonoBehaviour:
     - pos:
         x: 1
         y: 5
-      moduleID: 10
-      moduleName: Signal Capacitor
+      moduleID: 2
+      moduleName: Signal Rotator
       orientation: 0
     slotPrefab: {fileID: 6622818502655049371, guid: 80c85fcaea6536748bb67591b4fc60b2, type: 3}
     signalPrefab: {fileID: 7786143621109699157, guid: e7f648ad21042b64ca742ba22438c585, type: 3}
@@ -112,16 +112,16 @@ MonoBehaviour:
     requirements: []
     hasCustomEffect: 1
     triggerRequirement:
-      rid: 578545810181456052
+      rid: 6796066367158091866
     customEffects:
-    - rid: 578545810181456053
+    - rid: 6796066367158091867
   - name: Signal Amplifier
     desc: Add 1 energy point to the signal pass through.
     otherPositions: []
     prefab: {fileID: 6219216261471928466, guid: ddab373e8e7f09a4c82d8f5654d9c978, type: 3}
     buffMask: 0
     signalEffects:
-    - rid: 578545810181456054
+    - rid: 6796066367158091868
     maxUses: -1
     consumptionMethod: 0
     energyConsumption: 0
@@ -138,7 +138,7 @@ MonoBehaviour:
     prefab: {fileID: 7680782621330569741, guid: 71a7ea6be685de642aef0c89bab4fbd5, type: 3}
     buffMask: 0
     signalEffects:
-    - rid: 578545810181456055
+    - rid: 6796066367158091869
     maxUses: -1
     consumptionMethod: 0
     energyConsumption: 0
@@ -158,13 +158,13 @@ MonoBehaviour:
     prefab: {fileID: 1402701477217004034, guid: 17646af2c7a669e49bb57947bbd60d0a, type: 3}
     buffMask: 1
     signalEffects:
-    - rid: 578545810181456056
+    - rid: 6796066367158091870
     maxUses: -1
     consumptionMethod: 0
     energyConsumption: 1
     coolDown: 0
     placingEffects:
-    - rid: 578545810181456057
+    - rid: 6796066367158091871
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
@@ -181,9 +181,9 @@ MonoBehaviour:
     energyConsumption: 0
     coolDown: 0
     placingEffects:
-    - rid: 578545810181456058
+    - rid: 6796066367158091872
     requirements:
-    - rid: 578545810181456059
+    - rid: 6796066367158091873
     hasCustomEffect: 0
     triggerRequirement:
       rid: -2
@@ -199,7 +199,7 @@ MonoBehaviour:
     energyConsumption: 0
     coolDown: 0
     placingEffects:
-    - rid: 578545810181456060
+    - rid: 6796066367158091874
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
@@ -216,7 +216,7 @@ MonoBehaviour:
     energyConsumption: 0
     coolDown: 0
     placingEffects:
-    - rid: 578545810181456061
+    - rid: 6796066367158091875
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
@@ -233,7 +233,7 @@ MonoBehaviour:
     energyConsumption: 0
     coolDown: 0
     placingEffects:
-    - rid: 578545810181456062
+    - rid: 6796066367158091876
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
@@ -245,13 +245,13 @@ MonoBehaviour:
     prefab: {fileID: 730825653244556730, guid: 49d0f8d7babd7e84eb058de10337e464, type: 3}
     buffMask: 0
     signalEffects:
-    - rid: 578545810181456063
+    - rid: 6796066367158091877
     maxUses: -1
     consumptionMethod: 0
     energyConsumption: 0
     coolDown: 0
     placingEffects:
-    - rid: 578545810181456064
+    - rid: 6796066367158091878
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
@@ -263,7 +263,7 @@ MonoBehaviour:
     prefab: {fileID: 3218698526865631896, guid: 08ecda914fd6a5a4e825ce70006831d9, type: 3}
     buffMask: 0
     signalEffects:
-    - rid: 578545810181456065
+    - rid: 6796066367158091879
     maxUses: -1
     consumptionMethod: 0
     energyConsumption: 0
@@ -281,7 +281,7 @@ MonoBehaviour:
     prefab: {fileID: 9128623023197033979, guid: 9f5e39c1a3a76b24f9b4621047d50753, type: 3}
     buffMask: 0
     signalEffects:
-    - rid: 578545810181456066
+    - rid: 6796066367158091880
     maxUses: -1
     consumptionMethod: 1
     energyConsumption: 3
@@ -393,65 +393,86 @@ MonoBehaviour:
       - range:
           start: 0
           end: 30
+        spawnGroupID: 0
+      duration: 30
+      groupsMustBeat: 
+    - groups:
+      - range:
+          start: 0
+          end: 30
+        spawnGroupID: 0
+      - range:
+          start: 0
+          end: 30
+        spawnGroupID: 0
+      - range:
+          start: 0
+          end: 30
         spawnGroupID: 1
       duration: 30
       groupsMustBeat: 
     - groups:
       - range:
           start: 0
-          end: 45
+          end: 60
         spawnGroupID: 0
       - range:
           start: 0
-          end: 45
+          end: 60
         spawnGroupID: 1
       - range:
           start: 0
-          end: 45
+          end: 60
         spawnGroupID: 1
       - range:
-          start: 30
-          end: 45
+          start: 0
+          end: 60
         spawnGroupID: 0
       - range:
           start: 30
-          end: 45
+          end: 60
+        spawnGroupID: 0
+      - range:
+          start: 30
+          end: 60
         spawnGroupID: 1
-      duration: 45
+      duration: 60
       groupsMustBeat: 
     enemySpawnLevels:
     - waves:
       - waveID: 0
-        moduleRewards: 01000000020000000500000009000000
+        moduleRewards: 010000000700000009000000
       - waveID: 1
-        moduleRewards: 06000000070000000a00000008000000
+        moduleRewards: 020000000600000008000000
       - waveID: 2
+        moduleRewards: 02000000050000000a00000002000000060000000700000004000000
+      - waveID: 3
         moduleRewards: 
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 578545810181456052
+    - rid: 6796066367158091866
       type: {class: IntervalTimeTriggerRequirement, ns: InGame.Effects.TriggerRequirements, asm: Assembly-CSharp}
       data:
         interval: 1
         canEffectInTest: 1
-    - rid: 578545810181456053
+    - rid: 6796066367158091867
       type: {class: SignalGenerationEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         signalStrength: 2
-    - rid: 578545810181456054
+    - rid: 6796066367158091868
       type: {class: EnergyAmplifyEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         amplifiedAmount: 1
-    - rid: 578545810181456055
+    - rid: 6796066367158091869
       type: {class: SignalDirectionChangeEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data: 
-    - rid: 578545810181456056
+    - rid: 6796066367158091870
       type: {class: TowerShootEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data: 
-    - rid: 578545810181456057
+    - rid: 6796066367158091871
       type: {class: PlacingTowerEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         setUp:
@@ -467,19 +488,19 @@ MonoBehaviour:
             moveType: 0
             damageType: 0
             damage: 1
-            speed: 60
-            lifeTime: 5
+            speed: 100
+            lifeTime: 4
             bouncingTimes: 0
             penetrateTimes: 0
             splitTimes: 0
-    - rid: 578545810181456058
+    - rid: 6796066367158091872
       type: {class: ChangeShieldEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         delta: 1
-    - rid: 578545810181456059
+    - rid: 6796066367158091873
       type: {class: BorderRequirement, ns: InGame.Effects.PlacingEffectRequirements, asm: Assembly-CSharp}
       data: 
-    - rid: 578545810181456060
+    - rid: 6796066367158091874
       type: {class: ApplyWeaponBuff, ns: InGame.Effects.EffectElement.ApplyModuleBuffEffects, asm: Assembly-CSharp}
       data:
         range: 1
@@ -487,14 +508,14 @@ MonoBehaviour:
           bouncingBuff: 0
           splittingBuff: 0
           penetrationBuff: 0
-          numShotsFlatBuff: 1
+          numShotsFlatBuff: 2
           numBulletsPerShotFlatBuff: 0
           speedPercentageBuff: 0
           damagePercentageBuff: 0
           flatDamageBuff: 0
           bulletSizePercentageBuff: 0
           lifeTimePercentageBuff: 0
-    - rid: 578545810181456061
+    - rid: 6796066367158091875
       type: {class: ApplyWeaponBuff, ns: InGame.Effects.EffectElement.ApplyModuleBuffEffects, asm: Assembly-CSharp}
       data:
         range: 1
@@ -509,7 +530,7 @@ MonoBehaviour:
           flatDamageBuff: 0
           bulletSizePercentageBuff: 0
           lifeTimePercentageBuff: 0
-    - rid: 578545810181456062
+    - rid: 6796066367158091876
       type: {class: ApplyWeaponBuff, ns: InGame.Effects.EffectElement.ApplyModuleBuffEffects, asm: Assembly-CSharp}
       data:
         range: 0
@@ -520,14 +541,14 @@ MonoBehaviour:
           numShotsFlatBuff: 0
           numBulletsPerShotFlatBuff: 2
           speedPercentageBuff: 0
-          damagePercentageBuff: -50
+          damagePercentageBuff: 0
           flatDamageBuff: 0
           bulletSizePercentageBuff: 0
           lifeTimePercentageBuff: 0
-    - rid: 578545810181456063
+    - rid: 6796066367158091877
       type: {class: DestroySignalEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data: 
-    - rid: 578545810181456064
+    - rid: 6796066367158091878
       type: {class: ApplyWeaponBuff, ns: InGame.Effects.EffectElement.ApplyModuleBuffEffects, asm: Assembly-CSharp}
       data:
         range: 1
@@ -537,15 +558,15 @@ MonoBehaviour:
           penetrationBuff: 0
           numShotsFlatBuff: 0
           numBulletsPerShotFlatBuff: 0
-          speedPercentageBuff: -50
+          speedPercentageBuff: -25
           damagePercentageBuff: 0
           flatDamageBuff: 0
           bulletSizePercentageBuff: 100
           lifeTimePercentageBuff: 50
-    - rid: 578545810181456065
+    - rid: 6796066367158091879
       type: {class: SplitSignalEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         splittingDirections: 0300000002000000
-    - rid: 578545810181456066
+    - rid: 6796066367158091880
       type: {class: SignalGenerationFromUsedEnergyEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data: 

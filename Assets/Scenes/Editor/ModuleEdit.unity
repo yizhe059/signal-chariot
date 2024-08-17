@@ -315,7 +315,7 @@ MonoBehaviour:
     bouncingBuff: 0
     splittingBuff: 0
     penetrationBuff: 0
-    numShotsFlatBuff: 1
+    numShotsFlatBuff: 2
     numBulletsPerShotFlatBuff: 0
     speedPercentageBuff: 0
     damagePercentageBuff: 0
@@ -536,7 +536,7 @@ MonoBehaviour:
     penetrationBuff: 0
     numShotsFlatBuff: 0
     numBulletsPerShotFlatBuff: 0
-    speedPercentageBuff: -50
+    speedPercentageBuff: -25
     damagePercentageBuff: 0
     flatDamageBuff: 0
     bulletSizePercentageBuff: 100
@@ -902,8 +902,8 @@ MonoBehaviour:
       moveType: 0
       damageType: 0
       damage: 1
-      speed: 60
-      lifeTime: 5
+      speed: 80
+      lifeTime: 4
       bouncingTimes: 0
       penetrateTimes: 0
       splitTimes: 0
@@ -1489,7 +1489,7 @@ MonoBehaviour:
     numShotsFlatBuff: 0
     numBulletsPerShotFlatBuff: 2
     speedPercentageBuff: 0
-    damagePercentageBuff: -50
+    damagePercentageBuff: 0
     flatDamageBuff: 0
     bulletSizePercentageBuff: 0
     lifeTimePercentageBuff: 0
