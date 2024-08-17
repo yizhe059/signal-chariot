@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using SetUps;
-using UnityEngine;
 using Utils.Common;
 
 #if UNITY_EDITOR

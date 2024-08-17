@@ -1,8 +1,9 @@
-﻿#if UNITY_EDITOR
-using SetUps;
-using UnityEditor;
+﻿using SetUps;
 using UnityEngine;
 using Utils.Common;
+
+#if UNITY_EDITOR
+using UnityEditor;
 
 namespace Editors.Enemies
 {
@@ -52,5 +53,4 @@ namespace Editors.Enemies
         }
     }
 }
-
 #endif

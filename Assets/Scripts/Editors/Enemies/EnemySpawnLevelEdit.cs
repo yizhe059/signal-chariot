@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SetUps;
 using UnityEngine;
 
+#if UNITY_EDITOR
 namespace Editors.Enemies
 {
     [System.Serializable]
@@ -80,3 +81,4 @@ namespace Editors.Enemies
         }
     }
 }
+#endif

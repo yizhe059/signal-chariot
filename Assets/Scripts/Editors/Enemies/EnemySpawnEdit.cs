@@ -2,6 +2,7 @@
 using SetUps;
 using UnityEngine;
 
+#if UNITY_EDITOR
 namespace Editors.Enemies
 {
     public class EnemySpawnEdit: MonoBehaviour
@@ -20,3 +21,4 @@ namespace Editors.Enemies
         }
     }
 }
+#endif

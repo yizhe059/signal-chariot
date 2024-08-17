@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using SetUps;
-using UnityEngine;
 using Utils.Common;
 
+#if UNITY_EDITOR
 namespace Editors.Enemies
 {
     public class EnemyWavesEdit: MonoSingleton<EnemyWavesEdit>
@@ -22,3 +22,4 @@ namespace Editors.Enemies
         }
     }
 }
+#endif

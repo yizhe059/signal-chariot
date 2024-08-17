@@ -1,19 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using SetUps;
+﻿using SetUps;
 using UnityEngine;
-using UnityEngine.Serialization;
 
+#if UNITY_EDITOR
 namespace Editors.Enemies
 {
-
-    
     public class EnemySpawnWaveEdit: MonoBehaviour
     {
-        
-        
         public EnemyPlainWaveBlk wave;
-        
         
         public void OnValidate()
         {
@@ -28,10 +21,6 @@ namespace Editors.Enemies
                         wave.groupsMustBeat[i] = wave.groups.Count - 1;
                 }
             }
-
-            
-            
-
         }
         public EnemyPlainWaveBlk CreateBlk()
         {
@@ -40,3 +29,4 @@ namespace Editors.Enemies
         }
     }
 }
+#endif

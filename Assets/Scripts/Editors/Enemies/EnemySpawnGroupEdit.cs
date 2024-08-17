@@ -25,11 +25,7 @@ namespace Editors.Enemies
                 {
                     blk.enemyName = "Invalid ID";
                 }
-
-            }
-            
-            
-
+            }                        
         }
 
         public EnemyPlainGroupSpawnBlk CreateSpawnGroupBlks()

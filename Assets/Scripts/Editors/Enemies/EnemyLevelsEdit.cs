@@ -2,6 +2,7 @@
 using SetUps;
 using Utils.Common;
 
+#if UNITY_EDITOR
 namespace Editors.Enemies
 {
     public class EnemyLevelsEdit: MonoSingleton<EnemyLevelsEdit>
@@ -20,3 +21,4 @@ namespace Editors.Enemies
         }
     }
 }
+#endif

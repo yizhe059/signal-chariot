@@ -1,9 +1,8 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using InGame.Views;
+﻿using InGame.Views;
 using SetUps;
 using UnityEngine;
 
+#if UNITY_EDITOR
 namespace Editors.Enemies
 {
     public class EnemyEdit: MonoBehaviour
@@ -65,3 +64,4 @@ namespace Editors.Enemies
         }
     }
 }
+#endif
