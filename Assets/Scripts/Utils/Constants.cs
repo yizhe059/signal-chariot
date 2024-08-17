@@ -80,6 +80,7 @@ namespace Utils
         #region Multiplier
         public const float SPEED_MULTIPLIER = 0.1f;
         public const float BULLET_SIZE_MULTIPLIER = .1f;
-        #endregion 
+        public const float BULLET_BATCH_ROTATION_DEGREE = 10f;
+        #endregion
     }
 }

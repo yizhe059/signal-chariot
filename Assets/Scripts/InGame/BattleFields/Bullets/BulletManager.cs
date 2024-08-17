@@ -45,6 +45,11 @@ namespace InGame.BattleFields.Bullets
             return m_targets[batchIdx];
         }
 
+        public int GetBatchSize(int batchIdx)
+        {
+            return m_bullets[batchIdx].Count;
+        }
+
         public void RemoveBullet(Bullet bullet)
         {
             // m_bullets.Remove(bullet);

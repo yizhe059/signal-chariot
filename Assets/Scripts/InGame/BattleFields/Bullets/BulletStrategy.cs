@@ -67,18 +67,29 @@ namespace InGame.BattleFields.Bullets
             if(closest != null) target = closest.GetView().transform.position;
             else target = Utilities.RandomPosition();
 
-            m_bulletManager.SetBatchInfo(target, m_batchIdx);
             m_bullet.tower.towerView.SetTarget(target);
+
+            Vector3 direction = target - m_bulletTransform.position;
+            direction.z = Constants.BULLET_DEPTH;
+
+            m_bulletManager.SetBatchInfo(direction, m_batchIdx);
         }
 
         private void SetDirection()
         {
-            Vector3 target = m_bulletManager.GetBatchInfo(m_batchIdx);
-            Vector3 direction = target - m_bulletTransform.position;
-            direction.z = Constants.BULLET_DEPTH;
+            Vector3 direction = m_bulletManager.GetBatchInfo(m_batchIdx);
 
+            int batchSize = m_bulletManager.GetBatchSize(m_batchIdx);
+            float medium = (batchSize%2 == 0) ? (batchSize/2 - 0.5f) : batchSize/2;
+            float theta = (m_bulletIdx - medium) * Constants.BULLET_BATCH_ROTATION_DEGREE * Mathf.Deg2Rad;
+
+            Vector3 currDirection;
+            currDirection.x = Mathf.Cos(theta) * direction.x - Mathf.Sin(theta) * direction.y;
+            currDirection.y = Mathf.Sin(theta) * direction.x + Mathf.Cos(theta) * direction.y;
+            currDirection.z = direction.z;
+ 
             m_velocity = Constants.SPEED_MULTIPLIER * m_bullet.speed.value * 
-                        Time.deltaTime * direction.normalized;
+                        Time.deltaTime * currDirection.normalized;
         }
 
         public void Move()
