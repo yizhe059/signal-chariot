@@ -29,6 +29,7 @@ namespace InGame.BattleFields.Androids
         
         [Header("Bullet")]
         private BulletManager m_bulletManager;
+        public BulletManager bulletManager { get { return m_bulletManager;}}
         private BulletSetUp m_bulletSetUp;
         private UnlimitedProperty m_bulletCount;
         private UnlimitedProperty m_shootCount;
@@ -124,7 +125,7 @@ namespace InGame.BattleFields.Androids
 
             for(int i = 0; i < shootCount; i++)
             {
-                m_bulletManager.AddBullet(bulletSetUp, this);
+                m_bulletManager.AddBulletBatch(bulletCount, bulletSetUp, this);
                 yield return new WaitForSeconds(m_shootInterval.value);
             }
         }

@@ -21,11 +21,13 @@ namespace InGame.BattleFields.Bullets
         [Header("Generator")]
         private Tower m_tower;
         public Tower tower {get { return m_tower;}}
+        private int[] m_bulletIdx;
+        public int[] bulletIdx {get { return m_bulletIdx;}}
 
         [Header("Properties")]
         private Sprite m_sprite;
         private UnlimitedProperty m_size;
-        private IMoveStrategy m_moveStrategy;
+        private IMovable m_moveStrategy;
         private DamageType m_damageStrategy;
         private UnlimitedProperty m_speed;
         private UnlimitedProperty m_damage;
@@ -38,7 +40,7 @@ namespace InGame.BattleFields.Bullets
 
         public Sprite sprite{ get { return m_sprite;}}
         public UnlimitedProperty size{ get { return m_size;}}
-        public IMoveStrategy moveStrategy { get { return m_moveStrategy;}}
+        public IMovable moveStrategy { get { return m_moveStrategy;}}
         public DamageType damageType {get { return m_damageStrategy;}}
         public UnlimitedProperty speed { get { return m_speed;}}
         public UnlimitedProperty damage { get { return m_damage;}}
@@ -47,9 +49,10 @@ namespace InGame.BattleFields.Bullets
         public UnlimitedProperty penetrateTimes { get {return m_penetrateTimes;}}
         public UnlimitedProperty splitTimes { get {return m_splitTimes;}}
 
-        public Bullet(BulletSetUp bulletSetUp, Tower tower)
+        public Bullet(BulletSetUp bulletSetUp, Tower tower, int[] bulletIdx)
         {
             m_tower = tower;
+            m_bulletIdx = bulletIdx;
             
             UnlimitedProperty dmg = new(bulletSetUp.damage, UnlimitedPropertyType.Damage);
             UnlimitedProperty spd = new(bulletSetUp.speed, UnlimitedPropertyType.Speed);
@@ -102,10 +105,10 @@ namespace InGame.BattleFields.Bullets
                     m_moveStrategy = new ParabolaMoveStrategy(this);
                     break;
                 case MoveType.CircleRound:
-                    m_moveStrategy = new CircleRoundMoveStrategy();
+                    m_moveStrategy = new CircleRoundMoveStrategy(this);
                     break;
                 case MoveType.Placement:
-                    m_moveStrategy = new PlacementMoveStrategy();
+                    m_moveStrategy = new PlacementMoveStrategy(this);
                     break;
                 case MoveType.Random:
                     m_moveStrategy = new RandomMoveStrategy(this);
@@ -138,8 +141,11 @@ namespace InGame.BattleFields.Bullets
         public void DealDamage(IDamageable target, float dmg)
         {
             target.TakeDamage(dmg);
-            // TODO
-            if(m_bouncingTimes.value > 0) m_moveStrategy = new LinearMoveStrategy(this);
+            
+            if(m_bouncingTimes.value > 0){
+                m_moveStrategy = new LinearMoveStrategy(this);
+                m_bouncingTimes.value--;
+            } 
             else this.Die();
         }
     }
