@@ -34,22 +34,14 @@ namespace InGame.Boards.Modules
         public void DisplayModule(Module module)
         {
             if (!m_isOn) return;
-            Debug.Log($"Display {module.name} on {m_currentScreenPos}");
             ModuleCardUI.Instance.Show();
-            ModuleCardUI.Instance.SetContent(module.name, m_currentScreenPos);
+            ModuleCardUI.Instance.SetContent(module.name, module.desc, m_currentScreenPos);
         }
 
         public void UndisplayModule(Module module)
         {
             if (!m_isOn) return;
-            Debug.Log($"Undisplay {module.name}");
             ModuleCardUI.Instance.Hide();
         }
-        
-        #region UI
-
-
-
-        #endregion
     }
 }

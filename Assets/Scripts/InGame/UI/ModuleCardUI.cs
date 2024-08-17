@@ -20,9 +20,10 @@ public class ModuleCardUI : MonoSingleton<ModuleCardUI>, IHidable
         m_description = m_root.Q<Label>("description");
     }
 
-    public void SetContent(string name, Vector2 positon)
+    public void SetContent(string name, string description, Vector2 positon)
     {
         m_name.text = name;
+        m_description.text = description;
         m_panel.style.left = new Length(positon.x, LengthUnit.Pixel);
         m_panel.style.top = new Length(Screen.height - positon.y, LengthUnit.Pixel);
         // TODO: if ui out of bound, then display in another way

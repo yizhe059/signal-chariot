@@ -225,8 +225,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 1624054408}
     m_Modifications:
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: desc
+      value: Add 1 extra shot to the surrounded weapon.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: name
-      value: Bouncing Block
+      value: Extra Shot
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: prefab
@@ -234,7 +238,7 @@ PrefabInstance:
       objectReference: {fileID: 8708126383134337241, guid: c42566245f2938149af1fc74c1938ed4, type: 3}
     - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_Name
-      value: Bouncing Block
+      value: Extra Shot
       objectReference: {fileID: 0}
     - target: {fileID: 6579473263901316917, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -308,10 +312,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 1
   buff:
-    bouncingBuff: 2
+    bouncingBuff: 0
     splittingBuff: 0
     penetrationBuff: 0
-    numShotsFlatBuff: 0
+    numShotsFlatBuff: 1
     numBulletsPerShotFlatBuff: 0
     speedPercentageBuff: 0
     damagePercentageBuff: 0
@@ -329,6 +333,10 @@ PrefabInstance:
     - target: {fileID: 2107736309079604036, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: maxUses
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: desc
+      value: Rotate the signal to the pointed direction.
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: name
@@ -427,6 +435,10 @@ PrefabInstance:
     - target: {fileID: 2107736309079604036, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: maxUses
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: desc
+      value: Increase the size and slow down the bullets of the surrounded weapons.
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: name
@@ -557,6 +569,10 @@ PrefabInstance:
     - target: {fileID: 2107736309079604036, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: maxUses
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: desc
+      value: Add 1 energy point to the signal pass through.
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: name
@@ -770,6 +786,11 @@ PrefabInstance:
     - target: {fileID: 2107736309079604036, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: energyConsumption
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: desc
+      value: The cannon is triggered when the signal pass through. Each unit  consumes
+        1 energy point.
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: name
@@ -988,6 +1009,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1624054408}
     m_Modifications:
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: desc
+      value: Split the signal entered in entrance and output them in the 2 exits
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: name
       value: Two Way Signal Splitter
       objectReference: {fileID: 0}
@@ -1144,12 +1169,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 1624054408}
     m_Modifications:
     - target: {fileID: 2107736309079604036, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: maxUses
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2107736309079604036, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: consumptionMethod
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2107736309079604036, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: energyConsumption
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: desc
+      value: Store all energy point of the entered signal, emit the signal to the
+        pointed direction when it stores 3 energy points.
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: name
@@ -1361,6 +1395,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1624054408}
     m_Modifications:
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: desc
+      value: Add 2 extra bullets every shot to the weapon it points to.
+      objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: name
       value: Extra Barrel
@@ -1614,6 +1652,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1624054408}
     m_Modifications:
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: desc
+      value: Increase damage to the surrounded weapon.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: name
       value: Carbon Block
       objectReference: {fileID: 0}
@@ -1724,6 +1766,10 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: desc
+      value: Add 1 defence when it places at edge slots.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: name
       value: Extra Armor
       objectReference: {fileID: 0}
@@ -1818,6 +1864,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1624054408}
     m_Modifications:
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: desc
+      value: Generate a signal  every second to the pointed direction. The generated
+        signal has 2 energy points.
+      objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: name
       value: Signal Source
