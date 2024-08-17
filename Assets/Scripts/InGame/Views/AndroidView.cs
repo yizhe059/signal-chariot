@@ -35,12 +35,12 @@ namespace InGame.Views
         private void Move()
         {
             m_moveDirection = (m_moveDirection + m_obstacleDirection).normalized;
-            m_moveDirection *= Time.deltaTime *
-                            m_android.Get(UnlimitedPropertyType.Speed) *
-                            Constants.SPEED_MULTIPLIER;
+            Vector3 velocity = Constants.SPEED_MULTIPLIER * 
+                            m_android.Get(UnlimitedPropertyType.Speed) * 
+                            Time.deltaTime * m_moveDirection;
 
-            if (m_moveDirection == Vector3.zero) return;
-            this.transform.Translate(m_moveDirection, Space.World);
+            if (velocity == Vector3.zero) return;
+            this.transform.Translate(velocity, Space.World);
         }
 
         public void SetMoveDirection(Vector2 inputDirection)
@@ -49,7 +49,8 @@ namespace InGame.Views
             float y = inputDirection.y;
 
             m_moveDirection = (m_obstacleDirection != Vector3.zero) ? Vector3.zero : 
-                new Vector3(x * Mathf.Sqrt(1 - y * y * 0.5f), y * Mathf.Sqrt(1 - x * x * 0.5f), 0);
+                            new Vector3(x * Mathf.Sqrt(1 - y * y * 0.5f), 
+                                        y * Mathf.Sqrt(1 - x * x * 0.5f), 0);
         }
 
         #endregion

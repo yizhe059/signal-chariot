@@ -54,7 +54,7 @@ namespace InGame.Views
         public void Die()
         {
             m_timer.OnTimerComplete.RemoveListener(m_bullet.Die);
-            if(gameObject) Destroy(gameObject);
+            Destroy(gameObject);
         }
         #endregion
 

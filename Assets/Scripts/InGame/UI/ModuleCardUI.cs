@@ -7,6 +7,8 @@ using Utils.Common;
 public class ModuleCardUI : MonoSingleton<ModuleCardUI>, IHidable
 {
     [SerializeField] private UIDocument m_doc;
+    [SerializeField] private int X_DISPLAY_OFFSET = 150;
+    [SerializeField] private int Y_DISPLAY_OFFSET = 150;
     private VisualElement m_root;
     private VisualElement m_panel;
     private Label m_name;
@@ -22,10 +24,11 @@ public class ModuleCardUI : MonoSingleton<ModuleCardUI>, IHidable
 
     public void SetContent(string name, string description, Vector2 positon)
     {
+        
         m_name.text = name;
         m_description.text = description;
-        m_panel.style.left = new Length(positon.x, LengthUnit.Pixel);
-        m_panel.style.top = new Length(Screen.height - positon.y, LengthUnit.Pixel);
+        m_panel.style.left = new Length(positon.x - X_DISPLAY_OFFSET, LengthUnit.Pixel);
+        m_panel.style.top = new Length(Screen.height - positon.y - Y_DISPLAY_OFFSET, LengthUnit.Pixel);
         // TODO: if ui out of bound, then display in another way
     }
 
