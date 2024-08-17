@@ -11,9 +11,8 @@ namespace InGame.Cores
         private PlayerInput m_playerInput;
 
         private Dictionary<Camera, UnityEvent<Vector2>> m_onMouseLeftClickedEvents = new();
-        private UnityEvent<Vector2> m_onMouseLeftClicked = new();
         private Dictionary<Camera, UnityEvent<Vector2>> m_onMouseMoveEvents = new();
-        private UnityEvent<Vector2> m_onMouseMove = new();
+        private UnityEvent<Vector2> m_onMouseMoveScreenPos = new();
         private UnityEvent m_onRotatePressed = new();
         private UnityEvent<Vector2> m_onMoveKeyPressed = new();
         private UnityEvent<Vector2> m_onMoveKeyReleased = new();
@@ -78,6 +77,18 @@ namespace InGame.Cores
             }
             evt.RemoveListener(act);
         }
+        
+        public void RegisterScreenMouseMoveEvent(UnityAction<Vector2> act)
+        {
+            if (act == null) return;
+            m_onMouseMoveScreenPos.AddListener(act);
+        }
+        
+        public void UnregisterScreenMouseMoveEvent(UnityAction<Vector2> act)
+        {
+            if (act == null) return;
+            m_onMouseMoveScreenPos.RemoveListener(act);
+        }
 
         public void RegisterRotateEvent(UnityAction act)
         {
@@ -120,7 +131,8 @@ namespace InGame.Cores
         private void OnMouseMove(InputAction.CallbackContext context)
         {
             var mousePosition = context.ReadValue<Vector2>();
-
+            m_onMouseMoveScreenPos.Invoke(mousePosition);
+            
             foreach (var tuple in m_onMouseMoveEvents)
             {
                 var camera = tuple.Key;
