@@ -80,5 +80,7 @@ namespace Utils
         #region Multiplier
         public const float SPEED_MULTIPLIER = 0.1f;
         #endregion 
+        
+        public const float SELECT_THRESHOLD = 0.5f;
     }
 }

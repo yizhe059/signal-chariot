@@ -270,6 +270,14 @@ namespace InGame.Boards
             return module;
         }
 
+        public Module GetModule(int x, int y)
+        {
+            if (GetSlotStatus(x, y) != SlotStatus.Occupied) return null;
+            var moduleSlot = GetModuleSlot(x, y);
+            return moduleSlot.module;
+
+        }
+
         #endregion
 
         #region SlotStatus

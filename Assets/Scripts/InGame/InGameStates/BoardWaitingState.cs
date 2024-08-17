@@ -1,8 +1,10 @@
 ﻿using InGame.Boards;
+using InGame.Boards.Modules;
 using InGame.Cores;
 using InGame.UI;
 using InGame.Views;
 using UnityEngine;
+using Utils;
 
 namespace InGame.InGameStates
 {
@@ -11,6 +13,14 @@ namespace InGame.InGameStates
         public override InGameStateType type => InGameStateType.BoardWaitingState;
         private BoardView m_boardView;
         private Board m_board, m_extraBoard;
+        private ModuleDescriptionDisplayManager m_displayManager;
+        
+        
+        private float m_notMovingAccumulatedTime = 0f;
+        private const float SelectThreshold = Constants.SELECT_THRESHOLD;
+        private Module m_currentLookingModule = null;
+        private Module m_prevModule = null;
+        private Vector2 m_currentWorldPosition;
 
         public override void Enter(InGameState last)
         {
@@ -24,6 +34,9 @@ namespace InGame.InGameStates
             var boardCamera = cameraManager.boardCamera;
 
             GameManager.Instance.GetInputManager().RegisterClickEvent(boardCamera, OnClicked);
+            GameManager.Instance.GetInputManager().RegisterMouseMoveEvent(boardCamera, OnMouseMove);
+            
+            m_displayManager.Start();
             
             BattleProgressUI.Instance.Hide();
             BattleResultUI.Instance.Hide();
@@ -37,6 +50,14 @@ namespace InGame.InGameStates
             Debug.Log("Exit board waiting");
             var boardCamera = GameManager.Instance.GetCameraManager().boardCamera;
             GameManager.Instance.GetInputManager().UnregisterClickEvent(boardCamera, OnClicked);
+            GameManager.Instance.GetInputManager().UnregisterMouseMoveEvent(boardCamera, OnMouseMove);
+            
+            if (m_prevModule != null)
+            {
+                m_displayManager.UndisplayModule(m_prevModule);
+                m_prevModule = null;
+            }
+            m_displayManager.Stop();
             
             BattleProgressUI.Instance.Show();
             BattleResultUI.Instance.Show();
@@ -47,15 +68,92 @@ namespace InGame.InGameStates
 
         private void OnClicked(Vector2 worldPosition)
         {
-            if (!m_boardView.GetXY(worldPosition, out int x, out int y, out bool isNormal)) return;
-
-            var board = isNormal ? m_board : m_extraBoard;
+            if (!GetBoardPosition(worldPosition, out int x, out int y, out Board board)) return;
+            
             if (board.GetSlotStatus(x, y) == SlotStatus.Occupied)
             {
                 var module = board.RemoveModule(x, y);
 
                 GameManager.Instance.ChangeToModulePlacingState(module);
             }
+        }
+
+        private bool GetBoardPosition(Vector2 worldPosition, out int x, out int y, out Board board)
+        {
+            x = -1;
+            y = -1;
+            board = null;
+            if (!m_boardView.GetXY(worldPosition, out x, out y, out bool isNormal)) return false;
+            
+            board = isNormal ? m_board : m_extraBoard;
+
+            return true;
+        }
+        
+        private void OnMouseMove(Vector2 worldPosition)
+        {
+            m_notMovingAccumulatedTime = 0f;
+            m_currentWorldPosition = worldPosition;
+        }
+
+        private void FindModule()
+        {
+            if (m_currentLookingModule == null)
+            {
+                if (m_notMovingAccumulatedTime >= SelectThreshold)
+                {
+                    // not on any slot
+                    if (!GetBoardPosition(m_currentWorldPosition, out int x, out int y, out Board board)) return;
+                    
+                    var module = board.GetModule(x, y);
+                    
+                    // not on any module
+                    if (module == null) return;
+
+                    m_currentLookingModule = module;
+
+                }
+                else
+                {
+                    m_notMovingAccumulatedTime += Time.deltaTime;
+                }
+            }
+            else
+            {
+                if (!GetBoardPosition(m_currentWorldPosition, out int x, out int y, out Board board))
+                {
+                    m_currentLookingModule = null;
+                }
+                else
+                {
+                    m_currentLookingModule = board.GetModule(x, y);
+                    
+                }
+            }
+        }
+
+        private void DisplayModule()
+        {
+            
+            if (m_currentLookingModule != m_prevModule)
+            {
+                if (m_prevModule != null)
+                {
+                    m_displayManager.UndisplayModule(m_prevModule);
+                    m_prevModule = null;
+                }
+
+                if (m_currentLookingModule != null)
+                {
+                    m_displayManager.DisplayModule(m_currentLookingModule);
+                    m_prevModule = m_currentLookingModule;
+                }
+            }
+        }
+        public override void Update()
+        {
+            FindModule();
+            DisplayModule();
         }
 
         public static BoardWaitingState CreateState(Board board, Board extraBoard, BoardView boardView)
@@ -65,6 +163,7 @@ namespace InGame.InGameStates
                 m_board = board,
                 m_extraBoard = extraBoard,
                 m_boardView = boardView,
+                m_displayManager = GameManager.Instance.GetModuleDescriptionDisplayManager()
             };
             return state;
         }

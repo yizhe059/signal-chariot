@@ -42,6 +42,7 @@ namespace InGame.Cores
 
         private ModuleLib m_moduleLib;
         private SignalController m_signalController;
+        private ModuleDescriptionDisplayManager m_moduleDescriptionDisplayManager;
 
         [Header("Enemy")]
         private EnemySpawnLib m_enemySpawnLib;
@@ -101,6 +102,9 @@ namespace InGame.Cores
 
             m_signalController = SignalController.CreateSignalController(board, boardView);
             m_generalBoard = GeneralBoard.CreateGeneralBoard(board, extraBoard, boardView);
+
+            m_moduleDescriptionDisplayManager = new ModuleDescriptionDisplayManager(m_inputManager);
+
         }
 
         private void InitCamera()
@@ -143,6 +147,9 @@ namespace InGame.Cores
         public EnemySpawnController GetEnemySpawnController() => m_enemySpawnController;
         public InGameStateType GetCurrentInGameState() => WorldState.instance.currentState.type;
         public ModManager GetModManager() => m_modManager;
+
+        public ModuleDescriptionDisplayManager GetModuleDescriptionDisplayManager() =>
+            m_moduleDescriptionDisplayManager;
         #endregion
 
         #region World State Machine
