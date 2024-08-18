@@ -1,4 +1,6 @@
 ﻿using InGame.Cores;
+using InGame.UI;
+
 using UnityEngine;
 
 namespace InGame.Boards.Modules

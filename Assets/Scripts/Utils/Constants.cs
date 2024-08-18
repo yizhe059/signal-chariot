@@ -19,6 +19,7 @@ namespace Utils
 
         #region Resources Path
 
+        public const string GO_UI_COMMON_PATH = "Prefabs/UI/";
         public const string GO_BULLET_PATH = "Prefabs/BattleField/BulletView";
         public const string GO_ANDROID_PATH = "Prefabs/BattleField/AndroidView";
         public const string GO_TOWER_PATH = "Prefabs/BattleField/TowerView";
