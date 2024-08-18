@@ -755,34 +755,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4593550602273945553, guid: 8e200cf0cf1a648e496fa9a050124af6, type: 3}
-      propertyPath: m_uiPrefabPaths.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4593550602273945553, guid: 8e200cf0cf1a648e496fa9a050124af6, type: 3}
-      propertyPath: m_uiPrefabPaths.Array.data[0]
-      value: Battle/BattleProgress
-      objectReference: {fileID: 0}
-    - target: {fileID: 4593550602273945553, guid: 8e200cf0cf1a648e496fa9a050124af6, type: 3}
-      propertyPath: m_uiPrefabPaths.Array.data[1]
-      value: Battle/BattleResult
-      objectReference: {fileID: 0}
-    - target: {fileID: 4593550602273945553, guid: 8e200cf0cf1a648e496fa9a050124af6, type: 3}
-      propertyPath: m_uiPrefabPaths.Array.data[2]
-      value: Common/AndroidStatus
-      objectReference: {fileID: 0}
-    - target: {fileID: 4593550602273945553, guid: 8e200cf0cf1a648e496fa9a050124af6, type: 3}
-      propertyPath: m_uiPrefabPaths.Array.data[3]
-      value: Preparation/BoardBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 4593550602273945553, guid: 8e200cf0cf1a648e496fa9a050124af6, type: 3}
-      propertyPath: m_uiPrefabPaths.Array.data[4]
-      value: Preparation/ModuleInfoCard
-      objectReference: {fileID: 0}
-    - target: {fileID: 4593550602273945553, guid: 8e200cf0cf1a648e496fa9a050124af6, type: 3}
-      propertyPath: m_uiPrefabPaths.Array.data[5]
-      value: Preparation/NavigationBar
-      objectReference: {fileID: 0}
     - target: {fileID: 8141955580910854686, guid: 8e200cf0cf1a648e496fa9a050124af6, type: 3}
       propertyPath: m_Name
       value: GameCanvas
