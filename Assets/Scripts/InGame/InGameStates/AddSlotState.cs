@@ -39,12 +39,12 @@ namespace InGame.InGameStates
             var boardCamera = GameManager.Instance.GetCameraManager().boardCamera;
             GameManager.Instance.GetInputManager().RegisterClickEvent(boardCamera, OnClicked);
 
-            ModuleCardUI.Instance.Hide();
-            BattleProgressUI.Instance.Hide();
-            BattleResultUI.Instance.Hide();
-            AndroidStatusUI.Instance.Show();
-            NavigationBarUI.Instance.Show();
-            BoardBarUI.Instance.Show();
+            int bitmask = UIManager.Instance.GetDisplayBit(
+                UIElements.AndroidStatus,
+                UIElements.NavigationBar,
+                UIElements.BoardBar
+            );
+            UIManager.Instance.SetDisplayUI(bitmask);
         }
 
         public override void Exit()
@@ -61,13 +61,12 @@ namespace InGame.InGameStates
             m_selectableSlots.Clear();
             Debug.Log("Exit AddSlot");
 
-            // TODO: 用BitMap代替
-            ModuleCardUI.Instance.Show();
-            BattleProgressUI.Instance.Show();
-            BattleResultUI.Instance.Show();
-            AndroidStatusUI.Instance.Hide();
-            NavigationBarUI.Instance.Hide();
-            BoardBarUI.Instance.Hide();
+            int bitmask = UIManager.Instance.GetDisplayBit(
+                UIElements.ModuleInfoCard,
+                UIElements.BattleProgress,
+                UIElements.BattleResult
+            );
+            UIManager.Instance.SetDisplayUI(bitmask);
         }
 
         private void OnClicked(Vector2 worldPosition)

@@ -50,13 +50,12 @@ namespace InGame.InGameStates
             m_enemySpawnController.GoNextWave();
             m_enemySpawnController.RegisterWaveFinishCallBack(OnWaveFinished);
             m_enemySpawnController.Start();
-            
-            ModuleCardUI.Instance.Hide();
-            BattleProgressUI.Instance.Show();
-            BattleResultUI.Instance.Hide();
-            AndroidStatusUI.Instance.Show();
-            NavigationBarUI.Instance.Hide();
-            BoardBarUI.Instance.Hide();
+
+            int bitmask = UIManager.Instance.GetDisplayBit(
+                UIElements.BattleProgress,
+                UIElements.AndroidStatus
+            );
+            UIManager.Instance.SetDisplayUI(bitmask);
         }
         
         public override void Exit()
@@ -73,13 +72,14 @@ namespace InGame.InGameStates
             m_androidView.SetMoveDirection(Vector2.zero);
             m_enemySpawnController.UnregisterWaveFinishCallBack(OnWaveFinished);
             m_enemySpawnController.Stop();
-            
-            ModuleCardUI.Instance.Show();
-            BattleProgressUI.Instance.Hide();
-            BattleResultUI.Instance.Show();
-            AndroidStatusUI.Instance.Hide();
-            NavigationBarUI.Instance.Show();
-            BoardBarUI.Instance.Show();
+
+            int bitmask = UIManager.Instance.GetDisplayBit(
+                UIElements.ModuleInfoCard,
+                UIElements.BattleResult,
+                UIElements.NavigationBar,
+                UIElements.BoardBar
+            );
+            UIManager.Instance.SetDisplayUI(bitmask);
         }
         
         private void OnMoveKeyPressed(Vector2 inputDirection)

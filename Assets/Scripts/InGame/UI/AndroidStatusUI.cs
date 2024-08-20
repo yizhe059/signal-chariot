@@ -8,7 +8,7 @@ using Utils.Common;
 
 namespace InGame.UI
 {
-    public class AndroidStatusUI : MonoSingleton<AndroidStatusUI>, IHidable
+    public class AndroidStatusUI : MonoBehaviour, IHidable
     {
         [SerializeField] private UIDocument m_doc;
         private VisualElement m_root;

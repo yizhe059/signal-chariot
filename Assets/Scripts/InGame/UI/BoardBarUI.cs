@@ -8,7 +8,7 @@ using InGame.InGameStates;
 
 namespace InGame.UI
 {
-    public class BoardBarUI : MonoSingleton<BoardBarUI>, IHidable
+    public class BoardBarUI : MonoBehaviour, IHidable
     {
         [SerializeField] private UIDocument m_doc;
         private VisualElement m_root;

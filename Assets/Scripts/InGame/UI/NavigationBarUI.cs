@@ -6,7 +6,7 @@ using InGame.Cores;
 
 namespace InGame.UI
 {
-    public class NavigationBarUI : MonoSingleton<NavigationBarUI>, IHidable
+    public class NavigationBarUI : MonoBehaviour, IHidable
     {
         [SerializeField] private UIDocument m_doc;
         private VisualElement m_root;

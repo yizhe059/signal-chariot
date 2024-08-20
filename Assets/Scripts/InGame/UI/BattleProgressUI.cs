@@ -7,7 +7,7 @@ using InGame.BattleFields.Enemies;
 
 namespace InGame.UI
 {
-    public class BattleProgressUI : MonoSingleton<BattleProgressUI>, IHidable
+    public class BattleProgressUI : MonoBehaviour, IHidable
     {
         [SerializeField] private UIDocument m_doc;
         private VisualElement m_root;

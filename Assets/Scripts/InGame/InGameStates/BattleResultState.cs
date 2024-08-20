@@ -28,27 +28,28 @@ namespace InGame.InGameStates
             
             Debug.Log("Enter battle result");
 
-            ModuleCardUI.Instance.Hide();
-            BattleProgressUI.Instance.Show();
-
-            BattleResultUI.Instance.Show();
-            BattleResultUI.Instance.Switch(m_resultType);
-
-            AndroidStatusUI.Instance.Show();
-            NavigationBarUI.Instance.Hide();
-            BoardBarUI.Instance.Hide();
+            int bitmask = UIManager.Instance.GetDisplayBit(
+                UIElements.BattleProgress,
+                UIElements.BattleResult,
+                UIElements.AndroidStatus
+            );
+            UIManager.Instance.SetDisplayUI(bitmask);
+            
+            BattleResultUI battleResultUI = UIManager.Instance.GetUI(UIElements.BattleResult) as BattleResultUI;
+            if(battleResultUI != null) 
+                battleResultUI.Switch(m_resultType);
         }
         
         public override void Exit()
         {
             Debug.Log("Exit battle result");
 
-            ModuleCardUI.Instance.Show();
-            BattleProgressUI.Instance.Hide();
-            BattleResultUI.Instance.Hide();
-            AndroidStatusUI.Instance.Hide();
-            NavigationBarUI.Instance.Show();
-            BoardBarUI.Instance.Show();
+            int bitmask = UIManager.Instance.GetDisplayBit(
+                UIElements.ModuleInfoCard,
+                UIElements.NavigationBar,
+                UIElements.BoardBar
+            );
+            UIManager.Instance.SetDisplayUI(bitmask);
         }
 
         public static BattleResultState CreateState(BattleResultType resultType)

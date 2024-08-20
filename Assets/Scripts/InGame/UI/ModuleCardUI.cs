@@ -5,7 +5,7 @@ using Utils.Common;
 
 namespace InGame.UI
 {
-    public class ModuleCardUI : MonoSingleton<ModuleCardUI>, IHidable
+    public class ModuleCardUI : MonoBehaviour, IHidable
     {
         [SerializeField] private UIDocument m_doc;
         [SerializeField] private float X_DISPLAY_THRESHOLD = 0.2f;

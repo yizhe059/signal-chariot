@@ -14,27 +14,125 @@ namespace InGame.UI
         BoardBar,
         NavigationBar,
         ModuleInfoCard,
+        Default,
     }
 
     public class UIManager : MonoSingleton<UIManager>
     {
         [SerializeField] private List<string> m_uiPrefabPaths = new();
-        private List<IHidable> m_uiElements = new();
+        private List<(UIElements, IHidable)> m_uiElements = new();
         private Dictionary<UIElements, int> m_uiDisplayFlags = new();
 
         private void Awake()
         {
             SpawnUIList();
+            GenerateUIFlags();
+            SetDisplayUI(0); // close all UIs
         }
 
-        public void SpawnUIList()
+        private void SpawnUIList()
         {
             foreach(string uiPath in m_uiPrefabPaths)
             {
-                Resources.Load<GameObject>(Constants.GO_UI_COMMON_PATH + uiPath);
+                GameObject prefab = Resources.Load<GameObject>(Constants.GO_UI_COMMON_PATH + uiPath);
+                if(prefab == null){
+                    Debug.LogWarning($"Prefab at path {uiPath} could not be loaded.");
+                    continue;
+                }
+                GameObject uiElement = Instantiate(prefab, transform);
+                IHidable uiComponent = uiElement.GetComponent<IHidable>();
+                if(uiComponent != null)
+                {
+                    string[] directory = uiPath.Split("/");
+                    UIElements type = GetUIType(directory[^1]);
+                    m_uiElements.Add((type, uiComponent));
+                }
+                else Debug.LogWarning($"Prefab at path {uiPath} does not have UI component");
             }
         }
 
+        private void GenerateUIFlags()
+        {
+            m_uiDisplayFlags.Clear();
+            int index = 0;
+            foreach(UIElements element in System.Enum.GetValues(typeof(UIElements)))
+            {
+                if(index >= m_uiElements.Count)
+                {
+                    m_uiDisplayFlags[element] = 0;
+                    continue;
+                }
+                m_uiDisplayFlags[element] = 1 << index;
+                index++;
+            }
+        }
 
+        public void SetDisplayUI(int bitmask)
+        {
+            for(int i = 0; i < m_uiElements.Count; i++)
+            {
+                if((bitmask & (1 << i)) != 0)
+                    m_uiElements[i].Item2.Show();
+                else
+                    m_uiElements[i].Item2.Hide();
+            }
+        }
+
+        public void AddDisplayUI(int bitmask)
+        {
+            int i = 0;
+            while(((bitmask >> i) & 1) != 1) i++;
+            m_uiElements[i].Item2.Show();
+        }
+
+        public void RemoveDisplayUI(int bitmask)
+        {
+            int i = 0;
+            while(((bitmask >> i) & 1) != 1) i++;
+            m_uiElements[i].Item2.Hide();
+        }
+
+        public int GetDisplayBit(params UIElements[] elements)
+        {
+            int bitmask = 0;
+            foreach(UIElements element in elements)
+            {
+                if(m_uiDisplayFlags.ContainsKey(element)) 
+                    bitmask |= m_uiDisplayFlags[element];
+            }
+            return bitmask;
+        }
+
+        public IHidable GetUI(UIElements type)
+        {
+            foreach(var pair in m_uiElements)
+            {
+                if(pair.Item1 == type)
+                    return pair.Item2;
+            }
+            Debug.LogWarning($"Can't get {type} type UI");
+            return null;
+        }
+
+        public static UIElements GetUIType(string uiName)
+        {
+            switch(uiName)
+            {
+                case "BattleProgress":
+                    return UIElements.BattleProgress;
+                case "BattleResult":
+                    return UIElements.BattleResult;
+                case "AndroidStatus":
+                    return UIElements.AndroidStatus;
+                case "BoardBar":
+                    return UIElements.BoardBar;
+                case "NavigationBar":
+                    return UIElements.NavigationBar;
+                case "ModuleInfoCard":
+                    return UIElements.ModuleInfoCard;
+                default:
+                    return UIElements.Default;
+            }
+        }
     }
 }
