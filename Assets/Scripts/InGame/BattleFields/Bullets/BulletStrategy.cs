@@ -171,7 +171,7 @@ namespace InGame.BattleFields.Bullets
     public class ParabolaMoveStrategy : MoveStrategy, IMovable
     {
         private Vector3 m_target;
-        private float m_distance;
+        private float m_duration;
 
         public ParabolaMoveStrategy(Bullet bullet) : base(bullet)
         {
@@ -180,24 +180,18 @@ namespace InGame.BattleFields.Bullets
 
         private void SetTarget()
         {
-            Enemy closest = GameManager.Instance.GetEnemySpawnController().
-                            GetClosestEnemy(m_bulletTransform.position);
-            if(closest != null) m_target = closest.GetView().transform.position;
-            else m_target = Utilities.RandomPosition();
-
+            m_target = Utilities.RandomPosition();
             m_bullet.tower.towerView.SetTarget(m_target);
 
             m_target.z = Constants.BULLET_DEPTH;
-            this.m_distance = Vector3.Distance(this.m_bulletTransform.position, this.m_target);
+            float distance = Vector3.Distance(this.m_bulletTransform.position, this.m_target);
+            m_duration = distance / m_bullet.speed.value / Constants.SPEED_MULTIPLIER;
         }
 
         public void Move()
         {
-            float currDistance = Vector3.Distance(m_bulletTransform.position, m_target);
-            if(currDistance <= Constants.COLLIDE_OFFSET) return;
-            m_bulletTransform.DOMove(m_target, 
-                m_distance / m_bullet.speed.value / Constants.SPEED_MULTIPLIER).
-                SetEase(Ease.OutQuad);
+            // TODO wait for m_duration seconds
+            m_bulletTransform.position = m_target;
         }
     }
 

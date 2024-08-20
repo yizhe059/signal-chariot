@@ -27,7 +27,6 @@ namespace InGame.UI
         {
             SpawnUIList();
             GenerateUIFlags();
-            SetDisplayUI(0); // close all UIs
         }
 
         private void SpawnUIList()
@@ -35,13 +34,13 @@ namespace InGame.UI
             foreach(string uiPath in m_uiPrefabPaths)
             {
                 GameObject prefab = Resources.Load<GameObject>(Constants.GO_UI_COMMON_PATH + uiPath);
-                if(prefab == null){
+                if(prefab == null)
+                {
                     Debug.LogWarning($"Prefab at path {uiPath} could not be loaded.");
                     continue;
                 }
                 GameObject uiElement = Instantiate(prefab, transform);
-                IHidable uiComponent = uiElement.GetComponent<IHidable>();
-                if(uiComponent != null)
+                if(uiElement.TryGetComponent<IHidable>(out var uiComponent))
                 {
                     string[] directory = uiPath.Split("/");
                     UIElements type = GetUIType(directory[^1]);
@@ -55,14 +54,10 @@ namespace InGame.UI
         {
             m_uiDisplayFlags.Clear();
             int index = 0;
-            foreach(UIElements element in System.Enum.GetValues(typeof(UIElements)))
+            foreach(var pair in m_uiElements)
             {
-                if(index >= m_uiElements.Count)
-                {
-                    m_uiDisplayFlags[element] = 0;
-                    continue;
-                }
-                m_uiDisplayFlags[element] = 1 << index;
+                UIElements type = pair.Item1;
+                m_uiDisplayFlags[type] = 1 << index;
                 index++;
             }
         }
