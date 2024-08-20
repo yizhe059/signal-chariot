@@ -12,6 +12,7 @@ namespace InGame.UI
     {
         [SerializeField] private UIDocument m_doc;
         private VisualElement m_root;
+        private VisualElement m_panel;
         private VisualElement m_health;
         private VisualElement m_defence;
         private VisualElement m_mod;
@@ -19,9 +20,11 @@ namespace InGame.UI
         private void Awake()
         {
             m_root = m_doc.rootVisualElement;
+            m_panel = m_root.Q("panel");
             m_health = m_root.Q("health");
             m_defence = m_root.Q("defence");
             m_mod = m_root.Q("mod");
+            SetStyle();
         }
 
         private void Start()
@@ -30,6 +33,13 @@ namespace InGame.UI
             android.RegisterPropertyEvent(LimitedPropertyType.Health, SetHealthUI);
             android.RegisterPropertyEvent(UnlimitedPropertyType.Defence, SetDefenceUI);
             android.RegisterPropertyEvent(UnlimitedPropertyType.Mod, SetModUI);
+        }
+
+        private void SetStyle()
+        {
+            m_panel.style.width = new Length(20, LengthUnit.Percent);
+            m_panel.style.height = new Length(20, LengthUnit.Percent);
+            m_panel.style.top = new Length(79, LengthUnit.Percent);
         }
 
         private void SetHealthUI(float current, float max)

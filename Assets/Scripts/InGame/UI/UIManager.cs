@@ -11,8 +11,7 @@ namespace InGame.UI
         BattleProgress,
         BattleResult,
         AndroidStatus,
-        BoardBar,
-        NavigationBar,
+        BoardConsole,
         ModuleInfoCard,
         Default,
     }
@@ -119,10 +118,8 @@ namespace InGame.UI
                     return UIElements.BattleResult;
                 case "AndroidStatus":
                     return UIElements.AndroidStatus;
-                case "BoardBar":
-                    return UIElements.BoardBar;
-                case "NavigationBar":
-                    return UIElements.NavigationBar;
+                case "BoardConsole":
+                    return UIElements.BoardConsole;
                 case "ModuleInfoCard":
                     return UIElements.ModuleInfoCard;
                 default:

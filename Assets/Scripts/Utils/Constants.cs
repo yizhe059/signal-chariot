@@ -31,6 +31,7 @@ namespace Utils
         public const string UI_WAVE_WIN_PATH = "UI/Battle/WaveWin";
         public const string UI_BATTLE_WIN_PATH = "UI/Battle/BattleWin";
         public const string UI_FAIL_PATH = "UI/Battle/BattleFail";
+        public const string UI_ANDROID_STATUS_PATH = "UI/Common/AndroidStatus";
 
         public const string SPRITE_SELECTABLE_SLOT_PATH = "Arts/Boards/SelectableSlot";
         public const string SPRITE_EMPTY_SLOT_PATH = "Arts/Boards/EmptySlot";

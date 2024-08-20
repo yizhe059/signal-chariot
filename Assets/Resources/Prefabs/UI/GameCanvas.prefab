@@ -118,6 +118,5 @@ MonoBehaviour:
   - Battle/BattleProgress
   - Battle/BattleResult
   - Common/AndroidStatus
-  - Preparation/BoardBar
-  - Preparation/ModuleInfoCard
-  - Preparation/NavigationBar
+  - Board/ModuleInfoCard
+  - Board/BoardConsole
