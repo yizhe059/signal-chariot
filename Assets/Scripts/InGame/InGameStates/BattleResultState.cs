@@ -29,9 +29,8 @@ namespace InGame.InGameStates
             Debug.Log("Enter battle result");
 
             int bitmask = UIManager.Instance.GetDisplayBit(
-                UIElements.BattleProgress,
-                UIElements.BattleResult,
-                UIElements.AndroidStatus
+                UIElements.BattleConsole,
+                UIElements.BattleResult
             );
             UIManager.Instance.SetDisplayUI(bitmask);
             

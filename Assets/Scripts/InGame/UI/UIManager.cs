@@ -8,9 +8,8 @@ namespace InGame.UI
 {
     public enum UIElements
     {
-        BattleProgress,
+        BattleConsole,
         BattleResult,
-        AndroidStatus,
         BoardConsole,
         ModuleInfoCard,
         Default,
@@ -112,12 +111,10 @@ namespace InGame.UI
         {
             switch(uiName)
             {
-                case "BattleProgress":
-                    return UIElements.BattleProgress;
+                case "BattleConsole":
+                    return UIElements.BattleConsole;
                 case "BattleResult":
                     return UIElements.BattleResult;
-                case "AndroidStatus":
-                    return UIElements.AndroidStatus;
                 case "BoardConsole":
                     return UIElements.BoardConsole;
                 case "ModuleInfoCard":

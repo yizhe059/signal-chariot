@@ -62,7 +62,10 @@ namespace InGame.Cores
             InitCamera();
             InitEnemy();
             InitMod();
-            
+        }
+
+        private void Start()
+        {
             ChangeToBoardWaitingState(); // initial state is board preparation
         }
 

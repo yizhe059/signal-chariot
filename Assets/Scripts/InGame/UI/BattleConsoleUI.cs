@@ -7,10 +7,11 @@ using InGame.BattleFields.Enemies;
 
 namespace InGame.UI
 {
-    public class BattleProgressUI : MonoBehaviour, IHidable
+    public class BattleConsoleUI : MonoBehaviour, IHidable
     {
         [SerializeField] private UIDocument m_doc;
         private VisualElement m_root;
+        private AndroidStatusUI m_status;
         private ProgressBar m_time;
         private EnemySpawnController m_enemyController;
 
@@ -23,6 +24,7 @@ namespace InGame.UI
         private void Start()
         {
             m_enemyController = GameManager.Instance.GetEnemySpawnController();
+            m_status = new AndroidStatusUI(m_root.Q("status")); // stay in start
         }
 
         private void Update()

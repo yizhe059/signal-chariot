@@ -13,8 +13,7 @@ namespace InGame.UI
     {
         [SerializeField] private UIDocument m_doc;
         private VisualElement m_root;
-        private VisualElement m_screen;
-        private VisualElement m_androidStatus;
+        private AndroidStatusUI m_status;
         private Button m_testButton;
         private Button m_slotButton;
         private Button m_exitButton;
@@ -23,15 +22,12 @@ namespace InGame.UI
         private void Awake()
         {
             m_root = m_doc.rootVisualElement;
-            AddAndroidStatus();
             Register();
         }
 
-        private void AddAndroidStatus()
+        private void Start()
         {
-            m_androidStatus = Resources.Load<VisualTreeAsset>(Constants.UI_ANDROID_STATUS_PATH).Instantiate();
-            m_screen = m_root.Q("screen");
-            m_screen.Add(m_androidStatus);
+            m_status = new AndroidStatusUI(m_root.Q("status")); // stay in start
         }
 
         private void Register()

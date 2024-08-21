@@ -115,8 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_uiPrefabPaths:
-  - Battle/BattleProgress
+  - Battle/BattleConsole
   - Battle/BattleResult
-  - Common/AndroidStatus
   - Board/ModuleInfoCard
   - Board/BoardConsole

@@ -27,7 +27,6 @@ namespace InGame.InGameStates
                     Debug.LogError("NO ROOM! I don't know what to do, I will just panic");
                     return;
                 }
-                
             }
 
             if (m_isLastWave)

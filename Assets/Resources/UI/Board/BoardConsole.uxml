@@ -1,19 +1,34 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="panel" style="flex-grow: 1; flex-direction: row; max-height: 20%; -unity-font-style: bold; font-size: 20px; top: 80%; color: rgb(255, 255, 255); max-width: 100%; background-color: rgb(154, 150, 150);">
-        <ui:VisualElement name="left" style="flex-grow: 1; max-width: 10%; justify-content: center;">
-            <ui:Button text="Exit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="exit" style="max-width: none; font-size: 20px; background-color: rgb(217, 91, 91);" />
+    <ui:VisualElement name="left" style="flex-grow: 1; flex-direction: row; max-height: 20%; -unity-font-style: bold; font-size: 20px; top: 80%; color: rgb(255, 255, 255); max-width: 50%; background-color: rgb(255, 255, 255);">
+        <ui:VisualElement name="buttons" style="flex-grow: 1; max-width: 20%; justify-content: center; align-items: stretch; align-self: auto;">
+            <ui:Button text="Exit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="exit" style="max-width: none; font-size: 20px; background-color: rgb(217, 91, 91); align-self: auto; align-items: stretch;" />
         </ui:VisualElement>
-        <ui:VisualElement name="screen" style="flex-grow: 1; max-width: 80%; justify-content: center; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; flex-direction: row;">
-            <ui:VisualElement name="tutorials" style="flex-grow: 1; max-height: 90%; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; background-color: rgba(0, 0, 0, 0.39); max-width: 20%; justify-content: center; align-items: flex-start;">
+        <ui:VisualElement name="screen" style="flex-grow: 1; max-width: 80%; justify-content: center; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; flex-direction: row; align-items: stretch; background-color: rgba(18, 43, 53, 0.81);">
+            <ui:VisualElement name="tutorials" style="flex-grow: 1; max-height: 90%; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; background-color: rgba(0, 0, 0, 0.2); max-width: 50%; justify-content: center; align-items: flex-start; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px;">
                 <ui:Label tabindex="-1" text="Select: Mouse [Left Click]" parse-escape-sequences="true" display-tooltip-when-elided="true" name="select" />
                 <ui:Label tabindex="-1" text="Move: Mouse [Slide]" parse-escape-sequences="true" display-tooltip-when-elided="true" name="move" />
                 <ui:Label tabindex="-1" text="Rotate: Keyboard [R]" parse-escape-sequences="true" display-tooltip-when-elided="true" name="rotate" />
             </ui:VisualElement>
+            <ui:VisualElement name="status" style="flex-grow: 1; flex-direction: column; width: auto; height: auto; max-height: 90%; top: auto; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; background-color: rgba(0, 0, 0, 0.2); color: rgb(0, 0, 0); max-width: 50%;">
+                <ui:VisualElement name="health" style="flex-grow: 1; flex-direction: row; height: 25%; font-size: 20px; align-items: center; justify-content: flex-start;">
+                    <ui:Label tabindex="-1" text="HP" parse-escape-sequences="true" display-tooltip-when-elided="true" name="name" style="width: auto; color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 20px; justify-content: center;" />
+                    <ui:ProgressBar value="50" title="50/100" name="bar" style="width: 80%; -unity-font-style: bold; justify-content: center; color: rgb(0, 0, 0);" />
+                </ui:VisualElement>
+                <ui:VisualElement name="defence" style="flex-grow: 1; flex-direction: row; height: 25%; align-items: center; justify-content: flex-start;">
+                    <ui:Label tabindex="-1" text="ARMOR: 10" parse-escape-sequences="true" display-tooltip-when-elided="true" name="content" style="font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: bold;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="mod" style="flex-grow: 1; flex-direction: row; height: 25%; align-items: center; justify-content: flex-start;">
+                    <ui:Label tabindex="-1" text="MOD: 500" parse-escape-sequences="true" display-tooltip-when-elided="true" name="content" style="font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: bold;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="crystal" style="flex-grow: 1; height: 25%; justify-content: flex-start; flex-direction: row; align-items: center;">
+                    <ui:Label tabindex="-1" text="CRYSTAL: 50" parse-escape-sequences="true" display-tooltip-when-elided="true" name="content" style="-unity-font-style: bold; font-size: 20px; color: rgb(255, 255, 255);" />
+                </ui:VisualElement>
+            </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="right" style="flex-grow: 1; flex-direction: column; max-height: none; max-width: 10%; align-items: stretch; align-self: auto; justify-content: center;">
-            <ui:Button text="Test Signal" parse-escape-sequences="true" display-tooltip-when-elided="true" name="test" style="font-size: 20px; background-color: rgb(117, 155, 219);" />
-            <ui:Button text="Add Slot" parse-escape-sequences="true" display-tooltip-when-elided="true" name="add" style="font-size: 20px; background-color: rgb(212, 199, 119);" />
-            <ui:Button text="March" parse-escape-sequences="true" display-tooltip-when-elided="true" name="march" style="background-color: rgb(115, 168, 93); font-size: 20px;" />
-        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="right" style="flex-grow: 1; flex-direction: column; max-height: 20%; max-width: 10%; align-items: stretch; align-self: auto; justify-content: center; margin-left: 0; top: 60%; left: 90%; background-color: rgb(255, 255, 255); color: rgb(255, 255, 255); -unity-font-style: bold;">
+        <ui:Button text="Test Signal" parse-escape-sequences="true" display-tooltip-when-elided="true" name="test" style="font-size: 20px; background-color: rgb(117, 155, 219);" />
+        <ui:Button text="Add Slot" parse-escape-sequences="true" display-tooltip-when-elided="true" name="add" style="font-size: 20px; background-color: rgb(212, 199, 119);" />
+        <ui:Button text="March" parse-escape-sequences="true" display-tooltip-when-elided="true" name="march" style="background-color: rgb(115, 168, 93); font-size: 20px;" />
     </ui:VisualElement>
 </ui:UXML>

@@ -59,10 +59,9 @@ namespace InGame.InGameStates
             m_displayManager.Stop();
 
             int bitmask = UIManager.Instance.GetDisplayBit(
-                UIElements.BattleProgress,
+                UIElements.BattleConsole,
                 UIElements.BattleResult,
-                UIElements.ModuleInfoCard,
-                UIElements.AndroidStatus
+                UIElements.ModuleInfoCard
             );
             UIManager.Instance.SetDisplayUI(bitmask);
         }

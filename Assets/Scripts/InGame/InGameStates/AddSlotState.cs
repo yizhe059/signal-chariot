@@ -60,9 +60,8 @@ namespace InGame.InGameStates
             Debug.Log("Exit AddSlot");
 
             int bitmask = UIManager.Instance.GetDisplayBit(
-                UIElements.AndroidStatus,
                 UIElements.ModuleInfoCard,
-                UIElements.BattleProgress,
+                UIElements.BattleConsole,
                 UIElements.BattleResult
             );
             UIManager.Instance.SetDisplayUI(bitmask);

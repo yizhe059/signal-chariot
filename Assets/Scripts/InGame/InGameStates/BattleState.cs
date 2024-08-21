@@ -52,8 +52,7 @@ namespace InGame.InGameStates
             m_enemySpawnController.Start();
 
             int bitmask = UIManager.Instance.GetDisplayBit(
-                UIElements.BattleProgress,
-                UIElements.AndroidStatus
+                UIElements.BattleConsole
             );
             UIManager.Instance.SetDisplayUI(bitmask);
         }

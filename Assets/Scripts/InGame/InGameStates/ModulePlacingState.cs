@@ -50,10 +50,9 @@ namespace InGame.InGameStates
             GameManager.Instance.GetInputManager().UnregisterClickEvent(boardCamera, OnClick);
 
             int bitmask = UIManager.Instance.GetDisplayBit(
-                UIElements.BattleProgress,
+                UIElements.BattleConsole,
                 UIElements.BattleResult,
-                UIElements.ModuleInfoCard,
-                UIElements.AndroidStatus
+                UIElements.ModuleInfoCard
             );
             UIManager.Instance.SetDisplayUI(bitmask);
         }
