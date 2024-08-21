@@ -1,7 +1,7 @@
 using InGame.BattleFields.Androids;
 using InGame.BattleFields.Common;
 using InGame.Cores;
-using UnityEngine;
+
 using UnityEngine.UIElements;
 
 using Utils.Common;
@@ -32,6 +32,16 @@ namespace InGame.UI
             android.RegisterPropertyEvent(LimitedPropertyType.Health, SetHealthUI);
             android.RegisterPropertyEvent(UnlimitedPropertyType.Defence, SetDefenceUI);
             android.RegisterPropertyEvent(UnlimitedPropertyType.Mod, SetModUI);
+            android.RegisterPropertyEvent(UnlimitedPropertyType.Crystal, SetCrystalUI);
+        }
+
+        ~AndroidStatusUI()
+        {
+            Android android = GameManager.Instance.GetAndroid();
+            android.UnregisterPropertyEvent(LimitedPropertyType.Health, SetHealthUI);
+            android.UnregisterPropertyEvent(UnlimitedPropertyType.Defence, SetDefenceUI);
+            android.UnregisterPropertyEvent(UnlimitedPropertyType.Mod, SetModUI);
+            android.UnregisterPropertyEvent(UnlimitedPropertyType.Crystal, SetCrystalUI);
         }
 
         private void SetHealthUI(float current, float max)

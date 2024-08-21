@@ -24,6 +24,7 @@ namespace InGame.BattleFields.Androids
         private UnlimitedProperty m_defence;
         private UnlimitedProperty m_speed;
         private UnlimitedProperty m_mod;
+        private UnlimitedProperty m_crystal;
 
         [Header("Tower")]
         private TowerManager m_towerManager;
@@ -49,6 +50,11 @@ namespace InGame.BattleFields.Androids
             m_mod = new UnlimitedProperty(
                 setUp.mod,
                 UnlimitedPropertyType.Mod
+            );
+
+            m_crystal = new UnlimitedProperty(
+                setUp.crystal, 
+                UnlimitedPropertyType.Crystal
             );
 
             m_towerManager = new();
@@ -100,6 +106,7 @@ namespace InGame.BattleFields.Androids
                 UnlimitedPropertyType.Defence => m_defence.value,
                 UnlimitedPropertyType.Mod => m_mod.value,
                 UnlimitedPropertyType.Speed => m_speed.value,
+                UnlimitedPropertyType.Crystal => m_crystal.value,
                 _ => throw new NotImplementedException(),
             };
         }
@@ -120,6 +127,7 @@ namespace InGame.BattleFields.Androids
                 UnlimitedPropertyType.Defence => m_defence,
                 UnlimitedPropertyType.Mod => m_mod,
                 UnlimitedPropertyType.Speed => m_speed,
+                UnlimitedPropertyType.Crystal => m_crystal,
                 _ => null
             };
         }
