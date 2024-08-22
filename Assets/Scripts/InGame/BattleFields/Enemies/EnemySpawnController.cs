@@ -179,20 +179,26 @@ namespace InGame.BattleFields.Enemies
             Enemy closest = null;
             Vector2 pos = new(position.x, position.y);
 
-            foreach(EnemyBlk enemyBlk in m_enemies)
+            foreach(Enemy enemy in GetAllEnemies())
             {
-                if(enemyBlk == null || enemyBlk.enemy == null) continue;
-                Vector2 enemyPos = new Vector2(
-                    enemyBlk.enemy.GetView().transform.position.x, 
-                    enemyBlk.enemy.GetView().transform.position.y
+                if(enemy == null) continue;
+                Vector2 enemyPos = new(
+                    enemy.GetView().transform.position.x, 
+                    enemy.GetView().transform.position.y
                 );
 
                 prevDistance = distance;
                 distance = Mathf.Min(distance, Vector2.Distance(pos, enemyPos));
-                if(distance < prevDistance) closest = enemyBlk.enemy;
+                if(distance < prevDistance) closest = enemy;
             }
 
             return closest;
+        }
+
+        public Enemy GetRandomEnemy()
+        {
+            List<Enemy> enemies = GetAllEnemies();
+            return enemies[Random.Range(0, enemies.Count)];
         }
 
         public List<Enemy> GetAllEnemies()
