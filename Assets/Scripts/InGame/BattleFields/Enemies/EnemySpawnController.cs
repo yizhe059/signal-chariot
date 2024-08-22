@@ -217,6 +217,21 @@ namespace InGame.BattleFields.Enemies
             if (m_currentWaveController == null) return 0f;
             return (float)System.Math.Round(m_currentWaveController.timer, 1);
         }
+
+        public int GetCurrentWaveIdx()
+        {
+            return m_currentWaveIdx;
+        }
+
+        public int GetNumOfWaves()
+        {
+            return m_waves.Count;
+        }
+
+        public float[] GetAllWaveDurations()
+        {
+            return null; // TODO
+        }
     }
 
     public class EnemyWaveSpawnController

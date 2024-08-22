@@ -12,31 +12,61 @@ namespace InGame.UI
         [SerializeField] private UIDocument m_doc;
         private VisualElement m_root;
         private AndroidStatusUI m_status;
-        private ProgressBar m_time;
+        private VisualElement m_progress;
+        private ProgressBar[] m_timeline;
         private EnemySpawnController m_enemyController;
 
         private void Awake()
         {
-            m_root = m_doc.rootVisualElement;
-            m_time = m_root.Q<ProgressBar>("timeBar");
+            m_root = m_doc.rootVisualElement;   
         }
 
         private void Start()
         {
-            m_enemyController = GameManager.Instance.GetEnemySpawnController();
             m_status = new AndroidStatusUI(m_root.Q("status")); // stay in start
+            DisplayProgressUI();
+        }
+
+        private void DisplayProgressUI()
+        {
+            m_enemyController = GameManager.Instance.GetEnemySpawnController();
+        
+            float[] timeLimits = m_enemyController.GetAllWaveDurations(); 
+            
+            timeLimits = new float[]{
+                30, 30, 30, 60 // TODO: remove this
+            };
+            
+            float totalLimits = 0;
+            for (int i = 0; i < timeLimits.Length; i++)
+                totalLimits += timeLimits[i];
+            
+            m_progress = m_root.Q("timeline");
+            
+            m_timeline = new ProgressBar[timeLimits.Length];
+            for(int i = 0; i < timeLimits.Length; i++)
+            {
+                m_timeline[i] = new ProgressBar();
+                m_timeline[i].style.width = new Length(timeLimits[i]/totalLimits*100, LengthUnit.Percent);
+                m_timeline[i].highValue = timeLimits[i];
+                m_timeline[i].title = $"0/{m_timeline[i].highValue}";
+                m_progress.Add(m_timeline[i]);
+            }
         }
 
         private void Update()
         {
-            SetTimeUI();
+            SetProgress();
         }
 
-        private void SetTimeUI()
+        private void SetProgress()
         {
-            m_time.highValue = m_enemyController.GetCurrentWaveTotalDuration();
-            m_time.value = m_enemyController.GetCurrentWaveTimer();
-            m_time.title = $"{m_time.value}/{m_time.highValue}";
+            int currWave = m_enemyController.GetCurrentWaveIdx();
+            if(currWave < 0) return;
+            
+            m_timeline[currWave].highValue = m_enemyController.GetCurrentWaveTotalDuration(); // TODO: remove this
+            m_timeline[currWave].value = m_enemyController.GetCurrentWaveTimer();
+            m_timeline[currWave].title = $"{m_timeline[currWave].value}/{m_timeline[currWave].highValue}";
         }
 
         public void Hide()

@@ -14,10 +14,8 @@
             <ui:Label tabindex="-1" text="CRYSTAL: 50" parse-escape-sequences="true" display-tooltip-when-elided="true" name="content" style="-unity-font-style: bold; font-size: 20px; color: rgb(255, 255, 255);" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="progress" style="flex-grow: 1; max-height: 10%; align-items: center; justify-content: space-around; flex-direction: row; font-size: 20px; top: 69%; max-width: 60%; left: 20%;">
-        <ui:VisualElement name="time" style="flex-grow: 1; flex-direction: row; justify-content: center; align-self: auto;">
-            <ui:Label tabindex="-1" text="Time" parse-escape-sequences="true" display-tooltip-when-elided="true" name="name" style="justify-content: center; -unity-font-style: bold; color: rgb(255, 255, 255);" />
-            <ui:ProgressBar value="33" title="30s/90s" name="timeBar" style="justify-content: center; color: rgb(0, 0, 0); -unity-font-style: bold; width: 80%;" />
-        </ui:VisualElement>
+    <ui:VisualElement name="progress" style="flex-grow: 1; max-height: 10%; align-items: center; justify-content: space-around; flex-direction: row; font-size: 20px; top: 68%; max-width: 60%; left: 20.2%; background-color: rgba(0, 0, 0, 0.39); margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px;">
+        <ui:Label tabindex="-1" text="Progress" parse-escape-sequences="true" display-tooltip-when-elided="true" name="name" style="justify-content: center; -unity-font-style: bold; color: rgb(255, 255, 255); max-width: none; background-color: rgba(156, 156, 156, 0);" />
+        <ui:VisualElement name="timeline" style="flex-grow: 1; max-width: none; flex-direction: row;" />
     </ui:VisualElement>
 </ui:UXML>
