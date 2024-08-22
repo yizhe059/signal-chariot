@@ -48,6 +48,8 @@ namespace InGame.UI
             {
                 m_timeline[i] = new ProgressBar();
                 m_timeline[i].style.width = new Length(timeLimits[i]/totalLimits*100, LengthUnit.Percent);
+                m_timeline[i].style.marginRight = 0;
+                m_timeline[i].style.marginLeft = 0;
                 m_timeline[i].highValue = timeLimits[i];
                 m_timeline[i].title = $"0/{m_timeline[i].highValue}";
                 m_progress.Add(m_timeline[i]);
