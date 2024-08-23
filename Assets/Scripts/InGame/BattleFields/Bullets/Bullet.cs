@@ -1,14 +1,17 @@
+using System.Collections.Generic;
+
 using UnityEngine;
 
-using InGame.BattleFields.Common;
-using InGame.Views;
 using SetUps;
-using Utils;
+
 using InGame.Cores;
-using Unity.VisualScripting;
-using Utils.Common;
-using System;
+using InGame.Views;
 using InGame.BattleFields.Androids;
+using InGame.BattleFields.Common;
+using InGame.BattleEffects;
+
+using Utils;
+using Utils.Common;
 
 namespace InGame.BattleFields.Bullets
 {
@@ -27,27 +30,37 @@ namespace InGame.BattleFields.Bullets
         [Header("Properties")]
         private Sprite m_sprite;
         private UnlimitedProperty m_size;
-        private IMovable m_moveStrategy;
-        private DamageType m_damageStrategy;
         private UnlimitedProperty m_speed;
         private UnlimitedProperty m_damage;
         private UnlimitedProperty m_lifeTime;
-        private UnlimitedProperty m_bouncingTimes;
-        private UnlimitedProperty m_penetrateTimes;
-        private UnlimitedProperty m_splitTimes;
-        
-        // TODO DieEffect
+        private UnlimitedProperty m_bouncingTimes; // TODO effect
+        private UnlimitedProperty m_penetrateTimes; // TODO effect
+        private UnlimitedProperty m_splitTimes; // TODO effect
+
+        [Header("Logics")]
+        private IMovable m_moveStrategy;
+        private List<Effect> m_collisionEffects;
+        private List<Effect> m_destructionEffects;
+
+        // Effects:
+        // Range once damage
+        // Single once damage
+        // Range continuous damage
+        // Single continous damage
+        // Spawn sth
+        // bouncing
+        // penetration
+        // splitting
 
         public Sprite sprite{ get { return m_sprite;}}
         public UnlimitedProperty size{ get { return m_size;}}
-        public IMovable moveStrategy { get { return m_moveStrategy;}}
-        public DamageType damageType {get { return m_damageStrategy;}}
         public UnlimitedProperty speed { get { return m_speed;}}
         public UnlimitedProperty damage { get { return m_damage;}}
         public UnlimitedProperty lifetime { get { return m_lifeTime;}}
-        public UnlimitedProperty bouncingTimes { get { return m_bouncingTimes;}}
-        public UnlimitedProperty penetrateTimes { get {return m_penetrateTimes;}}
-        public UnlimitedProperty splitTimes { get {return m_splitTimes;}}
+        public UnlimitedProperty bouncingTimes { get { return m_bouncingTimes;}} // TODO effect
+        public UnlimitedProperty penetrateTimes { get {return m_penetrateTimes;}} // TODO effect
+        public UnlimitedProperty splitTimes { get {return m_splitTimes;}} // TODO effect
+        public IMovable moveStrategy { get { return m_moveStrategy;}}
 
         public Bullet(BulletSetUp bulletSetUp, Tower tower, int[] bulletIdx)
         {
@@ -74,7 +87,13 @@ namespace InGame.BattleFields.Bullets
             CreateView();
 
             CreateMoveStrategy(bulletSetUp.moveType);
-            CreateDamageStrategy(bulletSetUp.damageType);
+            CreateEffects();
+        }
+
+        private void CreateEffects()
+        {
+            m_collisionEffects = new();
+            m_destructionEffects = new();
         }
 
         private void CreateView()
@@ -119,20 +138,6 @@ namespace InGame.BattleFields.Bullets
             }
         }
 
-        private void CreateDamageStrategy(DamageType damageType)
-        {
-            switch(damageType)
-            {
-                case DamageType.Collide:
-                    break;
-                case DamageType.Range:
-                    break;
-                default:
-                    Debug.LogError("No matching damage type: " + damageType);
-                    break;
-            }
-        }
-
         public void Die()
         {
             m_bulletView.Die();
@@ -143,7 +148,7 @@ namespace InGame.BattleFields.Bullets
             target.TakeDamage(dmg);
             
             if(m_bouncingTimes.value > 0){
-                m_moveStrategy = new LinearMoveStrategy(this);
+                m_moveStrategy = new LinearMoveStrategy(this); // TODO effect
                 m_bouncingTimes.value--;
             } 
             else this.Die();

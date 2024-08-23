@@ -95,9 +95,10 @@ namespace InGame.Views
                 case Constants.ANDROID_LAYER:
                     break;
                 case Constants.OBSTACLE_LAYER:
-                    Die();
+                    Die(); // TODO effect
                     break;
                 default:
+                    // TODO effect
                     IDamageable target = other.gameObject.GetComponent<IDamageable>();
                     if(target != null) DealDamage(target, m_bullet.damage.value);
                     break;
