@@ -15,5 +15,6 @@ namespace SetUps
         public float speed = 1f;
 
         public int mod = 0;
+        public int crystal = 0;
     }
 }

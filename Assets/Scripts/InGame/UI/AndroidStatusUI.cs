@@ -1,35 +1,47 @@
 using InGame.BattleFields.Androids;
 using InGame.BattleFields.Common;
 using InGame.Cores;
-using UnityEngine;
+
 using UnityEngine.UIElements;
 
 using Utils.Common;
 
 namespace InGame.UI
 {
-    public class AndroidStatusUI : MonoSingleton<AndroidStatusUI>, IHidable
+    public class AndroidStatusUI : IHidable
     {
-        [SerializeField] private UIDocument m_doc;
         private VisualElement m_root;
         private VisualElement m_health;
         private VisualElement m_defence;
         private VisualElement m_mod;
+        private VisualElement m_crystal;
         
-        private void Awake()
+        public AndroidStatusUI(VisualElement root)
         {
-            m_root = m_doc.rootVisualElement;
+            m_root = root;
             m_health = m_root.Q("health");
             m_defence = m_root.Q("defence");
             m_mod = m_root.Q("mod");
+            m_crystal = m_root.Q("crystal");
+            Register();
         }
 
-        private void Start()
+        private void Register()
         {
             Android android = GameManager.Instance.GetAndroid();
             android.RegisterPropertyEvent(LimitedPropertyType.Health, SetHealthUI);
             android.RegisterPropertyEvent(UnlimitedPropertyType.Defence, SetDefenceUI);
             android.RegisterPropertyEvent(UnlimitedPropertyType.Mod, SetModUI);
+            android.RegisterPropertyEvent(UnlimitedPropertyType.Crystal, SetCrystalUI);
+        }
+
+        ~AndroidStatusUI()
+        {
+            Android android = GameManager.Instance.GetAndroid();
+            android.UnregisterPropertyEvent(LimitedPropertyType.Health, SetHealthUI);
+            android.UnregisterPropertyEvent(UnlimitedPropertyType.Defence, SetDefenceUI);
+            android.UnregisterPropertyEvent(UnlimitedPropertyType.Mod, SetModUI);
+            android.UnregisterPropertyEvent(UnlimitedPropertyType.Crystal, SetCrystalUI);
         }
 
         private void SetHealthUI(float current, float max)
@@ -52,14 +64,20 @@ namespace InGame.UI
             content.text = $"MOD: {current}";
         }
 
+        private void SetCrystalUI(float current)
+        {
+            Label content = m_crystal.Q<Label>("content");
+            content.text = $"CRYSTAL: {current}";
+        }
+
         public void Hide()
         {
-            m_doc.rootVisualElement.style.display = DisplayStyle.None;
+            m_root.style.display = DisplayStyle.None;
         }
 
         public void Show()
         {
-            m_doc.rootVisualElement.style.display = DisplayStyle.Flex;
+            m_root.style.display = DisplayStyle.Flex;
         }
     }
 }

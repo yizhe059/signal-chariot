@@ -167,32 +167,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   width: 7
-  height: 8
-  originPosition: {x: 0.5, y: -4, z: 0}
+  height: 2
+  originPosition: {x: 0, y: -5, z: 0}
   cellSize: 1
   openSlots: []
   modules:
   - pos:
       x: 0
-      y: 7
+      y: 1
     moduleID: 0
     moduleName: Signal Source
     orientation: 0
   - pos:
-      x: 3
-      y: 7
+      x: 1
+      y: 1
     moduleID: 3
     moduleName: Auto Cannon
     orientation: 0
   - pos:
       x: 0
-      y: 5
+      y: 0
     moduleID: 4
     moduleName: Extra Armor
     orientation: 0
   - pos:
       x: 1
-      y: 5
+      y: 0
     moduleID: 2
     moduleName: Signal Rotator
     orientation: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 7
   height: 7
-  originPosition: {x: -7.5, y: -3.5, z: 0}
+  originPosition: {x: -0.5, y: -2, z: 0}
   cellSize: 1
   openSlots:
   - x: 2

@@ -5,12 +5,12 @@ namespace InGame.InGameStates
     public enum InGameStateType
     {
         None,
-        // Preparation Sub-states
+        // Board Scene Sub-states
         AddSlotState,
         BoardWaitingState,
         ModulePlacingState,
         BoardTestState,
-        // Battle Sub-states
+        // Battle Scene Sub-states
         BattleState,
         BattleResultState,
         RewardState
@@ -19,26 +19,12 @@ namespace InGame.InGameStates
     {
         public abstract InGameStateType type { get; }
 
-        public virtual void Enter(InGameState last)
-        {
-            
-        }
+        public virtual void Enter(InGameState last){}
 
-        public virtual void Update()
-        {
-            
-        }
+        public virtual void Update(){}
         
-        public virtual void LateUpdate()
-        {
-            
-        }
+        public virtual void LateUpdate(){}
 
-        public virtual void Exit()
-        {
-            
-        }
-
-
+        public virtual void Exit(){}
     }
 }

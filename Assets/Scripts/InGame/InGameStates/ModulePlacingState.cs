@@ -35,12 +35,10 @@ namespace InGame.InGameStates
             GameManager.Instance.GetInputManager().RegisterRotateEvent(OnRotatePressed);
             GameManager.Instance.GetInputManager().RegisterClickEvent(boardCamera, OnClick);
 
-            ModuleCardUI.Instance.Hide();
-            BattleProgressUI.Instance.Hide();
-            BattleResultUI.Instance.Hide();
-            AndroidStatusUI.Instance.Show();
-            NavigationBarUI.Instance.Show();
-            BoardBarUI.Instance.Show();
+            int bitmask = UIManager.Instance.GetDisplayBit(
+                UIElements.BoardConsole
+            );
+            UIManager.Instance.SetDisplayUI(bitmask);
         }
 
         public override void Exit()
@@ -51,12 +49,12 @@ namespace InGame.InGameStates
             GameManager.Instance.GetInputManager().UnregisterRotateEvent(OnRotatePressed);
             GameManager.Instance.GetInputManager().UnregisterClickEvent(boardCamera, OnClick);
 
-            ModuleCardUI.Instance.Show();
-            BattleProgressUI.Instance.Show();
-            BattleResultUI.Instance.Show();
-            AndroidStatusUI.Instance.Hide();
-            NavigationBarUI.Instance.Hide();
-            BoardBarUI.Instance.Hide();
+            int bitmask = UIManager.Instance.GetDisplayBit(
+                UIElements.BattleConsole,
+                UIElements.BattleResult,
+                UIElements.ModuleInfoCard
+            );
+            UIManager.Instance.SetDisplayUI(bitmask);
         }
 
         private void OnMouseMove(Vector2 worldPos)
@@ -84,7 +82,6 @@ namespace InGame.InGameStates
                 
                 m_moduleView.SetWorldPos(pos);
                 GameManager.Instance.ChangeToBoardWaitingState();
-                //Debug.Log(m_board);
             }
             else
             {

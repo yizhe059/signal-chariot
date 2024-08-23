@@ -10,39 +10,17 @@ namespace InGame.Views
     {
         private Bullet m_bullet;
         private CountdownTimer m_timer;
+        private Transform m_model;
+        private SpriteRenderer m_spriteRenderer;
+        private Collider m_collider;
 
         #region LifeCycle
         public void Init(Bullet bullet)
         {
             m_bullet = bullet;
             SetSprite();
+            SetCollider();
             SetTimer();
-        }
-
-        private void SetTimer()
-        {
-            m_timer = new CountdownTimer(m_bullet.lifetime.value); 
-            m_timer.OnTimerComplete.AddListener(m_bullet.Die);
-            m_timer.StartTimer();
-        }
-
-        private void SetSprite()
-        {
-            Transform model = transform.Find(Constants.MODEL);
-            if(model == null)
-            {
-                Debug.LogError("No model under this game object!");
-                return;
-            }
-            
-            if(!model.TryGetComponent<SpriteRenderer>(out var spriteRenderer))
-            {
-                Debug.LogError("No sprite renderer under model!");
-                return;
-            }
-
-            spriteRenderer.sprite = m_bullet.sprite;
-            model.localScale = new(m_bullet.size.value, m_bullet.size.value, 1);
         }
 
         private void Update()
@@ -59,6 +37,49 @@ namespace InGame.Views
         #endregion
 
         #region Action
+        private void SetTimer()
+        {
+            m_timer = new CountdownTimer(m_bullet.lifetime.value); 
+            m_timer.OnTimerComplete.AddListener(m_bullet.Die);
+            m_timer.StartTimer();
+        }
+
+        private void SetSprite()
+        {
+            m_model = transform.Find(Constants.MODEL);
+            if(m_model == null)
+            {
+                Debug.LogError("No model under this game object!");
+                return;
+            }
+            m_model.localScale = new(m_bullet.size.value, m_bullet.size.value, 1);
+
+            if(!m_model.TryGetComponent<SpriteRenderer>(out m_spriteRenderer))
+            {
+                Debug.LogError("No sprite renderer under model!");
+                return;
+            }
+            m_spriteRenderer.sprite = m_bullet.sprite;
+        }
+
+        private void SetCollider()
+        {
+            if(!transform.TryGetComponent<Collider>(out m_collider))
+                Debug.LogError("No collider for bullet!");
+        }
+
+        public void Disable()
+        {
+            m_spriteRenderer.enabled = false;
+            m_collider.enabled = false;
+        }
+
+        public void Enable()
+        {
+            m_spriteRenderer.enabled = true;
+            m_collider.enabled = true;
+        }
+
         private void Move()
         {
             m_bullet.moveStrategy.Move();

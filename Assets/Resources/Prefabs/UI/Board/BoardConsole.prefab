@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2770870088589628646}
   - component: {fileID: 4218629127394844654}
   m_Layer: 5
-  m_Name: BoardBar
+  m_Name: BoardConsole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -17,6 +17,7 @@ using SetUps;
 using Utils.Common;
 using Utils;
 using MainMenu;
+using InGame.UI;
 
 namespace InGame.Cores
 {
@@ -39,14 +40,12 @@ namespace InGame.Cores
         // private Board m_extraBoard;
         // private BoardView m_boardView;
         private GeneralBoard m_generalBoard;
-
         private ModuleLib m_moduleLib;
         private SignalController m_signalController;
         private ModuleDescriptionDisplayManager m_moduleDescriptionDisplayManager;
 
         [Header("Enemy")]
         private EnemySpawnLib m_enemySpawnLib;
-
         private EnemyLib m_enemyLib;
         private EnemySpawnController m_enemySpawnController;
 
@@ -63,7 +62,10 @@ namespace InGame.Cores
             InitCamera();
             InitEnemy();
             InitMod();
-            
+        }
+
+        private void Start()
+        {
             ChangeToBoardWaitingState(); // initial state is board preparation
         }
 

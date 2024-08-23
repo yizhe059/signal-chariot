@@ -8,7 +8,7 @@ using Utils;
 
 namespace InGame.UI
 {
-    public class BattleResultUI : MonoSingleton<BattleResultUI>, IHidable
+    public class BattleResultUI : MonoBehaviour, IHidable
     {
         [SerializeField] private UIDocument m_doc;
 

@@ -902,7 +902,7 @@ MonoBehaviour:
       moveType: 0
       damageType: 0
       damage: 1
-      speed: 80
+      speed: 100
       lifeTime: 4
       bouncingTimes: 0
       penetrateTimes: 0

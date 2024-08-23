@@ -1,10 +1,11 @@
 using UnityEngine;
-using DG.Tweening;
 
 using Utils;
-using InGame.BattleFields.Enemies;
+using Utils.Common;
+
 using InGame.Cores;
-using Unity.VisualScripting;
+using InGame.BattleFields.Enemies;
+
 
 namespace InGame.BattleFields.Bullets
 {
@@ -62,7 +63,6 @@ namespace InGame.BattleFields.Bullets
         {
             Enemy closest = GameManager.Instance.GetEnemySpawnController().
                             GetClosestEnemy(m_bulletTransform.position);
-
             Vector3 target;
             if(closest != null) target = closest.GetView().transform.position;
             else target = Utilities.RandomPosition();
@@ -109,9 +109,15 @@ namespace InGame.BattleFields.Bullets
 
         protected override void SetBatchInfo()
         {
-            Vector3 target = Utilities.RandomPosition();
-            m_bulletManager.SetBatchInfo(target, m_batchIdx);
+            Enemy random = GameManager.Instance.GetEnemySpawnController().GetRandomEnemy();
+            Vector3 target;
+            if(random != null) target = random.GetView().transform.position;
+            else target = Utilities.RandomPosition();
+
             m_bullet.tower.towerView.SetTarget(target);
+            
+            target.z = Constants.BULLET_DEPTH;
+            m_bulletManager.SetBatchInfo(target, m_batchIdx);
         }
 
         private void SetDirection()
@@ -135,6 +141,11 @@ namespace InGame.BattleFields.Bullets
         public FollowMoveStrategy(Bullet bullet) : base(bullet)
         {
             this.SetTarget();
+        }
+
+        protected override void SetBatchInfo()
+        {
+
         }
 
         private void SetTarget()
@@ -170,34 +181,47 @@ namespace InGame.BattleFields.Bullets
 
     public class ParabolaMoveStrategy : MoveStrategy, IMovable
     {
-        private Vector3 m_target;
-        private float m_distance;
+        private CountdownTimer m_timer;
 
         public ParabolaMoveStrategy(Bullet bullet) : base(bullet)
         {
             this.SetTarget();
+            this.m_bullet.bulletView.Disable();
+        }
+
+        protected override void SetBatchInfo()
+        {
+            Enemy random = GameManager.Instance.GetEnemySpawnController().GetRandomEnemy();
+            Vector3 target;
+            if(random != null) target = random.GetView().transform.position;
+            else target = Utilities.RandomPosition();  
+            
+            m_bullet.tower.towerView.SetTarget(target);
+            
+            target.z = Constants.BULLET_DEPTH;
+            m_bulletManager.SetBatchInfo(target, m_batchIdx);
         }
 
         private void SetTarget()
         {
-            Enemy closest = GameManager.Instance.GetEnemySpawnController().
-                            GetClosestEnemy(m_bulletTransform.position);
-            if(closest != null) m_target = closest.GetView().transform.position;
-            else m_target = Utilities.RandomPosition();
+            Vector3 target = m_bulletManager.GetBatchInfo(m_batchIdx);
+            float distance = Vector3.Distance(this.m_bulletTransform.position, target);
+            
+            m_timer = new CountdownTimer(
+                distance / m_bullet.speed.value / Constants.SPEED_MULTIPLIER
+            );
 
-            m_bullet.tower.towerView.SetTarget(m_target);
+            m_timer.OnTimerComplete.AddListener(() => {
+                m_bullet.bulletView.Enable();
+                m_bulletTransform.position = target;
+            });
 
-            m_target.z = Constants.BULLET_DEPTH;
-            this.m_distance = Vector3.Distance(this.m_bulletTransform.position, this.m_target);
+            m_timer.StartTimer();
         }
 
         public void Move()
         {
-            float currDistance = Vector3.Distance(m_bulletTransform.position, m_target);
-            if(currDistance <= Constants.COLLIDE_OFFSET) return;
-            m_bulletTransform.DOMove(m_target, 
-                m_distance / m_bullet.speed.value / Constants.SPEED_MULTIPLIER).
-                SetEase(Ease.OutQuad);
+            m_timer.Update(Time.deltaTime);   
         }
     }
 

@@ -27,12 +27,10 @@ namespace InGame.InGameStates
             m_timeEffectManager.TestStart();
             m_signalController.TestStart();
 
-            ModuleCardUI.Instance.Hide();
-            BattleProgressUI.Instance.Hide();
-            BattleResultUI.Instance.Hide();
-            AndroidStatusUI.Instance.Show();
-            NavigationBarUI.Instance.Show();
-            BoardBarUI.Instance.Show();
+            int bitmask = UIManager.Instance.GetDisplayBit(
+                UIElements.BoardConsole
+            );
+            UIManager.Instance.SetDisplayUI(bitmask);
         }
 
         public override void Exit()
@@ -42,12 +40,12 @@ namespace InGame.InGameStates
             m_signalController.TestStop();
             m_timeEffectManager.TestStop();
 
-            ModuleCardUI.Instance.Show();
-            BattleProgressUI.Instance.Show();
-            BattleResultUI.Instance.Show();
-            AndroidStatusUI.Instance.Hide();
-            NavigationBarUI.Instance.Hide();
-            BoardBarUI.Instance.Hide();
+            int bitmask = UIManager.Instance.GetDisplayBit(
+                UIElements.BattleConsole,
+                UIElements.BattleResult,
+                UIElements.ModuleInfoCard
+            );
+            UIManager.Instance.SetDisplayUI(bitmask);
         }
         
 

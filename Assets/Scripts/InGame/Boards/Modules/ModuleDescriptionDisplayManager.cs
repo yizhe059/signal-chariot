@@ -1,4 +1,6 @@
 ﻿using InGame.Cores;
+using InGame.UI;
+
 using UnityEngine;
 
 namespace InGame.Boards.Modules
@@ -34,14 +36,23 @@ namespace InGame.Boards.Modules
         public void DisplayModule(Module module)
         {
             if (!m_isOn) return;
-            ModuleCardUI.Instance.Show();
-            ModuleCardUI.Instance.SetContent(module.name, module.desc, m_currentScreenPos);
+            int bitmask = UIManager.Instance.GetDisplayBit(
+                UIElements.ModuleInfoCard
+            );
+            UIManager.Instance.AddDisplayUI(bitmask);
+
+            ModuleCardUI moduleCardUI = UIManager.Instance.GetUI(UIElements.ModuleInfoCard) as ModuleCardUI;
+            if (moduleCardUI != null)
+                moduleCardUI.SetContent(module.name, module.desc, m_currentScreenPos);
         }
 
         public void UndisplayModule(Module module)
         {
             if (!m_isOn) return;
-            ModuleCardUI.Instance.Hide();
+            int bitmask = UIManager.Instance.GetDisplayBit(
+                UIElements.ModuleInfoCard
+            );
+            UIManager.Instance.RemoveDisplayUI(bitmask);
         }
     }
 }

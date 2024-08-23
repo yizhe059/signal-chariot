@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using InGame.BattleFields.Common;
 using UnityEngine;
 using UnityEngine.UI;
