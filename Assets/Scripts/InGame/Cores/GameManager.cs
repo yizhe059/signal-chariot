@@ -123,8 +123,8 @@ namespace InGame.Cores
 
         public void Update()
         {
-            m_signalController?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
             m_timeEffectManager?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
+            m_signalController?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
             m_enemySpawnController?.Update(UnityEngine.Time.deltaTime);
         }
 
