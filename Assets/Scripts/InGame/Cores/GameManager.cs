@@ -41,7 +41,8 @@ namespace InGame.Cores
         // private BoardView m_boardView;
         private GeneralBoard m_generalBoard;
         private ModuleLib m_moduleLib;
-        private SignalController m_signalController;
+        //private SignalController m_signalController;
+        private GeneralSignalController m_generalSignalController;
         private ModuleDescriptionDisplayManager m_moduleDescriptionDisplayManager;
 
         [Header("Enemy")]
@@ -102,7 +103,8 @@ namespace InGame.Cores
             var boardView = boardGO.GetComponent<BoardView>();
             boardView.Init(board, extraBoard, m_setUp.boardSetUp, m_setUp.extraBoardSetUp);
 
-            m_signalController = SignalController.CreateSignalController(board, boardView);
+            m_generalSignalController = new GeneralSignalController(board, boardView);
+            //m_signalController = SignalController.CreateSignalController(board, boardView);
             m_generalBoard = GeneralBoard.CreateGeneralBoard(board, extraBoard, boardView);
 
             m_moduleDescriptionDisplayManager = new ModuleDescriptionDisplayManager(m_inputManager);
@@ -124,7 +126,7 @@ namespace InGame.Cores
         public void Update()
         {
             m_timeEffectManager?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
-            m_signalController?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
+            m_generalSignalController?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
             m_enemySpawnController?.Update(UnityEngine.Time.deltaTime);
         }
 
@@ -139,7 +141,7 @@ namespace InGame.Cores
         public CameraManager GetCameraManager() => m_cameraManager;
         public InputManager GetInputManager() => m_inputManager;
         public ModuleLib GetModuleLib() =>  m_moduleLib;
-        public SignalController GetSignalController() => m_signalController;
+        public GeneralSignalController GetSignalController() => m_generalSignalController;
         public TimeEffectManager GetTimeEffectManager() => m_timeEffectManager;
         public Board GetBoard() => m_generalBoard.board;
         public Board GetExtraBoard() => m_generalBoard.extraBoard;
@@ -177,7 +179,7 @@ namespace InGame.Cores
 
         public void ChangeToBoardTestState()
         {
-            WorldState.instance.nextState = BoardTestState.CreateState(m_timeEffectManager, m_signalController);
+            WorldState.instance.nextState = BoardTestState.CreateState(m_timeEffectManager, m_generalSignalController);
         }
 
         public void ChangeToBattleState()

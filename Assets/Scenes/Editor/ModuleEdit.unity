@@ -170,6 +170,7 @@ MonoBehaviour:
   consumptionMethod: 0
   energyConsumption: 0
   coolDown: 0
+  mask: 0
 --- !u!1 &377390790
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,8 +332,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 1624054408}
     m_Modifications:
     - target: {fileID: 2107736309079604036, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: mask
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2107736309079604036, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: maxUses
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2107736309079604036, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: consumptionMethod
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: desc
@@ -709,6 +718,7 @@ MonoBehaviour:
   consumptionMethod: 0
   energyConsumption: 0
   coolDown: 0
+  mask: 0
 --- !u!1 &825085954
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,14 +909,14 @@ MonoBehaviour:
     bulletSetUp:
       sprite: {fileID: 21300000, guid: 494c2058d61db45a89aa442c3fa2acfb, type: 3}
       size: 1
-      moveType: 0
-      damageType: 0
       damage: 1
+      health: 0
       speed: 100
       lifeTime: 4
       bouncingTimes: 0
       penetrateTimes: 0
       splitTimes: 0
+      moveType: 0
 --- !u!1 &993809584 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9075689799680712317, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
@@ -1864,6 +1874,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1624054408}
     m_Modifications:
+    - target: {fileID: 2107736309079604036, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: mask
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: desc
       value: Generate a signal  every second to the pointed direction. The generated

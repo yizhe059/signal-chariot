@@ -110,8 +110,10 @@ namespace InGame.Effects
         private Time m_coolDown;
         private Time m_prevTriggerTime;
 
+        private SignalType m_signalMask;
+
         public static SignalEffects CreateSignalEffects(List<Effect> signalEffects, int maxUses,
-        EnergyConsumptionMethod consumptionMethod, int energyConsumption, float coolDown)
+        EnergyConsumptionMethod consumptionMethod, int energyConsumption, float coolDown, SignalType mask)
         {
             return new SignalEffects
             {
@@ -121,12 +123,13 @@ namespace InGame.Effects
                 m_consumptionMethod = consumptionMethod,
                 m_energyConsumption = energyConsumption,
                 m_coolDown = new Time(coolDown),
-                m_prevTriggerTime = new Time(-coolDown)
+                m_prevTriggerTime = new Time(-coolDown),
+                m_signalMask = mask
             };
         }
         
         public static SignalEffects CreateSignalEffects(List<Effect> signalEffects, int maxUses, EnergyConsumptionMethod consumptionMethod,
-            int energyConsumption, Time coolDown)
+            int energyConsumption, Time coolDown, SignalType mask)
         {
             return new SignalEffects
             {
@@ -136,7 +139,8 @@ namespace InGame.Effects
                 m_consumptionMethod = consumptionMethod,
                 m_energyConsumption = energyConsumption,
                 m_coolDown = coolDown,
-                m_prevTriggerTime = -coolDown
+                m_prevTriggerTime = -coolDown,
+                m_signalMask = mask
             };
         }
 
@@ -149,13 +153,29 @@ namespace InGame.Effects
             }
 
 
-            return CreateSignalEffects(signalEffects, other.m_maxUses, other.m_consumptionMethod, other.m_energyConsumption, other.m_coolDown);
+            return CreateSignalEffects(signalEffects, other.m_maxUses, other.m_consumptionMethod,
+                other.m_energyConsumption, other.m_coolDown, other.m_signalMask);
         }
 
         public void Trigger(EffectBlackBoard blackBoard)
         {
             var signal = blackBoard.signal;
             var time = blackBoard.time;
+            
+            // filter out certain type of signal
+            if ((m_signalMask & signal.type) != signal.type) return;
+            
+            // To Do: maybe every type of signal will have its own consume mechanism
+            if (signal.type != SignalType.Normal)
+            {
+                foreach (var effect in m_effects)
+                {
+                    effect.Trigger(blackBoard);
+                }
+
+                return;
+            }
+            
             // cool down not finished
             if (time - m_prevTriggerTime < m_coolDown)
             {

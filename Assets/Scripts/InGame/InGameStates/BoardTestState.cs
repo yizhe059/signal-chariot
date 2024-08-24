@@ -10,7 +10,7 @@ namespace InGame.InGameStates
         public override InGameStateType type => InGameStateType.BoardTestState;
 
         private TimeEffectManager m_timeEffectManager;
-        private SignalController m_signalController;
+        private GeneralSignalController m_signalController;
         
         public override void Enter(InGameState last)
         {
@@ -49,7 +49,7 @@ namespace InGame.InGameStates
         }
         
 
-        public static BoardTestState CreateState(TimeEffectManager timeEffectManager, SignalController signalController)
+        public static BoardTestState CreateState(TimeEffectManager timeEffectManager, GeneralSignalController signalController)
         {
             return new BoardTestState
             {

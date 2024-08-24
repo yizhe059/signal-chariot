@@ -60,6 +60,7 @@ namespace Editors.Board
                 buffMask = buffMask,
                 prefab = prefab,
                 signalEffects = signalEffectEdits.CreateEffects(),
+                signalMask = signalEffectEdits.mask,
                 coolDown = signalEffectEdits.coolDown,
                 consumptionMethod = signalEffectEdits.consumptionMethod,
                 energyConsumption = signalEffectEdits.energyConsumption,
