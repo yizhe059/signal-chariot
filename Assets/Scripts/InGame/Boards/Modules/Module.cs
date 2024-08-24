@@ -4,10 +4,8 @@ using InGame.Effects;
 using InGame.Effects.PlacingEffectRequirements;
 using InGame.Effects.TriggerRequirements;
 using InGame.Views;
-using MainMenu;
 using SetUps;
 using UnityEngine;
-using Utils.Common;
 
 namespace InGame.Boards.Modules
 {
@@ -65,6 +63,14 @@ namespace InGame.Boards.Modules
         }
     }
 
+    public enum Category
+    {
+        Signal,
+        Epuipment,
+        Auxiliary,
+        Default
+    }
+
     public class Module
     {
         public enum Orientation
@@ -88,6 +94,7 @@ namespace InGame.Boards.Modules
         #endregion
         
         public string name { get; protected set; }
+        public Category category{ get; protected set; }
         public string desc { get; protected set; }
         
         #region Effect
@@ -499,6 +506,7 @@ namespace InGame.Boards.Modules
             {
                 name = setUp.name,
                 desc = setUp.desc,
+                category = setUp.category,
                 m_buffMasks = setUp.buffMask,
                 m_prefab = setUp.prefab,
                 m_signalEffects = SignalEffects.CreateSignalEffects(signalEffects, setUp.maxUses, setUp.consumptionMethod, setUp.energyConsumption, setUp.coolDown),
@@ -524,6 +532,7 @@ namespace InGame.Boards.Modules
                 m_slotMap = other.m_slotMap,
                 name = other.name,
                 desc = other.desc,
+                category = other.category,
                 m_buffMasks = other.m_buffMasks,
                 m_signalEffects = SignalEffects.CreateSignalEffects(other.m_signalEffects),
                 m_placingEffects = PlacingEffects.CreatePlacingEffects(other.m_placingEffects),

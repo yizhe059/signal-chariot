@@ -20,13 +20,21 @@ namespace InGame.Views
         private bool m_isOn = false;
         private IDamageable m_dmgTarget = null;
         private RaycastHit[] m_hits;
-        private float m_length = .5f;
+        private float[] m_colliderSizes;
 
         #region Life Cycle
         public void Init(Enemy enemy)
         {
             m_enemy = enemy;
             m_hits = new RaycastHit[4];
+            if(!TryGetComponent<BoxCollider>(out var boxCollider))
+            {
+                Debug.LogError("Android has no collider!");
+                return;
+            }
+            m_colliderSizes = new float[2];
+            m_colliderSizes[0] = boxCollider.size.y/2;
+            m_colliderSizes[1] = boxCollider.size.x/2;
             new SlideBarUI(gameObject, m_enemy, LimitedPropertyType.Health);
         }
 
@@ -46,10 +54,10 @@ namespace InGame.Views
         #region Action
         private void GenerateRay()
         {
-            Physics.Raycast(transform.position, Vector2.up, out m_hits[0], m_length);
-            Physics.Raycast(transform.position, Vector2.down, out m_hits[1], m_length);
-            Physics.Raycast(transform.position, Vector2.left, out m_hits[2], m_length);
-            Physics.Raycast(transform.position, Vector2.right, out m_hits[3], m_length);
+            Physics.Raycast(transform.position, Vector2.up, out m_hits[0], m_colliderSizes[0]);
+            Physics.Raycast(transform.position, Vector2.down, out m_hits[1], m_colliderSizes[0]);
+            Physics.Raycast(transform.position, Vector2.left, out m_hits[2], m_colliderSizes[1]);
+            Physics.Raycast(transform.position, Vector2.right, out m_hits[3], m_colliderSizes[1]);
 
             if (m_hits[0].collider != null && m_direction.y > 0)
                 OnRayHit(m_hits[0].collider, false);
@@ -152,6 +160,15 @@ namespace InGame.Views
             Vector3 worldPos = pos;
             worldPos.z = Constants.ENEMY_DEPTH;
             transform.position = worldPos;
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawLine(transform.position, transform.position + Vector3.up * m_colliderSizes[0]);
+            Gizmos.DrawLine(transform.position, transform.position + Vector3.down * m_colliderSizes[0]);
+            Gizmos.DrawLine(transform.position, transform.position + Vector3.left * m_colliderSizes[1]);
+            Gizmos.DrawLine(transform.position, transform.position + Vector3.right * m_colliderSizes[1]);
         }
         
         public void TurnOn() => m_isOn = true;

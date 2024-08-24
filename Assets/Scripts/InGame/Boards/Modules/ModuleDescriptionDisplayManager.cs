@@ -43,7 +43,7 @@ namespace InGame.Boards.Modules
 
             ModuleCardUI moduleCardUI = UIManager.Instance.GetUI(UIElements.ModuleInfoCard) as ModuleCardUI;
             if (moduleCardUI != null)
-                moduleCardUI.SetContent(module.name, module.desc, m_currentScreenPos);
+                moduleCardUI.SetContent(module.name, module.desc, module.category, m_currentScreenPos);
         }
 
         public void UndisplayModule(Module module)

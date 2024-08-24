@@ -6,6 +6,7 @@ using InGame.Effects.PlacingEffectRequirements;
 using InGame.Effects.TriggerRequirements;
 using InGame.Views;
 using UnityEngine;
+using InGame.Boards.Modules;
 
 namespace SetUps
 {
@@ -14,6 +15,7 @@ namespace SetUps
     {
         public string name ="";
         public string desc = "";
+        public Category category = Category.Default;
         public List<ModulePosition> otherPositions;
         public ModuleView prefab;
         public ModuleBuffType buffMask;

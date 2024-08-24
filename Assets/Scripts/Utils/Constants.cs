@@ -76,7 +76,7 @@ namespace Utils
         public const float COLLIDE_OFFSET = 0.5f;
         public const float SEPERATION_DISTANCE = 1f;
         public const float SEPERATION_FORCE = 1f;
-        public const float SELECT_THRESHOLD = 0.5f;
+        public const float SELECT_THRESHOLD = 0.2f;
 
         #endregion
 

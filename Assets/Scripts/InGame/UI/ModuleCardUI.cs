@@ -1,3 +1,4 @@
+using InGame.Boards.Modules;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -13,6 +14,7 @@ namespace InGame.UI
         private VisualElement m_root;
         private VisualElement m_panel;
         private Label m_name;
+        private Label m_category;
         private Label m_description;
 
         private void Awake()
@@ -22,13 +24,15 @@ namespace InGame.UI
             m_panel = m_root.Q("panel");
 
             m_name = m_root.Q<Label>("name");
+            m_category = m_root.Q<Label>("category");
             m_description = m_root.Q<Label>("description");
         }
 
-        public void SetContent(string name, string description, Vector2 position)
+        public void SetContent(string name, string description, Category category, Vector2 position)
         {
             m_name.text = name;
-            m_description.text = description;
+            m_category.text = "Category: " + category.ToString();
+            m_description.text = "Description: " + description;
 
             // Vector2 mousePosition = position;
             Vector2 panelPosition = m_root.WorldToLocal(position);
@@ -52,8 +56,8 @@ namespace InGame.UI
             m_panel.style.left = new Length(panelPosition.x, LengthUnit.Pixel);
             m_panel.style.top = new Length(panelPosition.y, LengthUnit.Pixel);
 
-            Debug.Log("mouse position " + position.x + ", " + position.y);
-            Debug.Log("panel position " + panelPosition.x + ", " + panelPosition.y);
+            // Debug.Log("mouse position " + position.x + ", " + position.y);
+            // Debug.Log("panel position " + panelPosition.x + ", " + panelPosition.y);
         }
 
         public void Hide()

@@ -12,6 +12,7 @@ namespace Editors.Board
     {
         public new string name ="";
         public string desc = "";
+        public Category category = Category.Default;
         public ModuleView prefab;
         public List<ModulePosition> otherPositions;
         public ModuleBuffType buffMask;
@@ -56,6 +57,7 @@ namespace Editors.Board
             {
                 name = name,
                 desc = desc,
+                category = category,
                 otherPositions = new List<ModulePosition>(otherPositions),
                 buffMask = buffMask,
                 prefab = prefab,

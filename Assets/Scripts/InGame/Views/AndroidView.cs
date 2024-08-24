@@ -13,14 +13,23 @@ namespace InGame.Views
         private Vector3 m_moveDirection = Vector3.zero;
         private Vector3 m_obstacleDirection = Vector3.zero;
         private Android m_android;
-        private RaycastHit[] m_hits; 
-        private float m_length = .5f;
+        private RaycastHit[] m_hits;
+        private float[] m_colliderSizes;
         
         #region Life Cycle
         public void Init(Android android)
         {
             m_android = android;
             m_hits = new RaycastHit[4];
+            
+            if(!TryGetComponent<BoxCollider>(out var boxCollider))
+            {
+                Debug.LogError("Android has no collider!");
+                return;
+            }
+            m_colliderSizes = new float[2];
+            m_colliderSizes[0] = boxCollider.size.y/2;
+            m_colliderSizes[1] = boxCollider.size.x/2;
         }
 
         private void Update()
@@ -38,10 +47,10 @@ namespace InGame.Views
         #region Action
         private void GenerateRay()
         {
-            Physics.Raycast(transform.position, Vector2.up, out m_hits[0], m_length);
-            Physics.Raycast(transform.position, Vector2.down, out m_hits[1], m_length);
-            Physics.Raycast(transform.position, Vector2.left, out m_hits[2], m_length);
-            Physics.Raycast(transform.position, Vector2.right, out m_hits[3], m_length);
+            Physics.Raycast(transform.position, Vector2.up, out m_hits[0], m_colliderSizes[0]);
+            Physics.Raycast(transform.position, Vector2.down, out m_hits[1], m_colliderSizes[0]);
+            Physics.Raycast(transform.position, Vector2.left, out m_hits[2], m_colliderSizes[1]);
+            Physics.Raycast(transform.position, Vector2.right, out m_hits[3], m_colliderSizes[1]);
             
             if (m_hits[0].collider != null && m_moveDirection.y > 0)
                 OnRayHit(m_hits[0].collider, false);
@@ -65,8 +74,8 @@ namespace InGame.Views
         {
             m_moveDirection = (m_moveDirection + m_obstacleDirection).normalized;
             Vector3 velocity = Constants.SPEED_MULTIPLIER * 
-                            m_android.Get(UnlimitedPropertyType.Speed) * 
-                            Time.deltaTime * m_moveDirection;
+                                m_android.Get(UnlimitedPropertyType.Speed) * 
+                                Time.deltaTime * m_moveDirection;
 
             if (velocity == Vector3.zero) return;
             this.transform.Translate(velocity, Space.World);
@@ -117,10 +126,10 @@ namespace InGame.Views
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position, transform.position + Vector3.up * m_length);
-            Gizmos.DrawLine(transform.position, transform.position + Vector3.down * m_length);
-            Gizmos.DrawLine(transform.position, transform.position + Vector3.left * m_length);
-            Gizmos.DrawLine(transform.position, transform.position + Vector3.right * m_length);
+            Gizmos.DrawLine(transform.position, transform.position + Vector3.up * m_colliderSizes[0]);
+            Gizmos.DrawLine(transform.position, transform.position + Vector3.down * m_colliderSizes[0]);
+            Gizmos.DrawLine(transform.position, transform.position + Vector3.left * m_colliderSizes[1]);
+            Gizmos.DrawLine(transform.position, transform.position + Vector3.right * m_colliderSizes[1]);
         }
     }
 }
