@@ -89,7 +89,6 @@ namespace InGame.Views
 
         private Vector3 Seperation()
         {
-            // TODO: Trigger by Raycast instead
             Vector3 seperation = Vector3.zero;
             foreach(Enemy otherEnemy in GameManager.Instance.GetEnemySpawnController().GetAllEnemies())
             {
@@ -128,7 +127,6 @@ namespace InGame.Views
             switch(layer)
             {
                 case Constants.ENEMY_LAYER:
-                    
                     break;
                 default:
                     m_dmgTarget = other.gameObject.GetComponent<IDamageable>();

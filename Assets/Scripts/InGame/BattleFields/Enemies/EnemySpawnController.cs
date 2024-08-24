@@ -4,6 +4,8 @@ using InGame.Cores;
 using SetUps;
 using UnityEngine;
 using UnityEngine.Events;
+using Utils;
+using Utils.Common;
 
 namespace InGame.BattleFields.Enemies
 {
@@ -19,6 +21,7 @@ namespace InGame.BattleFields.Enemies
             public Enemy enemy;
             public UnityAction dieCallback;
         }
+
         private EnemySpawnLib m_spawnLib;
         private EnemyLib m_enemyLib;
         private int m_currentWaveIdx;
@@ -134,9 +137,7 @@ namespace InGame.BattleFields.Enemies
             {
                 var blk = m_enemies[idx];
                 if (blk.enemy == null)
-                {
                     break;
-                }
             }
 
             EnemyBlk enemyBlk;
@@ -486,6 +487,7 @@ namespace InGame.BattleFields.Enemies
                     callBack = () => EnemyIsDead(idx)
                 };
 
+                
                 enemy.SetPosition(GenerateSpawningLocation());
                     
                 enemy.RegisterDieCallBack(enemyBlk.callBack);
@@ -528,8 +530,9 @@ namespace InGame.BattleFields.Enemies
             // To Do Generate the location in a location manager
             Vector2 min = new Vector2(-9f, -9f), max = new Vector2(9f, 9f);
             var playerPos = GameManager.Instance.GetAndroid().GetPosition();
-            var minPlayer = playerPos - new Vector2(3, 3);
-            var maxPlayer = playerPos + new Vector2(3, 3);
+            var cameraSize = GameManager.Instance.GetCameraManager().GetBattleCameraSize();
+            var minPlayer = playerPos - new Vector2(cameraSize.x/2, cameraSize.y/2);
+            var maxPlayer = playerPos + new Vector2(cameraSize.x/2, cameraSize.y/2);;
 
             Vector2 location;
             int count = 0;
@@ -539,11 +542,15 @@ namespace InGame.BattleFields.Enemies
                 location.x = Random.Range(min.x, max.x);
                 location.y = Random.Range(min.y, max.y);
                 
-                //prevent infinite loop
-                if (count > 100) break;
-            } while (location.x > minPlayer.x && location.y > minPlayer.y && location.x < maxPlayer.x && location.y < maxPlayer.y);
+                // prevent infinite loop
+                if (count > Constants.MAX_ENEMY_POS_FIND_TIMES) break;
+            } while (location.x > minPlayer.x && 
+                    location.y > minPlayer.y && 
+                    location.x < maxPlayer.x && 
+                    location.y < maxPlayer.y);
             
-            if (count > 100) {Debug.LogError("Can find the location");}
+            if (count > Constants.MAX_ENEMY_POS_FIND_TIMES) 
+                Debug.LogError("Can find the location");
 
             return location;
         }

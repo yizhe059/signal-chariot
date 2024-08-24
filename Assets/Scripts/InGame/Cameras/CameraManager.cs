@@ -46,6 +46,13 @@ namespace InGame.Cameras
             }
             m_battleVirtualCamera.Follow = target.transform;
         }
+
+        public Vector2 GetBattleCameraSize()
+        {
+            float height = 2f * m_battleCamera.orthographicSize;
+            float width = height * m_battleCamera.aspect;
+            return new Vector2(width, height);
+        }
         
         // no set position for battle camera because battle camera is using virtual camera
     }
