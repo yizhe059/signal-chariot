@@ -49,6 +49,7 @@ namespace InGame.Boards.Signals
             }; 
         }
 
+        #region Interface
         public void CreateSignal(SignalSetUp setUp, int delay = 0)
         {
             
@@ -71,62 +72,7 @@ namespace InGame.Boards.Signals
             m_setUpQueues.Add(newPack);
         }
 
-        private int AddSignal(SignalSetUp setUp)
-        {
-            var id = -1;
-            for (int i = 0; i < m_signals.Count; i++)
-            {
-                if (m_signals[i] == null)
-                {
-                    id = i;
-                    break;
-                }
-            }
-
-            if (id == -1)
-            {
-                id = m_signals.Count;
-                m_signals.Add(null);
-            }
-            setUp.id = id;
-
-            var signal = Signal.CreateSignal(setUp);
-            var blackBoard = new EffectBlackBoard
-            {
-                signal = signal,
-                time = new Time(0f),
-                isTest = m_isTest
-            };
-            
-            var signalPack = new SignalPack
-            {
-                signal = signal,
-                timer = 0f,
-                blackBoard = blackBoard
-            };
-
-
-            m_signals[id] = signalPack;
-            m_boardView.CreateSignalView(signalPack.signal);
-            m_signalDistributions.GetValue(setUp.pos.x, setUp.pos.y).Add(id);
-            if (m_isOn) signal.Start();
-            else signal.Stop();
-
-            return id;
-        }
-        
-        private void RemoveSignal(int id)
-        {
-            var signalPack = m_signals[id];
-            if (signalPack == null) return;
-            var pos = signalPack.signal.pos;
-            m_signalDistributions.GetValue(pos.x, pos.y).Remove(id);
-            m_signals[id] = null;
-            
-            signalPack.signal.SelfDestroy();
-            signalPack.blackBoard.Clean();
-        }
-        
+               
         public void Reset()
         {
             foreach (var signalPack in m_signals)
@@ -148,7 +94,6 @@ namespace InGame.Boards.Signals
                 signalPack.signal.Start();
             }
         }
-        
         public void Stop()
         {
             m_isOn = false;
@@ -195,6 +140,8 @@ namespace InGame.Boards.Signals
 
             return count;
         }
+        
+        #endregion
 
         public void Update(float deltaTime, float currentTime)
         {
@@ -222,14 +169,16 @@ namespace InGame.Boards.Signals
                 
                 m_timer -= Constants.SIGNAL_MOVING_DURATION;
                 MoveSignals();
-                FuseSignals();
+                FuseOppositeDirSignals();
                 TriggerSignals(deltaTime, currentTime);
-                RemoveSignals();
                 AddSignals();
+                FuseOneDirSignals();
+                RemoveSignals();
                 m_halfCheck = false;
             }
         }
-
+        
+        #region pipeline functions
         private void MoveSignals()
         {
             for (int i = 0; i < m_signals.Count; i++)
@@ -242,108 +191,37 @@ namespace InGame.Boards.Signals
             }
         }
 
-        private void FuseSignals()
+        private void FuseOppositeDirSignals()
         {
             for (int x = 0; x < m_signalDistributions.width; x++)
             {
                 for (int y = 0; y < m_signalDistributions.height; y++)
                 {
-                    var list = m_signalDistributions.GetValue(x, y);
-                    FuseSignalList(list, new BoardPosition(x,y));
+                    var pos = new BoardPosition(x, y);
+                    FuseTwoDirectionSignal(pos, Signal.Direction.Up, Signal.Direction.Down);
+                    FuseTwoDirectionSignal(pos, Signal.Direction.Right, Signal.Direction.Left);
+                    
+                    // var list = m_signalDistributions.GetValue(x, y);
+                    // FuseSignalList(list, new BoardPosition(x,y));
                 }
             }
         }
 
-        private void FuseSignalList(List<int> list, BoardPosition pos)
+        private void FuseOneDirSignals()
         {
-            List<int> up = new List<int>(), down = new List<int>(), left = new List<int>(), right = new List<int>();
-
-            for (int idx = list.Count - 1; idx >= 0; idx--)
+            for (int x = 0; x < m_signalDistributions.width; x++)
             {
-                var id = list[idx];
-                var signal = m_signals[id].signal;
-                
-                switch (signal.dir)
+                for (int y = 0; y < m_signalDistributions.height; y++)
                 {
-                    case Signal.Direction.Up:
-                        up.Add(id);
-                        break;
-                    case Signal.Direction.Down:
-                        down.Add(id);
-                        break;
-                    case Signal.Direction.Left:
-                        left.Add(id);
-                        break;
-                    case Signal.Direction.Right:
-                        right.Add(id);
-                        break;
-                    default:
-                        up.Add(id);
-                        break;
+                    var pos = new BoardPosition(x, y);
+                    FuseOneDirectionSignal(pos, Signal.Direction.Up);
+                    FuseOneDirectionSignal(pos, Signal.Direction.Down);
+                    FuseOneDirectionSignal(pos, Signal.Direction.Left);
+                    FuseOneDirectionSignal(pos, Signal.Direction.Right);
                 }
             }
-
-            
-
-            if (up.Count + down.Count > 1)
-            {
-                int upEnergy = 0;
-                foreach (var id in up)
-                {
-                    upEnergy += m_signals[id].signal.energy;
-                    m_signals[id].isDead = true;
-                }
-
-                foreach (var id in down)
-                {
-                    upEnergy -= m_signals[id].signal.energy;
-                    m_signals[id].isDead = true;
-                }
-
-                if (upEnergy != 0)
-                {
-                    var newID = AddSignal(new SignalSetUp
-                    {
-                        dir = upEnergy > 0? Signal.Direction.Up: Signal.Direction.Down,
-                        energy = upEnergy > 0? upEnergy: -upEnergy,
-                        pos = pos
-                    });
-                    
-                }
-                
-            }
-            
-            if (right.Count + left.Count > 1)
-            {
-                int rightEnergy = 0;
-                foreach (var id in right)
-                {
-                    rightEnergy += m_signals[id].signal.energy;
-                    m_signals[id].isDead = true;
-                }
-
-                foreach (var id in left)
-                {
-                    rightEnergy -= m_signals[id].signal.energy;
-                    m_signals[id].isDead = true;
-                }
-                
-                if (rightEnergy != 0)
-                {
-                    var newID = AddSignal(new SignalSetUp
-                    {
-                        dir = rightEnergy > 0? Signal.Direction.Right: Signal.Direction.Left,
-                        energy = rightEnergy > 0? rightEnergy: -rightEnergy,
-                        pos = pos
-                    });
-                    
-                }
-            }
-            
-
-            
         }
-
+        
         private void FuseBorderSignals()
         {
             for (int x = 0; x < m_signalDistributions.width - 1; x++)
@@ -356,7 +234,131 @@ namespace InGame.Boards.Signals
                 }
             }
         }
+        
+        private void AddSignals()
+        {
+            foreach (var pack in m_setUpQueues)
+            {
+                if (pack.isEmpty) continue;
+                
+                if (pack.delay <= 0)
+                {
+                    AddSignal(pack.setUp);
+                    pack.isEmpty = true;
+                }
+                else
+                {
+                    pack.delay--;
+                }
+            }
+        }
 
+        private void TriggerSignals(float deltaTime, float currentTime)
+        {
+            for (int i = 0; i < m_signals.Count; i++)
+            {
+                var signalPack = m_signals[i];
+                if (signalPack == null || signalPack.isDead) continue;
+                signalPack.blackBoard.time = new Time(currentTime);
+                TriggerSignal(signalPack.signal, signalPack.blackBoard, out signalPack.isDead);
+            }
+        }
+        
+        
+        private void RemoveSignals()
+        {
+            for (int i = 0; i < m_signals.Count; i++)
+            {
+                var signalPack = m_signals[i];
+                if (signalPack == null) continue;
+                
+                if (signalPack.isDead) RemoveSignal(i);
+            }
+        }
+
+        #endregion
+
+        #region  Fuse
+
+        // Fuse all the signal that is in one direction
+        private void FuseOneDirectionSignal(BoardPosition pos, Signal.Direction dir)
+        {
+            var signals = m_signalDistributions.GetValue(pos.x, pos.y);
+            if (signals.Count <= 1) return;
+            
+            var dirList = new List<int>();
+    
+            foreach (var id in signals)
+            {
+                if (!m_signals[id].isDead && m_signals[id].signal.dir == dir)
+                {
+                    dirList.Add(id);
+                }
+                    
+            }
+
+            if (dirList.Count <= 1) return;
+
+            int newEnergy = 0;
+
+            foreach (var id in dirList)
+            {
+                newEnergy += m_signals[id].signal.energy;
+                m_signals[id].isDead = true;
+            }
+            
+            Debug.Assert(newEnergy > 0);
+
+            AddSignal(new SignalSetUp
+            {
+                energy = newEnergy,
+                dir = dir,
+                pos = pos
+            });
+        }
+        
+        //Assume there is only one signal in each dir, fuse two different direction signal together
+        private void FuseTwoDirectionSignal(BoardPosition pos, Signal.Direction posDir, Signal.Direction negDir)
+        {
+            var signals = m_signalDistributions.GetValue(pos.x, pos.y);
+            if (signals.Count <= 1) return;
+
+            var posList = new List<int>();
+            var negList = new List<int>();
+
+            foreach (var id in signals)
+            {
+                if (m_signals[id].isDead) continue;
+                var signalDir = m_signals[id].signal.dir;
+                
+                if(posDir == signalDir) posList.Add(id);
+                else if(negDir == signalDir) negList.Add(id);
+            }
+            
+            Debug.Assert(posList.Count <= 1 || negList.Count <= 1);
+
+            if (posList.Count == 0 || negList.Count == 0) return;
+
+            var posSignalID = posList[0];
+            var negSignalID = negList[0];
+
+            int energy = m_signals[posSignalID].signal.energy - m_signals[negSignalID].signal.energy;
+            m_signals[posSignalID].isDead = true;
+            m_signals[negSignalID].isDead = true;
+
+            if (energy != 0)
+            {
+                AddSignal(new SignalSetUp
+                {
+                    dir = energy > 0 ? posDir : negDir,
+                    energy = energy > 0 ? energy : -energy,
+                    pos = pos
+                });
+            }
+            
+
+        }
+        
         private void FuseBorderSignalList(BoardPosition first, Signal.Direction dir)
         {
             BoardPosition second;
@@ -434,46 +436,66 @@ namespace InGame.Boards.Signals
                 }
             }
         }
+
+        #endregion
+       
+
+        private int AddSignal(SignalSetUp setUp)
+        {
+            var id = -1;
+            for (int i = 0; i < m_signals.Count; i++)
+            {
+                if (m_signals[i] == null)
+                {
+                    id = i;
+                    break;
+                }
+            }
+
+            if (id == -1)
+            {
+                id = m_signals.Count;
+                m_signals.Add(null);
+            }
+            setUp.id = id;
+
+            var signal = Signal.CreateSignal(setUp);
+            var blackBoard = new EffectBlackBoard
+            {
+                signal = signal,
+                time = new Time(0f),
+                isTest = m_isTest
+            };
+            
+            var signalPack = new SignalPack
+            {
+                signal = signal,
+                timer = 0f,
+                blackBoard = blackBoard
+            };
+
+
+            m_signals[id] = signalPack;
+            m_boardView.CreateSignalView(signalPack.signal);
+            m_signalDistributions.GetValue(setUp.pos.x, setUp.pos.y).Add(id);
+            if (m_isOn) signal.Start();
+            else signal.Stop();
+
+            return id;
+        }
         
-        private void TriggerSignals(float deltaTime, float currentTime)
+        private void RemoveSignal(int id)
         {
-            for (int i = 0; i < m_signals.Count; i++)
-            {
-                var signalPack = m_signals[i];
-                if (signalPack == null || signalPack.isDead) continue;
-                signalPack.blackBoard.time = new Time(currentTime);
-                TriggerSignal(signalPack.signal, signalPack.blackBoard, out signalPack.isDead);
-            }
+            var signalPack = m_signals[id];
+            if (signalPack == null) return;
+            var pos = signalPack.signal.pos;
+            m_signalDistributions.GetValue(pos.x, pos.y).Remove(id);
+            m_signals[id] = null;
+            
+            signalPack.signal.SelfDestroy();
+            signalPack.blackBoard.Clean();
         }
-
-        private void RemoveSignals()
-        {
-            for (int i = 0; i < m_signals.Count; i++)
-            {
-                var signalPack = m_signals[i];
-                if (signalPack == null) continue;
-                
-                if (signalPack.isDead) RemoveSignal(i);
-            }
-        }
-
-        private void AddSignals()
-        {
-            foreach (var pack in m_setUpQueues)
-            {
-                if (pack.isEmpty) continue;
-                
-                if (pack.delay <= 0)
-                {
-                    AddSignal(pack.setUp);
-                    pack.isEmpty = true;
-                }
-                else
-                {
-                    pack.delay--;
-                }
-            }
-        }
+        
         private void MoveSignal(Signal signal, out bool isDead)
         {
             
