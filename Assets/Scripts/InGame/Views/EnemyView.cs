@@ -19,17 +19,21 @@ namespace InGame.Views
         private Vector3 m_obstacleDirection = Vector3.zero;
         private bool m_isOn = false;
         private IDamageable m_dmgTarget = null;
+        private RaycastHit[] m_hits;
+        private float m_length = .5f;
 
         #region Life Cycle
         public void Init(Enemy enemy)
         {
             m_enemy = enemy;
+            m_hits = new RaycastHit[4];
             new SlideBarUI(gameObject, m_enemy, LimitedPropertyType.Health);
         }
 
         private void Update()
         {
             if(!m_isOn) return;
+            GenerateRay();
             Move();
         }
 
@@ -40,6 +44,22 @@ namespace InGame.Views
         #endregion
 
         #region Action
+        private void GenerateRay()
+        {
+            Physics.Raycast(transform.position, Vector2.up, out m_hits[0], m_length);
+            Physics.Raycast(transform.position, Vector2.down, out m_hits[1], m_length);
+            Physics.Raycast(transform.position, Vector2.left, out m_hits[2], m_length);
+            Physics.Raycast(transform.position, Vector2.right, out m_hits[3], m_length);
+
+            if (m_hits[0].collider != null && m_direction.y > 0)
+                OnRayHit(m_hits[0].collider, false);
+            if (m_hits[1].collider != null && m_direction.y < 0)
+                OnRayHit(m_hits[1].collider, false);
+            if (m_hits[2].collider != null && m_direction.x < 0)
+                OnRayHit(m_hits[2].collider, true);
+            if (m_hits[3].collider != null && m_direction.x > 0)
+                OnRayHit(m_hits[3].collider, true);
+        }
 
         private void Move()
         {
@@ -52,15 +72,11 @@ namespace InGame.Views
             float distance = Vector3.Distance(this.transform.position, m_target);
             if(distance <= Constants.COLLIDE_OFFSET) return;
 
-            m_direction = (m_obstacleDirection != Vector3.zero) ? 
-                        Vector3.zero : (m_target - this.transform.position).normalized;
-
-            m_direction = (m_direction + Seperation() + m_obstacleDirection).normalized;
-            m_direction *= Time.deltaTime * 
-                        m_enemy.Get(UnlimitedPropertyType.Speed) * 
-                        Constants.SPEED_MULTIPLIER;
+            m_direction = (m_target - this.transform.position + Seperation()).normalized;
+            Vector3 velocity = Constants.SPEED_MULTIPLIER * m_enemy.Get(UnlimitedPropertyType.Speed) * 
+                            Time.deltaTime * m_direction;
             
-            this.transform.Translate(m_direction, Space.World);
+            this.transform.Translate(velocity, Space.World);
         }
 
         private Vector3 Seperation()
@@ -85,6 +101,18 @@ namespace InGame.Views
         #endregion
         
         #region Interaction
+        private void OnRayHit(Collider other, bool isX)
+        {
+            int layer = other.gameObject.layer;
+            switch(layer)
+            {
+                case Constants.OBSTACLE_LAYER:
+                    if(isX) m_direction.x = 0;
+                    else m_direction.y = 0;
+                    break;
+            }
+        }
+
         public void OnTriggerEnter(Collider other)
         {
             int layer = other.gameObject.layer;
@@ -92,35 +120,11 @@ namespace InGame.Views
             {
                 case Constants.ENEMY_LAYER:
                     break;
-                case Constants.OBSTACLE_LAYER:
-                    Block(other.transform);
-                    break;
                 default:
                     m_dmgTarget = other.gameObject.GetComponent<IDamageable>();
                     if(m_dmgTarget != null) StartCoroutine(Attack());
                     break;
             }
-        }
-
-        public void OnTriggerExit(Collider other)
-        {
-            int layer = other.gameObject.layer;
-            switch(layer)
-            {
-                case Constants.OBSTACLE_LAYER:
-                    m_obstacleDirection = Vector3.zero;
-                    break;
-                default:
-                    m_dmgTarget = null;
-                    break;
-            }
-        }
-
-        private void Block(Transform obstacleTrans)
-        {
-            Vector3 collisionPoint = gameObject.GetComponent<Collider>().ClosestPoint(obstacleTrans.position);
-            m_obstacleDirection = (this.transform.position - collisionPoint).normalized;
-            m_obstacleDirection.z = 0;
         }
 
         public void TakeDamage(float dmg)
@@ -149,7 +153,7 @@ namespace InGame.Views
         }
         
         public void TurnOn() => m_isOn = true;
-
+        
         public void TurnOff() => m_isOn = false;
     }
 }

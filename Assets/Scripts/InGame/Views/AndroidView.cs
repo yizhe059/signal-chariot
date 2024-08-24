@@ -13,12 +13,14 @@ namespace InGame.Views
         private Vector3 m_moveDirection = Vector3.zero;
         private Vector3 m_obstacleDirection = Vector3.zero;
         private Android m_android;
+        private RaycastHit[] m_hits; 
         private float m_length = .5f;
         
         #region Life Cycle
         public void Init(Android android)
         {
             m_android = android;
+            m_hits = new RaycastHit[4];
         }
 
         private void Update()
@@ -36,17 +38,19 @@ namespace InGame.Views
         #region Action
         private void GenerateRay()
         {
-            RaycastHit[] hits = new RaycastHit[4];
-            Physics.Raycast(transform.position, Vector2.up, out hits[0], m_length);
-            Physics.Raycast(transform.position, Vector2.down, out hits[1], m_length);
-            Physics.Raycast(transform.position, Vector2.left, out hits[2], m_length);
-            Physics.Raycast(transform.position, Vector2.right, out hits[3], m_length);
-            if ((hits[0].collider != null && m_moveDirection.y > 0) ||
-                (hits[1].collider != null && m_moveDirection.y < 0))
-                m_moveDirection.y = 0;  
-            if ((hits[2].collider != null && m_moveDirection.x < 0) ||
-                (hits[3].collider != null && m_moveDirection.x > 0))
-                m_moveDirection.x = 0;  
+            Physics.Raycast(transform.position, Vector2.up, out m_hits[0], m_length);
+            Physics.Raycast(transform.position, Vector2.down, out m_hits[1], m_length);
+            Physics.Raycast(transform.position, Vector2.left, out m_hits[2], m_length);
+            Physics.Raycast(transform.position, Vector2.right, out m_hits[3], m_length);
+            
+            if (m_hits[0].collider != null && m_moveDirection.y > 0)
+                OnRayHit(m_hits[0].collider, false);
+            if (m_hits[1].collider != null && m_moveDirection.y < 0)
+                OnRayHit(m_hits[1].collider, false);
+            if (m_hits[2].collider != null && m_moveDirection.x < 0)
+                OnRayHit(m_hits[2].collider, true);
+            if (m_hits[3].collider != null && m_moveDirection.x > 0)
+                OnRayHit(m_hits[3].collider, true);
         }
 
         public void SetMoveDirection(Vector2 inputDirection)
@@ -75,25 +79,25 @@ namespace InGame.Views
             m_android.TakeDamage(dmg);
         }
 
-        public void OnTriggerEnter(Collider other)
+        private void OnRayHit(Collider other, bool isX)
+        {
+            int layer = other.gameObject.layer;
+            switch (layer)
+            {
+                case Constants.OBSTACLE_LAYER:
+                    if(isX) m_moveDirection.x = 0;
+                    else m_moveDirection.y = 0;
+                    break;
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
         {
             int layer = other.gameObject.layer;
             switch (layer)
             {
                 case Constants.MOD_LAYER:
                     PickUp(other.gameObject);
-                    break;
-                case Constants.OBSTACLE_LAYER:
-                    break;
-            }
-        }
-
-        public void OnTriggerExit(Collider other)
-        {
-            int layer = other.gameObject.layer;
-            switch(layer)
-            {
-                case Constants.OBSTACLE_LAYER:
                     break;
             }
         }
