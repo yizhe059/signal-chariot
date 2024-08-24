@@ -196,7 +196,6 @@ namespace InGame.Cores
                 RewardState.CreateState(isLastWave, rewards, GetGeneralBoard(), GetModuleLib());
         }
             
-
         public void ChangeToNullState()
         {
             WorldState.instance.nextState = null;

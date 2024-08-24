@@ -4,6 +4,8 @@ using InGame.Cores;
 using InGame.Views;
 using InGame.UI;
 using UnityEngine;
+using InGame.BattleFields.Common;
+using Utils;
 
 namespace InGame.InGameStates
 {
@@ -71,15 +73,18 @@ namespace InGame.InGameStates
         {
             if (!m_boardView.GetXY(worldPosition, out int x, out int y)) return;
 
+            int currMod = (int) GameManager.Instance.GetAndroid().Get(UnlimitedPropertyType.Mod);
+            if(currMod < Constants.ADD_SLOT_COST) return;
+            
             if (m_board.GetSlotStatus(x, y) == SlotStatus.Selectable)
             {
                 m_board.SetSlotStatus(x, y, SlotStatus.Empty);
+                GameManager.Instance.GetAndroid().Decrease(UnlimitedPropertyType.Mod, Constants.ADD_SLOT_COST);    
                 m_amount--;
                 m_currentSelectableAmount--;
                 
                 var lists = m_board.GetAdjacentSlots(x, y);
 
-                
                 foreach (var pos in lists)
                 {
                     m_board.SetSlotStatus(pos, SlotStatus.Selectable);
@@ -104,7 +109,6 @@ namespace InGame.InGameStates
                 m_amount = amount
             };
             
-
             return state;
         }
     }

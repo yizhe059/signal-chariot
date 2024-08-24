@@ -77,6 +77,7 @@ namespace Utils
         public const float SEPERATION_DISTANCE = 1f;
         public const float SEPERATION_FORCE = 1f;
         public const float SELECT_THRESHOLD = 0.2f;
+        public const int ADD_SLOT_COST = 100;
 
         #endregion
 
