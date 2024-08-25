@@ -39,4 +39,9 @@ namespace Utils.Common
         public void UnregisterPropertyEvent(UnlimitedPropertyType type, 
                                         UnityAction<float> call);
     }
+
+    public interface IDieable
+    {
+        public void Die();
+    }
 }

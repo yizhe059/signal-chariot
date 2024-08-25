@@ -2,10 +2,11 @@
 
 namespace InGame.BattleEffects
 {
-    public class SingleContinuousDamageEffect : Effect
+    public class DeathEffect : Effect
     {
         public override void Trigger()
         {
+            
         }
     }
 }

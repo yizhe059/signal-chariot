@@ -17,10 +17,6 @@ namespace SetUps
         public float health;
         public float speed;
         public float lifeTime;
-        
-        public int bouncingTimes; // TODO effect
-        public int penetrateTimes; // TODO effect
-        public int splitTimes; // TODO effect
 
         public MoveType moveType;
         public List<Effect> collisionEffects;
@@ -35,10 +31,6 @@ namespace SetUps
             health = other.health;
             speed = other.speed;
             lifeTime = other.lifeTime;
-
-            bouncingTimes = other.bouncingTimes; // TODO effect
-            penetrateTimes = other.penetrateTimes; // TODO effect
-            splitTimes = other.splitTimes; // TODO effect
 
             moveType = other.moveType;
             collisionEffects = other.collisionEffects;

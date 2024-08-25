@@ -33,9 +33,6 @@ namespace InGame.BattleFields.Bullets
         private UnlimitedProperty m_speed;
         private UnlimitedProperty m_damage;
         private UnlimitedProperty m_lifeTime;
-        private UnlimitedProperty m_bouncingTimes; // TODO effect
-        private UnlimitedProperty m_penetrateTimes; // TODO effect
-        private UnlimitedProperty m_splitTimes; // TODO effect
 
         [Header("Logics")]
         private IMovable m_moveStrategy;
@@ -47,10 +44,9 @@ namespace InGame.BattleFields.Bullets
         public UnlimitedProperty speed { get { return m_speed;}}
         public UnlimitedProperty damage { get { return m_damage;}}
         public UnlimitedProperty lifetime { get { return m_lifeTime;}}
-        public UnlimitedProperty bouncingTimes { get { return m_bouncingTimes;}} // TODO effect
-        public UnlimitedProperty penetrateTimes { get {return m_penetrateTimes;}} // TODO effect
-        public UnlimitedProperty splitTimes { get {return m_splitTimes;}} // TODO effect
         public IMovable moveStrategy { get { return m_moveStrategy;}}
+        public List<Effect> collisionEffects { get{ return m_collisionEffects;}}
+        public List<Effect> destructionEffects { get { return m_destructionEffects;}}
 
         public Bullet(BulletSetUp bulletSetUp, Tower tower, int[] bulletIdx)
         {
@@ -60,30 +56,18 @@ namespace InGame.BattleFields.Bullets
             UnlimitedProperty dmg = new(bulletSetUp.damage, UnlimitedPropertyType.Damage);
             UnlimitedProperty spd = new(bulletSetUp.speed, UnlimitedPropertyType.Speed);
             UnlimitedProperty lft = new(bulletSetUp.lifeTime);
-            UnlimitedProperty rfl = new(bulletSetUp.bouncingTimes);
-            UnlimitedProperty pnt = new(bulletSetUp.penetrateTimes);
-            UnlimitedProperty spl = new(bulletSetUp.splitTimes);
             UnlimitedProperty siz = new(bulletSetUp.size * Constants.BULLET_SIZE_MULTIPLIER);
 
             m_damage = dmg;
             m_speed = spd;
             m_lifeTime = lft;
-            m_bouncingTimes = rfl;
-            m_penetrateTimes = pnt;
-            m_splitTimes = spl;
-
             m_size = siz;
+
             m_sprite = bulletSetUp.sprite;
             CreateView();
 
             CreateMoveStrategy(bulletSetUp.moveType);
             CreateEffects();
-        }
-
-        private void CreateEffects()
-        {
-            m_collisionEffects = new();
-            m_destructionEffects = new();
         }
 
         private void CreateView()
@@ -128,6 +112,12 @@ namespace InGame.BattleFields.Bullets
             }
         }
 
+        private void CreateEffects()
+        {
+            m_collisionEffects = new();
+            m_destructionEffects = new();
+        }
+
         public void Die()
         {
             m_bulletView.Die();
@@ -136,12 +126,7 @@ namespace InGame.BattleFields.Bullets
         public void DealDamage(IDamageable target, float dmg)
         {
             target.TakeDamage(dmg);
-            
-            if(m_bouncingTimes.value > 0){
-                m_moveStrategy = new LinearMoveStrategy(this); // TODO effect
-                m_bouncingTimes.value--;
-            } 
-            else this.Die();
+            this.Die();
         }
     }
 }

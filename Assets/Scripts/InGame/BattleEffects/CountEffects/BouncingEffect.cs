@@ -2,7 +2,7 @@
 
 namespace InGame.BattleEffects
 {
-    public class PenetrationEffect : Effect
+    public class BouncingEffect : CountEffect
     {
         
     }

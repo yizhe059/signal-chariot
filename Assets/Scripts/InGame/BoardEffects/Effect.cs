@@ -61,9 +61,7 @@ namespace InGame.Effects
             OnUnTrigger(blackBoard);
         }
         
-        public virtual void OnUnTrigger(EffectBlackBoard blackBoard)
-        {
-        }
+        public virtual void OnUnTrigger(EffectBlackBoard blackBoard){}
 
         public void AddBuff(ModuleBuff buff)
         {
@@ -84,11 +82,7 @@ namespace InGame.Effects
         }
         
         public virtual void OnRemoveBuff(ModuleBuff buff){}
-        
-        public virtual void ClearBuffs(){
-            
-            
-        }
+        public virtual void ClearBuffs(){}
         public abstract Effect CreateCopy();
     }
 

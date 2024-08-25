@@ -6,7 +6,7 @@ using InGame.BattleFields.Bullets;
 
 namespace InGame.Views
 {
-    public class BulletView : MonoBehaviour, IDamager
+    public class BulletView : MonoBehaviour, IDieable, IDamager
     {
         private Bullet m_bullet;
         private CountdownTimer m_timer;
