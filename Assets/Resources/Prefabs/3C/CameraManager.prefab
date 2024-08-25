@@ -159,10 +159,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2658575108869463433}
-  - {fileID: 4447770411802223313}
-  - {fileID: 8778713400582882675}
   - {fileID: 9002918844891526573}
   - {fileID: 2370542228247132741}
+  - {fileID: 4447770411802223313}
+  - {fileID: 8778713400582882675}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1969004011857855890
@@ -178,8 +178,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_boardCamera: {fileID: 1842252410422755935}
+  m_boardThumbnailCamera: {fileID: 5925833667066839654}
   m_battleCamera: {fileID: 1163668498271188895}
-  m_miniBoardCamera: {fileID: 5925833667066839654}
+  m_battleSimulationCamera: {fileID: 7311800439909820095}
   m_battleVirtualCamera: {fileID: 7302969138994297402}
 --- !u!1 &5156874556526978143
 GameObject:
