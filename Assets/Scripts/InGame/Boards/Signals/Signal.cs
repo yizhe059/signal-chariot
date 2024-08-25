@@ -6,6 +6,16 @@ using UnityEngine;
 
 namespace InGame.Boards.Signals
 {
+    [Flags]
+    public enum SignalType
+    {
+        None = 0,
+        Normal = 1 << 0,
+        Penetrate = 1 << 1,
+        Explosive = 1 << 2,
+        Mine = 1 << 3
+    }
+    
     public class Signal
     {
         public enum Direction
@@ -39,6 +49,9 @@ namespace InGame.Boards.Signals
             m_pos = newPos;
             view?.SetPos(newPos);
         }
+
+        private SignalType m_type;
+        public SignalType type => m_type;
 
         private SignalView m_view;
 
@@ -75,7 +88,8 @@ namespace InGame.Boards.Signals
                 m_id = setUp.id,
                 m_energy = setUp.energy,
                 m_pos = new BoardPosition(setUp.pos),
-                m_dir = setUp.dir
+                m_dir = setUp.dir,
+                m_type = setUp.type
             };
         }
 

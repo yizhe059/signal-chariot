@@ -6,6 +6,8 @@ namespace SetUps
     public struct SignalSetUp
     {
         public int id;
+
+        public SignalType type;
         
         public Signal.Direction dir;
 

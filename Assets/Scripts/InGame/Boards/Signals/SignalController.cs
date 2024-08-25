@@ -75,6 +75,7 @@ namespace InGame.Boards.Signals
                
         public void Reset()
         {
+            m_timer = Constants.SIGNAL_MOVING_DURATION;
             foreach (var signalPack in m_signals)
             {
                 if (signalPack == null) continue;
