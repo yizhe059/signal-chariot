@@ -50,12 +50,6 @@ namespace InGame.BattleFields.Bullets
             return m_bullets[batchIdx].Count;
         }
 
-        public void RemoveBullet(Bullet bullet)
-        {
-            // m_bullets.Remove(bullet);
-            // bullet.Die();
-        }
-
         public void ClearBullet()
         {
             foreach(List<Bullet> batch in m_bullets)

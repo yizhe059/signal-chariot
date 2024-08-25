@@ -42,16 +42,6 @@ namespace InGame.BattleFields.Bullets
         private List<Effect> m_collisionEffects;
         private List<Effect> m_destructionEffects;
 
-        // Effects:
-        // Range once damage
-        // Single once damage
-        // Range continuous damage
-        // Single continous damage
-        // Spawn sth
-        // bouncing
-        // penetration
-        // splitting
-
         public Sprite sprite{ get { return m_sprite;}}
         public UnlimitedProperty size{ get { return m_size;}}
         public UnlimitedProperty speed { get { return m_speed;}}

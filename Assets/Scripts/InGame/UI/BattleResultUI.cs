@@ -33,7 +33,7 @@ namespace InGame.UI
 
             waveWinContinue.clicked += () => 
             {
-                GameManager.Instance.ChangeToBoardWaitingState(); // TODO: Go to next wave
+                GameManager.Instance.ChangeToBoardWaitingState();
             };
 
             battleWinContinue.clicked += () => 

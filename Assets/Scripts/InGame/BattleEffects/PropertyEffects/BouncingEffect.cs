@@ -1,7 +1,8 @@
 
+
 namespace InGame.BattleEffects
 {
-    public abstract class Effect
+    public class BouncingEffect : Effect
     {
         
     }

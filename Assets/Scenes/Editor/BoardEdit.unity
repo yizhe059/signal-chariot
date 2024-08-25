@@ -176,7 +176,7 @@ MonoBehaviour:
       x: 0
       y: 1
     moduleID: 0
-    moduleName: Signal Source
+    moduleName: Energy Source
     orientation: 0
   - pos:
       x: 1
@@ -267,20 +267,6 @@ MonoBehaviour:
     y: 4
   - x: 4
     y: 4
-  - x: 5
-    y: 1
-  - x: 5
-    y: 2
-  - x: 5
-    y: 3
-  - x: 5
-    y: 4
-  - x: 2
-    y: 1
-  - x: 3
-    y: 1
-  - x: 4
-    y: 1
   modules: []
   signalPrefab: {fileID: 7786143621109699157, guid: e7f648ad21042b64ca742ba22438c585, type: 3}
   slotPrefab: {fileID: 6622818502655049371, guid: 80c85fcaea6536748bb67591b4fc60b2, type: 3}
