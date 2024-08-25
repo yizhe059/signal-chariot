@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using InGame.Boards.Modules;
 using InGame.Boards.Modules.ModuleBuffs;
 using InGame.Boards.Signals;
@@ -6,8 +7,8 @@ using InGame.Effects;
 using InGame.Effects.PlacingEffectRequirements;
 using InGame.Effects.TriggerRequirements;
 using InGame.Views;
+
 using UnityEngine;
-using InGame.Boards.Modules;
 
 namespace SetUps
 {

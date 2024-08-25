@@ -1,11 +1,9 @@
 
-
 namespace InGame.BattleEffects
 {
     public class CountEffect : Effect
     {
-        private int m_count;
-        public bool IsActive => m_count > 0;
+        public CountEffect(int count) : base(count){}
 
         public override void Trigger()
         {
