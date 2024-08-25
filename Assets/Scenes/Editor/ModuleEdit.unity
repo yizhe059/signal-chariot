@@ -237,6 +237,10 @@ PrefabInstance:
       propertyPath: prefab
       value: 
       objectReference: {fileID: 8708126383134337241, guid: c42566245f2938149af1fc74c1938ed4, type: 3}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: category
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_Name
       value: Extra Shot
@@ -359,6 +363,10 @@ PrefabInstance:
       propertyPath: buffMask
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: category
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_Name
       value: Signal Rotator
@@ -460,6 +468,10 @@ PrefabInstance:
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: buffMask
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: category
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_Name
@@ -595,6 +607,10 @@ PrefabInstance:
       propertyPath: buffMask
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: category
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_Name
       value: Signal Amplifier
@@ -686,6 +702,10 @@ PrefabInstance:
       propertyPath: prefab
       value: 
       objectReference: {fileID: 2049807452291936642, guid: 1f31f5835809cb145be162bca626cb0b, type: 3}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: category
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_Name
       value: PenetrationBullet
@@ -929,6 +949,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: category
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: otherPositions.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1152,6 +1176,10 @@ PrefabInstance:
       propertyPath: buffMask
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: category
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_Name
       value: Two Way Signal Splitter
@@ -1276,6 +1304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Module 1
   desc: 
+  category: 3
   prefab: {fileID: -5447537739969293526, guid: 780332fa93134cc499d3148c3d2857d8, type: 3}
   otherPositions:
   - x: 1
@@ -1325,6 +1354,10 @@ PrefabInstance:
       propertyPath: prefab
       value: 
       objectReference: {fileID: 9128623023197033979, guid: 9f5e39c1a3a76b24f9b4621047d50753, type: 3}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: category
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_Name
       value: Signal Capacitor
@@ -1540,6 +1573,10 @@ PrefabInstance:
       propertyPath: prefab
       value: 
       objectReference: {fileID: 486613650758552989, guid: b69c4a0d7cd408844bef9f09a55c75e1, type: 3}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: category
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_Name
       value: Extra Barrel
@@ -1721,6 +1758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Module 2
   desc: 
+  category: 3
   prefab: {fileID: 4244946465113611698, guid: 7dfda94a13c9d414db28b5c2e8ea0fac, type: 3}
   otherPositions:
   - x: 1
@@ -1796,6 +1834,10 @@ PrefabInstance:
       propertyPath: prefab
       value: 
       objectReference: {fileID: 8388062090847505977, guid: b71e17e3d5185e445bbe70a64c52d9b5, type: 3}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: category
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_Name
       value: Carbon Block
@@ -1910,6 +1952,10 @@ PrefabInstance:
       propertyPath: prefab
       value: 
       objectReference: {fileID: 8876540461052638955, guid: d35de34960652b143a367a5546d1c2ea, type: 3}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: category
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_Name
       value: Extra Armor
@@ -2008,15 +2054,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: name
-      value: Signal Source
+      value: Energy Source
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: buffMask
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: category
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_Name
-      value: Signal Source
+      value: Energy Source
       objectReference: {fileID: 0}
     - target: {fileID: 6579473263901316917, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_LocalPosition.x
