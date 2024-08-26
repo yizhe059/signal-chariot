@@ -8,8 +8,13 @@ using UnityEditor;
 
 namespace Editors.BattleEffects
 {
-    // [CustomEditor(typeof())]
-    public class EffectEditor : Editor
+    public class EffectEditor : MonoBehaviour
+    {
+        
+    }
+
+    [CustomEditor(typeof(EffectEditor))]
+    public class EffectTemplate : Editor
     {
         public EffectType effectType = EffectType.None;
 
@@ -29,6 +34,7 @@ namespace Editors.BattleEffects
 
             // 显示 EffectType 下拉列表
             effectType = (EffectType)EditorGUILayout.EnumPopup("Effect Type", effectType);
+            EditorGUILayout.IntField("Trigger Condition", damage);
 
             // 根据选中的 EffectType 显示不同的参数
             switch (effectType)
@@ -58,8 +64,20 @@ namespace Editors.BattleEffects
                     break;
 
                 case EffectType.SpawnAndDestroyEffect:
-                    SerializedProperty objectsToSpawnProperty = serializedObject.FindProperty("objectsToSpawn");
-                    EditorGUILayout.PropertyField(objectsToSpawnProperty, true);
+                    // SerializedProperty objectsToSpawnProperty = serializedObject.FindProperty("objectsToSpawn");
+                    // EditorGUILayout.PropertyField(objectsToSpawnProperty, true);
+                    break;
+                
+                case EffectType.BouncingEffect:
+                    EditorGUILayout.IntField("Count", damage);
+                    break;
+                
+                case EffectType.PenetrationEffect:
+                    EditorGUILayout.IntField("Count", damage);
+                    break;
+
+                case EffectType.SplittingEffect:
+                    EditorGUILayout.IntField("Count", damage);
                     break;
             }
 

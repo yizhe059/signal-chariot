@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using InGame.BattleFields.Bullets;
+using InGame.BattleEffects;
 using Editors.BattleEffects;
 
 namespace SetUps
@@ -19,8 +20,8 @@ namespace SetUps
         public float lifeTime;
 
         public MoveType moveType;
-        public List<EffectEditor> collisionEffects = new();
-        public List<EffectEditor> destructionEffects = new();
+        public List<Effect> collisionEffects = new();
+        public List<Effect> destructionEffects = new();
 
         public BulletSetUp(BulletSetUp other)
         {
@@ -35,6 +36,16 @@ namespace SetUps
             moveType = other.moveType;
             collisionEffects = other.collisionEffects;
             destructionEffects = other.destructionEffects;
+        }
+
+        public BulletSetUp(BulletEditor editor)
+        {
+            sprite = editor.sprite;
+            size = editor.size;
+            health = editor.health;
+            speed = editor.speed;
+            lifeTime = editor.lifeTime;
+            moveType = editor.moveType;
         }
     }
 }

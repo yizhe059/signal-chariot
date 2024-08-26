@@ -1,14 +1,15 @@
-using System.Collections.Generic;
-
 using UnityEngine;
-
-using SetUps;
+using InGame.BattleFields.Bullets;
 
 namespace Editors.BattleEffects
 {
-    [System.Serializable]
     public class BulletEditor : MonoBehaviour
     {
-        public BulletSetUp bulletSetUp;
+        public Sprite sprite;
+        public float size;
+        public float health;
+        public float speed;
+        public float lifeTime;
+        public MoveType moveType;
     }
 }
