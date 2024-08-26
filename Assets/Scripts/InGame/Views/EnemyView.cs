@@ -11,7 +11,7 @@ using System.Collections;
 
 namespace InGame.Views
 {
-    public class EnemyView : MonoBehaviour, IDamager, IDamageable
+    public class EnemyView : MonoBehaviour, IDamageable
     {
         private Enemy m_enemy;
         private Vector3 m_target = Vector3.zero;
@@ -143,13 +143,8 @@ namespace InGame.Views
         public IEnumerator Attack()
         {
             // TODO: enlarge collider size based on attack range
-            DealDamage(m_dmgTarget, m_enemy.Get(UnlimitedPropertyType.Damage));
+            m_dmgTarget.TakeDamage(m_enemy.Get(UnlimitedPropertyType.Damage));
             yield return new WaitForSeconds(m_enemy.Get(UnlimitedPropertyType.Interval));
-        }
-
-        public void DealDamage(IDamageable target, float dmg)
-        {
-            target.TakeDamage(dmg);
         }
         #endregion
 

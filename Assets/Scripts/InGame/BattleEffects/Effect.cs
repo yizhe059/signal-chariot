@@ -1,6 +1,19 @@
 
 namespace InGame.BattleEffects
 {
+    public enum EffectType
+    {
+        None,
+        SingleOnceDamageEffect,
+        SingleContinuousDamageEffect,
+        RangeOnceDamageEffect,
+        RangeContinuousDamageEffect,
+        BouncingEffect,
+        PenetrationEffect,
+        SplittingEffect,
+        SpawnAndDestroyEffect
+    }
+
     public abstract class Effect
     {
         protected int m_count;

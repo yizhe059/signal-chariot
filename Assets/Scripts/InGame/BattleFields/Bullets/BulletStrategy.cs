@@ -18,11 +18,6 @@ namespace InGame.BattleFields.Bullets
         Placement,
         Random,
     }
-    public enum DamageType
-    {
-        Collide,
-        Range,
-    }
     
     public interface IMovable
     {

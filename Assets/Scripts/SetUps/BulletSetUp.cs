@@ -1,9 +1,9 @@
 using System;
+using System.Collections.Generic;
 
 using UnityEngine;
 using InGame.BattleFields.Bullets;
-using InGame.BattleEffects;
-using System.Collections.Generic;
+using Editors.BattleEffects;
 
 namespace SetUps
 {
@@ -19,8 +19,8 @@ namespace SetUps
         public float lifeTime;
 
         public MoveType moveType;
-        public List<Effect> collisionEffects;
-        public List<Effect> destructionEffects;
+        public List<EffectEditor> collisionEffects = new();
+        public List<EffectEditor> destructionEffects = new();
 
         public BulletSetUp(BulletSetUp other)
         {

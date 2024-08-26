@@ -8,6 +8,12 @@ namespace InGame.BattleEffects
         private IDamageable m_target;
         private int m_damage;
 
+        public SingleContinuousDamageEffect(int damage, float duration, float interval) : 
+        base(Mathf.FloorToInt(duration / interval))
+        {
+            this.m_damage = damage;
+        }
+
         public SingleContinuousDamageEffect(int damage, IDamageable target, 
         float duration, float interval) : base(Mathf.FloorToInt(duration / interval))
         {

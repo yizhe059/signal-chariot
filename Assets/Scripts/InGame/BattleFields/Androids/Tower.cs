@@ -6,7 +6,6 @@ using SetUps;
 using InGame.Cores;
 using InGame.Views;
 using InGame.Boards.Modules;
-using InGame.BattleFields.Enemies;
 using InGame.BattleFields.Bullets;
 using InGame.BattleFields.Common;
 
@@ -87,8 +86,7 @@ namespace InGame.BattleFields.Androids
         }
         #endregion
 
-        public BulletManager GetBulletManager() => m_bulletManager;
-
+        #region Effection
         public void Effect()
         {
             m_towerView.Shoot(WeaponBuff.CreateEmptyBuff(ModuleBuffType.Weapon) as WeaponBuff);
@@ -140,11 +138,24 @@ namespace InGame.BattleFields.Androids
         }
 
         private BulletSetUp AddEffectiveBuffs(BulletSetUp bulletSetUp, WeaponBuff buff)
-        {
-            // bulletSetUp.bouncingTimes += buff.bouncingBuff;
-            // bulletSetUp.penetrateTimes += buff.penetrationBuff;
-            // bulletSetUp.splitTimes += buff.splittingBuff;
+        {            
+            if(buff.bouncingBuff > 0)
+            {
+
+            }
+
+            if(buff.penetrationBuff > 0)
+            {
+
+            }
+
+            if(buff.splittingBuff > 0)
+            {
+
+            }
+
             return bulletSetUp;
         }
+        #endregion
     }
 }

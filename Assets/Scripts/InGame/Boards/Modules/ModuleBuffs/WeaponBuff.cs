@@ -1,8 +1,4 @@
-﻿
-
-using UnityEngine.Serialization;
-
-namespace InGame.Boards.Modules.ModuleBuffs
+﻿namespace InGame.Boards.Modules.ModuleBuffs
 {
     [System.Serializable]
     public class WeaponBuff: ModuleBuff

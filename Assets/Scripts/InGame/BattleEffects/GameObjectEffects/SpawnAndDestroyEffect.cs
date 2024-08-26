@@ -4,12 +4,17 @@ using Utils.Common;
 
 namespace InGame.BattleEffects
 {
-    public class DestroyAndSpawnEffect : Effect
+    public class SpawnAndDestroyEffect : Effect
     {
         private readonly GameObject m_owner;
         private readonly GameObject[] m_objectsToSpawn;
 
-        public DestroyAndSpawnEffect(GameObject owner, GameObject[] objectsToSpawn) : base(1)
+        public SpawnAndDestroyEffect(GameObject[] objectsToSpawn) : base(1)
+        {
+            this.m_objectsToSpawn = objectsToSpawn;
+        }
+
+        public SpawnAndDestroyEffect(GameObject owner, GameObject[] objectsToSpawn) : base(1)
         {
             this.m_owner = owner;
             this.m_objectsToSpawn = objectsToSpawn;

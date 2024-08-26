@@ -6,7 +6,7 @@ using InGame.BattleFields.Bullets;
 
 namespace InGame.Views
 {
-    public class BulletView : MonoBehaviour, IDieable, IDamager
+    public class BulletView : MonoBehaviour, IDieable
     {
         private Bullet m_bullet;
         private CountdownTimer m_timer;
@@ -31,6 +31,8 @@ namespace InGame.Views
 
         public void Die()
         {
+            foreach(var effect in m_bullet.destructionEffects)
+                effect.Trigger();
             m_timer.OnTimerComplete.RemoveListener(m_bullet.Die);
             Destroy(gameObject);
         }
@@ -94,20 +96,11 @@ namespace InGame.Views
             {
                 case Constants.ANDROID_LAYER:
                     break;
-                case Constants.OBSTACLE_LAYER:
-                    Die(); // TODO effect
-                    break;
                 default:
-                    // TODO effect
-                    IDamageable target = other.gameObject.GetComponent<IDamageable>();
-                    if(target != null) DealDamage(target, m_bullet.damage.value);
+                    foreach(var effect in m_bullet.collisionEffects)
+                        effect.Trigger();
                     break;
             }
-        }
-
-        public void DealDamage(IDamageable target, float dmg)
-        {
-            m_bullet.DealDamage(target, dmg);
         }
         #endregion
     }

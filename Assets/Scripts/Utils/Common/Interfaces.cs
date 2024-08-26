@@ -15,11 +15,6 @@ namespace Utils.Common
         public void TakeDamage(float dmg);
     }
 
-    public interface IDamager
-    {
-        public void DealDamage(IDamageable target, float dmg);
-    }
-
     public interface IPickable
     {
         public void PickUp();
