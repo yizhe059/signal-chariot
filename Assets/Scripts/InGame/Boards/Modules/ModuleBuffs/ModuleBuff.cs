@@ -8,8 +8,8 @@ namespace InGame.Boards.Modules.ModuleBuffs
     {
         None = 0,
         Weapon = 1 << 0,
-        Buff1 = 1 << 1,
-        Buff2 = 1 << 2
+        Magazine = 1 << 1,
+        Heat = 1 << 2
         
     }
 
@@ -71,6 +71,7 @@ namespace InGame.Boards.Modules.ModuleBuffs
             {
                 ModuleBuffType.None => null,
                 ModuleBuffType.Weapon => WeaponBuff.CreateBuff(),
+                ModuleBuffType.Magazine => MagazineBuff.CreateBuff(),
                 _ => null
             };
         }
