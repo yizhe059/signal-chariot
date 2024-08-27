@@ -49,7 +49,6 @@ namespace Editors.Enemies
 
             EditorUtility.SetDirty(setUp);
             Debug.Log("Save Asset");
-
         }
     }
 }

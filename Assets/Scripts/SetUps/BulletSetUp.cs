@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using InGame.BattleFields.Bullets;
 using InGame.BattleEffects;
-using Editors.BattleEffects;
 
 namespace SetUps
 {
     [Serializable]
     public class BulletSetUp
     {
+        public string name;
         public Sprite sprite;
+        
         public float size;
-
         public float damage;
         public float health;
         public float speed;
@@ -23,11 +23,17 @@ namespace SetUps
         public List<Effect> collisionEffects = new();
         public List<Effect> destructionEffects = new();
 
+        public BulletSetUp()
+        {
+            
+        }
+        
         public BulletSetUp(BulletSetUp other)
         {
+            name = other.name;
             sprite = other.sprite;
+            
             size = other.size;
-
             damage = other.damage;
             health = other.health;
             speed = other.speed;
@@ -36,16 +42,6 @@ namespace SetUps
             moveType = other.moveType;
             collisionEffects = other.collisionEffects;
             destructionEffects = other.destructionEffects;
-        }
-
-        public BulletSetUp(BulletEditor editor)
-        {
-            sprite = editor.sprite;
-            size = editor.size;
-            health = editor.health;
-            speed = editor.speed;
-            lifeTime = editor.lifeTime;
-            moveType = editor.moveType;
         }
     }
 }

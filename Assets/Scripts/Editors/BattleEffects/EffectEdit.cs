@@ -8,22 +8,24 @@ using UnityEditor;
 
 namespace Editors.BattleEffects
 {
-    public class EffectEditor : MonoBehaviour
+    public class EffectEdit : MonoBehaviour
     {
         
     }
 
-    [CustomEditor(typeof(EffectEditor))]
-    public class EffectTemplate : Editor
+    [CustomEditor(typeof(EffectEdit))]
+    public class EffectEditTemplate : Editor
     {
         public EffectType effectType = EffectType.None;
+
+        public int count;
 
         [Header("Damage Effects")]
         public int damage;
         public float duration;
         public float interval;
-        public Vector3 center;
         public float radius;
+        public Vector3 center;
 
         [Header("Spawn & Destroy Effects")]
         public GameObject[] objectsToSpawn;
@@ -69,15 +71,15 @@ namespace Editors.BattleEffects
                     break;
                 
                 case EffectType.BouncingEffect:
-                    EditorGUILayout.IntField("Count", damage);
+                    count = EditorGUILayout.IntField("Count", count);
                     break;
                 
                 case EffectType.PenetrationEffect:
-                    EditorGUILayout.IntField("Count", damage);
+                    count = EditorGUILayout.IntField("Count", count);
                     break;
 
                 case EffectType.SplittingEffect:
-                    EditorGUILayout.IntField("Count", damage);
+                    count = EditorGUILayout.IntField("Count", count);
                     break;
             }
 
@@ -106,7 +108,16 @@ namespace Editors.BattleEffects
 
                 case EffectType.SpawnAndDestroyEffect:
                     return new SpawnAndDestroyEffect(objectsToSpawn);
-
+                
+                case EffectType.BouncingEffect:
+                    return new BouncingEffect(count);
+                
+                case EffectType.PenetrationEffect:
+                    return new PenetrationEffect(count);
+                
+                case EffectType.SplittingEffect:
+                    return new SplittingEffect(count);
+                    
                 default:
                     return null;
             }

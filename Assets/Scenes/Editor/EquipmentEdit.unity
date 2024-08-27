@@ -192,6 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c00875aa986de47c3afebb99dd6b6cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: 
   sprite: {fileID: 0}
   size: 0
   health: 0
@@ -208,7 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1953216937}
   m_Layer: 0
-  m_Name: EquipmentRoot
+  m_Name: EquipmentLib
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -238,6 +239,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2116755078}
+  - component: {fileID: 2116755079}
   m_Layer: 0
   m_Name: BulletRoot
   m_TagString: Untagged
@@ -261,6 +263,19 @@ Transform:
   - {fileID: 450031693}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2116755079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116755077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbdbd82fb9bf4f108b17161204d8283, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setUp: {fileID: 11400000, guid: 01b1065d17b32e74dace4bbbdf6637cd, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
