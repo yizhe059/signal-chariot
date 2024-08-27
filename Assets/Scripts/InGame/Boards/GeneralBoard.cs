@@ -24,6 +24,11 @@ namespace InGame.Boards
             }
         }
 
+        public void Reset()
+        {
+            board.Reset();
+        }
+        
         public static GeneralBoard CreateGeneralBoard(Board newBoard, Board newExtraBoard, BoardView newBoardView)
         {
             return new GeneralBoard

@@ -16,6 +16,8 @@ namespace InGame.InGameStates
         {
             Debug.Log("Enter BoardTest State");
             
+            GameManager.Instance.GetGeneralBoard().Reset();
+            
             var cameraManager = GameManager.Instance.GetCameraManager();
             cameraManager.BoardCameraSetActive(true);
             cameraManager.MiniBoardCameraSetActive(false);

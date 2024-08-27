@@ -256,7 +256,21 @@ namespace InGame.Views
 
         public SignalView CreateSignalView(Signal signal)
         {
-            return SignalView.CreateSignalView(m_signalPrefab, m_signalsTransform, this, signal);
+            SignalView prefab;
+            switch (signal.type)
+            {
+                case SignalType.Normal:
+                    prefab = Resources.Load<SignalView>("Prefabs/Signals/NormalSignalView");
+                    break;
+                case SignalType.Penetrate:
+                    prefab = Resources.Load<SignalView>("Prefabs/Signals/PenetrateSignalView");
+                    break;
+                default:
+                    Debug.LogError($"No prefab for signal type {signal.type}, using normal signal prefab");
+                    prefab = Resources.Load<SignalView>("Prefabs/Signals/NormalSignalView");
+                    break;
+            }
+            return SignalView.CreateSignalView(prefab, m_signalsTransform, this, signal);
         }
 
         public void DestroySignalView(Signal signal)
