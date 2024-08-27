@@ -19,10 +19,12 @@ namespace InGame.InGameStates
         public override void Enter(InGameState last)
         {
             Debug.Log("Enter battle");
-
+            
+            GameManager.Instance.GetGeneralBoard().Reset();
+            #region Camera
             var boardView = GameManager.Instance.GetBoardView();
             boardView.GetActiveBoardCornerPos(out var minPos, out var maxPos);
-
+            
             var center = (minPos + maxPos) / 2;
             var delta = maxPos - minPos;
             var length = Mathf.Max(delta.x, delta.y);
@@ -35,7 +37,7 @@ namespace InGame.InGameStates
             cameraManager.SetMiniBoardCameraSize(length / 2);
             
             cameraManager.BattleCameraSetActive(true);
-            
+            #endregion
             
             GameManager.Instance.GetInputManager().RegisterMoveEvent(OnMoveKeyPressed);
 
@@ -71,7 +73,8 @@ namespace InGame.InGameStates
             m_androidView.SetMoveDirection(Vector2.zero);
             m_enemySpawnController.UnregisterWaveFinishCallBack(OnWaveFinished);
             m_enemySpawnController.Stop();
-
+            
+            
             int bitmask = UIManager.Instance.GetDisplayBit(
                 UIElements.ModuleInfoCard,
                 UIElements.BattleResult,

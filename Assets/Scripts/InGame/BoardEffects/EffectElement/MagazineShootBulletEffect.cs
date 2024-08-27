@@ -42,7 +42,7 @@ namespace InGame.Effects.EffectElement
         {
             var signal = blackBoard.signal;
             
-            while(m_bullets.Count < magazineCapacity && signal.energy > 0)
+            while(m_bullets.Count < magazineCapacity + m_magazineBuff.magazineCapacityBuff && signal.energy > 0)
             {
                 m_bullets.Enqueue(signal.type);
                 signal.ConsumeEnergy(1);

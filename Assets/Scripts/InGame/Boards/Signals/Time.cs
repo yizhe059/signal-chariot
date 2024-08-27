@@ -6,7 +6,7 @@ namespace InGame.Boards.Signals
     {
         private float m_time;
 
-
+        public float val => m_time;
         public Time(float time)
         {
             m_time = time;
