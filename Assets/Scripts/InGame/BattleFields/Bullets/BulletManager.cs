@@ -10,8 +10,9 @@ namespace InGame.BattleFields.Bullets
 {
     public enum BulletType
     {
-        BasicBullet,
-        PenetrationBullet
+        Basic,
+        Laser,
+        Landmine,
     }
 
     public class BulletManager

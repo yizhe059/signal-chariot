@@ -1,6 +1,8 @@
 using UnityEngine;
 
 using InGame.BattleEffects;
+using System.Collections.Generic;
+
 
 
 #if UNITY_EDITOR
@@ -21,10 +23,9 @@ namespace Editors.BattleEffects
         public float duration;
         public float interval;
         public float radius;
-        public Vector3 center;
        
         [Header("Spawn & Destroy Effects")]
-        public GameObject[] objectsToSpawn;
+        public List<GameObject> objectsToSpawn;
 
         public Effect CreateEffect()
         {
@@ -32,9 +33,9 @@ namespace Editors.BattleEffects
             {
                 EffectType.SingleOnceDamageEffect => new SingleOnceDamageEffect(damage),
                 EffectType.SingleContinuousDamageEffect => new SingleContinuousDamageEffect(damage, duration, interval),
-                EffectType.RangeOnceDamageEffect => new RangeOnceDamageEffect(center, radius, damage),
-                EffectType.RangeContinuousDamageEffect => new RangeContinuousDamageEffect(center, radius, damage, duration, interval),
-                EffectType.SpawnEffect => new SpawnEffect(objectsToSpawn),
+                EffectType.RangeOnceDamageEffect => new RangeOnceDamageEffect(radius, damage),
+                EffectType.RangeContinuousDamageEffect => new RangeContinuousDamageEffect(radius, damage, duration, interval),
+                EffectType.SpawnEffect => new SpawnEffect(objectsToSpawn.ToArray()),
                 EffectType.BouncingEffect => new BouncingEffect(count),
                 EffectType.PenetrationEffect => new PenetrationEffect(count),
                 EffectType.SplittingEffect => new SplittingEffect(count),
@@ -58,7 +59,6 @@ namespace Editors.BattleEffects
         public SerializedProperty duration;
         public SerializedProperty interval;
         public SerializedProperty radius;
-        public SerializedProperty center;
 
         // spawn
         public SerializedProperty objectsToSpawn;
@@ -74,9 +74,8 @@ namespace Editors.BattleEffects
             duration = effectEdit.FindProperty("duration");
             interval = effectEdit.FindProperty("interval");
             radius = effectEdit.FindProperty("radius");
-            center = effectEdit.FindProperty("center");
 
-            objectsToSpawn = effectEdit.FindProperty("objectToSpawn");
+            objectsToSpawn = effectEdit.FindProperty("objectsToSpawn");
         }
 
         public override void OnInspectorGUI()
@@ -103,13 +102,11 @@ namespace Editors.BattleEffects
 
                 case EffectType.RangeOnceDamageEffect:
                     EditorGUILayout.PropertyField(damage);
-                    EditorGUILayout.PropertyField(center);
                     EditorGUILayout.PropertyField(radius);
                     break;
 
                 case EffectType.RangeContinuousDamageEffect:
                     EditorGUILayout.PropertyField(damage);
-                    EditorGUILayout.PropertyField(center);
                     EditorGUILayout.PropertyField(radius);
                     EditorGUILayout.PropertyField(duration);
                     EditorGUILayout.PropertyField(interval);

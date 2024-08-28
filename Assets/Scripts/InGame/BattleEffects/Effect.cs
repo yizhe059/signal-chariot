@@ -24,7 +24,7 @@ namespace InGame.BattleEffects
     public abstract class Effect
     {
         protected int m_count;
-        protected bool IsActive => m_count > 0;
+        protected bool IsActive => m_count > 0 || m_count == -1; // count == -1 means infinity
         public Effect(int count)
         {
             this.m_count = count;
