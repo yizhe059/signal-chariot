@@ -8,6 +8,8 @@ namespace InGame.Effects.EffectElement
     {
         public SignalType type;
         public int numOfBullets;
+
+        protected override bool canEffectByTest => true;
         
         public override void OnTrigger(EffectBlackBoard blackBoard)
         {
@@ -17,7 +19,7 @@ namespace InGame.Effects.EffectElement
             {
                 dir = Signal.OrientationToDirection(orientation, Signal.Direction.Up),
                 energy = numOfBullets,
-                pos = blackBoard.slot.pos
+                pos = blackBoard.pos,
             }, 0, type);
         }
 
