@@ -288,12 +288,13 @@ namespace InGame.Boards.Signals
             if (signals.Count <= 1) return;
             
             var dirList = new List<int>();
-    
+            SignalType type = SignalType.None;
             foreach (var id in signals)
             {
                 if (!m_signals[id].isDead && m_signals[id].signal.dir == dir)
                 {
                     dirList.Add(id);
+                    type = m_signals[id].signal.type;
                 }
                     
             }
@@ -314,7 +315,9 @@ namespace InGame.Boards.Signals
             {
                 energy = newEnergy,
                 dir = dir,
-                pos = pos
+                pos = pos,
+                type = type
+                
             });
         }
         
@@ -326,12 +329,14 @@ namespace InGame.Boards.Signals
 
             var posList = new List<int>();
             var negList = new List<int>();
-
+            SignalType type = SignalType.None;
+            
             foreach (var id in signals)
             {
                 if (m_signals[id].isDead) continue;
                 var signalDir = m_signals[id].signal.dir;
-                
+                type = m_signals[id].signal.type;
+                    
                 if(posDir == signalDir) posList.Add(id);
                 else if(negDir == signalDir) negList.Add(id);
             }
@@ -353,7 +358,8 @@ namespace InGame.Boards.Signals
                 {
                     dir = energy > 0 ? posDir : negDir,
                     energy = energy > 0 ? energy : -energy,
-                    pos = pos
+                    pos = pos,
+                    type = type
                 });
             }
             
@@ -395,17 +401,26 @@ namespace InGame.Boards.Signals
             var dirList = new List<int>();
             var reverseDirList = new List<int>();
             
+            SignalType type = SignalType.None;
             // To DO: can be put into a function becasue fuse signals function also use this structure
             foreach (var id in firstList)
             {
                 var signalDir = m_signals[id].signal.dir;
-                if (signalDir == dir) dirList.Add(id);
+                if (signalDir == dir)
+                {
+                    dirList.Add(id);
+                    type = m_signals[id].signal.type;
+                }
             }
 
             foreach (var id in secondList)
             {
                 var signalDir = m_signals[id].signal.dir;
-                if (signalDir == reversedDir) reverseDirList.Add(id);
+                if (signalDir == reversedDir)
+                {
+                    reverseDirList.Add(id);
+                    type = m_signals[id].signal.type;
+                }
             }
 
             if (dirList.Count + reverseDirList.Count > 1)
@@ -431,7 +446,8 @@ namespace InGame.Boards.Signals
                     {
                         dir = dirEnergy > 0? dir: reversedDir,
                         energy = dirEnergy > 0? dirEnergy: -dirEnergy,
-                        pos = newPos
+                        pos = newPos,
+                        type = type
                     });
                     
                 }
