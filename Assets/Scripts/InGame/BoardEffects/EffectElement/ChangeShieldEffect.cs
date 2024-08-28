@@ -9,12 +9,12 @@ namespace InGame.Effects.EffectElement
         
         public override void OnTrigger(EffectBlackBoard blackBoard)
         {
-            GameManager.Instance.GetAndroid().Increase(UnlimitedPropertyType.Defence, delta);
+            GameManager.Instance.GetAndroid().Increase(UnlimitedPropertyType.Defense, delta);
         }
 
         public override void OnUnTrigger(EffectBlackBoard blackBoard)
         {
-            GameManager.Instance.GetAndroid().Decrease(UnlimitedPropertyType.Defence, delta);
+            GameManager.Instance.GetAndroid().Decrease(UnlimitedPropertyType.Defense, delta);
         }
 
         public override Effect CreateCopy()

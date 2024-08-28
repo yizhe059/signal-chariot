@@ -13,7 +13,8 @@ namespace InGame.BattleFields.Common
     {
         Mod,
         Crystal,
-        Defence,
+        Defense,
+        Armor,
         Speed,
         BulletCount,
         Damage,

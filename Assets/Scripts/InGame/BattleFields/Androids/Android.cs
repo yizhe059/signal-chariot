@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,7 +19,8 @@ namespace InGame.BattleFields.Androids
 
         [Header("Properties")]       
         private LimitedProperty m_health;
-        private UnlimitedProperty m_defence;
+        private UnlimitedProperty m_defense;
+        private UnlimitedProperty m_armor;
         private UnlimitedProperty m_speed;
         private UnlimitedProperty m_mod;
         private UnlimitedProperty m_crystal;
@@ -37,9 +36,14 @@ namespace InGame.BattleFields.Androids
                 LimitedPropertyType.Health
             );
 
-            m_defence = new UnlimitedProperty(
-                setUp.defence,
-                UnlimitedPropertyType.Defence
+            m_defense = new UnlimitedProperty(
+                setUp.defense,
+                UnlimitedPropertyType.Defense
+            );
+
+            m_armor = new UnlimitedProperty(
+                setUp.armor,
+                UnlimitedPropertyType.Armor
             );
 
             m_speed = new UnlimitedProperty(
@@ -103,7 +107,7 @@ namespace InGame.BattleFields.Androids
         {
             return type switch
             {
-                UnlimitedPropertyType.Defence => m_defence.value,
+                UnlimitedPropertyType.Defense => m_defense.value,
                 UnlimitedPropertyType.Mod => m_mod.value,
                 UnlimitedPropertyType.Speed => m_speed.value,
                 UnlimitedPropertyType.Crystal => m_crystal.value,
@@ -124,7 +128,8 @@ namespace InGame.BattleFields.Androids
         {
             return type switch
             {
-                UnlimitedPropertyType.Defence => m_defence,
+                UnlimitedPropertyType.Defense => m_defense,
+                UnlimitedPropertyType.Armor => m_armor,
                 UnlimitedPropertyType.Mod => m_mod,
                 UnlimitedPropertyType.Speed => m_speed,
                 UnlimitedPropertyType.Crystal => m_crystal,
@@ -162,8 +167,29 @@ namespace InGame.BattleFields.Androids
         public void Decrease(LimitedPropertyType type, float delta, bool isCurrentValue)
         {
             LimitedProperty property = GetLimitedProperty(type);
-            if(isCurrentValue) property.current -= delta;
-            else property.max -= delta;
+            switch(type)
+            {
+                case LimitedPropertyType.Health:
+                    if(isCurrentValue)
+                    {
+                        float armor = GetUnlimitedProperty(UnlimitedPropertyType.Armor).value;
+                        if(armor == 0)
+                            property.current -= delta;
+                        else if(armor >= delta)
+                            Decrease(UnlimitedPropertyType.Armor, delta);
+                        else if(armor < delta)
+                        {
+                            property.current -= delta - armor;
+                            Set(UnlimitedPropertyType.Armor, 0);
+                        }                        
+                    }
+                    else property.max -= delta;
+                    break;
+                default:
+                    if(isCurrentValue) property.current -= delta;
+                    else property.max -= delta;
+                    break;
+            }
         }
 
         public void Decrease(UnlimitedPropertyType type, float delta)
@@ -217,7 +243,7 @@ namespace InGame.BattleFields.Androids
 
         public void TakeDamage(float dmg)
         {
-            dmg -= m_defence.value;
+            dmg -= m_defense.value;
             dmg = Mathf.Max(dmg, 0);
             m_health.current -= dmg;
             

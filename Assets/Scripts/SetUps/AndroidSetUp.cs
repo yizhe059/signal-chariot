@@ -10,11 +10,16 @@ namespace SetUps
         public float maxHealth = 100;
         #endregion
 
-        public float defence = 0;
-        
+        #region Shield
+        public float defense = 0;
+        public int armor = 0;
+        #endregion
+
         public float speed = 1f;
 
+        #region Resources
         public int mod = 0;
         public int crystal = 0;
+        #endregion
     }
 }

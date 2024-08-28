@@ -1,3 +1,4 @@
+using System;
 using InGame.BattleFields.Androids;
 using InGame.BattleFields.Common;
 using InGame.Cores;
@@ -12,7 +13,8 @@ namespace InGame.UI
     {
         private VisualElement m_root;
         private VisualElement m_health;
-        private VisualElement m_defence;
+        private VisualElement m_defense;
+        private VisualElement m_armor;
         private VisualElement m_mod;
         private VisualElement m_crystal;
         
@@ -20,7 +22,8 @@ namespace InGame.UI
         {
             m_root = root;
             m_health = m_root.Q("health");
-            m_defence = m_root.Q("defence");
+            m_defense = m_root.Q("defense");
+            m_armor = m_root.Q("armor");
             m_mod = m_root.Q("mod");
             m_crystal = m_root.Q("crystal");
             Register();
@@ -30,7 +33,8 @@ namespace InGame.UI
         {
             Android android = GameManager.Instance.GetAndroid();
             android.RegisterPropertyEvent(LimitedPropertyType.Health, SetHealthUI);
-            android.RegisterPropertyEvent(UnlimitedPropertyType.Defence, SetDefenceUI);
+            android.RegisterPropertyEvent(UnlimitedPropertyType.Defense, SetDefenseUI);
+            android.RegisterPropertyEvent(UnlimitedPropertyType.Armor, SetArmorUI);
             android.RegisterPropertyEvent(UnlimitedPropertyType.Mod, SetModUI);
             android.RegisterPropertyEvent(UnlimitedPropertyType.Crystal, SetCrystalUI);
         }
@@ -39,10 +43,11 @@ namespace InGame.UI
         {
             Android android = GameManager.Instance.GetAndroid();
             android.UnregisterPropertyEvent(LimitedPropertyType.Health, SetHealthUI);
-            android.UnregisterPropertyEvent(UnlimitedPropertyType.Defence, SetDefenceUI);
+            android.UnregisterPropertyEvent(UnlimitedPropertyType.Defense, SetDefenseUI);
+            android.UnregisterPropertyEvent(UnlimitedPropertyType.Armor, SetArmorUI);
             android.UnregisterPropertyEvent(UnlimitedPropertyType.Mod, SetModUI);
             android.UnregisterPropertyEvent(UnlimitedPropertyType.Crystal, SetCrystalUI);
-        }
+        }        
 
         private void SetHealthUI(float current, float max)
         {
@@ -52,10 +57,16 @@ namespace InGame.UI
             bar.title = $"{current}/{max}";
         }
 
-        private void SetDefenceUI(float current)
+        private void SetDefenseUI(float current)
         {
-            Label content = m_defence.Q<Label>("content");
-            content.text = $"DEFENCE: {current}";
+            Label content = m_defense.Q<Label>("content");
+            content.text = $"DEFENSE: {current}";
+        }
+
+        private void SetArmorUI(float current)
+        {
+            Label content = m_armor.Q<Label>("content");
+            content.text = $"ARMOR: {current}";
         }
 
         private void SetModUI(float current)
