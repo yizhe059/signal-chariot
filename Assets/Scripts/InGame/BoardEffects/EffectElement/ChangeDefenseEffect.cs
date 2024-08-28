@@ -3,29 +3,29 @@ using InGame.Cores;
 
 namespace InGame.Effects.EffectElement
 {
-    public class ChangeShieldEffect: Effect
+    public class ChangeDefenseEffect: Effect
     {
         public int delta;
         
         public override void OnTrigger(EffectBlackBoard blackBoard)
         {
-            GameManager.Instance.GetAndroid().Increase(UnlimitedPropertyType.Armor, delta);
+            GameManager.Instance.GetAndroid().Increase(UnlimitedPropertyType.Defense, delta);
         }
 
         public override void OnUnTrigger(EffectBlackBoard blackBoard)
         {
-            GameManager.Instance.GetAndroid().Decrease(UnlimitedPropertyType.Armor, delta);
+            GameManager.Instance.GetAndroid().Decrease(UnlimitedPropertyType.Defense, delta);
         }
 
         public override Effect CreateCopy()
         {
-            return new ChangeShieldEffect { delta = this.delta };
+            return new ChangeDefenseEffect { delta = this.delta };
             
         }
 
-        public static ChangeShieldEffect CreateEffect(int delta)
+        public static ChangeDefenseEffect CreateEffect(int delta)
         {
-            return new ChangeShieldEffect
+            return new ChangeDefenseEffect
             {
                 delta = delta
             };

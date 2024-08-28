@@ -169,16 +169,16 @@ namespace InGame.Effects
             // filter out certain type of signal
             if ((m_signalMask & signal.type) != signal.type) return;
             
-            // To Do: maybe every type of signal will have its own consume mechanism
-            if (signal.type != SignalType.Normal)
-            {
-                foreach (var effect in m_effects)
-                {
-                    effect.Trigger(blackBoard);
-                }
-
-                return;
-            }
+            // // To Do: maybe every type of signal will have its own consume mechanism
+            // if (signal.type != SignalType.Normal)
+            // {
+            //     foreach (var effect in m_effects)
+            //     {
+            //         effect.Trigger(blackBoard);
+            //     }
+            //
+            //     return;
+            // }
             
             // cool down not finished
             if (time - m_prevTriggerTime < m_coolDown)

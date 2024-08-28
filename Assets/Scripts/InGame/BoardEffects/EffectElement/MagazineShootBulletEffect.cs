@@ -18,15 +18,31 @@ namespace InGame.Effects.EffectElement
         {
             //To Do: maybe the trigger requirement is not just the signal
             if (blackBoard.signal == null) return;
-            if (blackBoard.signal.type == SignalType.Normal)
+            // if (blackBoard.signal.type == SignalType.Normal)
+            // {
+            //     ShootBullet(blackBoard);
+            // }else if (blackBoard.signal.type != SignalType.None)
+            // {
+            //     LoadBullet(blackBoard);
+            // }
+            LoadBullet(blackBoard);
+            if (m_bullets.Count == magazineCapacity + m_magazineBuff.magazineCapacityBuff)
             {
-                ShootBullet(blackBoard);
-            }else if (blackBoard.signal.type != SignalType.None)
-            {
-                LoadBullet(blackBoard);
+                ShootBullets();
             }
         }
 
+        private void ShootBullets()
+        {
+            var towerManager = GameManager.Instance.GetAndroid().GetTowerManager();
+            while (m_bullets.Count != 0)
+            {
+                var type = m_bullets.Dequeue();
+                Debug.Log($"Shoot Bullet： {type}");
+                //towerManager.TowerEffect(m_module, m_weaponBuff.CreateCopy() as WeaponBuff);
+            }
+        }
+        
         private void ShootBullet(EffectBlackBoard blackBoard)
         {
             if (m_bullets.Count == 0) return;

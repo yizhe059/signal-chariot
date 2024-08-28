@@ -54,6 +54,9 @@ namespace InGame.Effects.EffectElement
             UpdateHeat(blackBoard.time.val);
             
             if (m_isOverHeated) return;
+
+            var signalType = blackBoard.signal.type; 
+            
             AddHeat(heatCostPerShot);
             GameManager.Instance.GetAndroid().GetTowerManager().
             TowerEffect(m_module, m_buff.CreateCopy() as WeaponBuff);

@@ -941,6 +941,10 @@ PrefabInstance:
       propertyPath: maxUses
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 2107736309079604036, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: energyConsumption
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: desc
       value: Add 1 armor when signal passes through.
@@ -1008,13 +1012,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9075689799680712317, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 780748522}
   m_SourcePrefab: {fileID: 100100000, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
 --- !u!4 &780748520 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6579473263901316917, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
   m_PrefabInstance: {fileID: 780748519}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &780748521 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9075689799680712317, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+  m_PrefabInstance: {fileID: 780748519}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &780748522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780748521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e821273e74e648448286112b932cddc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delta: 1
 --- !u!1 &804244396
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,6 +1159,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1624054408}
     m_Modifications:
+    - target: {fileID: 2107736309079604036, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: mask
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 2107736309079604036, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: maxUses
       value: -1
@@ -2245,7 +2274,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1911935691}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e821273e74e648448286112b932cddc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a12cc15050f4eff82990c173353ded2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   delta: 1
