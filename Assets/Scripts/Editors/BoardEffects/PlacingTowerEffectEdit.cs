@@ -6,10 +6,10 @@ namespace Editors.Effects
 {
     public class PlacingTowerEffectEdit: EffectEdit
     {
-        public TowerSetUp setUp;
+        public EquipmentSetUp setUp;
         public override Effect CreateEffect()
         {
-            return PlacingTowerEffect.CreateEffect(new TowerSetUp(setUp));
+            return PlacingTowerEffect.CreateEffect(new EquipmentSetUp(setUp));
         }
     }
 }

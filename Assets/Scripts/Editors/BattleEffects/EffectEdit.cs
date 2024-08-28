@@ -2,6 +2,7 @@ using UnityEngine;
 
 using InGame.BattleEffects;
 
+
 #if UNITY_EDITOR
 
 using UnityEditor;
@@ -10,112 +11,123 @@ namespace Editors.BattleEffects
 {
     public class EffectEdit : MonoBehaviour
     {
-        
-    }
-
-    [CustomEditor(typeof(EffectEdit))]
-    public class EffectEditTemplate : Editor
-    {
+        [Header("Common")]
         public EffectType effectType = EffectType.None;
-
+        public TriggerType triggerType = TriggerType.Collision;
         public int count;
-
+        
         [Header("Damage Effects")]
         public int damage;
         public float duration;
         public float interval;
         public float radius;
         public Vector3 center;
-
+       
         [Header("Spawn & Destroy Effects")]
         public GameObject[] objectsToSpawn;
 
-        public override void OnInspectorGUI()
-        {
-            // EffectListEditor effectContainer = (EffectListEditor)target;
-
-            // 显示 EffectType 下拉列表
-            effectType = (EffectType)EditorGUILayout.EnumPopup("Effect Type", effectType);
-            
-            EditorGUILayout.IntField("Trigger Condition", damage);
-
-            // 根据选中的 EffectType 显示不同的参数
-            switch (effectType)
-            {
-                case EffectType.SingleOnceDamageEffect:
-                    damage = EditorGUILayout.IntField("Damage", damage);
-                    break;
-
-                case EffectType.SingleContinuousDamageEffect:
-                    damage = EditorGUILayout.IntField("Damage", damage);
-                    duration = EditorGUILayout.FloatField("Duration", duration);
-                    interval = EditorGUILayout.FloatField("Interval", interval);
-                    break;
-
-                case EffectType.RangeOnceDamageEffect:
-                    damage = EditorGUILayout.IntField("Damage", damage);
-                    center = EditorGUILayout.Vector3Field("Center", center);
-                    radius = EditorGUILayout.FloatField("Radius", radius);
-                    break;
-
-                case EffectType.RangeContinuousDamageEffect:
-                    damage = EditorGUILayout.IntField("Damage", damage);
-                    center = EditorGUILayout.Vector3Field("Center", center);
-                    radius = EditorGUILayout.FloatField("Radius", radius);
-                    duration = EditorGUILayout.FloatField("Duration", duration);
-                    interval = EditorGUILayout.FloatField("Interval", interval);
-                    break;
-
-                case EffectType.SpawnEffect:
-                    // SerializedProperty objectsToSpawnProperty = serializedObject.FindProperty("objectsToSpawn");
-                    // EditorGUILayout.PropertyField(objectsToSpawnProperty, true);
-                    break;
-                
-                case EffectType.BouncingEffect:
-                    count = EditorGUILayout.IntField("Count", count);
-                    break;
-                
-                case EffectType.PenetrationEffect:
-                    count = EditorGUILayout.IntField("Count", count);
-                    break;
-
-                case EffectType.SplittingEffect:
-                    count = EditorGUILayout.IntField("Count", count);
-                    break;
-            }
-        }
-
         public Effect CreateEffect()
         {
-            switch (effectType)
+            return effectType switch
+            {
+                EffectType.SingleOnceDamageEffect => new SingleOnceDamageEffect(damage),
+                EffectType.SingleContinuousDamageEffect => new SingleContinuousDamageEffect(damage, duration, interval),
+                EffectType.RangeOnceDamageEffect => new RangeOnceDamageEffect(center, radius, damage),
+                EffectType.RangeContinuousDamageEffect => new RangeContinuousDamageEffect(center, radius, damage, duration, interval),
+                EffectType.SpawnEffect => new SpawnEffect(objectsToSpawn),
+                EffectType.BouncingEffect => new BouncingEffect(count),
+                EffectType.PenetrationEffect => new PenetrationEffect(count),
+                EffectType.SplittingEffect => new SplittingEffect(count),
+                _ => null,
+            };
+        }
+    }
+
+    [CustomEditor(typeof(EffectEdit))]
+    public class EffectEditTemplate : Editor
+    {
+        private SerializedObject effectEdit;
+
+        // common
+        public SerializedProperty count;
+        public SerializedProperty effectType;
+        public SerializedProperty triggerType;
+
+        // damage
+        public SerializedProperty damage;
+        public SerializedProperty duration;
+        public SerializedProperty interval;
+        public SerializedProperty radius;
+        public SerializedProperty center;
+
+        // spawn
+        public SerializedProperty objectsToSpawn;
+
+        private void OnEnable()
+        {
+            effectEdit = new SerializedObject(target);
+            count = effectEdit.FindProperty("count");
+            effectType = effectEdit.FindProperty("effectType");
+            triggerType = effectEdit.FindProperty("triggerType");
+
+            damage = effectEdit.FindProperty("damage");
+            duration = effectEdit.FindProperty("duration");
+            interval = effectEdit.FindProperty("interval");
+            radius = effectEdit.FindProperty("radius");
+            center = effectEdit.FindProperty("center");
+
+            objectsToSpawn = effectEdit.FindProperty("objectToSpawn");
+        }
+
+        public override void OnInspectorGUI()
+        {
+            // Update the serialized object before making changes
+            effectEdit.Update();
+
+            // Display and edit the EffectType and TriggerType enums
+            EditorGUILayout.PropertyField(effectType);
+            EditorGUILayout.PropertyField(triggerType);
+
+            // Switch based on the selected effect type to display appropriate fields
+            switch ((EffectType)effectType.enumValueIndex)
             {
                 case EffectType.SingleOnceDamageEffect:
-                    return new SingleOnceDamageEffect(damage);
+                    EditorGUILayout.PropertyField(damage);
+                    break;
 
                 case EffectType.SingleContinuousDamageEffect:
-                    return new SingleContinuousDamageEffect(damage, duration, interval);
+                    EditorGUILayout.PropertyField(damage);
+                    EditorGUILayout.PropertyField(duration);
+                    EditorGUILayout.PropertyField(interval);
+                    break;
 
                 case EffectType.RangeOnceDamageEffect:
-                    return new RangeOnceDamageEffect(center, radius, damage);
+                    EditorGUILayout.PropertyField(damage);
+                    EditorGUILayout.PropertyField(center);
+                    EditorGUILayout.PropertyField(radius);
+                    break;
 
                 case EffectType.RangeContinuousDamageEffect:
-                    return new RangeContinuousDamageEffect(center, radius, damage, duration, interval);
+                    EditorGUILayout.PropertyField(damage);
+                    EditorGUILayout.PropertyField(center);
+                    EditorGUILayout.PropertyField(radius);
+                    EditorGUILayout.PropertyField(duration);
+                    EditorGUILayout.PropertyField(interval);
+                    break;
 
                 case EffectType.SpawnEffect:
-                    return new SpawnEffect(objectsToSpawn);
-                
+                    EditorGUILayout.PropertyField(objectsToSpawn, true);
+                    break;
+
                 case EffectType.BouncingEffect:
-                    return new BouncingEffect(count);
-                
                 case EffectType.PenetrationEffect:
-                    return new PenetrationEffect(count);
-                
                 case EffectType.SplittingEffect:
-                    return new SplittingEffect(count);
-                    
-                default:
-                    return null;
+                    EditorGUILayout.PropertyField(count);
+                    break;
             }
+
+            // Apply the modified properties to the serialized object
+            effectEdit.ApplyModifiedProperties();
         }
     }
 }

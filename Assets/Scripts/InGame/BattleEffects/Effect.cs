@@ -15,6 +15,12 @@ namespace InGame.BattleEffects
         SpawnEffect
     }
 
+    public enum TriggerType
+    {
+        Collision,
+        Destruction
+    }
+
     public abstract class Effect
     {
         protected int m_count;

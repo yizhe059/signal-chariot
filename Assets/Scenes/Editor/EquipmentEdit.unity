@@ -133,9 +133,8 @@ GameObject:
   - component: {fileID: 450031693}
   - component: {fileID: 450031696}
   - component: {fileID: 450031695}
-  - component: {fileID: 450031694}
   m_Layer: 0
-  m_Name: Bullet1
+  m_Name: Basic Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,18 +155,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2116755078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &450031694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 450031692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24856f4901f1f4497b0ec4981d563406, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &450031695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +167,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24856f4901f1f4497b0ec4981d563406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectType: 1
+  triggerType: 0
+  count: 0
+  damage: 1
+  duration: 0
+  interval: 0
+  radius: 0
+  center: {x: 0, y: 0, z: 0}
+  objectsToSpawn: []
 --- !u!114 &450031696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,12 +188,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c00875aa986de47c3afebb99dd6b6cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Bullet1
-  sprite: {fileID: 0}
-  size: 0
-  health: 0
-  speed: 0
-  lifeTime: 0
+  name: Basic Bullet
+  sprite: {fileID: 21300000, guid: 494c2058d61db45a89aa442c3fa2acfb, type: 3}
+  size: 1
+  health: -1
+  speed: 100
+  lifeTime: 4
   moveType: 0
 --- !u!1 &1953216936
 GameObject:

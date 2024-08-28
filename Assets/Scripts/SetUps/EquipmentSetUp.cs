@@ -2,30 +2,26 @@ using System;
 
 using UnityEngine;
 
-using InGame.BattleFields.Androids;
+using InGame.BattleFields.Bullets;
 
 namespace SetUps
 {
     [Serializable]
-    public class TowerSetUp
+    public class EquipmentSetUp
     {
         public Sprite sprite;
         public float damageMultipler;
-
-        #region Damage
         public float seekInterval;
         public float shootInterval;
         public int shootCount;
         public int bulletCount;
-        public BulletSetUp bulletSetUp;
-        #endregion
+        public BulletType bulletType;
 
-        public TowerSetUp(TowerSetUp other)
+        public EquipmentSetUp(EquipmentSetUp other)
         {
             sprite = other.sprite;
             damageMultipler = other.damageMultipler;
-
-            bulletSetUp = new BulletSetUp(other.bulletSetUp);
+            bulletType = other.bulletType;
             bulletCount = other.bulletCount;
             shootCount = other.shootCount;
             seekInterval = other.seekInterval;

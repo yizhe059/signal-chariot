@@ -6,7 +6,7 @@ namespace InGame.Effects.EffectElement
 {
     public class PlacingTowerEffect: Effect
     {
-        public TowerSetUp setUp;
+        public EquipmentSetUp setUp;
         private Tower m_tower;
         
         
@@ -28,7 +28,7 @@ namespace InGame.Effects.EffectElement
             };
         }
 
-        public static PlacingTowerEffect CreateEffect(TowerSetUp newSetUp)
+        public static PlacingTowerEffect CreateEffect(EquipmentSetUp newSetUp)
         {
             return new PlacingTowerEffect
             {

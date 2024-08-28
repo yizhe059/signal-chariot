@@ -28,17 +28,23 @@ namespace Editors.Bullets
             foreach (var edit in bulletEdits)
             {        
                 var effectEdits = edit.gameObject.GetComponents<EffectEdit>();
-                var effects = new List<Effect>();
+                var collisionEffects = new List<Effect>();
+                var destructionEffects = new List<Effect>();
                 foreach (var effectEdit in effectEdits)
                 {
-                    // select list based on trigger condition
-                    // effects.Add(effectEdit.CreateEffect());
+                    if(effectEdit.triggerType == TriggerType.Collision)
+                        collisionEffects.Add(effectEdit.CreateEffect());
+                    else 
+                        destructionEffects.Add(effectEdit.CreateEffect());
                 }
 
                 var bulletSetUp = edit.CreateBulletSetUp();
-                // add effect list to setUp
+                bulletSetUp.collisionEffects = collisionEffects;
+                bulletSetUp.destructionEffects = destructionEffects;
                 setUp.bulletLibrary.Add(bulletSetUp);
             }
+
+            Debug.Log("Save Asset");
         }
     }
 }

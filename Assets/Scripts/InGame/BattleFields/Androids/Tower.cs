@@ -29,7 +29,7 @@ namespace InGame.BattleFields.Androids
         [Header("Bullet")]
         private BulletManager m_bulletManager;
         public BulletManager bulletManager { get { return m_bulletManager;}}
-        private BulletSetUp m_bulletSetUp;
+        private BulletType m_bulletType;
         private UnlimitedProperty m_bulletCount;
         private UnlimitedProperty m_shootCount;
         private UnlimitedProperty m_shootInterval;
@@ -42,16 +42,16 @@ namespace InGame.BattleFields.Androids
         public Module module { get { return m_module;}}
 
         #region Life Cycle
-        public Tower(TowerSetUp towerSetUp, Module module)
+        public Tower(EquipmentSetUp equipmentSetUp, Module module)
         {
-            UnlimitedProperty bltCnt = new(towerSetUp.bulletCount, UnlimitedPropertyType.BulletCount);
-            UnlimitedProperty shtCnt = new(towerSetUp.shootCount);
-            UnlimitedProperty shtItv = new(towerSetUp.shootInterval, UnlimitedPropertyType.Interval);
-            UnlimitedProperty skItv = new(towerSetUp.seekInterval, UnlimitedPropertyType.Speed);
-            UnlimitedProperty dmgMtp = new(towerSetUp.damageMultipler, UnlimitedPropertyType.Multiplier);
+            UnlimitedProperty bltCnt = new(equipmentSetUp.bulletCount, UnlimitedPropertyType.BulletCount);
+            UnlimitedProperty shtCnt = new(equipmentSetUp.shootCount);
+            UnlimitedProperty shtItv = new(equipmentSetUp.shootInterval, UnlimitedPropertyType.Interval);
+            UnlimitedProperty skItv = new(equipmentSetUp.seekInterval, UnlimitedPropertyType.Speed);
+            UnlimitedProperty dmgMtp = new(equipmentSetUp.damageMultipler, UnlimitedPropertyType.Multiplier);
 
             m_bulletManager = new();
-            m_bulletSetUp = towerSetUp.bulletSetUp; // TODO: replace this with bullet 
+            m_bulletType = equipmentSetUp.bulletType; 
 
             m_bulletCount = bltCnt;
             m_shootCount = shtCnt;
@@ -61,7 +61,7 @@ namespace InGame.BattleFields.Androids
             m_damageMultiplier = dmgMtp;
 
             m_module = module;              
-            m_sprite = towerSetUp.sprite;
+            m_sprite = equipmentSetUp.sprite;
 
             CreateView();
         }
@@ -69,7 +69,6 @@ namespace InGame.BattleFields.Androids
         public void Die()
         {
             m_towerView.Die();
-            // m_bulletManager.ClearBullet();
         }
         
         private void CreateView()
@@ -99,7 +98,7 @@ namespace InGame.BattleFields.Androids
 
         public IEnumerator ShootBullet(WeaponBuff buff)
         {
-            BulletSetUp bulletSetUp = m_bulletManager.GenerateBulletSetUp(m_bulletSetUp, buff); // input bulletType & buff
+            BulletSetUp bulletSetUp = m_bulletManager.GenerateBulletSetUp(m_bulletType, buff); // input bulletType & buff
             
             float shootCount = m_shootCount.value + buff.numShotsFlatBuff;
             float bulletCount = m_bulletCount.value + buff.numBulletsPerShotFlatBuff;

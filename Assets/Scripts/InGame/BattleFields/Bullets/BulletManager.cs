@@ -10,27 +10,30 @@ namespace InGame.BattleFields.Bullets
 {
     public enum BulletType
     {
-
+        BasicBullet,
+        PenetrationBullet
     }
 
     public class BulletManager
     {
         private List<List<Bullet>> m_bullets;
         private List<Vector3> m_targets;
-        private Dictionary<BulletType, BulletSetUp> m_bulletSetUpLib;
+        private Dictionary<BulletType, BulletSetUp> m_bulletSetUpLib; // TODO Generate lib
 
         public BulletManager()
         {
             m_bullets = new();
             m_targets = new();
+            m_bulletSetUpLib = new();
         }
 
-        public BulletSetUp GenerateBulletSetUp(BulletSetUp bulletSetUp, WeaponBuff buff)
+        public BulletSetUp GenerateBulletSetUp(BulletType bulletType, WeaponBuff buff)
         {
-            BulletSetUp resultSetUp = new(bulletSetUp);
-            resultSetUp = AddNumericalBuffs(bulletSetUp, buff);
-            resultSetUp = AddEffectiveBuffs(bulletSetUp, buff);
-            return resultSetUp;
+            if(m_bulletSetUpLib[bulletType] == null) return null;
+            BulletSetUp buffedSetUp = new(m_bulletSetUpLib[bulletType]);
+            buffedSetUp = AddNumericalBuffs(buffedSetUp, buff);
+            buffedSetUp = AddEffectiveBuffs(buffedSetUp, buff);
+            return buffedSetUp;
         }
 
         private BulletSetUp AddNumericalBuffs(BulletSetUp bulletSetUp, WeaponBuff buff)

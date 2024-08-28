@@ -21,7 +21,7 @@ namespace InGame.BattleFields.Androids
         {
             m_towers = towers;
         }
-        public Tower AddTower(TowerSetUp towerSetUp, Module module)
+        public Tower AddTower(EquipmentSetUp towerSetUp, Module module)
         {
             Tower tower = new(towerSetUp, module);
             m_towers.Add(tower);

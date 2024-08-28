@@ -9,7 +9,7 @@ namespace SetUps
     {
         #region Android
         public AndroidSetUp androidSetUp;
-        public List<TowerSetUp> equipmentLibrary;
+        public List<EquipmentSetUp> equipmentLibrary;
         public List<BulletSetUp> bulletLibrary;
         #endregion
         
