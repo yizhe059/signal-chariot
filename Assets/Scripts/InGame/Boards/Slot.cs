@@ -55,6 +55,11 @@ namespace InGame.Boards
             moduleSlot?.TriggerEffect(blackBoard);
         }
 
+        public void Reset()
+        {
+            moduleSlot?.Reset();
+        }
+
         #region Buff
 
         public void AddBuff(ModuleBuff buff)

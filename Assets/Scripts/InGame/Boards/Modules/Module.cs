@@ -52,6 +52,11 @@ namespace InGame.Boards.Modules
             module.TriggerSignalEffect(bb);
         }
 
+        public void Reset()
+        {
+            module.Reset();
+        }
+
         public void AddBuff(ModuleBuff buff)
         {
             m_module.AddBuff(buff);
@@ -349,6 +354,13 @@ namespace InGame.Boards.Modules
             }
             
             m_customEffect?.Unregister(bb);
+        }
+
+        public void Reset()
+        {
+            // Can not reset placing effect, because it will reset when it remove it
+            m_signalEffects.Reset();
+            m_customEffect?.Reset();
         }
         #endregion
         

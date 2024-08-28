@@ -60,7 +60,7 @@ namespace InGame.Boards
     {
         private UnityEvent<int, int, SlotStatus> m_onStatusChanged = new UnityEvent<int, int, SlotStatus>();
 
-        private List<Module> m_modules = new List<Module>();
+        //private List<Module> m_modules = new List<Module>();
 
         private bool m_noEffectTrigger = false;
         
@@ -359,6 +359,19 @@ namespace InGame.Boards
 
             blackBoard.pos = new BoardPosition(x, y);
             slot.TriggerEffect(blackBoard);
+        }
+
+        public void Reset()
+        {
+            if (m_noEffectTrigger) return;
+            
+            for (int x = 0; x < m_width; x++)
+            {
+                for (int y = 0; y < m_height; y++)
+                {
+                    GetValue(x,y).Reset();
+                }
+            }
         }
 
         #endregion

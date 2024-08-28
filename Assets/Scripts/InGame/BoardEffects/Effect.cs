@@ -63,6 +63,16 @@ namespace InGame.Effects
         
         public virtual void OnUnTrigger(EffectBlackBoard blackBoard){}
 
+        public void Reset()
+        {
+            OnReset();
+        }
+
+        protected virtual void OnReset()
+        {
+            
+        }
+
         public void AddBuff(ModuleBuff buff)
         {
             if (ModuleBuff.IsInMask(buffMask, buff.type))
@@ -226,6 +236,14 @@ namespace InGame.Effects
             
         }
 
+        public void Reset()
+        {
+            foreach (var effect in m_effects)
+            {
+                effect.Reset();
+            }
+        }
+        
         public void AddBuff(ModuleBuff buff)
         {
             foreach(var effect in m_effects) effect.AddBuff(buff);
@@ -314,6 +332,14 @@ namespace InGame.Effects
             m_isTrigger = false;
         }
         
+        public void Reset()
+        {
+            foreach (var effect in m_effects)
+            {
+                effect.Reset();
+            }
+        }
+        
         public void AddBuff(ModuleBuff buff)
         {
             foreach(var effect in m_effects) effect.AddBuff(buff);
@@ -365,6 +391,14 @@ namespace InGame.Effects
             foreach (var effect in m_effects)
             {
                 effect.Trigger(blackBoard);
+            }
+        }
+        
+        public void Reset()
+        {
+            foreach (var effect in m_effects)
+            {
+                effect.Reset();
             }
         }
         
