@@ -10,6 +10,8 @@ namespace Editors.Bullets
         public new string name = "";
         private string m_prevName = "";
 
+        public BulletType type;
+
         public Sprite sprite;
         
         [Min(0.1f)]
@@ -39,6 +41,7 @@ namespace Editors.Bullets
             return new BulletSetUp
             {
                 name = name,
+                type = type,
                 sprite = sprite,
                 size = size,
                 health = health,

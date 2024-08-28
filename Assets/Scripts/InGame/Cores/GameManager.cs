@@ -7,6 +7,7 @@ using InGame.Boards;
 using InGame.Boards.Modules;
 using InGame.Boards.Signals;
 using InGame.BattleFields.Androids;
+using InGame.BattleFields.Bullets;
 using InGame.BattleFields.Common;
 using InGame.BattleFields.Enemies;
 using InGame.Cameras;
@@ -17,7 +18,6 @@ using SetUps;
 using Utils.Common;
 using Utils;
 using MainMenu;
-using InGame.UI;
 
 namespace InGame.Cores
 {
@@ -34,14 +34,12 @@ namespace InGame.Cores
         [Header("Android")]
         private Android m_android;
         private AndroidView m_androidView;
+        private ModManager m_modManager;
+        private BulletLib m_bulletLib;
 
         [Header("Board")]
-        // private Board m_board;
-        // private Board m_extraBoard;
-        // private BoardView m_boardView;
         private GeneralBoard m_generalBoard;
         private ModuleLib m_moduleLib;
-        //private SignalController m_signalController;
         private GeneralSignalController m_generalSignalController;
         private ModuleDescriptionDisplayManager m_moduleDescriptionDisplayManager;
 
@@ -49,8 +47,6 @@ namespace InGame.Cores
         private EnemySpawnLib m_enemySpawnLib;
         private EnemyLib m_enemyLib;
         private EnemySpawnController m_enemySpawnController;
-
-        private ModManager m_modManager;
 
         #region Life Cycle
         protected override void Init()
@@ -87,6 +83,13 @@ namespace InGame.Cores
         {
             m_android = new Android(m_setUp.androidSetUp);
             m_androidView = m_android.androidView;
+
+            m_bulletLib = new();
+            foreach(var bul in m_setUp.bulletLibrary)
+            {
+                Debug.Log("collision effects in lib " + bul.collisionEffects.Count);
+            }
+            m_bulletLib.Init(m_setUp.bulletLibrary);
         }
 
         private void InitBoard()
@@ -104,11 +107,9 @@ namespace InGame.Cores
             boardView.Init(board, extraBoard, m_setUp.boardSetUp, m_setUp.extraBoardSetUp);
 
             m_generalSignalController = new GeneralSignalController(board, boardView);
-            //m_signalController = SignalController.CreateSignalController(board, boardView);
             m_generalBoard = GeneralBoard.CreateGeneralBoard(board, extraBoard, boardView);
 
             m_moduleDescriptionDisplayManager = new ModuleDescriptionDisplayManager(m_inputManager);
-
         }
 
         private void InitCamera()
@@ -141,6 +142,7 @@ namespace InGame.Cores
         public CameraManager GetCameraManager() => m_cameraManager;
         public InputManager GetInputManager() => m_inputManager;
         public ModuleLib GetModuleLib() =>  m_moduleLib;
+        public BulletLib GetBulletLib() => m_bulletLib;
         public GeneralSignalController GetSignalController() => m_generalSignalController;
         public TimeEffectManager GetTimeEffectManager() => m_timeEffectManager;
         public Board GetBoard() => m_generalBoard.board;

@@ -3,35 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using SetUps;
+
 using InGame.BattleFields.Androids;
 using InGame.Boards.Modules.ModuleBuffs;
+using InGame.Cores;
 
 namespace InGame.BattleFields.Bullets
 {
-    public enum BulletType
-    {
-        Basic,
-        Laser,
-        Landmine,
-    }
 
     public class BulletManager
     {
         private List<List<Bullet>> m_bullets;
         private List<Vector3> m_targets;
-        private Dictionary<BulletType, BulletSetUp> m_bulletSetUpLib; // TODO Generate lib
 
         public BulletManager()
         {
             m_bullets = new();
             m_targets = new();
-            m_bulletSetUpLib = new();
         }
 
         public BulletSetUp GenerateBulletSetUp(BulletType bulletType, WeaponBuff buff)
         {
-            if(m_bulletSetUpLib[bulletType] == null) return null;
-            BulletSetUp buffedSetUp = new(m_bulletSetUpLib[bulletType]);
+            BulletSetUp setUp = GameManager.Instance.GetBulletLib().GetSetUp(bulletType);
+            if(setUp == null) return null;
+            
+            BulletSetUp buffedSetUp = new(setUp);
             buffedSetUp = AddNumericalBuffs(buffedSetUp, buff);
             buffedSetUp = AddEffectiveBuffs(buffedSetUp, buff);
             return buffedSetUp;
@@ -48,7 +44,7 @@ namespace InGame.BattleFields.Bullets
             bulletSetUp.speed = Mathf.Max(0.001f, bulletSetUp.speed);
 
             // damage
-            // bulletSetUp.damage *= m_damageMultiplier.value;
+            // TODO bulletSetUp.damage *= m_damageMultiplier.value;
             bulletSetUp.damage *= 1 + (float)buff.damagePercentageBuff/100f;
             bulletSetUp.damage += buff.flatDamageBuff;
             bulletSetUp.damage = Mathf.Max(0.001f, bulletSetUp.damage);

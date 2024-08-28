@@ -188,6 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Basic
+  type: 0
   sprite: {fileID: 21300000, guid: 494c2058d61db45a89aa442c3fa2acfb, type: 3}
   size: 1
   health: -1
@@ -281,12 +282,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Landmine
+  type: 2
   sprite: {fileID: 21300000, guid: 3b362b8a735364076a358feec9a74534, type: 3}
   size: 1
   health: -1
   speed: 100
   lifeTime: 4
-  moveType: 0
+  moveType: 4
 --- !u!1 &1665733254
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Laser
+  type: 1
   sprite: {fileID: 21300000, guid: 3b362b8a735364076a358feec9a74534, type: 3}
   size: 1
   health: -1

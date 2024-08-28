@@ -63,15 +63,17 @@ namespace InGame.BattleFields.Bullets
             m_lifeTime = lft;
             m_size = siz;
             
-            m_sprite = bulletSetUp.sprite;
+            m_collisionEffects = bulletSetUp.collisionEffects;
+            m_destructionEffects = bulletSetUp.destructionEffects;
 
-            CreateView();
-            CreateEffects();
+            CreateView(bulletSetUp.sprite);
             CreateMoveStrategy(bulletSetUp.moveType);
         }
 
-        private void CreateView()
+        private void CreateView(Sprite sprite)
         {
+            m_sprite = sprite;
+
             GameObject bulletPref = Resources.Load<GameObject>(Constants.GO_BULLET_PATH);
             GameObject bulletGO = GameObject.Instantiate(bulletPref);
             
@@ -112,24 +114,11 @@ namespace InGame.BattleFields.Bullets
             }
         }
 
-        private void CreateEffects()
-        {
-            m_collisionEffects = new();
-            m_destructionEffects = new();
-        }
-
-        private void CreateEffects(List<Effect> colEffects, List<Effect> desEffects)
-        {
-            m_collisionEffects = colEffects;
-            m_destructionEffects = desEffects;
-        }
-
         public void Die()
         {
             m_bulletView.Die();
         }
 
-        // TODO: Effects
         public void DealDamage(IDamageable target, float dmg)
         {
             target.TakeDamage(dmg);

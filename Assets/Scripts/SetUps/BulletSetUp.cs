@@ -11,8 +11,9 @@ namespace SetUps
     public class BulletSetUp
     {
         public string name;
+        public BulletType type;
+
         public Sprite sprite;
-        
         public float size;
         public float damage;
         public float health;
@@ -31,8 +32,9 @@ namespace SetUps
         public BulletSetUp(BulletSetUp other)
         {
             name = other.name;
+            type = other.type;
+
             sprite = other.sprite;
-            
             size = other.size;
             damage = other.damage;
             health = other.health;

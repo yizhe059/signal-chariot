@@ -28,6 +28,7 @@ namespace Editors.Bullets
             foreach (var edit in bulletEdits)
             {        
                 var effectEdits = edit.gameObject.GetComponents<EffectEdit>();
+
                 var collisionEffects = new List<Effect>();
                 var destructionEffects = new List<Effect>();
                 foreach (var effectEdit in effectEdits)
@@ -42,6 +43,11 @@ namespace Editors.Bullets
                 bulletSetUp.collisionEffects = collisionEffects;
                 bulletSetUp.destructionEffects = destructionEffects;
                 setUp.bulletLibrary.Add(bulletSetUp);
+            }
+
+            foreach(var bul in setUp.bulletLibrary)
+            {
+                Debug.Log("collide effect count in setUp " + bul.collisionEffects.Count);
             }
 
             Debug.Log("Save Asset");
