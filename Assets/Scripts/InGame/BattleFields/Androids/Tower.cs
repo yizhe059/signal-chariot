@@ -51,7 +51,7 @@ namespace InGame.BattleFields.Androids
             UnlimitedProperty dmgMtp = new(towerSetUp.damageMultipler, UnlimitedPropertyType.Multiplier);
 
             m_bulletManager = new();
-            m_bulletSetUp = towerSetUp.bulletSetUp;
+            m_bulletSetUp = towerSetUp.bulletSetUp; // TODO: replace this with bullet 
 
             m_bulletCount = bltCnt;
             m_shootCount = shtCnt;
@@ -99,11 +99,8 @@ namespace InGame.BattleFields.Androids
 
         public IEnumerator ShootBullet(WeaponBuff buff)
         {
-            BulletSetUp bulletSetUp = new(m_bulletSetUp);
-
-            bulletSetUp = AddNumericalBuffs(bulletSetUp, buff);
-            bulletSetUp = AddEffectiveBuffs(bulletSetUp, buff);
-
+            BulletSetUp bulletSetUp = m_bulletManager.GenerateBulletSetUp(m_bulletSetUp, buff); // input bulletType & buff
+            
             float shootCount = m_shootCount.value + buff.numShotsFlatBuff;
             float bulletCount = m_bulletCount.value + buff.numBulletsPerShotFlatBuff;
 
@@ -112,49 +109,6 @@ namespace InGame.BattleFields.Androids
                 m_bulletManager.AddBulletBatch(bulletCount, bulletSetUp, this);
                 yield return new WaitForSeconds(m_shootInterval.value);
             }
-        }
-
-        private BulletSetUp AddNumericalBuffs(BulletSetUp bulletSetUp, WeaponBuff buff)
-        {
-            // life time
-            bulletSetUp.lifeTime *= 1 + (float)buff.lifeTimePercentageBuff/100f;
-            bulletSetUp.lifeTime = Mathf.Max(0.001f, bulletSetUp.lifeTime);
-            
-            // speed
-            bulletSetUp.speed *= 1 + (float)buff.speedPercentageBuff/100f;
-            bulletSetUp.speed = Mathf.Max(0.001f, bulletSetUp.speed);
-            
-            // damage
-            bulletSetUp.damage *= m_damageMultiplier.value;
-            bulletSetUp.damage *= 1 + (float)buff.damagePercentageBuff/100f;
-            bulletSetUp.damage += buff.flatDamageBuff;
-            bulletSetUp.damage = Mathf.Max(0.001f, bulletSetUp.damage);
-            
-            // size
-            bulletSetUp.size  *= 1 + (float)buff.bulletSizePercentageBuff/100f;
-            bulletSetUp.size = Mathf.Max(0.001f, bulletSetUp.size);
-
-            return bulletSetUp;
-        }
-
-        private BulletSetUp AddEffectiveBuffs(BulletSetUp bulletSetUp, WeaponBuff buff)
-        {            
-            if(buff.bouncingBuff > 0)
-            {
-
-            }
-
-            if(buff.penetrationBuff > 0)
-            {
-
-            }
-
-            if(buff.splittingBuff > 0)
-            {
-
-            }
-
-            return bulletSetUp;
         }
         #endregion
     }

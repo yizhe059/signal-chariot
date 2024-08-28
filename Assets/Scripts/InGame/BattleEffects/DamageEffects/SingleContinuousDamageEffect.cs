@@ -5,7 +5,6 @@ namespace InGame.BattleEffects
 {
     public class SingleContinuousDamageEffect : Effect
     {
-        private IDamageable m_target;
         private int m_damage;
 
         public SingleContinuousDamageEffect(int damage, float duration, float interval) : 
@@ -14,17 +13,11 @@ namespace InGame.BattleEffects
             this.m_damage = damage;
         }
 
-        public SingleContinuousDamageEffect(int damage, IDamageable target, 
-        float duration, float interval) : base(Mathf.FloorToInt(duration / interval))
-        {
-            this.m_damage = damage;
-            this.m_target = target;
-        }
-
-        public override void Trigger()
+        public override void Trigger(GameObject go)
         {
             if (!IsActive) return;
-            m_target.TakeDamage(m_damage);
+            IDamageable damageable = go.GetComponent<IDamageable>();
+            damageable?.TakeDamage(m_damage);
             m_count--;
             // TODO: Continuous m_damage logic here (e.g., wait for the interval to trigger again)
         }

@@ -1,3 +1,4 @@
+using UnityEngine;
 
 namespace InGame.BattleEffects
 {
@@ -5,7 +6,7 @@ namespace InGame.BattleEffects
     {
         public CountEffect(int count) : base(count){}
 
-        public override void Trigger()
+        public override void Trigger(GameObject go)
         {
             if(!IsActive) return;
             m_count--;

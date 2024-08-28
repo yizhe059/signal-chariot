@@ -32,7 +32,7 @@ namespace InGame.Views
         public void Die()
         {
             foreach(var effect in m_bullet.destructionEffects)
-                effect.Trigger();
+                effect.Trigger(this.gameObject);
             m_timer.OnTimerComplete.RemoveListener(m_bullet.Die);
             Destroy(gameObject);
         }
@@ -98,9 +98,10 @@ namespace InGame.Views
                     break;
                 default:
                     foreach(var effect in m_bullet.collisionEffects)
-                        effect.Trigger();
+                        effect.Trigger(other.gameObject);
                     break;
             }
+            // 判断是否需要死亡
         }
         #endregion
     }

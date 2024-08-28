@@ -1,3 +1,4 @@
+using UnityEngine;
 
 namespace InGame.BattleEffects
 {
@@ -11,7 +12,7 @@ namespace InGame.BattleEffects
         BouncingEffect,
         PenetrationEffect,
         SplittingEffect,
-        SpawnAndDestroyEffect
+        SpawnEffect
     }
 
     public abstract class Effect
@@ -22,6 +23,6 @@ namespace InGame.BattleEffects
         {
             this.m_count = count;
         }
-        public abstract void Trigger();
+        public abstract void Trigger(GameObject go);
     }
 }

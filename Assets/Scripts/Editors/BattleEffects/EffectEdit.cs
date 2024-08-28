@@ -36,6 +36,7 @@ namespace Editors.BattleEffects
 
             // 显示 EffectType 下拉列表
             effectType = (EffectType)EditorGUILayout.EnumPopup("Effect Type", effectType);
+            
             EditorGUILayout.IntField("Trigger Condition", damage);
 
             // 根据选中的 EffectType 显示不同的参数
@@ -65,7 +66,7 @@ namespace Editors.BattleEffects
                     interval = EditorGUILayout.FloatField("Interval", interval);
                     break;
 
-                case EffectType.SpawnAndDestroyEffect:
+                case EffectType.SpawnEffect:
                     // SerializedProperty objectsToSpawnProperty = serializedObject.FindProperty("objectsToSpawn");
                     // EditorGUILayout.PropertyField(objectsToSpawnProperty, true);
                     break;
@@ -82,15 +83,9 @@ namespace Editors.BattleEffects
                     count = EditorGUILayout.IntField("Count", count);
                     break;
             }
-
-            if (GUILayout.Button("Create Effect"))
-            {
-                Effect newEffect = CreateEffectInstance();
-                // effectContainer.AddEffect(newEffect);
-            }
         }
 
-        private Effect CreateEffectInstance()
+        public Effect CreateEffect()
         {
             switch (effectType)
             {
@@ -106,8 +101,8 @@ namespace Editors.BattleEffects
                 case EffectType.RangeContinuousDamageEffect:
                     return new RangeContinuousDamageEffect(center, radius, damage, duration, interval);
 
-                case EffectType.SpawnAndDestroyEffect:
-                    return new SpawnAndDestroyEffect(objectsToSpawn);
+                case EffectType.SpawnEffect:
+                    return new SpawnEffect(objectsToSpawn);
                 
                 case EffectType.BouncingEffect:
                     return new BouncingEffect(count);

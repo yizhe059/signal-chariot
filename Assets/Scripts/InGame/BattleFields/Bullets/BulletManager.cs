@@ -4,18 +4,72 @@ using UnityEngine;
 
 using SetUps;
 using InGame.BattleFields.Androids;
+using InGame.Boards.Modules.ModuleBuffs;
 
 namespace InGame.BattleFields.Bullets
 {
+    public enum BulletType
+    {
+
+    }
+
     public class BulletManager
     {
         private List<List<Bullet>> m_bullets;
         private List<Vector3> m_targets;
+        private Dictionary<BulletType, BulletSetUp> m_bulletSetUpLib;
 
         public BulletManager()
         {
             m_bullets = new();
             m_targets = new();
+        }
+
+        public BulletSetUp GenerateBulletSetUp(BulletSetUp bulletSetUp, WeaponBuff buff)
+        {
+            BulletSetUp resultSetUp = new(bulletSetUp);
+            resultSetUp = AddNumericalBuffs(bulletSetUp, buff);
+            resultSetUp = AddEffectiveBuffs(bulletSetUp, buff);
+            return resultSetUp;
+        }
+
+        private BulletSetUp AddNumericalBuffs(BulletSetUp bulletSetUp, WeaponBuff buff)
+        {
+            // life time
+            bulletSetUp.lifeTime *= 1 + (float)buff.lifeTimePercentageBuff/100f;
+            bulletSetUp.lifeTime = Mathf.Max(0.001f, bulletSetUp.lifeTime);
+
+            // speed
+            bulletSetUp.speed *= 1 + (float)buff.speedPercentageBuff/100f;
+            bulletSetUp.speed = Mathf.Max(0.001f, bulletSetUp.speed);
+
+            // damage
+            // bulletSetUp.damage *= m_damageMultiplier.value;
+            bulletSetUp.damage *= 1 + (float)buff.damagePercentageBuff/100f;
+            bulletSetUp.damage += buff.flatDamageBuff;
+            bulletSetUp.damage = Mathf.Max(0.001f, bulletSetUp.damage);
+
+            // size
+            bulletSetUp.size  *= 1 + (float)buff.bulletSizePercentageBuff/100f;
+            bulletSetUp.size = Mathf.Max(0.001f, bulletSetUp.size);
+            return bulletSetUp;
+        }
+
+        private BulletSetUp AddEffectiveBuffs(BulletSetUp bulletSetUp, WeaponBuff buff)
+        {            
+            if(buff.bouncingBuff > 0)
+            {
+
+            }
+            if(buff.penetrationBuff > 0)
+            {
+
+            }
+            if(buff.splittingBuff > 0)
+            {
+                
+            }
+            return bulletSetUp;
         }
 
         public List<Bullet> AddBulletBatch(float batchSize, BulletSetUp setup, Tower tower)

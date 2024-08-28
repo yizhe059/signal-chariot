@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c00875aa986de47c3afebb99dd6b6cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
+  name: Bullet1
   sprite: {fileID: 0}
   size: 0
   health: 0

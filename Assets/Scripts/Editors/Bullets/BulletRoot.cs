@@ -1,5 +1,13 @@
-using SetUps;
+using System.Collections.Generic;
+
 using UnityEngine;
+
+using SetUps;
+
+using InGame.BattleEffects;
+
+using Editors.BattleEffects;
+
 using Utils.Common;
 
 #if UNITY_EDITOR
@@ -18,11 +26,19 @@ namespace Editors.Bullets
             var bulletEdits = gameObject.GetComponentsInChildren<BulletEdit>();
             
             foreach (var edit in bulletEdits)
-            {
-                setUp.bulletLibrary.Add(edit.CreateBulletSetUp());
-            }
+            {        
+                var effectEdits = edit.gameObject.GetComponents<EffectEdit>();
+                var effects = new List<Effect>();
+                foreach (var effectEdit in effectEdits)
+                {
+                    // select list based on trigger condition
+                    // effects.Add(effectEdit.CreateEffect());
+                }
 
-            // TODO for loop effect edits
+                var bulletSetUp = edit.CreateBulletSetUp();
+                // add effect list to setUp
+                setUp.bulletLibrary.Add(bulletSetUp);
+            }
         }
     }
 }

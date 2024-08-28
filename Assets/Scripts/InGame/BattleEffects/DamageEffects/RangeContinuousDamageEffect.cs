@@ -17,15 +17,15 @@ namespace InGame.BattleEffects
             this.m_damage = damage;
         }
 
-        public override void Trigger()
+        public override void Trigger(GameObject go)
         {
             if (!IsActive) return;
             
             Collider[] colliders = Physics.OverlapSphere(m_center, m_radius);
             foreach (var collider in colliders)
             {
-                IDamageable m_damageable = collider.GetComponent<IDamageable>();
-                m_damageable?.TakeDamage(m_damage);
+                IDamageable damageable = collider.GetComponent<IDamageable>();
+                damageable?.TakeDamage(m_damage);
             }
             m_count--;
             // TODO: Continuous m_damage logic here (e.g., wait for the interval to trigger again)
