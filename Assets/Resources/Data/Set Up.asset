@@ -82,7 +82,7 @@ MonoBehaviour:
         x: 0
         y: 0
       moduleID: 4
-      moduleName: Extra Armor
+      moduleName: Extra Defence
       orientation: 0
     - pos:
         x: 1
@@ -106,7 +106,13 @@ MonoBehaviour:
         x: 5
         y: 0
       moduleID: 12
-      moduleName: Module 1
+      moduleName: Charging Cannon
+      orientation: 0
+    - pos:
+        x: 6
+        y: 0
+      moduleID: 13
+      moduleName: Extra Armor
       orientation: 0
     slotPrefab: {fileID: 6622818502655049371, guid: 80c85fcaea6536748bb67591b4fc60b2, type: 3}
     signalPrefab: {fileID: 7786143621109699157, guid: e7f648ad21042b64ca742ba22438c585, type: 3}
