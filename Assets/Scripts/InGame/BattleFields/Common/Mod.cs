@@ -37,7 +37,7 @@ namespace InGame.BattleFields.Common
 
         public void Pickup()
         {
-            GameManager.Instance.GetAndroid().Increase(UnlimitedPropertyType.Mod, m_quality);
+            GameManager.Instance.GetAndroid().Increase(LimitedPropertyType.Mod, m_quality, true);
             this.Die();
         }
     }

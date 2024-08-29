@@ -6,13 +6,13 @@ namespace InGame.BattleFields.Common
     public enum LimitedPropertyType
     {
         Health,
+        Mod,
+        Crystal,
         Default,
     }
 
     public enum UnlimitedPropertyType
     {
-        Mod,
-        Crystal,
         Defense,
         Armor,
         Speed,

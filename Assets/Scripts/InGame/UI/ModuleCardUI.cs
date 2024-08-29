@@ -34,9 +34,7 @@ namespace InGame.UI
             m_category.text = "Category: " + category.ToString();
             m_description.text = "Description: " + description;
 
-            // Vector2 mousePosition = position;
             Vector2 panelPosition = m_root.WorldToLocal(position);
-
             Vector2 screenSize = new(Screen.width, Screen.height);
             panelPosition.y = screenSize.y - panelPosition.y;
 

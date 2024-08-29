@@ -19,11 +19,11 @@ namespace InGame.BattleFields.Androids
 
         [Header("Properties")]       
         private LimitedProperty m_health;
+        private LimitedProperty m_mod;
+        private LimitedProperty m_crystal;
         private UnlimitedProperty m_defense;
         private UnlimitedProperty m_armor;
         private UnlimitedProperty m_speed;
-        private UnlimitedProperty m_mod; // TODO change to limited
-        private UnlimitedProperty m_crystal; // TODO change to limited
 
         [Header("Tower")]
         private TowerManager m_towerManager;
@@ -34,6 +34,18 @@ namespace InGame.BattleFields.Androids
                 setUp.maxHealth, 
                 setUp.initialHealth, 
                 LimitedPropertyType.Health
+            );
+
+            m_mod = new LimitedProperty(
+                setUp.maxMod,
+                setUp.initialMod,
+                LimitedPropertyType.Mod
+            );
+
+            m_crystal = new LimitedProperty(
+                setUp.maxCrystal,
+                setUp.initialCrystal,
+                LimitedPropertyType.Crystal
             );
 
             m_defense = new UnlimitedProperty(
@@ -49,16 +61,6 @@ namespace InGame.BattleFields.Androids
             m_speed = new UnlimitedProperty(
                 setUp.speed,
                 UnlimitedPropertyType.Speed
-            );
-
-            m_mod = new UnlimitedProperty(
-                setUp.mod,
-                UnlimitedPropertyType.Mod
-            );
-
-            m_crystal = new UnlimitedProperty(
-                setUp.crystal, 
-                UnlimitedPropertyType.Crystal
             );
 
             m_towerManager = new();
@@ -97,6 +99,12 @@ namespace InGame.BattleFields.Androids
                 case LimitedPropertyType.Health:
                     result = m_health;
                     break;
+                case LimitedPropertyType.Mod:
+                    result = m_mod;
+                    break;
+                case LimitedPropertyType.Crystal:
+                    result = m_crystal;
+                    break;
             }
             
             if(isCurrentValue) return result.current;
@@ -109,9 +117,7 @@ namespace InGame.BattleFields.Androids
             {
                 UnlimitedPropertyType.Defense => m_defense.value,
                 UnlimitedPropertyType.Armor => m_armor.value,
-                UnlimitedPropertyType.Mod => m_mod.value,
                 UnlimitedPropertyType.Speed => m_speed.value,
-                UnlimitedPropertyType.Crystal => m_crystal.value,
                 _ => throw new NotImplementedException(),
             };
         }
@@ -121,6 +127,8 @@ namespace InGame.BattleFields.Androids
             return type switch
             {
                 LimitedPropertyType.Health => m_health,
+                LimitedPropertyType.Mod => m_mod,
+                LimitedPropertyType.Crystal => m_crystal,
                 _ => null
             };
         }
@@ -131,9 +139,7 @@ namespace InGame.BattleFields.Androids
             {
                 UnlimitedPropertyType.Defense => m_defense,
                 UnlimitedPropertyType.Armor => m_armor,
-                UnlimitedPropertyType.Mod => m_mod,
                 UnlimitedPropertyType.Speed => m_speed,
-                UnlimitedPropertyType.Crystal => m_crystal,
                 _ => null
             };
         }
@@ -235,7 +241,6 @@ namespace InGame.BattleFields.Androids
             dmg -= m_defense.value;
             dmg = Mathf.Max(dmg, 0);
             DecreaseCurrHealth(dmg);
-            
             if(m_health.current <= 0) Die();
         }
 

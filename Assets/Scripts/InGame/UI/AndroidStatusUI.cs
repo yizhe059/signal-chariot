@@ -35,8 +35,8 @@ namespace InGame.UI
             android.RegisterPropertyEvent(LimitedPropertyType.Health, SetHealthUI);
             android.RegisterPropertyEvent(UnlimitedPropertyType.Defense, SetDefenseUI);
             android.RegisterPropertyEvent(UnlimitedPropertyType.Armor, SetArmorUI);
-            android.RegisterPropertyEvent(UnlimitedPropertyType.Mod, SetModUI);
-            android.RegisterPropertyEvent(UnlimitedPropertyType.Crystal, SetCrystalUI);
+            android.RegisterPropertyEvent(LimitedPropertyType.Mod, SetModUI);
+            android.RegisterPropertyEvent(LimitedPropertyType.Crystal, SetCrystalUI);
         }
 
         ~AndroidStatusUI()
@@ -45,8 +45,8 @@ namespace InGame.UI
             android.UnregisterPropertyEvent(LimitedPropertyType.Health, SetHealthUI);
             android.UnregisterPropertyEvent(UnlimitedPropertyType.Defense, SetDefenseUI);
             android.UnregisterPropertyEvent(UnlimitedPropertyType.Armor, SetArmorUI);
-            android.UnregisterPropertyEvent(UnlimitedPropertyType.Mod, SetModUI);
-            android.UnregisterPropertyEvent(UnlimitedPropertyType.Crystal, SetCrystalUI);
+            android.UnregisterPropertyEvent(LimitedPropertyType.Mod, SetModUI);
+            android.UnregisterPropertyEvent(LimitedPropertyType.Crystal, SetCrystalUI);
         }        
 
         private void SetHealthUI(float current, float max)
@@ -69,16 +69,16 @@ namespace InGame.UI
             content.text = $"ARMOR: {current}";
         }
 
-        private void SetModUI(float current)
+        private void SetModUI(float current, float max)
         {
             Label content = m_mod.Q<Label>("content");
-            content.text = $"MOD: {current}";
+            content.text = $"MOD: {current}/{max}";
         }
 
-        private void SetCrystalUI(float current)
+        private void SetCrystalUI(float current, float max)
         {
             Label content = m_crystal.Q<Label>("content");
-            content.text = $"CRYSTAL: {current}";
+            content.text = $"CRYSTAL: {current}/{max}";
         }
 
         public void Hide()

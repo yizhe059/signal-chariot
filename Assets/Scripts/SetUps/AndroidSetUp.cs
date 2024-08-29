@@ -18,8 +18,10 @@ namespace SetUps
         public float speed = 1f;
 
         #region Resources
-        public int mod = 0;
-        public int crystal = 0;
+        public int initialMod = 0;
+        public int maxMod = 500;
+        public int initialCrystal = 0;
+        public int maxCrystal = 50;
         #endregion
     }
 }
