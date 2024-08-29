@@ -41,7 +41,7 @@ namespace InGame.Effects.EffectElement
                 
                 var bulletType = Signal.SignalTypeToBulletType(type);
                 Debug.Log($"Shoot Bullet： {bulletType}");
-                //towerManager.TowerEffect(m_module, m_weaponBuff.CreateCopy() as WeaponBuff);
+                towerManager.TowerEffect(m_module, bulletType, m_weaponBuff.CreateCopy() as WeaponBuff);
             }
         }
         
