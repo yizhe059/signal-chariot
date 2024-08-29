@@ -1280,7 +1280,7 @@ MonoBehaviour:
     shootInterval: 0.05
     shootCount: 2
     bulletCount: 1
-    bulletType: 1
+    bulletType: 0
 --- !u!1 &993809584 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9075689799680712317, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}

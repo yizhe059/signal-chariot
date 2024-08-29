@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24856f4901f1f4497b0ec4981d563406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectType: 3
+  effectType: 1
   triggerType: 0
   count: 0
   damage: 1

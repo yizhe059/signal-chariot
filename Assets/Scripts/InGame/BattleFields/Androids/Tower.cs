@@ -94,7 +94,7 @@ namespace InGame.BattleFields.Androids
 
         public IEnumerator ShootBullet(WeaponBuff buff, BulletType type)
         {
-            BulletSetUp bulletSetUp = m_bulletManager.GenerateBulletSetUp(type, buff); // input bulletType & buff
+            BulletSetUp bulletSetUp = m_bulletManager.GenerateBulletSetUp(type, buff);
             
             float shootCount = m_shootCount.value + buff.numShotsFlatBuff;
             float bulletCount = m_bulletCount.value + buff.numBulletsPerShotFlatBuff;

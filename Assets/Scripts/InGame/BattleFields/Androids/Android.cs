@@ -22,8 +22,8 @@ namespace InGame.BattleFields.Androids
         private UnlimitedProperty m_defense;
         private UnlimitedProperty m_armor;
         private UnlimitedProperty m_speed;
-        private UnlimitedProperty m_mod;
-        private UnlimitedProperty m_crystal;
+        private UnlimitedProperty m_mod; // TODO change to limited
+        private UnlimitedProperty m_crystal; // TODO change to limited
 
         [Header("Tower")]
         private TowerManager m_towerManager;
@@ -108,6 +108,7 @@ namespace InGame.BattleFields.Androids
             return type switch
             {
                 UnlimitedPropertyType.Defense => m_defense.value,
+                UnlimitedPropertyType.Armor => m_armor.value,
                 UnlimitedPropertyType.Mod => m_mod.value,
                 UnlimitedPropertyType.Speed => m_speed.value,
                 UnlimitedPropertyType.Crystal => m_crystal.value,
@@ -170,19 +171,7 @@ namespace InGame.BattleFields.Androids
             switch(type)
             {
                 case LimitedPropertyType.Health:
-                    if(isCurrentValue)
-                    {
-                        float armor = GetUnlimitedProperty(UnlimitedPropertyType.Armor).value;
-                        if(armor == 0)
-                            property.current -= delta;
-                        else if(armor >= delta)
-                            Decrease(UnlimitedPropertyType.Armor, delta);
-                        else if(armor < delta)
-                        {
-                            property.current -= delta - armor;
-                            Set(UnlimitedPropertyType.Armor, 0);
-                        }                        
-                    }
+                    if(isCurrentValue) DecreaseCurrHealth(delta);
                     else property.max -= delta;
                     break;
                 default:
@@ -245,9 +234,23 @@ namespace InGame.BattleFields.Androids
         {
             dmg -= m_defense.value;
             dmg = Mathf.Max(dmg, 0);
-            m_health.current -= dmg;
+            DecreaseCurrHealth(dmg);
             
             if(m_health.current <= 0) Die();
+        }
+
+        private void DecreaseCurrHealth(float delta)
+        {
+            float armor = m_armor.value;
+            if(armor == 0)
+                m_health.current -= delta;
+            else if(armor >= delta)
+                Decrease(UnlimitedPropertyType.Armor, delta);
+            else if(armor < delta)
+            {
+                m_health.current -= delta - armor;
+                m_armor.value = 0;
+            }                        
         }
 
         #endregion
