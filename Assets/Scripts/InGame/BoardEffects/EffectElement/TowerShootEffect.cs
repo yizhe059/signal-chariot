@@ -58,8 +58,9 @@ namespace InGame.Effects.EffectElement
             var signalType = blackBoard.signal.type; 
             
             AddHeat(heatCostPerShot);
-            GameManager.Instance.GetAndroid().GetTowerManager().
-            TowerEffect(m_module, m_buff.CreateCopy() as WeaponBuff);
+            // TODO
+            // GameManager.Instance.GetAndroid().GetTowerManager().
+            // TowerEffect(m_module, , m_buff.CreateCopy() as WeaponBuff);
         }
 
         protected override void OnReset()

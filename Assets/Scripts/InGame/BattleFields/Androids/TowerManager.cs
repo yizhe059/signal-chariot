@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SetUps;
 using InGame.Boards.Modules;
 using InGame.Boards.Modules.ModuleBuffs;
+using InGame.BattleFields.Bullets;
 
 namespace InGame.BattleFields.Androids
 {
@@ -43,21 +44,12 @@ namespace InGame.BattleFields.Androids
             m_towers.Clear();
         }
 
-        public void TowerEffect(Module module)
+        public void TowerEffect(Module module, BulletType type, WeaponBuff buff)
         {
             foreach(Tower tower in m_towers)
             {
                 if(module == tower.module)
-                    tower.Effect();
-            }
-        }
-
-        public void TowerEffect(Module module, WeaponBuff buff)
-        {
-            foreach(Tower tower in m_towers)
-            {
-                if(module == tower.module)
-                    tower.Effect(buff);
+                    tower.Effect(buff, type);
             }
         }
     }

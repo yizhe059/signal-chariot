@@ -245,6 +245,10 @@ PrefabInstance:
       propertyPath: buffMask
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: category
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_Name
       value: Charging Cannon
@@ -334,15 +338,7 @@ MonoBehaviour:
     shootInterval: 0
     shootCount: 0
     bulletCount: 0
-    bulletSetUp:
-      name: 
-      sprite: {fileID: 0}
-      size: 0
-      damage: 0
-      health: 0
-      speed: 0
-      lifeTime: 0
-      moveType: 0
+    bulletType: 0
 --- !u!114 &389777221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1284,15 +1280,7 @@ MonoBehaviour:
     shootInterval: 0.05
     shootCount: 2
     bulletCount: 1
-    bulletSetUp:
-      name: 
-      sprite: {fileID: 21300000, guid: 494c2058d61db45a89aa442c3fa2acfb, type: 3}
-      size: 1
-      damage: 1
-      health: -1
-      speed: 100
-      lifeTime: 4
-      moveType: 0
+    bulletType: 1
 --- !u!1 &993809584 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9075689799680712317, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}

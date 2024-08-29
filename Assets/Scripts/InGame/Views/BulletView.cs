@@ -97,6 +97,7 @@ namespace InGame.Views
                 case Constants.ANDROID_LAYER:
                     break;
                 default:
+                    Debug.Log("collision");
                     foreach(var effect in m_bullet.collisionEffects)
                         effect.Trigger(other.gameObject);
                     break;
