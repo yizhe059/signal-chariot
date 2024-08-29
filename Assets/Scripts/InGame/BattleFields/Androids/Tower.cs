@@ -86,19 +86,15 @@ namespace InGame.BattleFields.Androids
         #endregion
 
         #region Effection
-        public void Effect()
+
+        public void Effect(WeaponBuff buff, BulletType type)
         {
-            m_towerView.Shoot(WeaponBuff.CreateEmptyBuff(ModuleBuffType.Weapon) as WeaponBuff);
+            m_towerView.Shoot(buff, type);
         }
 
-        public void Effect(WeaponBuff buff)
+        public IEnumerator ShootBullet(WeaponBuff buff, BulletType type)
         {
-            m_towerView.Shoot(buff);
-        }
-
-        public IEnumerator ShootBullet(WeaponBuff buff)
-        {
-            BulletSetUp bulletSetUp = m_bulletManager.GenerateBulletSetUp(m_bulletType, buff); // input bulletType & buff
+            BulletSetUp bulletSetUp = m_bulletManager.GenerateBulletSetUp(type, buff); // input bulletType & buff
             
             float shootCount = m_shootCount.value + buff.numShotsFlatBuff;
             float bulletCount = m_bulletCount.value + buff.numBulletsPerShotFlatBuff;
