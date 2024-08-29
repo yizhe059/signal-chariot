@@ -21,12 +21,14 @@ namespace SetUps
         public float lifeTime;
 
         public MoveType moveType;
-        public List<Effect> collisionEffects = new();
-        public List<Effect> destructionEffects = new();
+        
+        [SerializeReference] public List<Effect> collisionEffects;
+        [SerializeReference] public List<Effect> destructionEffects;
 
         public BulletSetUp()
         {
-            
+            collisionEffects = new();
+            destructionEffects = new();
         }
         
         public BulletSetUp(BulletSetUp other)

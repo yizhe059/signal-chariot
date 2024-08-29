@@ -494,7 +494,6 @@ namespace InGame.BattleFields.Enemies
                 m_enemies.Add(enemyBlk);
                 
                 m_numOfEnemies++;
-                //Debug.Log($"Enemy Spawn. ID: {m_ID}, total: {m_enemies.Count}, {m_timer}");
             }
         }
 

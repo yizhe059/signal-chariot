@@ -54,10 +54,7 @@ namespace InGame.UI
                 panelPosition.y = screenSize.y * Y_DISPLAY_THRESHOLD;
 
             m_panel.style.left = new Length(panelPosition.x, LengthUnit.Pixel);
-            m_panel.style.top = new Length(panelPosition.y, LengthUnit.Pixel);
-
-            // Debug.Log("mouse position " + position.x + ", " + position.y);
-            // Debug.Log("panel position " + panelPosition.x + ", " + panelPosition.y);
+            m_panel.style.top = new Length(panelPosition.y, LengthUnit.Pixel);        
         }
 
         public void Hide()

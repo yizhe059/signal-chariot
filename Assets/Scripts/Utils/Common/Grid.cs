@@ -78,16 +78,14 @@ namespace Utils.Common
                 Debug.LogError("Array is null");
                 return default(T);
             }
-            if (m_gridArray.Length == m_width) Debug.LogError($"Length does not match {m_gridArray.Length}");
+
+            if (m_gridArray.Length == m_width) 
+                Debug.LogError($"Length does not match {m_gridArray.Length}");
+            
             if ((x >= 0 && x < m_width) && (y >= 0 && y < m_height))
-            {
                 return m_gridArray[x, y];
-            }
             else
-            {
-                //Debug.Log($"Grid Out of Bound: {x}, {y}");
                 return default(T);
-            }
         }
 
         public T GetValue(Vector3 worldPosition)

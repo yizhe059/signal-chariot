@@ -45,11 +45,6 @@ namespace Editors.Bullets
                 setUp.bulletLibrary.Add(bulletSetUp);
             }
 
-            foreach(var bul in setUp.bulletLibrary)
-            {
-                Debug.Log("collide effect count in setUp " + bul.collisionEffects.Count);
-            }
-
             Debug.Log("Save Asset");
         }
     }

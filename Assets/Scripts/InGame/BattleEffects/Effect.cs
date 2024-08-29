@@ -21,6 +21,7 @@ namespace InGame.BattleEffects
         Destruction
     }
 
+    [System.Serializable]
     public abstract class Effect
     {
         protected int m_count;

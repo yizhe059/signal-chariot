@@ -17,9 +17,6 @@ namespace InGame.BattleFields.Enemies
             m_levelsSetUp = setUp.enemySpawnLevels;
             m_wavesSetUp = setUp.enemySpawnWaves;
             m_groupsSetUp = setUp.enemySpawnGroups;
-            
-            // Debug.Log($"{m_levelsSetUp.Count}, {m_wavesSetUp.Count}, {m_groupsSetUp.Count}");
- 
         }
 
         public bool GetLevelSetUp(int levelID, out EnemyPlainLevelBlk blk)

@@ -85,10 +85,6 @@ namespace InGame.Cores
             m_androidView = m_android.androidView;
 
             m_bulletLib = new();
-            foreach(var bul in m_setUp.bulletLibrary)
-            {
-                Debug.Log("collision effects in lib " + bul.collisionEffects.Count);
-            }
             m_bulletLib.Init(m_setUp.bulletLibrary);
         }
 
