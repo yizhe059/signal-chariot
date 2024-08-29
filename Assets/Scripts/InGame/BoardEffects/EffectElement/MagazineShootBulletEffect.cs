@@ -38,7 +38,9 @@ namespace InGame.Effects.EffectElement
             while (m_bullets.Count != 0)
             {
                 var type = m_bullets.Dequeue();
-                Debug.Log($"Shoot Bullet： {type}");
+                
+                var bulletType = Signal.SignalTypeToBulletType(type);
+                Debug.Log($"Shoot Bullet： {bulletType}");
                 //towerManager.TowerEffect(m_module, m_weaponBuff.CreateCopy() as WeaponBuff);
             }
         }

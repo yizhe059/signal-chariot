@@ -1,4 +1,5 @@
 ﻿using System;
+using InGame.BattleFields.Bullets;
 using InGame.Boards.Modules;
 using InGame.Views;
 using SetUps;
@@ -165,6 +166,17 @@ namespace InGame.Boards.Signals
                 _ => 0
             };
             
+        }
+
+        public static BulletType SignalTypeToBulletType(SignalType type)
+        {
+            return type switch
+            {
+                SignalType.Normal => BulletType.Basic,
+                SignalType.Penetrate => BulletType.Laser,
+                SignalType.Mine => BulletType.Landmine,
+                _ => BulletType.Basic
+            };
         }
     }
 }

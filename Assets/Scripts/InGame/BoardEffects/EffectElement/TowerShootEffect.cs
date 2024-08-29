@@ -1,4 +1,5 @@
 ﻿using InGame.Boards.Modules.ModuleBuffs;
+using InGame.Boards.Signals;
 using InGame.Cores;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -55,7 +56,8 @@ namespace InGame.Effects.EffectElement
             
             if (m_isOverHeated) return;
 
-            var signalType = blackBoard.signal.type; 
+            var signalType = blackBoard.signal.type;
+            var bulletType = Signal.SignalTypeToBulletType(signalType);
             
             AddHeat(heatCostPerShot);
             GameManager.Instance.GetAndroid().GetTowerManager().
