@@ -37,6 +37,10 @@ namespace InGame.BattleFields.Common
 
         public void Pickup()
         {
+            int curr = (int)GameManager.Instance.GetAndroid().Get(LimitedPropertyType.Mod, true);
+            int max = (int)GameManager.Instance.GetAndroid().Get(LimitedPropertyType.Mod, false);
+            if(curr >= max) return; 
+
             GameManager.Instance.GetAndroid().Increase(LimitedPropertyType.Mod, m_quality, true);
             this.Die();
         }

@@ -200,13 +200,13 @@ MonoBehaviour:
       x: 2
       y: 0
     moduleID: 11
-    moduleName: PenetrationBullet
+    moduleName: Laser Bullet Source
     orientation: 0
   - pos:
       x: 3
       y: 0
-    moduleID: 11
-    moduleName: PenetrationBullet
+    moduleID: 14
+    moduleName: Landmine Bullet Source
     orientation: 0
   - pos:
       x: 5

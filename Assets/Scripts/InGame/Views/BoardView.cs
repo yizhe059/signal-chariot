@@ -263,7 +263,10 @@ namespace InGame.Views
                     prefab = Resources.Load<SignalView>("Prefabs/Signals/NormalSignalView");
                     break;
                 case SignalType.Penetrate:
-                    prefab = Resources.Load<SignalView>("Prefabs/Signals/PenetrateSignalView");
+                    prefab = Resources.Load<SignalView>("Prefabs/Signals/LaserSignalView");
+                    break;
+                case SignalType.Mine:
+                    prefab = Resources.Load<SignalView>("Prefabs/Signals/MineSignalView");
                     break;
                 default:
                     Debug.LogError($"No prefab for signal type {signal.type}, using normal signal prefab");

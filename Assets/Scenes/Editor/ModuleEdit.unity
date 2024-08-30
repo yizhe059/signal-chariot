@@ -333,11 +333,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setUp:
     sprite: {fileID: 0}
-    damageMultipler: 0
-    seekInterval: 0
-    shootInterval: 0
-    shootCount: 0
-    bulletCount: 0
+    damageMultipler: 1
+    seekInterval: 1
+    shootInterval: 1
+    shootCount: 1
+    bulletCount: 1
     bulletType: 0
 --- !u!114 &389777221
 MonoBehaviour:
@@ -835,11 +835,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: desc
-      value: Generate a penetration bullet signal when energy signal passes through.
+      value: Generate a laser bullet signal when energy signal passes through.
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: name
-      value: PenetrationBullet
+      value: Laser Bullet Source
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: prefab
@@ -851,7 +851,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_Name
-      value: PenetrationBullet
+      value: Laser Bullet Source
       objectReference: {fileID: 0}
     - target: {fileID: 6579473263901316917, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1550,6 +1550,110 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6579473263901316917, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
   m_PrefabInstance: {fileID: 5439609511674378703}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1381565905
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1624054408}
+    m_Modifications:
+    - target: {fileID: 2107736309079604036, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: energyConsumption
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: desc
+      value: Generate a landmine bullet signal when energy signal passes through.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: name
+      value: Landmine Bullet Source
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 2049807452291936642, guid: 1f31f5835809cb145be162bca626cb0b, type: 3}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: category
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: m_Name
+      value: Landmine Bullet Source
+      objectReference: {fileID: 0}
+    - target: {fileID: 6579473263901316917, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 6579473263901316917, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 6579473263901316917, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6579473263901316917, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6579473263901316917, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6579473263901316917, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6579473263901316917, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6579473263901316917, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6579473263901316917, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6579473263901316917, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9075689799680712317, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1381565908}
+  m_SourcePrefab: {fileID: 100100000, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+--- !u!4 &1381565906 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6579473263901316917, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+  m_PrefabInstance: {fileID: 1381565905}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1381565907 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9075689799680712317, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+  m_PrefabInstance: {fileID: 1381565905}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1381565908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381565907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621857106d624656875b720ef32c83df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 8
+  numOfBullets: 1
 --- !u!1001 &1577870977
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1704,6 +1808,7 @@ Transform:
   - {fileID: 761649093}
   - {fileID: 389777217}
   - {fileID: 780748520}
+  - {fileID: 1381565906}
   - {fileID: 1194270909}
   - {fileID: 1801328677}
   m_Father: {fileID: 377390791}
@@ -2173,11 +2278,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: desc
-      value: Add 1 defence when it places at edge slots.
+      value: Add 1 defense when it places at edge slots.
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: name
-      value: Extra Defence
+      value: Extra Defense
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: prefab
@@ -2189,7 +2294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_Name
-      value: Extra Defence
+      value: Extra Defense
       objectReference: {fileID: 0}
     - target: {fileID: 6117275396622674993, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: requirements.Array.size

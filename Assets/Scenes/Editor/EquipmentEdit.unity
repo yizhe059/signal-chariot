@@ -263,10 +263,10 @@ MonoBehaviour:
   name: Landmine
   type: 2
   sprite: {fileID: 21300000, guid: 494c2058d61db45a89aa442c3fa2acfb, type: 3}
-  size: 5
+  size: 1.5
   health: -1
-  speed: 100
-  lifeTime: 4
+  speed: 0
+  lifeTime: 2
   moveType: 4
 --- !u!1 &1665733254
 GameObject:
@@ -360,7 +360,7 @@ MonoBehaviour:
   size: 3
   health: -1
   speed: 100
-  lifeTime: 4
+  lifeTime: 6
   moveType: 0
 --- !u!1 &1953216936
 GameObject:
