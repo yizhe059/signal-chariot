@@ -82,7 +82,8 @@ namespace InGame.BattleFields.Bullets
             currDirection.x = Mathf.Cos(theta) * direction.x - Mathf.Sin(theta) * direction.y;
             currDirection.y = Mathf.Sin(theta) * direction.x + Mathf.Cos(theta) * direction.y;
             currDirection.z = direction.z;
- 
+
+            m_bulletTransform.rotation = Quaternion.LookRotation(currDirection);
             m_velocity = Constants.SPEED_MULTIPLIER * m_bullet.speed.value * 
                         Time.deltaTime * currDirection.normalized;
         }
@@ -119,6 +120,7 @@ namespace InGame.BattleFields.Bullets
         {
             Vector3 target = m_bulletManager.GetBatchInfo(m_batchIdx);
             Vector3 direction = (target - m_bulletTransform.position).normalized;
+            m_bulletTransform.rotation = Quaternion.LookRotation(direction);
             m_velocity = Constants.SPEED_MULTIPLIER * m_bullet.speed.value * 
                         Time.deltaTime * direction;
         }
@@ -168,6 +170,7 @@ namespace InGame.BattleFields.Bullets
             if(m_target == null) return;
             Vector3 direction = m_target.position - m_bulletTransform.position;
             direction.z = Constants.BULLET_DEPTH;
+            m_bulletTransform.rotation = Quaternion.LookRotation(direction);
             Vector3 velocity = Constants.SPEED_MULTIPLIER * m_bullet.speed.value * 
                                 Time.deltaTime * direction.normalized;
             m_bulletTransform.Translate(velocity, Space.World);
