@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using InGame.Cores;
 using InGame.Effects;
 using InGame.Views;
 using SetUps;
@@ -26,26 +27,26 @@ namespace InGame.Boards.Signals
             public bool isEmpty;
         }
 
-        private float m_timer;
+        private GeneralSignalController m_generalController;
         private List<SignalPack> m_signals = new List<SignalPack>();
         private List<SetUpPack> m_setUpQueues = new List<SetUpPack>();
         private Grid<List<int>> m_signalDistributions;
         
-        private bool m_isOn = false;
         private bool m_isTest = false;
-        private bool m_halfCheck = false;
         
         private Board m_board;
         private BoardView m_boardView;
 
-        public static SignalController CreateSignalController(Board board, BoardView boardView)
+        public static SignalController CreateSignalController(Board board, BoardView boardView, 
+            GeneralSignalController parent)
         {
             return new SignalController
             {
                 m_board = board, 
                 m_boardView = boardView,
                 m_signalDistributions = new Grid<List<int>>(board.width, board.height, 1f, Vector3.zero,
-                    ((grid, x, y) => new List<int>()))
+                    ((grid, x, y) => new List<int>())),
+                m_generalController = parent
             }; 
         }
 
@@ -75,7 +76,6 @@ namespace InGame.Boards.Signals
                
         public void Reset()
         {
-            m_timer = Constants.SIGNAL_MOVING_DURATION;
             foreach (var signalPack in m_signals)
             {
                 if (signalPack == null) continue;
@@ -85,9 +85,7 @@ namespace InGame.Boards.Signals
 
         public void Start()
         {
-            m_isOn = true;
             m_isTest = false;
-            m_timer = Constants.SIGNAL_MOVING_DURATION;
             foreach (var signalPack in m_signals)
             {
                 if (signalPack == null) continue;
@@ -97,7 +95,6 @@ namespace InGame.Boards.Signals
         }
         public void Stop()
         {
-            m_isOn = false;
             m_isTest = false;
             for (int i = 0; i < m_signals.Count; i++)
             {
@@ -108,9 +105,7 @@ namespace InGame.Boards.Signals
 
         public void TestStart()
         {
-            m_isOn = true;
             m_isTest = true;
-            m_timer = Constants.SIGNAL_MOVING_DURATION;
             foreach (var signalPack in m_signals)
             {
                 if (signalPack == null) continue;
@@ -122,7 +117,6 @@ namespace InGame.Boards.Signals
 
         public void TestStop()
         {
-            m_isOn = false;
             m_isTest = false;
             
             for (int i = 0; i < m_signals.Count; i++)
@@ -143,44 +137,9 @@ namespace InGame.Boards.Signals
         }
         
         #endregion
-
-        public void Update(float deltaTime, float currentTime)
-        {
-            if (!m_isOn) return;
-
-            m_timer += deltaTime;
-
-            if (m_timer >= Constants.SIGNAL_MOVING_DURATION / 2 && !m_halfCheck)
-            {
-                m_halfCheck = true;
-                FuseBorderSignals();
-                RemoveSignals();
-                
-            }
-
-            while (m_timer >= Constants.SIGNAL_MOVING_DURATION)
-            {
-                if (m_timer >= Constants.SIGNAL_MOVING_DURATION / 2 && !m_halfCheck)
-                {
-                    m_halfCheck = true;
-                    FuseBorderSignals();
-                    RemoveSignals();
-
-                }
-                
-                m_timer -= Constants.SIGNAL_MOVING_DURATION;
-                MoveSignals();
-                FuseOppositeDirSignals();
-                TriggerSignals(deltaTime, currentTime);
-                AddSignals();
-                FuseOneDirSignals();
-                RemoveSignals();
-                m_halfCheck = false;
-            }
-        }
         
         #region pipeline functions
-        private void MoveSignals()
+        public void MoveSignals()
         {
             for (int i = 0; i < m_signals.Count; i++)
             {
@@ -208,7 +167,7 @@ namespace InGame.Boards.Signals
             }
         }
 
-        private void FuseOneDirSignals()
+        public void FuseOneDirSignals()
         {
             for (int x = 0; x < m_signalDistributions.width; x++)
             {
@@ -223,7 +182,7 @@ namespace InGame.Boards.Signals
             }
         }
         
-        private void FuseBorderSignals()
+        public void FuseBorderSignals()
         {
             for (int x = 0; x < m_signalDistributions.width - 1; x++)
             {
@@ -236,12 +195,12 @@ namespace InGame.Boards.Signals
             }
         }
         
-        private void AddSignals()
+        public void AddSignals()
         {
             foreach (var pack in m_setUpQueues)
             {
-                if (pack.isEmpty) continue;
                 
+                if (pack.isEmpty) continue;
                 if (pack.delay <= 0)
                 {
                     AddSignal(pack.setUp);
@@ -254,7 +213,7 @@ namespace InGame.Boards.Signals
             }
         }
 
-        private void TriggerSignals(float deltaTime, float currentTime)
+        public void TriggerSignals(float deltaTime, float currentTime)
         {
             for (int i = 0; i < m_signals.Count; i++)
             {
@@ -266,7 +225,7 @@ namespace InGame.Boards.Signals
         }
         
         
-        private void RemoveSignals()
+        public void RemoveSignals()
         {
             for (int i = 0; i < m_signals.Count; i++)
             {
@@ -495,7 +454,7 @@ namespace InGame.Boards.Signals
             m_signals[id] = signalPack;
             m_boardView.CreateSignalView(signalPack.signal);
             m_signalDistributions.GetValue(setUp.pos.x, setUp.pos.y).Add(id);
-            if (m_isOn) signal.Start();
+            if (m_generalController.isOn) signal.Start();
             else signal.Stop();
 
             return id;

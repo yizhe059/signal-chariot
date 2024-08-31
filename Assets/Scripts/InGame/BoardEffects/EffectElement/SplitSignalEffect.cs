@@ -20,7 +20,8 @@ namespace InGame.Effects.EffectElement
             
             var count = splittingDirections.Count;
             if (splittingDirections.Count == 0) return;
-            
+
+            var signalType = signal.type;
             int energy = signal.energy;
             signal.ConsumeEnergy(energy);
             
@@ -38,8 +39,9 @@ namespace InGame.Effects.EffectElement
                 {
                     dir = worldDir,
                     energy = energyPerSignal,
-                    pos = blackBoard.pos
-                });
+                    pos = blackBoard.pos,
+                    
+                }, 0, signalType);
             }
         }
 
