@@ -18,12 +18,12 @@ namespace InGame.BattleEffects
         public override void Trigger(GameObject go)
         {
             if (!IsActive) return;
-            Debug.Log("is active!");
+            Debug.Log("random once damage effect active!");
             Vector3 center = go.transform.position;
             Collider[] colliders = Physics.OverlapSphere(center, m_radius);
             foreach (var collider in colliders)
             {
-                Debug.Log("meet collider!");
+                Debug.Log("meet collider ");
                 IDamageable damageable = collider.GetComponent<IDamageable>();
                 damageable?.TakeDamage(m_damage);
             }
