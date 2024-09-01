@@ -9,7 +9,10 @@ namespace Editors.Effects
     {
         public int maxUses;
         public SignalEffects.EnergyConsumptionMethod consumptionMethod = SignalEffects.EnergyConsumptionMethod.Fixed;
+        [Min(0)]
         public int energyConsumption;
+        [Min(0)]
+        public int maxStoredPerTrigger;
         public float coolDown;
         public SignalType mask = SignalType.Normal;
         

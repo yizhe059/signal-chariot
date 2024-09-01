@@ -110,14 +110,16 @@ namespace InGame.Effects
         private EnergyConsumptionMethod m_consumptionMethod = EnergyConsumptionMethod.Fixed;
         private int m_energyConsumption;
         private int m_storedEnergy = 0;
+        private int m_maxStoredPerTrigger = 0;
         
         private Time m_coolDown;
         private Time m_prevTriggerTime;
 
         private SignalType m_signalMask;
 
+        #region Constructor
         public static SignalEffects CreateSignalEffects(List<Effect> signalEffects, int maxUses,
-        EnergyConsumptionMethod consumptionMethod, int energyConsumption, float coolDown, SignalType mask)
+        EnergyConsumptionMethod consumptionMethod, int energyConsumption, int maxStoredPerTrigger, float coolDown, SignalType mask)
         {
             return new SignalEffects
             {
@@ -126,6 +128,7 @@ namespace InGame.Effects
                 m_remainUses = maxUses,
                 m_consumptionMethod = consumptionMethod,
                 m_energyConsumption = energyConsumption,
+                m_maxStoredPerTrigger = maxStoredPerTrigger,
                 m_coolDown = new Time(coolDown),
                 m_prevTriggerTime = new Time(-coolDown),
                 m_signalMask = mask
@@ -133,7 +136,7 @@ namespace InGame.Effects
         }
         
         public static SignalEffects CreateSignalEffects(List<Effect> signalEffects, int maxUses, EnergyConsumptionMethod consumptionMethod,
-            int energyConsumption, Time coolDown, SignalType mask)
+            int energyConsumption, int maxStoredPerTrigger, Time coolDown, SignalType mask)
         {
             return new SignalEffects
             {
@@ -142,6 +145,7 @@ namespace InGame.Effects
                 m_remainUses = maxUses,
                 m_consumptionMethod = consumptionMethod,
                 m_energyConsumption = energyConsumption,
+                m_maxStoredPerTrigger = maxStoredPerTrigger,
                 m_coolDown = coolDown,
                 m_prevTriggerTime = -coolDown,
                 m_signalMask = mask
@@ -158,9 +162,10 @@ namespace InGame.Effects
 
 
             return CreateSignalEffects(signalEffects, other.m_maxUses, other.m_consumptionMethod,
-                other.m_energyConsumption, other.m_coolDown, other.m_signalMask);
+                other.m_energyConsumption, other.m_maxStoredPerTrigger, other.m_coolDown, other.m_signalMask);
         }
-
+        #endregion
+        
         public void Trigger(EffectBlackBoard blackBoard)
         {
             var signal = blackBoard.signal;
@@ -205,7 +210,7 @@ namespace InGame.Effects
                 energyUsed = m_energyConsumption;
             }else if (m_consumptionMethod == EnergyConsumptionMethod.Stored)
             {
-                int consumeEnergy = Mathf.Min(m_energyConsumption, signal.energy);
+                int consumeEnergy = Mathf.Min(m_maxStoredPerTrigger, signal.energy);
                 signal.ConsumeEnergy(consumeEnergy);
                 m_storedEnergy += consumeEnergy;
                 if (m_storedEnergy < m_energyConsumption) return;

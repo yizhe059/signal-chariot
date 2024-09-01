@@ -160,7 +160,6 @@ namespace InGame.BattleFields.Androids
         public void Increase(LimitedPropertyType type, float delta, bool isCurrentValue)
         {
             LimitedProperty property = GetLimitedProperty(type);
-            property.current += delta;
             if(isCurrentValue) property.current += delta;
             else property.max += delta;
         }

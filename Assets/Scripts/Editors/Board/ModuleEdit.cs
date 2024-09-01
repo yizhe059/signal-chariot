@@ -66,6 +66,7 @@ namespace Editors.Board
                 coolDown = signalEffectEdits.coolDown,
                 consumptionMethod = signalEffectEdits.consumptionMethod,
                 energyConsumption = signalEffectEdits.energyConsumption,
+                maxStoredPerTrigger = signalEffectEdits.maxStoredPerTrigger,
                 maxUses = signalEffectEdits.maxUses,
                 placingEffects = placingEffectEdits.CreateEffects(),
                 requirements = placingEffectEdits.CreateRequirements(),

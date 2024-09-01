@@ -82,7 +82,7 @@ namespace InGame.BattleFields.Common
             get => m_max;
             set
             {
-                m_max = Mathf.Min(0, value);
+                m_max = Mathf.Max(0, value);
                 onValueChanged.Invoke(m_current, m_max);
             }
         }

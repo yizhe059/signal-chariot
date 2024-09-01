@@ -29,6 +29,7 @@ namespace SetUps
         public int maxUses;
         public SignalEffects.EnergyConsumptionMethod consumptionMethod;
         public int energyConsumption;
+        public int maxStoredPerTrigger;
         public float coolDown;
         public SignalType signalMask;
         #endregion
