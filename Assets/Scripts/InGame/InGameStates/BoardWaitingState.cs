@@ -140,10 +140,9 @@ namespace InGame.InGameStates
                 if (m_prevModule != null)
                 {
                     m_displayManager.UndisplayModule(m_prevModule);
+                    m_currentLookingModule = null;
                     m_prevModule = null;
-                }
-
-                if (m_currentLookingModule != null)
+                }else
                 {
                     m_displayManager.DisplayModule(m_currentLookingModule);
                     m_prevModule = m_currentLookingModule;

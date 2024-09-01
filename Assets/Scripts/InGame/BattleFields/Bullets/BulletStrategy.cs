@@ -86,7 +86,6 @@ namespace InGame.BattleFields.Bullets
             Vector3 upwardDirection = currDirection;
             upwardDirection.z = 0;
             m_bulletTransform.rotation = Quaternion.LookRotation(Vector3.forward, upwardDirection);
-            Debug.Log(m_bulletTransform.rotation);
             m_velocity = Constants.SPEED_MULTIPLIER * m_bullet.speed.value * 
                         Time.deltaTime * currDirection.normalized;
         }
