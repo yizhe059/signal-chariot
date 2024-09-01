@@ -6,7 +6,9 @@ namespace InGame.BattleEffects
 {
     public class RangeOnceDamageEffect : Effect
     {
+        [SerializeField]
         private float m_radius;
+        [SerializeField]
         private int m_damage;
 
         public RangeOnceDamageEffect(float radius, int damage) : base(1)
@@ -14,6 +16,8 @@ namespace InGame.BattleEffects
             this.m_radius = radius;
             this.m_damage = damage;
         }
+        
+        private RangeOnceDamageEffect(){}
 
         public override void Trigger(GameObject go)
         {
@@ -28,6 +32,15 @@ namespace InGame.BattleEffects
                 damageable?.TakeDamage(m_damage);
             }
             m_count--;
+        }
+
+        protected override Effect OnCreateCopy()
+        {
+            return new RangeOnceDamageEffect
+            {
+                m_radius = m_radius,
+                m_damage = m_damage
+            };
         }
     }
 }

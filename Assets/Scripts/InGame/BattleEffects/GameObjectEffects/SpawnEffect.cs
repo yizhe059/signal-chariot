@@ -6,12 +6,14 @@ namespace InGame.BattleEffects
 {
     public class SpawnEffect : Effect
     {
-        private readonly GameObject[] m_objectsToSpawn;
+        private GameObject[] m_objectsToSpawn;
 
         public SpawnEffect(GameObject[] objectsToSpawn) : base(1)
         {
             this.m_objectsToSpawn = objectsToSpawn;
         }
+        
+        private SpawnEffect(){}
 
         public override void Trigger(GameObject go)
         {
@@ -24,6 +26,14 @@ namespace InGame.BattleEffects
             // dieable?.Die();
 
             m_count--;
+        }
+
+        protected override Effect OnCreateCopy()
+        {
+            return new SpawnEffect
+            {
+                m_objectsToSpawn = m_objectsToSpawn
+            };
         }
     }
 }

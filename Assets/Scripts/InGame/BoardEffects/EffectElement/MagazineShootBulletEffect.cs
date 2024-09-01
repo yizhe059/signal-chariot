@@ -60,10 +60,9 @@ namespace InGame.Effects.EffectElement
         {
             var signal = blackBoard.signal;
             
-            while(m_bullets.Count < magazineCapacity + m_magazineBuff.magazineCapacityBuff && signal.energy > 0)
+            if(m_bullets.Count < magazineCapacity + m_magazineBuff.magazineCapacityBuff)
             {
                 m_bullets.Enqueue(signal.type);
-                signal.ConsumeEnergy(1);
                 Debug.Log($"Load Bullet {signal.type}");
             }
             

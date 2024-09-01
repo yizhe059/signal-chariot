@@ -5,7 +5,9 @@ namespace InGame.BattleEffects
 {
     public class RangeContinuousDamageEffect : Effect
     {
+        [SerializeField]
         private float m_radius;
+        [SerializeField]
         private int m_damage;
 
         public RangeContinuousDamageEffect(float radius, int damage, 
@@ -14,7 +16,9 @@ namespace InGame.BattleEffects
             this.m_radius = radius;
             this.m_damage = damage;
         }
-
+        
+        private RangeContinuousDamageEffect(){}
+        
         public override void Trigger(GameObject go)
         {
             if (!IsActive) return;
@@ -27,6 +31,15 @@ namespace InGame.BattleEffects
             }
             m_count--;
             // TODO: Continuous m_damage logic here (e.g., wait for the interval to trigger again)
+        }
+
+        protected override Effect OnCreateCopy()
+        {
+            return new RangeContinuousDamageEffect
+            {
+                m_radius = m_radius,
+                m_damage = m_damage
+            };
         }
     }
 }

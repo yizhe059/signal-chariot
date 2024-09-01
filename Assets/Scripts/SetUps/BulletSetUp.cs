@@ -44,8 +44,18 @@ namespace SetUps
             lifeTime = other.lifeTime;
 
             moveType = other.moveType;
-            collisionEffects = other.collisionEffects;
-            destructionEffects = other.destructionEffects;
+
+            collisionEffects = new List<Effect>();
+            foreach (var effect in other.collisionEffects)
+            {
+                collisionEffects.Add(effect.CreateCopy());
+            }
+
+            destructionEffects = new List<Effect>();
+            foreach (var effect in other.destructionEffects)
+            {
+                destructionEffects.Add(effect.CreateCopy());
+            }
         }
     }
 }

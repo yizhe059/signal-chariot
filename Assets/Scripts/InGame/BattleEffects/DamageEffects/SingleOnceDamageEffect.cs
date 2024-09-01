@@ -5,12 +5,15 @@ namespace InGame.BattleEffects
 {
     public class SingleOnceDamageEffect : Effect
     {
+        [SerializeField]
         protected int m_damage;
 
         public SingleOnceDamageEffect(int damage) : base(1)
         {
             this.m_damage = damage;
         }
+        
+        private SingleOnceDamageEffect(){}
 
         public override void Trigger(GameObject go)
         {
@@ -19,6 +22,14 @@ namespace InGame.BattleEffects
             Debug.Log("active");
             IDamageable damageable = go.GetComponent<IDamageable>();
             damageable?.TakeDamage(m_damage);
+        }
+
+        protected override Effect OnCreateCopy()
+        {
+            return new SingleOnceDamageEffect()
+            {
+                m_damage = m_damage
+            };
         }
     }
 }

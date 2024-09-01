@@ -5,6 +5,7 @@ namespace InGame.BattleEffects
 {
     public class SingleContinuousDamageEffect : Effect
     {
+        [SerializeField]
         private int m_damage;
 
         public SingleContinuousDamageEffect(int damage, float duration, float interval) : 
@@ -12,6 +13,8 @@ namespace InGame.BattleEffects
         {
             this.m_damage = damage;
         }
+        
+        private SingleContinuousDamageEffect(){}
 
         public override void Trigger(GameObject go)
         {
@@ -20,6 +23,14 @@ namespace InGame.BattleEffects
             damageable?.TakeDamage(m_damage);
             m_count--;
             // TODO: Continuous m_damage logic here (e.g., wait for the interval to trigger again)
+        }
+
+        protected override Effect OnCreateCopy()
+        {
+            return new SingleContinuousDamageEffect
+            {
+                m_damage = m_damage
+            };
         }
     }
 }
