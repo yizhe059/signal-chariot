@@ -83,7 +83,10 @@ namespace InGame.BattleFields.Bullets
             currDirection.y = Mathf.Sin(theta) * direction.x + Mathf.Cos(theta) * direction.y;
             currDirection.z = direction.z;
 
-            // m_bulletTransform.rotation = Quaternion.LookRotation(currDirection);
+            Vector3 upwardDirection = currDirection;
+            upwardDirection.z = 0;
+            m_bulletTransform.rotation = Quaternion.LookRotation(Vector3.forward, upwardDirection);
+            Debug.Log(m_bulletTransform.rotation);
             m_velocity = Constants.SPEED_MULTIPLIER * m_bullet.speed.value * 
                         Time.deltaTime * currDirection.normalized;
         }
