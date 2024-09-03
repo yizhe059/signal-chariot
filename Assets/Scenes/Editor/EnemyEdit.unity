@@ -175,14 +175,20 @@ MonoBehaviour:
       moduleName: Extra Barrel
     - moduleID: 9
       moduleName: Two Way Signal Splitter
+    - moduleID: 11
+      moduleName: Laser Bullet Source
+    - moduleID: 15
+      moduleName: Extra Health
   - waveID: 1
     moduleRewards:
-    - moduleID: 2
-      moduleName: Signal Rotator
+    - moduleID: 14
+      moduleName: Landmine Bullet Source
     - moduleID: 6
       moduleName: Carbon Block
     - moduleID: 8
       moduleName: Lead Block
+    - moduleID: 16
+      moduleName: Extra Mod
   - waveID: 2
     moduleRewards:
     - moduleID: 2
@@ -193,12 +199,12 @@ MonoBehaviour:
       moduleName: Signal Capacitor
     - moduleID: 2
       moduleName: Signal Rotator
-    - moduleID: 6
-      moduleName: Carbon Block
     - moduleID: 7
       moduleName: Extra Barrel
     - moduleID: 4
-      moduleName: Extra Armor
+      moduleName: Extra Defense
+    - moduleID: 12
+      moduleName: Charging Cannon
   - waveID: 3
     moduleRewards: []
 --- !u!1 &325115585
@@ -395,17 +401,17 @@ MonoBehaviour:
     groups:
     - range:
         start: 0
-        end: 30
+        end: 45
       spawnGroupID: 0
     - range:
-        start: 0
-        end: 30
+        start: 10
+        end: 45
       spawnGroupID: 0
     - range:
         start: 0
         end: 30
       spawnGroupID: 1
-    duration: 30
+    duration: 45
     groupsMustBeat: 
 --- !u!1 &846067235
 GameObject:
