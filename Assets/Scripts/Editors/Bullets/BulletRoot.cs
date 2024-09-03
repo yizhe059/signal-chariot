@@ -6,11 +6,10 @@ using SetUps;
 
 using InGame.BattleEffects;
 
-using Editors.BattleEffects;
-
 using Utils.Common;
 
 #if UNITY_EDITOR
+using Editors.BattleEffects;
 using UnityEditor;
 
 namespace Editors.Bullets
