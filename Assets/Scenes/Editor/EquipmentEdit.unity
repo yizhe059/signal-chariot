@@ -243,7 +243,7 @@ MonoBehaviour:
   effectType: 3
   triggerType: 1
   count: 0
-  damage: 1
+  damage: 2
   duration: 0
   interval: 0
   radius: 3
@@ -359,8 +359,8 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 3b362b8a735364076a358feec9a74534, type: 3}
   size: 3
   health: -1
-  speed: 100
-  lifeTime: 6
+  speed: 150
+  lifeTime: 4
   moveType: 0
 --- !u!1 &1953216936
 GameObject:
