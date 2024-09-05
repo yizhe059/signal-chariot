@@ -1,4 +1,5 @@
-﻿using InGame.Boards.Modules;
+﻿using System;
+using InGame.Boards.Modules;
 using UnityEngine;
 
 namespace InGame.Views
@@ -6,6 +7,17 @@ namespace InGame.Views
     public class ModuleView: MonoBehaviour
     {
         private Module m_module;
+        private Animator m_animator;
+        public void Awake()
+        {
+            m_animator = GetComponent<Animator>();
+        }
+        
+
+        public void PlayAnimation(string animationName)
+        {
+            m_animator.Play(animationName, -1, 0f);
+        }
 
         public void SetWorldPos(Vector3 pos)
         {

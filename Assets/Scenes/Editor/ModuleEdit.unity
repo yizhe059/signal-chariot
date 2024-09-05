@@ -900,7 +900,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 9075689799680712317, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 761649095}
+      addedObject: {fileID: 761649098}
   m_SourcePrefab: {fileID: 100100000, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
 --- !u!4 &761649093 stripped
 Transform:
@@ -912,7 +912,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9075689799680712317, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
   m_PrefabInstance: {fileID: 761649092}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &761649095
+--- !u!114 &761649098
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1900,7 +1900,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 9075689799680712317, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1381565908}
+      addedObject: {fileID: 1381565911}
   m_SourcePrefab: {fileID: 100100000, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
 --- !u!4 &1381565906 stripped
 Transform:
@@ -1912,7 +1912,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9075689799680712317, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
   m_PrefabInstance: {fileID: 1381565905}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1381565908
+--- !u!114 &1381565911
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2670,6 +2670,10 @@ PrefabInstance:
       propertyPath: name
       value: Energy Source
       objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 9073931639319901667, guid: 937a604dc0aff1940bd654b218af17e3, type: 3}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: buffMask
       value: 0
