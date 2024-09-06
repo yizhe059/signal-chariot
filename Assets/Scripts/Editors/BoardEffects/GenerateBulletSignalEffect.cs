@@ -2,7 +2,7 @@
 using InGame.Effects;
 using UnityEngine;
 
-namespace Editors.Effects.CustomEffectTrigger
+namespace Editors.Effects
 {
     public class GenerateBulletSignalEffect: EffectEdit
     {

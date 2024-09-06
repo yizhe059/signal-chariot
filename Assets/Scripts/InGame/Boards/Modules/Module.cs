@@ -429,6 +429,14 @@ namespace InGame.Boards.Modules
 
         #endregion
         
+        #region Animation
+        public void PlayAnimation(string animationName)
+        {
+            m_moduleView.PlayAnimation(animationName);
+        }
+        #endregion
+        
+        
         #region static method
         public static Orientation RotateClockwise(Orientation current)
         {

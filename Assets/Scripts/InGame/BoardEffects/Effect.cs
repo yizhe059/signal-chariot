@@ -104,6 +104,8 @@ namespace InGame.Effects
             Stored,
             All
         }
+
+        private Module m_module;
         private List<Effect> m_effects;
         private int m_maxUses, m_remainUses;
 
@@ -232,8 +234,9 @@ namespace InGame.Effects
             if(m_maxUses != -1) m_remainUses--;
 
             m_prevTriggerTime = time;
-
             blackBoard.energyUsed = energyUsed;
+            
+            m_module.PlayAnimation("TriggerAnimation");
             foreach (var effect in m_effects)
             {
                 effect.Trigger(blackBoard);
@@ -266,6 +269,7 @@ namespace InGame.Effects
         
         public void SetModule(Module module)
         {
+            m_module = module;
             foreach(var effect in m_effects) effect.SetModule(module);
         }
     }
