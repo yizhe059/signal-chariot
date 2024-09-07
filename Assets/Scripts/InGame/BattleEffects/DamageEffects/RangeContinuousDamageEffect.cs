@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils;
 using Utils.Common;
 
 namespace InGame.BattleEffects
@@ -26,6 +27,7 @@ namespace InGame.BattleEffects
             Collider[] colliders = Physics.OverlapSphere(center, m_radius);
             foreach (var collider in colliders)
             {
+                if(collider.gameObject.CompareTag(Constants.ANDROID_TAG)) continue;
                 IDamageable damageable = collider.GetComponent<IDamageable>();
                 damageable?.TakeDamage(m_damage);
             }

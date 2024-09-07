@@ -532,7 +532,7 @@ MonoBehaviour:
   - name: "\u767D\u8840\u7403"
     maxHealth: 4
     defense: 0
-    attack: 2
+    attack: 1
     attackDuration: 2
     attackRadius: 0.2
     speed: 15
@@ -542,7 +542,7 @@ MonoBehaviour:
   - name: "\u767D\u8840\u7403\u9886\u961F"
     maxHealth: 10
     defense: 0
-    attack: 3
+    attack: 2
     attackDuration: 1.5
     attackRadius: 0.2
     speed: 10
@@ -633,7 +633,7 @@ MonoBehaviour:
       - waveID: 0
         moduleRewards: 0100000007000000090000000b0000000f000000
       - waveID: 1
-        moduleRewards: 0e000000060000000800000010000000
+        moduleRewards: 0e00000006000000080000001000000001000000
       - waveID: 2
         moduleRewards: 02000000050000000a0000000200000007000000040000000c000000
       - waveID: 3

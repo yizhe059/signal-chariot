@@ -72,19 +72,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2357851555678894876, guid: 1736ed262d4c17445b4665d042388a63, type: 3}
       propertyPath: m_Name
-      value: Armor
+      value: ExtraArmor
       objectReference: {fileID: 0}
     - target: {fileID: 6567514327051405123, guid: 1736ed262d4c17445b4665d042388a63, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.8625966
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6567514327051405123, guid: 1736ed262d4c17445b4665d042388a63, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6858806
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6567514327051405123, guid: 1736ed262d4c17445b4665d042388a63, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.35113335
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6567514327051405123, guid: 1736ed262d4c17445b4665d042388a63, type: 3}
       propertyPath: m_LocalRotation.w

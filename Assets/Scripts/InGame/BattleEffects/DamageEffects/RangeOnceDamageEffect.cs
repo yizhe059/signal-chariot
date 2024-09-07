@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using Utils;
 using Utils.Common;
 
 namespace InGame.BattleEffects
@@ -22,12 +22,12 @@ namespace InGame.BattleEffects
         public override void Trigger(GameObject go)
         {
             if (!IsActive) return;
-            Debug.Log("random once damage effect active!");
+            
             Vector3 center = go.transform.position;
             Collider[] colliders = Physics.OverlapSphere(center, m_radius);
             foreach (var collider in colliders)
             {
-                Debug.Log("meet collider ");
+                if(collider.gameObject.CompareTag(Constants.ANDROID_TAG)) continue;
                 IDamageable damageable = collider.GetComponent<IDamageable>();
                 damageable?.TakeDamage(m_damage);
             }

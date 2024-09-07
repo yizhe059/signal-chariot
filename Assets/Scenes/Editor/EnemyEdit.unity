@@ -189,6 +189,8 @@ MonoBehaviour:
       moduleName: Lead Block
     - moduleID: 16
       moduleName: Extra Mod
+    - moduleID: 1
+      moduleName: Signal Amplifier
   - waveID: 2
     moduleRewards:
     - moduleID: 2
