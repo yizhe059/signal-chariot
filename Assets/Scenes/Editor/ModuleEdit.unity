@@ -952,11 +952,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: desc
-      value: Add 1 armor when signal passes through.
+      value: 'Armor: +10'
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: name
       value: Extra Armor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: modTag
+      value: 'Charging: store 1 energy when signal passes through'
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: prefab
@@ -965,6 +969,10 @@ PrefabInstance:
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: category
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: function
+      value: Armor +1 when store up to 5 energy
       objectReference: {fileID: 0}
     - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_Name
@@ -1021,6 +1029,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9075689799680712317, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 780748522}
+    - targetCorrespondingSourceObject: {fileID: 1394448028094193207, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 780748524}
   m_SourcePrefab: {fileID: 100100000, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
 --- !u!4 &780748520 stripped
 Transform:
@@ -1045,6 +1056,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delta: 1
+--- !u!1 &780748523 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1394448028094193207, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+  m_PrefabInstance: {fileID: 780748519}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &780748524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780748523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e821273e74e648448286112b932cddc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delta: 10
 --- !u!1 &804244396
 GameObject:
   m_ObjectHideFlags: 0
@@ -1691,6 +1720,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Module 1
   desc: 
+  modTag: 
+  function: 
   category: 3
   prefab: {fileID: -5447537739969293526, guid: 780332fa93134cc499d3148c3d2857d8, type: 3}
   otherPositions:
@@ -2372,6 +2403,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Module 2
   desc: 
+  modTag: 
+  function: 
   category: 3
   prefab: {fileID: 4244946465113611698, guid: 7dfda94a13c9d414db28b5c2e8ea0fac, type: 3}
   otherPositions:

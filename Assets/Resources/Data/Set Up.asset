@@ -26,7 +26,7 @@ MonoBehaviour:
   bulletLibrary:
   - name: Basic
     type: 0
-    sprite: {fileID: 21300000, guid: 494c2058d61db45a89aa442c3fa2acfb, type: 3}
+    sprite: {fileID: 21300000, guid: 3b362b8a735364076a358feec9a74534, type: 3}
     size: 1
     damage: 0
     health: -1
@@ -34,11 +34,11 @@ MonoBehaviour:
     lifeTime: 4
     moveType: 0
     collisionEffects:
-    - rid: 6853769551149006848
+    - rid: 8686676385120911360
     destructionEffects: []
   - name: Laser
     type: 1
-    sprite: {fileID: 21300000, guid: 3b362b8a735364076a358feec9a74534, type: 3}
+    sprite: {fileID: 21300000, guid: 7e9256ed26aff4806b936bb09538a8e5, type: 3}
     size: 3
     damage: 0
     health: -1
@@ -46,8 +46,8 @@ MonoBehaviour:
     lifeTime: 4
     moveType: 0
     collisionEffects:
-    - rid: 6853769551149006849
-    - rid: 6853769551149006850
+    - rid: 8686676385120911361
+    - rid: 8686676385120911362
     destructionEffects: []
   - name: Landmine
     type: 2
@@ -60,7 +60,7 @@ MonoBehaviour:
     moveType: 4
     collisionEffects: []
     destructionEffects:
-    - rid: 6853769551149006851
+    - rid: 8686676385120911363
   boardSetUp:
     width: 7
     height: 7
@@ -129,6 +129,8 @@ MonoBehaviour:
   - name: Energy Source
     desc: Generate a signal  every second to the pointed direction. The generated
       signal has 2 energy points.
+    tag: 
+    function: 
     category: 0
     otherPositions: []
     prefab: {fileID: 9073931639319901667, guid: 937a604dc0aff1940bd654b218af17e3, type: 3}
@@ -144,17 +146,19 @@ MonoBehaviour:
     requirements: []
     hasCustomEffect: 1
     triggerRequirement:
-      rid: 5489045836302647296
+      rid: 8686676406240280576
     customEffects:
-    - rid: 5489045836302647297
+    - rid: 8686676406240280577
   - name: Signal Amplifier
     desc: Add 1 energy point to the signal pass through.
+    tag: 
+    function: 
     category: 0
     otherPositions: []
     prefab: {fileID: 6219216261471928466, guid: ddab373e8e7f09a4c82d8f5654d9c978, type: 3}
     buffMask: 0
     signalEffects:
-    - rid: 5489045836302647298
+    - rid: 8686676406240280578
     maxUses: -1
     consumptionMethod: 0
     energyConsumption: 0
@@ -169,12 +173,14 @@ MonoBehaviour:
     customEffects: []
   - name: Signal Rotator
     desc: Rotate the signal to the pointed direction.
+    tag: 
+    function: 
     category: 0
     otherPositions: []
     prefab: {fileID: 7680782621330569741, guid: 71a7ea6be685de642aef0c89bab4fbd5, type: 3}
     buffMask: 0
     signalEffects:
-    - rid: 5489045836302647299
+    - rid: 8686676406240280579
     maxUses: -1
     consumptionMethod: 0
     energyConsumption: 0
@@ -190,6 +196,8 @@ MonoBehaviour:
   - name: Auto Cannon
     desc: The cannon is triggered when the signal pass through. Each unit  consumes
       1 energy point.
+    tag: 
+    function: 
     category: 1
     otherPositions:
     - x: 1
@@ -197,7 +205,7 @@ MonoBehaviour:
     prefab: {fileID: 1402701477217004034, guid: 17646af2c7a669e49bb57947bbd60d0a, type: 3}
     buffMask: 1
     signalEffects:
-    - rid: 5489045836302647300
+    - rid: 8686676406240280580
     maxUses: -1
     consumptionMethod: 0
     energyConsumption: 1
@@ -205,7 +213,7 @@ MonoBehaviour:
     coolDown: 0
     signalMask: -1
     placingEffects:
-    - rid: 5489045836302647301
+    - rid: 8686676406240280581
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
@@ -213,6 +221,8 @@ MonoBehaviour:
     customEffects: []
   - name: Extra Defense
     desc: Add 1 defense when it places at edge slots.
+    tag: 
+    function: 
     category: 2
     otherPositions: []
     prefab: {fileID: 8876540461052638955, guid: d35de34960652b143a367a5546d1c2ea, type: 3}
@@ -225,15 +235,17 @@ MonoBehaviour:
     coolDown: 0
     signalMask: 1
     placingEffects:
-    - rid: 5489045836302647302
+    - rid: 8686676406240280582
     requirements:
-    - rid: 5489045836302647303
+    - rid: 8686676406240280583
     hasCustomEffect: 0
     triggerRequirement:
       rid: -2
     customEffects: []
   - name: Extra Shot
     desc: Add 1 extra shot to the surrounded weapon.
+    tag: 
+    function: 
     category: 2
     otherPositions: []
     prefab: {fileID: 8708126383134337241, guid: c42566245f2938149af1fc74c1938ed4, type: 3}
@@ -246,7 +258,7 @@ MonoBehaviour:
     coolDown: 0
     signalMask: 1
     placingEffects:
-    - rid: 5489045836302647304
+    - rid: 8686676406240280584
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
@@ -254,6 +266,8 @@ MonoBehaviour:
     customEffects: []
   - name: Carbon Block
     desc: Increase damage to the surrounded weapon.
+    tag: 
+    function: 
     category: 2
     otherPositions: []
     prefab: {fileID: 8388062090847505977, guid: b71e17e3d5185e445bbe70a64c52d9b5, type: 3}
@@ -266,7 +280,7 @@ MonoBehaviour:
     coolDown: 0
     signalMask: 1
     placingEffects:
-    - rid: 5489045836302647305
+    - rid: 8686676406240280585
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
@@ -274,6 +288,8 @@ MonoBehaviour:
     customEffects: []
   - name: Extra Barrel
     desc: Add 2 extra bullets every shot to the weapon it points to.
+    tag: 
+    function: 
     category: 2
     otherPositions: []
     prefab: {fileID: 486613650758552989, guid: b69c4a0d7cd408844bef9f09a55c75e1, type: 3}
@@ -286,7 +302,7 @@ MonoBehaviour:
     coolDown: 0
     signalMask: 1
     placingEffects:
-    - rid: 5489045836302647306
+    - rid: 8686676406240280586
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
@@ -294,12 +310,14 @@ MonoBehaviour:
     customEffects: []
   - name: Lead Block
     desc: Increase the size and slow down the bullets of the surrounded weapons.
+    tag: 
+    function: 
     category: 2
     otherPositions: []
     prefab: {fileID: 730825653244556730, guid: 49d0f8d7babd7e84eb058de10337e464, type: 3}
     buffMask: 0
     signalEffects:
-    - rid: 5489045836302647307
+    - rid: 8686676406240280587
     maxUses: -1
     consumptionMethod: 0
     energyConsumption: 0
@@ -307,7 +325,7 @@ MonoBehaviour:
     coolDown: 0
     signalMask: 1
     placingEffects:
-    - rid: 5489045836302647308
+    - rid: 8686676406240280588
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
@@ -315,12 +333,14 @@ MonoBehaviour:
     customEffects: []
   - name: Two Way Signal Splitter
     desc: Split the signal entered in entrance and output them in the 2 exits
+    tag: 
+    function: 
     category: 0
     otherPositions: []
     prefab: {fileID: 3218698526865631896, guid: 08ecda914fd6a5a4e825ce70006831d9, type: 3}
     buffMask: 0
     signalEffects:
-    - rid: 5489045836302647309
+    - rid: 8686676406240280589
     maxUses: -1
     consumptionMethod: 0
     energyConsumption: 0
@@ -336,12 +356,14 @@ MonoBehaviour:
   - name: Signal Capacitor
     desc: Store all energy point of the entered signal, emit the signal to the pointed
       direction when it stores 3 energy points.
+    tag: 
+    function: 
     category: 0
     otherPositions: []
     prefab: {fileID: 9128623023197033979, guid: 9f5e39c1a3a76b24f9b4621047d50753, type: 3}
     buffMask: 0
     signalEffects:
-    - rid: 5489045836302647310
+    - rid: 8686676406240280590
     maxUses: -1
     consumptionMethod: 1
     energyConsumption: 3
@@ -356,12 +378,14 @@ MonoBehaviour:
     customEffects: []
   - name: Laser Bullet Source
     desc: Generate a laser bullet signal when energy signal passes through.
+    tag: 
+    function: 
     category: 0
     otherPositions: []
     prefab: {fileID: 2049807452291936642, guid: 1f31f5835809cb145be162bca626cb0b, type: 3}
     buffMask: 0
     signalEffects:
-    - rid: 5489045836302647311
+    - rid: 8686676406240280591
     maxUses: -1
     consumptionMethod: 0
     energyConsumption: 1
@@ -376,12 +400,14 @@ MonoBehaviour:
     customEffects: []
   - name: Charging Cannon
     desc: 
+    tag: 
+    function: 
     category: 1
     otherPositions: []
     prefab: {fileID: 6197358729617534202, guid: ce0eb96a9ad87a74b89d40efae5e0bbd, type: 3}
     buffMask: 3
     signalEffects:
-    - rid: 5489045836302647312
+    - rid: 8686676406240280592
     maxUses: -1
     consumptionMethod: 0
     energyConsumption: 1
@@ -389,27 +415,30 @@ MonoBehaviour:
     coolDown: 0
     signalMask: -1
     placingEffects:
-    - rid: 5489045836302647313
+    - rid: 8686676406240280593
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
       rid: -2
     customEffects: []
   - name: Extra Armor
-    desc: Add 1 armor when signal passes through.
+    desc: 'Armor: +10'
+    tag: 'Charging: store 1 energy when signal passes through'
+    function: Armor +1 when store up to 5 energy
     category: 2
     otherPositions: []
     prefab: {fileID: 8876540461052638955, guid: d35de34960652b143a367a5546d1c2ea, type: 3}
     buffMask: 0
     signalEffects:
-    - rid: 5489045836302647314
+    - rid: 8686676406240280594
     maxUses: -1
     consumptionMethod: 1
     energyConsumption: 5
     maxStoredPerTrigger: 1
     coolDown: 0
     signalMask: 1
-    placingEffects: []
+    placingEffects:
+    - rid: 8686676406240280595
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
@@ -417,12 +446,14 @@ MonoBehaviour:
     customEffects: []
   - name: Landmine Bullet Source
     desc: Generate a landmine bullet signal when energy signal passes through.
+    tag: 
+    function: 
     category: 0
     otherPositions: []
     prefab: {fileID: 2049807452291936642, guid: 1f31f5835809cb145be162bca626cb0b, type: 3}
     buffMask: 0
     signalEffects:
-    - rid: 5489045836302647315
+    - rid: 8686676406240280596
     maxUses: -1
     consumptionMethod: 0
     energyConsumption: 1
@@ -437,12 +468,14 @@ MonoBehaviour:
     customEffects: []
   - name: Extra Health
     desc: Add extra health limit, recover when 10 signals passes through
+    tag: 
+    function: 
     category: 1
     otherPositions: []
     prefab: {fileID: 8727443920234290347, guid: ffd896a3e4409f74593d174c845ac28d, type: 3}
     buffMask: 0
     signalEffects:
-    - rid: 5489045836302647316
+    - rid: 8686676406240280597
     maxUses: -1
     consumptionMethod: 1
     energyConsumption: 10
@@ -450,7 +483,7 @@ MonoBehaviour:
     coolDown: 0
     signalMask: 1
     placingEffects:
-    - rid: 5489045836302647317
+    - rid: 8686676406240280598
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
@@ -458,6 +491,8 @@ MonoBehaviour:
     customEffects: []
   - name: Extra Mod
     desc: Add extra mod limit, absorb all mods in screen when 20 signals passes through
+    tag: 
+    function: 
     category: 1
     otherPositions: []
     prefab: {fileID: 8391292637636138931, guid: f51ec83e33c66984997f5d59373d213c, type: 3}
@@ -470,7 +505,7 @@ MonoBehaviour:
     coolDown: 0
     signalMask: 1
     placingEffects:
-    - rid: 5489045836302647318
+    - rid: 8686676406240280599
     requirements: []
     hasCustomEffect: 0
     triggerRequirement:
@@ -478,6 +513,8 @@ MonoBehaviour:
     customEffects: []
   - name: Module 1
     desc: 
+    tag: 
+    function: 
     category: 3
     otherPositions:
     - x: 1
@@ -505,6 +542,8 @@ MonoBehaviour:
     customEffects: []
   - name: Module 2
     desc: 
+    tag: 
+    function: 
     category: 3
     otherPositions:
     - x: 1
@@ -643,29 +682,49 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 5489045836302647296
+    - rid: 8686676385120911360
+      type: {class: SingleOnceDamageEffect, ns: InGame.BattleEffects, asm: Assembly-CSharp}
+      data:
+        m_count: 1
+        m_damage: 1
+    - rid: 8686676385120911361
+      type: {class: SingleOnceDamageEffect, ns: InGame.BattleEffects, asm: Assembly-CSharp}
+      data:
+        m_count: 1
+        m_damage: 1
+    - rid: 8686676385120911362
+      type: {class: PenetrationEffect, ns: InGame.BattleEffects, asm: Assembly-CSharp}
+      data:
+        m_count: -1
+    - rid: 8686676385120911363
+      type: {class: RangeOnceDamageEffect, ns: InGame.BattleEffects, asm: Assembly-CSharp}
+      data:
+        m_count: 1
+        m_radius: 3
+        m_damage: 2
+    - rid: 8686676406240280576
       type: {class: IntervalTimeTriggerRequirement, ns: InGame.Effects.TriggerRequirements, asm: Assembly-CSharp}
       data:
         interval: 1
         canEffectInTest: 1
-    - rid: 5489045836302647297
+    - rid: 8686676406240280577
       type: {class: SignalGenerationEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         signalStrength: 2
-    - rid: 5489045836302647298
+    - rid: 8686676406240280578
       type: {class: EnergyAmplifyEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         amplifiedAmount: 1
-    - rid: 5489045836302647299
+    - rid: 8686676406240280579
       type: {class: SignalDirectionChangeEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data: 
-    - rid: 5489045836302647300
+    - rid: 8686676406240280580
       type: {class: TowerShootEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         heatGauge: 0.001
         dissipationRate: 0
         heatCostPerShot: 0
-    - rid: 5489045836302647301
+    - rid: 8686676406240280581
       type: {class: PlacingTowerEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         setUp:
@@ -676,14 +735,14 @@ MonoBehaviour:
           shootCount: 2
           bulletCount: 1
           bulletType: 0
-    - rid: 5489045836302647302
+    - rid: 8686676406240280582
       type: {class: ChangeDefenseEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         delta: 1
-    - rid: 5489045836302647303
+    - rid: 8686676406240280583
       type: {class: BorderRequirement, ns: InGame.Effects.PlacingEffectRequirements, asm: Assembly-CSharp}
       data: 
-    - rid: 5489045836302647304
+    - rid: 8686676406240280584
       type: {class: ApplyWeaponBuff, ns: InGame.Effects.EffectElement.ApplyModuleBuffEffects, asm: Assembly-CSharp}
       data:
         range: 1
@@ -698,7 +757,7 @@ MonoBehaviour:
           flatDamageBuff: 0
           bulletSizePercentageBuff: 0
           lifeTimePercentageBuff: 0
-    - rid: 5489045836302647305
+    - rid: 8686676406240280585
       type: {class: ApplyWeaponBuff, ns: InGame.Effects.EffectElement.ApplyModuleBuffEffects, asm: Assembly-CSharp}
       data:
         range: 1
@@ -713,7 +772,7 @@ MonoBehaviour:
           flatDamageBuff: 0
           bulletSizePercentageBuff: 0
           lifeTimePercentageBuff: 0
-    - rid: 5489045836302647306
+    - rid: 8686676406240280586
       type: {class: ApplyWeaponBuff, ns: InGame.Effects.EffectElement.ApplyModuleBuffEffects, asm: Assembly-CSharp}
       data:
         range: 0
@@ -728,10 +787,10 @@ MonoBehaviour:
           flatDamageBuff: 0
           bulletSizePercentageBuff: 0
           lifeTimePercentageBuff: 0
-    - rid: 5489045836302647307
+    - rid: 8686676406240280587
       type: {class: DestroySignalEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data: 
-    - rid: 5489045836302647308
+    - rid: 8686676406240280588
       type: {class: ApplyWeaponBuff, ns: InGame.Effects.EffectElement.ApplyModuleBuffEffects, asm: Assembly-CSharp}
       data:
         range: 1
@@ -746,23 +805,23 @@ MonoBehaviour:
           flatDamageBuff: 0
           bulletSizePercentageBuff: 100
           lifeTimePercentageBuff: 50
-    - rid: 5489045836302647309
+    - rid: 8686676406240280589
       type: {class: SplitSignalEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         splittingDirections: 0300000002000000
-    - rid: 5489045836302647310
+    - rid: 8686676406240280590
       type: {class: SignalGenerationFromUsedEnergyEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data: 
-    - rid: 5489045836302647311
+    - rid: 8686676406240280591
       type: {class: GenerateBulletSignalEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         type: 2
         numOfBullets: 1
-    - rid: 5489045836302647312
+    - rid: 8686676406240280592
       type: {class: MagazineShootBulletEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         magazineCapacity: 4
-    - rid: 5489045836302647313
+    - rid: 8686676406240280593
       type: {class: PlacingTowerEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         setUp:
@@ -773,50 +832,34 @@ MonoBehaviour:
           shootCount: 3
           bulletCount: 1
           bulletType: 0
-    - rid: 5489045836302647314
+    - rid: 8686676406240280594
       type: {class: ChangeShieldEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         delta: 1
-    - rid: 5489045836302647315
+    - rid: 8686676406240280595
+      type: {class: ChangeShieldEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
+      data:
+        delta: 10
+    - rid: 8686676406240280596
       type: {class: GenerateBulletSignalEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         type: 8
         numOfBullets: 1
-    - rid: 5489045836302647316
+    - rid: 8686676406240280597
       type: {class: ChangeLimitedPropertyEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         propertyType: 0
         delta: 5
         isCurrent: 1
-    - rid: 5489045836302647317
+    - rid: 8686676406240280598
       type: {class: ChangeLimitedPropertyEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         propertyType: 0
         delta: 5
         isCurrent: 0
-    - rid: 5489045836302647318
+    - rid: 8686676406240280599
       type: {class: ChangeLimitedPropertyEffect, ns: InGame.Effects.EffectElement, asm: Assembly-CSharp}
       data:
         propertyType: 1
         delta: 100
         isCurrent: 0
-    - rid: 6853769551149006848
-      type: {class: SingleOnceDamageEffect, ns: InGame.BattleEffects, asm: Assembly-CSharp}
-      data:
-        m_count: 1
-        m_damage: 1
-    - rid: 6853769551149006849
-      type: {class: SingleOnceDamageEffect, ns: InGame.BattleEffects, asm: Assembly-CSharp}
-      data:
-        m_count: 1
-        m_damage: 1
-    - rid: 6853769551149006850
-      type: {class: PenetrationEffect, ns: InGame.BattleEffects, asm: Assembly-CSharp}
-      data:
-        m_count: -1
-    - rid: 6853769551149006851
-      type: {class: RangeOnceDamageEffect, ns: InGame.BattleEffects, asm: Assembly-CSharp}
-      data:
-        m_count: 1
-        m_radius: 3
-        m_damage: 2

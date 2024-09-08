@@ -12,6 +12,8 @@ namespace Editors.Board
     {
         public new string name ="";
         public string desc = "";
+        public string modTag = "";
+        public string function = "";
         public Category category = Category.Default;
         public ModuleView prefab;
         public List<ModulePosition> otherPositions;
@@ -29,7 +31,6 @@ namespace Editors.Board
                 gameObject.name = name != "" ? name : "No name";
             }
         }
-
 
         private void OnDrawGizmos()
         {
@@ -52,12 +53,14 @@ namespace Editors.Board
             var customEffectEdits = GetComponentInChildren<CustomEffectEdit>();
             bool hasCustomEffect = 
                 customEffectEdits.CreateCustomEffect(out var req, out var customEffects);
-            
+
             return new ModuleSetUp
             {
                 name = name,
-                desc = desc,
                 category = category,
+                desc = desc,
+                tag = modTag,
+                function = function,
                 otherPositions = new List<ModulePosition>(otherPositions),
                 buffMask = buffMask,
                 prefab = prefab,
