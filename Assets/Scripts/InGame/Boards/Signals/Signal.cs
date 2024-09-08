@@ -72,6 +72,11 @@ namespace InGame.Boards.Signals
 
         public void IncreaseEnergy(int amount) => m_energy += amount;
 
+        public void DisplayingEnergy()
+        {
+            m_view.DisplayingText(m_energy);
+        }
+        
         public void Start()
         {
             m_view?.StartMoving();

@@ -456,7 +456,9 @@ namespace InGame.Boards.Signals
             m_signalDistributions.GetValue(setUp.pos.x, setUp.pos.y).Add(id);
             if (m_generalController.isOn) signal.Start();
             else signal.Stop();
-
+            
+            signal.DisplayingEnergy();
+            
             return id;
         }
         
@@ -497,9 +499,16 @@ namespace InGame.Boards.Signals
         private void TriggerSignal(Signal signal, EffectBlackBoard bb, out bool isDead)
         {
             var pos = signal.pos;
-            
-            m_board.TriggerEffect(pos.x, pos.y, bb);
 
+            var signalBefore = signal.energy;
+            m_board.TriggerEffect(pos.x, pos.y, bb);
+            var signalAfter = signal.energy;
+
+            if (signalBefore != signalAfter)
+            {
+                signal.DisplayingEnergy();
+            }
+            
             if (signal.energy <= 0)
             {
                 isDead = true;

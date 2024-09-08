@@ -1,4 +1,5 @@
-﻿using InGame.Boards;
+﻿using System;
+using InGame.Boards;
 using InGame.Boards.Signals;
 using UnityEngine;
 using Utils;
@@ -11,6 +12,25 @@ namespace InGame.Views
         private Signal m_signal;
         private bool m_isMoving = false;
         private Vector3 m_direciton;
+        
+        public float fadeDuration = 1f;
+
+        private FloatingText m_floatingText;
+        
+        private FloatingText floatingText
+        {
+            get
+            {
+                if (m_floatingText == null)
+                {
+                    m_floatingText = GetComponentInChildren<FloatingText>();
+                    m_floatingText.Init(fadeDuration);
+                }
+
+                return m_floatingText;
+            }
+        }
+        
 
         public void SelfDestroy()
         {
@@ -24,6 +44,11 @@ namespace InGame.Views
             worldPos.z = Constants.SIGNAL_DEPTH;
             transform.localPosition = worldPos;
             
+        }
+
+        public void DisplayingText(int number)
+        {
+            floatingText.DisplayText(number);
         }
 
         public void StartMoving()
