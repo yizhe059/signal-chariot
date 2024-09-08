@@ -14,11 +14,11 @@ using InGame.Boards.Modules.ModuleBuffs;
 
 namespace InGame.BattleFields.Androids
 {
-    public class Tower 
+    public class Equipment 
     {
         [Header("View")]
-        private TowerView m_towerView;
-        public TowerView towerView { get {return m_towerView;} }
+        private EquipmentView m_equipmentView;
+        public EquipmentView equipmentView { get {return m_equipmentView;} }
         private Sprite m_sprite;
         public Sprite sprite { get { return m_sprite; } }
 
@@ -42,7 +42,7 @@ namespace InGame.BattleFields.Androids
         public Module module { get { return m_module;}}
 
         #region Life Cycle
-        public Tower(EquipmentSetUp equipmentSetUp, Module module)
+        public Equipment(EquipmentSetUp equipmentSetUp, Module module)
         {
             UnlimitedProperty bltCnt = new(equipmentSetUp.bulletCount, UnlimitedPropertyType.BulletCount);
             UnlimitedProperty shtCnt = new(equipmentSetUp.shootCount);
@@ -68,20 +68,20 @@ namespace InGame.BattleFields.Androids
 
         public void Die()
         {
-            m_towerView.Die();
+            m_equipmentView.Die();
         }
         
         private void CreateView()
         {
-            GameObject towerPref = Resources.Load<GameObject>(Constants.GO_TOWER_PATH);
-            GameObject towerGO = GameObject.Instantiate(towerPref);
-            towerGO.transform.parent = GameManager.Instance.GetAndroid().androidView.transform;
-            float x = towerGO.transform.parent.position.x;
-            float y = towerGO.transform.parent.position.y;
-            towerGO.transform.position = new(x, y, Constants.TOWER_DEPTH); 
+            GameObject equipmentPref = Resources.Load<GameObject>(Constants.GO_TOWER_PATH);
+            GameObject equipmentGO = GameObject.Instantiate(equipmentPref);
+            equipmentGO.transform.parent = GameManager.Instance.GetAndroid().androidView.transform;
+            float x = equipmentGO.transform.parent.position.x;
+            float y = equipmentGO.transform.parent.position.y;
+            equipmentGO.transform.position = new(x, y, Constants.TOWER_DEPTH); 
 
-            m_towerView = towerGO.GetComponent<TowerView>();
-            m_towerView.Init(this);
+            m_equipmentView = equipmentGO.GetComponent<EquipmentView>();
+            m_equipmentView.Init(this);
         }
         #endregion
 
@@ -89,7 +89,7 @@ namespace InGame.BattleFields.Androids
 
         public void Effect(WeaponBuff buff, BulletType type)
         {
-            m_towerView.Shoot(buff, type);
+            m_equipmentView.Shoot(buff, type);
         }
 
         public IEnumerator ShootBullet(WeaponBuff buff, BulletType type)

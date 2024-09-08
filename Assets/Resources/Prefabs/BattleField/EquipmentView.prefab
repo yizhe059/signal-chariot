@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 7340968915634312269}
   - component: {fileID: 6993462882478946293}
   m_Layer: 3
-  m_Name: TowerView
+  m_Name: EquipmentView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

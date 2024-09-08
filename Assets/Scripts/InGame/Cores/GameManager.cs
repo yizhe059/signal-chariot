@@ -10,7 +10,6 @@ using InGame.BattleFields.Androids;
 using InGame.BattleFields.Bullets;
 using InGame.BattleFields.Common;
 using InGame.BattleFields.Enemies;
-using InGame.Cameras;
 using InGame.InGameStates;
 using InGame.Views;
 

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace InGame.Effects.EffectElement
 {
-    public class TowerShootEffect: Effect
+    public class WeaponShootEffect: Effect
     {
         public override ModuleBuffType buffMask => ModuleBuffType.Weapon;
         public float heatGauge;
@@ -61,8 +61,8 @@ namespace InGame.Effects.EffectElement
             
             AddHeat(heatCostPerShot);
 
-            GameManager.Instance.GetAndroid().GetTowerManager().
-            TowerEffect(m_module, bulletType, m_buff.CreateCopy() as WeaponBuff);
+            GameManager.Instance.GetAndroid().GetEquipmentManager().
+            EquipmentEffect(m_module, bulletType, m_buff.CreateCopy() as WeaponBuff);
         }
 
         protected override void OnReset()
@@ -94,7 +94,7 @@ namespace InGame.Effects.EffectElement
 
         public override Effect CreateCopy()
         {
-            return new TowerShootEffect
+            return new WeaponShootEffect
             {
                 heatGauge = heatGauge,
                 dissipationRate = dissipationRate,
@@ -103,9 +103,9 @@ namespace InGame.Effects.EffectElement
         }
         
 
-        public static TowerShootEffect CreateEffect(float heatGauge, float dissipationRate, float heatCostPerShot)
+        public static WeaponShootEffect CreateEffect(float heatGauge, float dissipationRate, float heatCostPerShot)
         {
-            return new TowerShootEffect
+            return new WeaponShootEffect
             {
                 heatGauge = heatGauge,
                 dissipationRate = dissipationRate,

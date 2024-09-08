@@ -11,15 +11,15 @@ using InGame.BattleFields.Bullets;
 
 namespace InGame.Views
 {
-    public class TowerView : MonoBehaviour
+    public class EquipmentView : MonoBehaviour
     {
-        private Tower m_tower;
+        private Equipment m_equipment;
         private Vector3 m_target;
 
         #region Life Cycle
-        public void Init(Tower tower)
+        public void Init(Equipment equipment)
         {
-            m_tower = tower;
+            m_equipment = equipment;
             SetSprite();
         }
 
@@ -39,7 +39,7 @@ namespace InGame.Views
                 return;
             }
 
-            spriteRenderer.sprite = m_tower.sprite;
+            spriteRenderer.sprite = m_equipment.sprite;
         }
 
         private void Update()
@@ -67,7 +67,7 @@ namespace InGame.Views
 
         public void Shoot(WeaponBuff buff, BulletType type)
         {
-            StartCoroutine(m_tower.ShootBullet(buff, type));
+            StartCoroutine(m_equipment.ShootBullet(buff, type));
         }
 
         public IEnumerator RotateTowards()
@@ -76,7 +76,7 @@ namespace InGame.Views
             direction.z = 0;
             
             float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
-            Tween rotateTween = transform.DORotate(new Vector3(0, 0, targetAngle), m_tower.seekInterval.value);
+            Tween rotateTween = transform.DORotate(new Vector3(0, 0, targetAngle), m_equipment.seekInterval.value);
 
             yield return rotateTween.WaitForCompletion();
         }

@@ -34,14 +34,14 @@ namespace InGame.Effects.EffectElement
 
         private void ShootBullets()
         {
-            var towerManager = GameManager.Instance.GetAndroid().GetTowerManager();
+            var equipmentManager = GameManager.Instance.GetAndroid().GetEquipmentManager();
             while (m_bullets.Count != 0)
             {
                 var type = m_bullets.Dequeue();
                 
                 var bulletType = Signal.SignalTypeToBulletType(type);
                 Debug.Log($"Shoot Bullet： {bulletType}");
-                towerManager.TowerEffect(m_module, bulletType, m_weaponBuff.CreateCopy() as WeaponBuff);
+                equipmentManager.EquipmentEffect(m_module, bulletType, m_weaponBuff.CreateCopy() as WeaponBuff);
             }
         }
         
@@ -49,11 +49,11 @@ namespace InGame.Effects.EffectElement
         {
             if (m_bullets.Count == 0) return;
             var bullet = m_bullets.Dequeue();
-            var towerManager = GameManager.Instance.GetAndroid().GetTowerManager();
+            var equipmentManager = GameManager.Instance.GetAndroid().GetEquipmentManager();
             
             Debug.Log($"Shoot Bullet： {bullet}");
             // TO DO: add the bullet Type to the thing
-            //towerManager.TowerEffect(m_module, m_weaponBuff.CreateCopy() as WeaponBuff);
+            //equipmentManager.EquipmentEffect(m_module, m_weaponBuff.CreateCopy() as WeaponBuff);
         }
 
         private void LoadBullet(EffectBlackBoard blackBoard)

@@ -2,7 +2,7 @@
 
 using Cinemachine;
 
-namespace InGame.Cameras
+namespace InGame.Cores
 {
     public class CameraManager: MonoBehaviour
     {
