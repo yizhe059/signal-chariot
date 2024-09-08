@@ -12,7 +12,7 @@ namespace Editors.Board
     {
         public new string name ="";
         public string desc = "";
-        public string modTag = "";
+        public string tags = "";
         public string function = "";
         public Category category = Category.Default;
         public ModuleView prefab;
@@ -59,7 +59,7 @@ namespace Editors.Board
                 name = name,
                 category = category,
                 desc = desc,
-                tag = modTag,
+                tag = tags,
                 function = function,
                 otherPositions = new List<ModulePosition>(otherPositions),
                 buffMask = buffMask,

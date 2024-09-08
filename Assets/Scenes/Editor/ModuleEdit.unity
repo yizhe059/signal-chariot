@@ -959,6 +959,10 @@ PrefabInstance:
       value: Extra Armor
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: tags
+      value: 'Charge: Charge 1 energy when signal passes through'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: modTag
       value: 'Charging: store 1 energy when signal passes through'
       objectReference: {fileID: 0}
@@ -1720,7 +1724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Module 1
   desc: 
-  modTag: 
+  tags: 
   function: 
   category: 3
   prefab: {fileID: -5447537739969293526, guid: 780332fa93134cc499d3148c3d2857d8, type: 3}
@@ -2403,7 +2407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Module 2
   desc: 
-  modTag: 
+  tags: 
   function: 
   category: 3
   prefab: {fileID: 4244946465113611698, guid: 7dfda94a13c9d414db28b5c2e8ea0fac, type: 3}
