@@ -10,11 +10,11 @@ namespace Editors.Board
 {
     public class ModuleEdit: MonoBehaviour
     {
-        public new string name ="";
+        public new string name = "";
         public string desc = "";
         public string tags = "";
         public string function = "";
-        public Category category = Category.Default;
+        public Category category = Category.默认;
         public ModuleView prefab;
         public List<ModulePosition> otherPositions;
         public ModuleBuffType buffMask;

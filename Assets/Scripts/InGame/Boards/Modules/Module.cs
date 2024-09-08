@@ -70,10 +70,13 @@ namespace InGame.Boards.Modules
 
     public enum Category
     {
-        Signal,
-        Epuipment,
-        Auxiliary,
-        Default
+        信号_源,
+        信号_路由,
+        装备_武器,
+        装备_防具,
+        装备_机体,
+        辅助,
+        默认,
     }
 
     public class Module
