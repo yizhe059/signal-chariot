@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4a3249aadf19ebe47ab12d6df2d38f72, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8113208, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,6 +99,10 @@ PrefabInstance:
     - target: {fileID: 3125096310482266018, guid: 6bbc0162beb8b674b8f4e7c5cc6ee9c3, type: 3}
       propertyPath: m_Name
       value: NormalSignalView
+      objectReference: {fileID: 0}
+    - target: {fileID: 4758596050494755184, guid: 6bbc0162beb8b674b8f4e7c5cc6ee9c3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.02
       objectReference: {fileID: 0}
     - target: {fileID: 8527764552869943693, guid: 6bbc0162beb8b674b8f4e7c5cc6ee9c3, type: 3}
       propertyPath: m_LocalPosition.x
