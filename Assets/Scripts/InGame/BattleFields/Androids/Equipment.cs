@@ -29,7 +29,6 @@ namespace InGame.BattleFields.Androids
         [Header("Bullet")]
         private BulletManager m_bulletManager;
         public BulletManager bulletManager { get { return m_bulletManager;}}
-        private BulletType m_bulletType;
         private UnlimitedProperty m_bulletCount;
         private UnlimitedProperty m_shootCount;
         private UnlimitedProperty m_shootInterval;
@@ -51,7 +50,6 @@ namespace InGame.BattleFields.Androids
             UnlimitedProperty dmgMtp = new(equipmentSetUp.damageMultipler, UnlimitedPropertyType.Multiplier);
 
             m_bulletManager = new();
-            m_bulletType = equipmentSetUp.bulletType; 
 
             m_bulletCount = bltCnt;
             m_shootCount = shtCnt;

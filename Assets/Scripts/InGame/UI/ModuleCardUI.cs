@@ -9,8 +9,8 @@ namespace InGame.UI
     public class ModuleCardUI : MonoBehaviour, IHidable
     {
         [SerializeField] private UIDocument m_doc;
-        [SerializeField] private float X_DISPLAY_THRESHOLD = 0.2f;
-        [SerializeField] private float Y_DISPLAY_THRESHOLD = 0.3f;
+        [SerializeField] private float X_DISPLAY_THRESHOLD = 0.3f;
+        [SerializeField] private float Y_DISPLAY_THRESHOLD = 0.5f;
         private VisualElement m_root;
         private VisualElement m_panel;
         private Label m_name;
@@ -44,6 +44,7 @@ namespace InGame.UI
             Vector2 panelPosition = m_root.WorldToLocal(position);
             Vector2 screenSize = new(Screen.width, Screen.height);
             panelPosition.y = screenSize.y - panelPosition.y;
+            panelPosition.x -= screenSize.x * X_DISPLAY_THRESHOLD;
 
             // right side out of screen
             if(panelPosition.x > screenSize.x * (1f - X_DISPLAY_THRESHOLD)) 
@@ -51,11 +52,11 @@ namespace InGame.UI
             // left side out of screen
             if(panelPosition.x < 0)
                 panelPosition.x = 0;
-            // top side out of screen
-            if(panelPosition.y > screenSize.y *  (1f - Y_DISPLAY_THRESHOLD)) 
-                panelPosition.y -= screenSize.y * Y_DISPLAY_THRESHOLD;
             // bottom side out of screen
-            if(panelPosition.y < screenSize.y * Y_DISPLAY_THRESHOLD)
+            if(panelPosition.y > screenSize.y * (1f - Y_DISPLAY_THRESHOLD))
+                panelPosition.y -= screenSize.y * Y_DISPLAY_THRESHOLD;
+            // top side out of screen
+            if(panelPosition.y < 0)
                 panelPosition.y = screenSize.y * Y_DISPLAY_THRESHOLD;
 
             m_panel.style.left = new Length(panelPosition.x, LengthUnit.Pixel);

@@ -62,3 +62,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_doc: {fileID: 1003255673500120598}
+  X_DISPLAY_THRESHOLD: 0.2
+  Y_DISPLAY_THRESHOLD: 0.5
