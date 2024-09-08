@@ -4,33 +4,33 @@ using SetUps;
 
 namespace InGame.Effects.EffectElement
 {
-    public class PlacingTowerEffect: Effect
+    public class PlacingEquipmentEffect: Effect
     {
         public EquipmentSetUp setUp;
-        private Tower m_tower;
+        private Equipment m_equipment;
         
         
         public override void OnTrigger(EffectBlackBoard blackBoard)
         {
-            m_tower = GameManager.Instance.GetAndroid().GetTowerManager().AddTower(setUp, m_module);
+            m_equipment = GameManager.Instance.GetAndroid().GetEquipmentManager().AddEquipment(setUp, m_module);
         }
 
         public override void OnUnTrigger(EffectBlackBoard blackBoard)
         {
-            GameManager.Instance.GetAndroid().GetTowerManager().RemoveTower(m_tower);
+            GameManager.Instance.GetAndroid().GetEquipmentManager().RemoveEquipment(m_equipment);
         }
 
         public override Effect CreateCopy()
         {
-            return new PlacingTowerEffect
+            return new PlacingEquipmentEffect
             {
                 setUp = setUp
             };
         }
 
-        public static PlacingTowerEffect CreateEffect(EquipmentSetUp newSetUp)
+        public static PlacingEquipmentEffect CreateEffect(EquipmentSetUp newSetUp)
         {
-            return new PlacingTowerEffect
+            return new PlacingEquipmentEffect
             {
                 setUp = newSetUp
             };

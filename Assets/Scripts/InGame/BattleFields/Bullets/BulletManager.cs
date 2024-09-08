@@ -72,7 +72,7 @@ namespace InGame.BattleFields.Bullets
             return bulletSetUp;
         }
 
-        public List<Bullet> AddBulletBatch(float batchSize, BulletSetUp setup, Tower tower)
+        public List<Bullet> AddBulletBatch(float batchSize, BulletSetUp setup, Equipment equipment)
         {
             List<Bullet> batch = new();
             m_bullets.Add(batch);
@@ -82,7 +82,7 @@ namespace InGame.BattleFields.Bullets
 
             for(int i = 0; i < batchSize; i++)
             {
-                Bullet bullet = new(setup, tower, new int[2]{batchIdx, i});
+                Bullet bullet = new(setup, equipment, new int[2]{batchIdx, i});
                 batch.Add(bullet);
             }
             

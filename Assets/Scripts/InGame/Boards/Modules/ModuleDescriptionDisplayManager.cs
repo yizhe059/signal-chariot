@@ -42,8 +42,15 @@ namespace InGame.Boards.Modules
             UIManager.Instance.AddDisplayUI(bitmask);
 
             ModuleCardUI moduleCardUI = UIManager.Instance.GetUI(UIElements.ModuleInfoCard) as ModuleCardUI;
-            if (moduleCardUI != null)
-                moduleCardUI.SetContent(module.name, module.desc, module.category, m_currentScreenPos);
+            Debug.Log("tag " + module.tag + "; function " + module.function);
+            string[] content = new string[5]{
+                module.name,
+                module.category.ToString(),
+                module.desc,
+                module.tag,
+                module.function
+            };
+            if (moduleCardUI != null) moduleCardUI.SetContent(content, m_currentScreenPos);
         }
 
         public void UndisplayModule(Module module)

@@ -17,7 +17,9 @@ namespace SetUps
     {
         public string name ="";
         public string desc = "";
-        public Category category = Category.Default;
+        public string tag = "";
+        public string function = "";
+        public Category category = Category.默认;
         public List<ModulePosition> otherPositions;
         public ModuleView prefab;
         public ModuleBuffType buffMask;

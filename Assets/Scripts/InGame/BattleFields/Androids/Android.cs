@@ -25,8 +25,8 @@ namespace InGame.BattleFields.Androids
         private UnlimitedProperty m_armor;
         private UnlimitedProperty m_speed;
 
-        [Header("Tower")]
-        private TowerManager m_towerManager;
+        [Header("Equipment")]
+        private EquipmentManager m_equipmentManager;
         
         public Android(AndroidSetUp setUp)
         {
@@ -63,14 +63,14 @@ namespace InGame.BattleFields.Androids
                 UnlimitedPropertyType.Speed
             );
 
-            m_towerManager = new();
+            m_equipmentManager = new();
 
             CreateView();
         }
 
         private void Die()
         {
-            // m_towerManager.ClearTower();
+            // m_equipmentManager.ClearEquipment();
             m_androidView.Die();
             GameManager.Instance.ChangeToBattleResultState(BattleResultType.Fail);
         }
@@ -227,9 +227,9 @@ namespace InGame.BattleFields.Androids
         }
         #endregion
 
-        #region Tower
+        #region Equipment
 
-        public TowerManager GetTowerManager() => m_towerManager;
+        public EquipmentManager GetEquipmentManager() => m_equipmentManager;
 
         #endregion
 

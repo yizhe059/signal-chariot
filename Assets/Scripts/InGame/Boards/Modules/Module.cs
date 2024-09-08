@@ -70,10 +70,13 @@ namespace InGame.Boards.Modules
 
     public enum Category
     {
-        Signal,
-        Epuipment,
-        Auxiliary,
-        Default
+        信号_源,
+        信号_路由,
+        装备_武器,
+        装备_防具,
+        装备_机体,
+        辅助,
+        默认,
     }
 
     public class Module
@@ -99,8 +102,10 @@ namespace InGame.Boards.Modules
         #endregion
         
         public string name { get; protected set; }
-        public Category category{ get; protected set; }
+        public Category category { get; protected set; }
         public string desc { get; protected set; }
+        public string tag { get; protected set; }
+        public string function { get; protected set; }
         
         #region Effect
 
@@ -487,8 +492,6 @@ namespace InGame.Boards.Modules
 
         public static Module CreateModule(ModuleSetUp setUp)
         {
-            
-            
             var signalEffects = new List<Effect>();
             foreach (var eff in setUp.signalEffects)
             {
@@ -521,11 +524,12 @@ namespace InGame.Boards.Modules
                 customEffect = CustomEffect.CreateCustomEffect(triggerRequirement, customEffectLists);
             }
             
-            
             var newModule = new Module
             {
                 name = setUp.name,
                 desc = setUp.desc,
+                tag = setUp.tag,
+                function = setUp.function,
                 category = setUp.category,
                 m_buffMasks = setUp.buffMask,
                 m_prefab = setUp.prefab,
@@ -553,6 +557,8 @@ namespace InGame.Boards.Modules
                 m_slotMap = other.m_slotMap,
                 name = other.name,
                 desc = other.desc,
+                tag = other.tag,
+                function = other.function,
                 category = other.category,
                 m_buffMasks = other.m_buffMasks,
                 m_signalEffects = SignalEffects.CreateSignalEffects(other.m_signalEffects),

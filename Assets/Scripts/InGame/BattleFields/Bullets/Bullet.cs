@@ -22,8 +22,8 @@ namespace InGame.BattleFields.Bullets
         public BulletView bulletView {get { return m_bulletView;}}
 
         [Header("Generator")]
-        private Tower m_tower;
-        public Tower tower {get { return m_tower;}}
+        private Equipment m_equipment;
+        public Equipment equipment {get { return m_equipment;}}
         private int[] m_bulletIdx;
         public int[] bulletIdx {get { return m_bulletIdx;}}
 
@@ -48,9 +48,9 @@ namespace InGame.BattleFields.Bullets
         public List<Effect> collisionEffects { get{ return m_collisionEffects;}}
         public List<Effect> destructionEffects { get { return m_destructionEffects;}}
 
-        public Bullet(BulletSetUp bulletSetUp, Tower tower, int[] bulletIdx)
+        public Bullet(BulletSetUp bulletSetUp, Equipment equipment, int[] bulletIdx)
         {
-            m_tower = tower;
+            m_equipment = equipment;
             m_bulletIdx = bulletIdx;
             
             UnlimitedProperty dmg = new(bulletSetUp.damage, UnlimitedPropertyType.Damage);

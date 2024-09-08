@@ -15,7 +15,9 @@ namespace InGame.UI
         private VisualElement m_panel;
         private Label m_name;
         private Label m_category;
-        private Label m_description;
+        private Label m_desc;
+        private Label m_tag;
+        private Label m_function;
 
         private void Awake()
         {
@@ -25,14 +27,19 @@ namespace InGame.UI
 
             m_name = m_root.Q<Label>("name");
             m_category = m_root.Q<Label>("category");
-            m_description = m_root.Q<Label>("description");
+
+            m_desc = m_root.Q<Label>("description");
+            m_tag = m_root.Q<Label>("tag");
+            m_function = m_root.Q<Label>("functionality");
         }
 
-        public void SetContent(string name, string description, Category category, Vector2 position)
+        public void SetContent(string[] content, Vector2 position)
         {
-            m_name.text = name;
-            m_category.text = "Category: " + category.ToString();
-            m_description.text = "Description: " + description;
+            m_name.text = content[0];
+            m_category.text = content[1];
+            m_desc.text = content[2];
+            m_tag.text = content[3];
+            m_function.text = content[4];
 
             Vector2 panelPosition = m_root.WorldToLocal(position);
             Vector2 screenSize = new(Screen.width, Screen.height);

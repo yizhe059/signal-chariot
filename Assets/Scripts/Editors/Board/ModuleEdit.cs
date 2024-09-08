@@ -10,9 +10,11 @@ namespace Editors.Board
 {
     public class ModuleEdit: MonoBehaviour
     {
-        public new string name ="";
+        public new string name = "";
         public string desc = "";
-        public Category category = Category.Default;
+        public string tags = "";
+        public string function = "";
+        public Category category = Category.默认;
         public ModuleView prefab;
         public List<ModulePosition> otherPositions;
         public ModuleBuffType buffMask;
@@ -29,7 +31,6 @@ namespace Editors.Board
                 gameObject.name = name != "" ? name : "No name";
             }
         }
-
 
         private void OnDrawGizmos()
         {
@@ -52,12 +53,14 @@ namespace Editors.Board
             var customEffectEdits = GetComponentInChildren<CustomEffectEdit>();
             bool hasCustomEffect = 
                 customEffectEdits.CreateCustomEffect(out var req, out var customEffects);
-            
+
             return new ModuleSetUp
             {
                 name = name,
-                desc = desc,
                 category = category,
+                desc = desc,
+                tag = tags,
+                function = function,
                 otherPositions = new List<ModulePosition>(otherPositions),
                 buffMask = buffMask,
                 prefab = prefab,
