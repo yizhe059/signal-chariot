@@ -189,7 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Basic
   type: 0
-  sprite: {fileID: 21300000, guid: 3b362b8a735364076a358feec9a74534, type: 3}
+  sprite: {fileID: 21300000, guid: 0ab1866aded2c47e685f4774e4b91e48, type: 3}
   size: 1
   health: -1
   speed: 100
