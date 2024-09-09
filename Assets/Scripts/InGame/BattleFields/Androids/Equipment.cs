@@ -74,7 +74,8 @@ namespace InGame.BattleFields.Androids
             GameObject equipmentPref = Resources.Load<GameObject>(Constants.GO_TOWER_PATH);
             GameObject equipmentGO = GameObject.Instantiate(equipmentPref);
             equipmentGO.transform.parent = GameManager.Instance.GetAndroid().androidView.transform;
-            float x = equipmentGO.transform.parent.position.x;
+            
+            float x = equipmentGO.transform.parent.position.x + Constants.EQUIPMENT_RADIUS;
             float y = equipmentGO.transform.parent.position.y;
             equipmentGO.transform.position = new(x, y, Constants.TOWER_DEPTH); 
 

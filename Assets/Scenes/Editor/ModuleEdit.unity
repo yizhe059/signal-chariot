@@ -1366,7 +1366,7 @@ MonoBehaviour:
   setUp:
     sprite: {fileID: 21300000, guid: 7753e655875224145bc90d1a18485416, type: 3}
     damageMultipler: 1
-    seekInterval: 0
+    seekInterval: 1
     shootInterval: 0.05
     shootCount: 2
     bulletCount: 1

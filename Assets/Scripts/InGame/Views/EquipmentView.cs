@@ -71,14 +71,38 @@ namespace InGame.Views
         }
 
         public IEnumerator RotateTowards()
-        {
-            Vector3 direction = m_target - transform.position;
-            direction.z = 0;
-            
-            float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
-            Tween rotateTween = transform.DORotate(new Vector3(0, 0, targetAngle), m_equipment.seekInterval.value);
+        {   
+            Vector3 parentPosition = transform.parent.position;
 
-            yield return rotateTween.WaitForCompletion();
+            Vector3 direction = m_target - parentPosition;
+            direction.z = 0; // Keep it 2D
+
+            float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; 
+            float currentAngle = Mathf.Atan2(transform.position.y - parentPosition.y, 
+                                            transform.position.x - parentPosition.x) * Mathf.Rad2Deg;
+            
+            Tween moveTween = DOTween.To(
+                () => currentAngle,
+                angle => {
+                    currentAngle = angle;
+
+                    // Calculate the new position around the parent
+                    float radian = currentAngle * Mathf.Deg2Rad;
+                    Vector3 offset = new Vector3(Mathf.Cos(radian), Mathf.Sin(radian), 0) * Constants.EQUIPMENT_RADIUS;
+
+                    Vector3 newPosition = parentPosition + offset;
+                    transform.position = newPosition;
+
+                    // Rotate to face outward along the direction of the radius
+                    Vector3 lookDirection = (newPosition - parentPosition).normalized;
+                    float rotationAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+                    transform.rotation = Quaternion.Euler(0, 0, rotationAngle - 90);
+                },
+                targetAngle, 
+                m_equipment.seekInterval.value // Duration of the rotation
+            );
+
+            yield return moveTween.WaitForCompletion();
         }
 
         #endregion

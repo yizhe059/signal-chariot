@@ -53,6 +53,7 @@ namespace Utils
         #endregion
 
         #region Positions
+
         // Positive is deeper, Negative is shallower
         // Board 
         public const float SLOT_DEPTH = 0;
@@ -68,6 +69,8 @@ namespace Utils
         public const float MOD_DEPTH = 0;
         public const float BULLET_DEPTH = -0.5f;
         public const float TOWER_DEPTH = -1f;
+
+        public const float EQUIPMENT_RADIUS = 1f;
         
         #endregion
         

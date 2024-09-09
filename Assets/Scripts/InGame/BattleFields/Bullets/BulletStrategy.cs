@@ -242,7 +242,7 @@ namespace InGame.BattleFields.Bullets
     {
         public PlacementMoveStrategy(Bullet bullet) : base(bullet)
         {
-
+            
         }
 
         public void Move()

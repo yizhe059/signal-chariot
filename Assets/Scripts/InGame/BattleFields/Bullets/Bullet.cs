@@ -77,8 +77,8 @@ namespace InGame.BattleFields.Bullets
             GameObject bulletPref = Resources.Load<GameObject>(Constants.GO_BULLET_PATH);
             GameObject bulletGO = GameObject.Instantiate(bulletPref);
             
-            float x = GameManager.Instance.GetAndroid().androidView.transform.position.x;
-            float y = GameManager.Instance.GetAndroid().androidView.transform.position.y;
+            float x = m_equipment.equipmentView.transform.position.x;
+            float y = m_equipment.equipmentView.transform.position.y;
 
             bulletGO.transform.position = new(x, y, Constants.BULLET_DEPTH);
 

@@ -22,6 +22,7 @@ namespace InGame.BattleFields.Androids
         {
             m_equipments = equipments;
         }
+        
         public Equipment AddEquipment(EquipmentSetUp equipmentSetUp, Module module)
         {
             Equipment equipment = new(equipmentSetUp, module);

@@ -14,7 +14,7 @@ namespace InGame.Boards.Signals
         Normal = 1 << 0,
         Penetrate = 1 << 1,
         Explosive = 1 << 2,
-        Mine = 1 << 3
+        Mine = 1 << 3,
     }
     
     public class Signal
@@ -121,6 +121,7 @@ namespace InGame.Boards.Signals
                 _ => throw new ArgumentOutOfRangeException(nameof(dir), dir, null)
             };
         }
+
         public static Vector3 GetDirWorldVector(Direction dir)
         {
             return dir switch
@@ -133,7 +134,7 @@ namespace InGame.Boards.Signals
             };
         }
         
-        // To DO: maybe use a universal 2D direction
+        // TODO: maybe use a universal 2D direction
         public static Direction OrientationToDirection(Module.Orientation o, Direction dir)
         {
             int rotate = dir switch
