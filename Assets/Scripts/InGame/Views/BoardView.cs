@@ -268,6 +268,9 @@ namespace InGame.Views
                 case SignalType.Mine:
                     prefab = Resources.Load<SignalView>("Prefabs/Signals/MineSignalView");
                     break;
+                case SignalType.Explosive:
+                    prefab = Resources.Load<SignalView>("Prefabs/Signals/ExplosionSignalView");
+                    break;
                 default:
                     Debug.LogError($"No prefab for signal type {signal.type}, using normal signal prefab");
                     prefab = Resources.Load<SignalView>("Prefabs/Signals/NormalSignalView");

@@ -122,6 +122,79 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &14587001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 14587002}
+  - component: {fileID: 14587004}
+  - component: {fileID: 14587003}
+  m_Layer: 0
+  m_Name: Explosion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &14587002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14587001}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2116755078}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &14587003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14587001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24856f4901f1f4497b0ec4981d563406, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectType: 3
+  triggerType: 1
+  count: 0
+  damage: 2
+  duration: 0
+  interval: 0
+  radius: 3
+  objectsToSpawn: []
+--- !u!114 &14587004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14587001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c00875aa986de47c3afebb99dd6b6cde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Explosion
+  type: 3
+  sprite: {fileID: 21300000, guid: 3b362b8a735364076a358feec9a74534, type: 3}
+  size: 1.5
+  health: -1
+  speed: 0
+  lifeTime: 2
+  moveType: 2
 --- !u!1 &450031692
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,6 +499,7 @@ Transform:
   - {fileID: 450031693}
   - {fileID: 1665733255}
   - {fileID: 563594144}
+  - {fileID: 14587002}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2116755079

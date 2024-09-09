@@ -170,43 +170,43 @@ MonoBehaviour:
   - waveID: 0
     moduleRewards:
     - moduleID: 1
-      moduleName: Signal Amplifier
+      moduleName: "\u589E\u5E45\u5668"
     - moduleID: 7
-      moduleName: Extra Barrel
+      moduleName: "\u5206\u88C2\u67AA\u53E3"
     - moduleID: 9
-      moduleName: Two Way Signal Splitter
+      moduleName: "\u53CC\u5411\u5206\u6D41\u5668"
     - moduleID: 11
-      moduleName: Laser Bullet Source
+      moduleName: "\u6FC0\u5149\u5B50\u5F39"
     - moduleID: 15
-      moduleName: Extra Health
+      moduleName: "\u4FEE\u590D\u6A21\u5757"
   - waveID: 1
     moduleRewards:
     - moduleID: 14
-      moduleName: Landmine Bullet Source
+      moduleName: "\u5730\u96F7"
     - moduleID: 6
-      moduleName: Carbon Block
+      moduleName: "\u78B3\u5143\u7D20"
     - moduleID: 8
-      moduleName: Lead Block
+      moduleName: "\u94C5\u5143\u7D20"
     - moduleID: 16
-      moduleName: Extra Mod
+      moduleName: "\u78C1\u5438\u5143\u4EF6"
     - moduleID: 1
-      moduleName: Signal Amplifier
+      moduleName: "\u589E\u5E45\u5668"
   - waveID: 2
     moduleRewards:
     - moduleID: 2
-      moduleName: Signal Rotator
-    - moduleID: 5
-      moduleName: Extra Shot
+      moduleName: "\u8F6C\u5411\u5668"
+    - moduleID: 17
+      moduleName: "\u9AD8\u7206\u5B50\u5F39"
     - moduleID: 10
-      moduleName: Signal Capacitor
+      moduleName: "\u7535\u5BB9\u5668(3)"
     - moduleID: 2
-      moduleName: Signal Rotator
+      moduleName: "\u8F6C\u5411\u5668"
     - moduleID: 7
-      moduleName: Extra Barrel
+      moduleName: "\u5206\u88C2\u67AA\u53E3"
     - moduleID: 4
       moduleName: Extra Defense
     - moduleID: 12
-      moduleName: Charging Cannon
+      moduleName: "\u5145\u80FD\u70AE"
   - waveID: 3
     moduleRewards: []
 --- !u!1 &325115585

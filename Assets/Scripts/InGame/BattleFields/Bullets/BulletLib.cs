@@ -11,6 +11,7 @@ namespace InGame.BattleFields.Bullets
         Basic,
         Laser,
         Landmine,
+        HighExplosive,
     }
 
     public class BulletLib

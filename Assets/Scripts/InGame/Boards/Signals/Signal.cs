@@ -103,9 +103,6 @@ namespace InGame.Boards.Signals
         {
             m_view?.SelfDestroy();
             m_view = null;
-            
-            
-            
         }
 
         public override string ToString()
@@ -180,6 +177,7 @@ namespace InGame.Boards.Signals
                 SignalType.Normal => BulletType.Basic,
                 SignalType.Penetrate => BulletType.Laser,
                 SignalType.Mine => BulletType.Landmine,
+                SignalType.Explosive => BulletType.HighExplosive,
                 _ => BulletType.Basic
             };
         }

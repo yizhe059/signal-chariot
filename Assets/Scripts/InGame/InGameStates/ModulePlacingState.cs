@@ -35,9 +35,7 @@ namespace InGame.InGameStates
             GameManager.Instance.GetInputManager().RegisterRotateEvent(OnRotatePressed);
             GameManager.Instance.GetInputManager().RegisterClickEvent(boardCamera, OnClick);
 
-            int bitmask = UIManager.Instance.GetDisplayBit(
-                UIElements.BoardConsole
-            );
+            int bitmask = UIManager.Instance.GetDisplayBit();
             UIManager.Instance.SetDisplayUI(bitmask);
         }
 
@@ -50,6 +48,7 @@ namespace InGame.InGameStates
             GameManager.Instance.GetInputManager().UnregisterClickEvent(boardCamera, OnClick);
 
             int bitmask = UIManager.Instance.GetDisplayBit(
+                UIElements.BoardConsole,
                 UIElements.BattleConsole,
                 UIElements.BattleResult,
                 UIElements.ModuleInfoCard
