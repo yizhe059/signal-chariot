@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="panel" style="flex-grow: 1; color: rgb(255, 255, 255); background-color: rgba(255, 179, 167, 0.39); min-height: 100%;">
-        <ui:Label tabindex="-1" text="战斗失败" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title" style="-unity-text-align: middle-center; font-size: 100px; -unity-font-style: bold; height: 80%;" />
+    <ui:VisualElement name="panel" style="flex-grow: 1; color: rgb(255, 255, 255); background-color: rgba(255, 179, 167, 0.39); min-height: 100%; -unity-font: resource(&apos;Fonts/字魂正酷ExtraBold&apos;); -unity-font-definition: initial;">
+        <ui:Label tabindex="-1" text="战斗失败" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title" style="-unity-text-align: middle-center; font-size: 100px; -unity-font-style: bold; height: 80%; -unity-font-definition: initial; -unity-font: resource(&apos;Fonts/字魂正酷ExtraBold&apos;);" />
         <ui:VisualElement name="buttons" style="flex-grow: 1; height: 20%; justify-content: center; align-self: center;">
             <ui:Button text="重新挑战" parse-escape-sequences="true" display-tooltip-when-elided="true" name="continue" style="font-size: 50px; -unity-font-style: bold;" />
         </ui:VisualElement>

@@ -17,9 +17,7 @@ namespace InGame.BattleEffects
 
         public override void Trigger(GameObject go)
         {
-            Debug.Log("triggerred");
             if(!IsActive) return;
-            Debug.Log("active");
             IDamageable damageable = go.GetComponent<IDamageable>();
             damageable?.TakeDamage(m_damage);
         }

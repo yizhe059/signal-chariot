@@ -240,14 +240,33 @@ namespace InGame.BattleFields.Bullets
 
     public class PlacementMoveStrategy : MoveStrategy, IMovable
     {
+        int m_maxIterations = 10;
+        float m_separationDistance = 0.2f;
+
         public PlacementMoveStrategy(Bullet bullet) : base(bullet)
         {
-            
+            Collider[] overlappingBullets = Physics.OverlapSphere(m_bulletTransform.position, 
+                                                                m_bullet.size.value, 
+                                                                Constants.BULLET_LAYER);
+            int iteration = 0;
+            while(overlappingBullets.Length > 0 && iteration < m_maxIterations)
+            {
+                foreach(var collider in overlappingBullets)
+                {
+                    if(collider.gameObject == m_bulletTransform.gameObject) continue;
+                    Vector2 directionToMove = (m_bulletTransform.position - collider.transform.position).normalized;
+                    m_bulletTransform.position += (Vector3)(directionToMove * m_separationDistance);
+                }
+                overlappingBullets = Physics.OverlapSphere(m_bulletTransform.position, 
+                                                           m_bullet.size.value, 
+                                                           Constants.BULLET_LAYER);
+                iteration++;
+            }
         }
 
         public void Move()
         {
-            
+
         }
     }
 }

@@ -50,7 +50,7 @@ namespace InGame.BattleFields.Bullets
             bulletSetUp.damage = Mathf.Max(0.001f, bulletSetUp.damage);
 
             // size
-            bulletSetUp.size  *= 1 + (float)buff.bulletSizePercentageBuff/100f;
+            bulletSetUp.size *= 1 + (float)buff.bulletSizePercentageBuff/100f;
             bulletSetUp.size = Mathf.Max(0.001f, bulletSetUp.size);
             return bulletSetUp;
         }
