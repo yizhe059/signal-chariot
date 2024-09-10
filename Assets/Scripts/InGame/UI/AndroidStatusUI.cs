@@ -60,25 +60,25 @@ namespace InGame.UI
         private void SetDefenseUI(float current)
         {
             Label content = m_defense.Q<Label>("content");
-            content.text = $"DEFENSE: {current}";
+            content.text = $"防御: {current}";
         }
 
         private void SetArmorUI(float current)
         {
             Label content = m_armor.Q<Label>("content");
-            content.text = $"ARMOR: {current}";
+            content.text = $"护甲: {current}";
         }
 
         private void SetModUI(float current, float max)
         {
             Label content = m_mod.Q<Label>("content");
-            content.text = $"MOD: {current}/{max}";
+            content.text = $"零件: {current}/{max}";
         }
 
         private void SetCrystalUI(float current, float max)
         {
             Label content = m_crystal.Q<Label>("content");
-            content.text = $"CRYSTAL: {current}/{max}";
+            content.text = $"晶体: {current}/{max}";
         }
 
         public void Hide()

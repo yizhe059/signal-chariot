@@ -57,12 +57,12 @@ namespace InGame.UI
         private void OnSignalClicked()
         {   
             if(GameManager.Instance.GetCurrentInGameState() == InGameStateType.BoardTestState){
-                m_slotButton.text = "Add Slot";
-                m_testButton.text = "Test Signal";
+                m_slotButton.text = "扩容";
+                m_testButton.text = "测试";
                 GameManager.Instance.ChangeToBoardWaitingState();
             }else{
-                m_slotButton.text = "Add Slot";
-                m_testButton.text = "Stop Signal";
+                m_slotButton.text = "扩容";
+                m_testButton.text = "退出测试";
                 GameManager.Instance.ChangeToBoardTestState();
             }
         }
@@ -70,12 +70,12 @@ namespace InGame.UI
         private void OnSlotClicked()
         {
             if(GameManager.Instance.GetCurrentInGameState() == InGameStateType.AddSlotState){
-                m_slotButton.text = "Add Slot";
-                m_testButton.text = "Test Signal";
+                m_slotButton.text = "扩容";
+                m_testButton.text = "测试";
                 GameManager.Instance.ChangeToBoardWaitingState();
             }else{
-                m_slotButton.text = "Exit Slot";
-                m_testButton.text = "Test Signal";
+                m_slotButton.text = "退出扩容";
+                m_testButton.text = "测试";
                 GameManager.Instance.ChangeToAddSlotState();
             }
         }

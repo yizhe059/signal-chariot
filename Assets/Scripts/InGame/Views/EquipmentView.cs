@@ -99,7 +99,7 @@ namespace InGame.Views
                     transform.rotation = Quaternion.Euler(0, 0, rotationAngle - 90);
                 },
                 targetAngle, 
-                m_equipment.seekInterval.value // Duration of the rotation
+                m_equipment.seekInterval.value
             );
 
             yield return moveTween.WaitForCompletion();
