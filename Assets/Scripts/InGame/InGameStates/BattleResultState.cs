@@ -29,7 +29,6 @@ namespace InGame.InGameStates
             Debug.Log("Enter battle result");
 
             int bitmask = UIManager.Instance.GetDisplayBit(
-                UIElements.BattleConsole,
                 UIElements.BattleResult
             );
             UIManager.Instance.SetDisplayUI(bitmask);
@@ -44,6 +43,7 @@ namespace InGame.InGameStates
             Debug.Log("Exit battle result");
 
             int bitmask = UIManager.Instance.GetDisplayBit(
+                UIElements.BattleConsole,
                 UIElements.ModuleInfoCard,
                 UIElements.BoardConsole
             );

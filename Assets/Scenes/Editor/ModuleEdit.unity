@@ -346,8 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setUp:
-    sprite: {fileID: 0}
-    damageMultipler: 1
+    sprite: {fileID: 21300000, guid: 7753e655875224145bc90d1a18485416, type: 3}
     seekInterval: 1
     shootInterval: 1
     shootCount: 3
@@ -1365,7 +1364,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setUp:
     sprite: {fileID: 21300000, guid: 7753e655875224145bc90d1a18485416, type: 3}
-    damageMultipler: 1
     seekInterval: 0.5
     shootInterval: 0.05
     shootCount: 2
