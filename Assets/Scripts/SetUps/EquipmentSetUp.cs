@@ -10,7 +10,7 @@ namespace SetUps
     public class EquipmentSetUp
     {
         public Sprite sprite;
-        public float damageMultipler;
+        // public float damageMultipler;
         public float seekInterval;
         public float shootInterval;
         public int shootCount;
@@ -20,7 +20,7 @@ namespace SetUps
         public EquipmentSetUp(EquipmentSetUp other)
         {
             sprite = other.sprite;
-            damageMultipler = other.damageMultipler;
+            // damageMultipler = other.damageMultipler;
             bulletType = other.bulletType;
             bulletCount = other.bulletCount;
             shootCount = other.shootCount;

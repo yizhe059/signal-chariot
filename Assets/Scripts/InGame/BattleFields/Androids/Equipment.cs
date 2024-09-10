@@ -23,8 +23,8 @@ namespace InGame.BattleFields.Androids
         public Sprite sprite { get { return m_sprite; } }
 
         [Header("Properties")]
-        private UnlimitedProperty m_damageMultiplier;
-        public UnlimitedProperty damageMultiplier { get { return m_damageMultiplier;}}
+        // private UnlimitedProperty m_damageMultiplier;
+        // public UnlimitedProperty damageMultiplier { get { return m_damageMultiplier;}}
         
         [Header("Bullet")]
         private BulletManager m_bulletManager;
@@ -47,7 +47,7 @@ namespace InGame.BattleFields.Androids
             UnlimitedProperty shtCnt = new(equipmentSetUp.shootCount);
             UnlimitedProperty shtItv = new(equipmentSetUp.shootInterval, UnlimitedPropertyType.Interval);
             UnlimitedProperty skItv = new(equipmentSetUp.seekInterval, UnlimitedPropertyType.Speed);
-            UnlimitedProperty dmgMtp = new(equipmentSetUp.damageMultipler, UnlimitedPropertyType.Multiplier);
+            // UnlimitedProperty dmgMtp = new(equipmentSetUp.damageMultipler, UnlimitedPropertyType.Multiplier);
 
             m_bulletManager = new();
 
@@ -56,7 +56,7 @@ namespace InGame.BattleFields.Androids
             m_shootInterval = shtItv;
             m_seekInterval = skItv;
 
-            m_damageMultiplier = dmgMtp;
+            // m_damageMultiplier = dmgMtp;
 
             m_module = module;              
             m_sprite = equipmentSetUp.sprite;
