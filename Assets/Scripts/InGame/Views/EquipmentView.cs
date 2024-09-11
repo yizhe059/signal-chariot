@@ -65,9 +65,9 @@ namespace InGame.Views
             StartCoroutine(RotateTowards());
         }
 
-        public void Shoot(WeaponBuff buff, BulletType type)
+        public void Shoot(WeaponBuff buff, BulletType type, int level)
         {
-            StartCoroutine(m_equipment.ShootBullet(buff, type));
+            StartCoroutine(m_equipment.ShootBullet(buff, type, level));
         }
 
         public IEnumerator RotateTowards()

@@ -12,6 +12,7 @@ namespace SetUps
     {
         public string name;
         public BulletType type;
+        public int level;
 
         public Sprite sprite;
         public float size;
@@ -35,6 +36,7 @@ namespace SetUps
         {
             name = other.name;
             type = other.type;
+            level = other.level;
 
             sprite = other.sprite;
             size = other.size;

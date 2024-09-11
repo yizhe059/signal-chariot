@@ -41,7 +41,7 @@ namespace InGame.Effects.EffectElement
                 
                 var bulletType = Signal.SignalTypeToBulletType(type);
                 Debug.Log($"Shoot Bullet： {bulletType}");
-                equipmentManager.EquipmentEffect(m_module, bulletType, m_weaponBuff.CreateCopy() as WeaponBuff);
+                equipmentManager.EquipmentEffect(m_module, bulletType, 1, m_weaponBuff.CreateCopy() as WeaponBuff);
             }
         }
         
