@@ -22,9 +22,9 @@ namespace InGame.BattleFields.Bullets
             m_targets = new();
         }
 
-        public BulletSetUp GenerateBulletSetUp(BulletType bulletType, WeaponBuff buff)
+        public BulletSetUp GenerateBulletSetUp(BulletType bulletType, int bulletLevel, WeaponBuff buff)
         {
-            BulletSetUp setUp = GameManager.Instance.GetBulletLib().GetSetUp(bulletType);
+            BulletSetUp setUp = GameManager.Instance.GetBulletLib().GetSetUp(bulletType, bulletLevel);
             if(setUp == null) return null;
             
             BulletSetUp buffedSetUp = new(setUp);

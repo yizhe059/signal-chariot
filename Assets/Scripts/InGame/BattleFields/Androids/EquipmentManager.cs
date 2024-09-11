@@ -45,12 +45,12 @@ namespace InGame.BattleFields.Androids
             m_equipments.Clear();
         }
 
-        public void EquipmentEffect(Module module, BulletType type, WeaponBuff buff)
+        public void EquipmentEffect(Module module, BulletType type, int level, WeaponBuff buff)
         {
             foreach(Equipment equipment in m_equipments)
             {
                 if(module == equipment.module)
-                    equipment.Effect(buff, type);
+                    equipment.Effect(buff, type, level);
             }
         }
     }

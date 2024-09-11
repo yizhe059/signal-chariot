@@ -71,6 +71,7 @@ namespace Utils
         public const float TOWER_DEPTH = -1f;
 
         public const float EQUIPMENT_RADIUS = 1f;
+        public const int MAX_BULLET_LEVEL = 3;
         
         #endregion
         

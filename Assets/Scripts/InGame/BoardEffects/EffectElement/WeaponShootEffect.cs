@@ -62,7 +62,7 @@ namespace InGame.Effects.EffectElement
             AddHeat(heatCostPerShot);
 
             GameManager.Instance.GetAndroid().GetEquipmentManager().
-            EquipmentEffect(m_module, bulletType, m_buff.CreateCopy() as WeaponBuff);
+            EquipmentEffect(m_module, bulletType, 1, m_buff.CreateCopy() as WeaponBuff);
         }
 
         protected override void OnReset()
