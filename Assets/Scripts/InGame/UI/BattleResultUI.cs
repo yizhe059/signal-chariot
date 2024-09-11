@@ -18,11 +18,16 @@ namespace InGame.UI
 
         private void Awake()
         {
-            m_waveWin = Resources.Load<VisualTreeAsset>(Constants.UI_WAVE_WIN_PATH).Instantiate();
-            m_battleWin = Resources.Load<VisualTreeAsset>(Constants.UI_BATTLE_WIN_PATH).Instantiate();
-            m_fail = Resources.Load<VisualTreeAsset>(Constants.UI_FAIL_PATH).Instantiate();
+            m_waveWin = Resources.Load<VisualTreeAsset>(Constants.UI_WAVE_WIN_PATH).Instantiate().Q("panel");
+            m_battleWin = Resources.Load<VisualTreeAsset>(Constants.UI_BATTLE_WIN_PATH).Instantiate().Q("panel");
+            m_fail = Resources.Load<VisualTreeAsset>(Constants.UI_FAIL_PATH).Instantiate().Q("panel");
 
             Register();
+            
+            VisualElement root = m_doc.rootVisualElement;
+            root.Add(m_waveWin);
+            root.Add(m_battleWin);
+            root.Add(m_fail);
         }
 
         private void Register()
@@ -59,22 +64,22 @@ namespace InGame.UI
 
         public void Switch(BattleResultType type)
         {
-            VisualElement root = m_doc.rootVisualElement;
-            root.style.minHeight = new Length(100, LengthUnit.Percent);
-            root.Clear();
+            m_waveWin.style.display = DisplayStyle.None;
+            m_battleWin.style.display = DisplayStyle.None;
+            m_fail.style.display = DisplayStyle.None;
 
             switch (type)
             {
                 case BattleResultType.WaveWin:
-                    root.Add(m_waveWin);
+                    m_waveWin.style.display = DisplayStyle.Flex;
                     break;
                 case BattleResultType.BattleWin:
-                    root.Add(m_battleWin);
+                    m_battleWin.style.display = DisplayStyle.Flex;
                     break;
                 case BattleResultType.GameWin:
                     break;
                 case BattleResultType.Fail:
-                    root.Add(m_fail);
+                    m_fail.style.display = DisplayStyle.Flex;
                     break;
             }
         }
