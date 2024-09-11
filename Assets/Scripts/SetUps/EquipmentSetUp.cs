@@ -15,13 +15,11 @@ namespace SetUps
         public float shootInterval;
         public int shootCount;
         public int bulletCount;
-        public BulletType bulletType;
 
         public EquipmentSetUp(EquipmentSetUp other)
         {
             sprite = other.sprite;
             // damageMultipler = other.damageMultipler;
-            bulletType = other.bulletType;
             bulletCount = other.bulletCount;
             shootCount = other.shootCount;
             seekInterval = other.seekInterval;

@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectType: 3
-  triggerType: 1
+  triggerType: 0
   count: 0
   damage: 2
   duration: 0

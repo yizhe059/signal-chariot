@@ -38,7 +38,7 @@ namespace InGame.BattleFields.Bullets
 
         public BulletSetUp GetSetUp(BulletType type, int level)
         {
-            return m_lib[type][level];
+            return m_lib[type][level-1];
         }
     }
 }

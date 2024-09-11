@@ -351,7 +351,6 @@ MonoBehaviour:
     shootInterval: 1
     shootCount: 3
     bulletCount: 1
-    bulletType: 0
 --- !u!114 &389777221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -870,7 +869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: name
-      value: "\u6FC0\u5149\u5B50\u5F39"
+      value: "\u6FC0\u5149\u4FE1\u53F7"
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: prefab
@@ -882,7 +881,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_Name
-      value: "\u6FC0\u5149\u5B50\u5F39"
+      value: "\u6FC0\u5149\u4FE1\u53F7"
       objectReference: {fileID: 0}
     - target: {fileID: 6579473263901316917, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1372,7 +1371,6 @@ MonoBehaviour:
     shootInterval: 0.05
     shootCount: 2
     bulletCount: 1
-    bulletType: 0
 --- !u!1 &993809584 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9075689799680712317, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
@@ -1927,7 +1925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: name
-      value: "\u9AD8\u7206\u5B50\u5F39"
+      value: "\u9AD8\u7206\u5F39\u4FE1\u53F7"
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: prefab
@@ -1939,7 +1937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_Name
-      value: "\u9AD8\u7206\u5B50\u5F39"
+      value: "\u9AD8\u7206\u5F39\u4FE1\u53F7"
       objectReference: {fileID: 0}
     - target: {fileID: 6579473263901316917, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2031,7 +2029,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: name
-      value: "\u5730\u96F7"
+      value: "\u5730\u96F7\u4FE1\u53F7"
       objectReference: {fileID: 0}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: prefab
@@ -2043,7 +2041,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4810080614412965423, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_Name
-      value: "\u5730\u96F7"
+      value: "\u5730\u96F7\u4FE1\u53F7"
       objectReference: {fileID: 0}
     - target: {fileID: 6579473263901316917, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: m_LocalPosition.x
