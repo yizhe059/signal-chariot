@@ -37,6 +37,8 @@ namespace InGame.InGameStates
 
             int bitmask = UIManager.Instance.GetDisplayBit();
             UIManager.Instance.SetDisplayUI(bitmask);
+
+            m_moduleView.DisplayRange();
         }
 
         public override void Exit()
@@ -54,6 +56,8 @@ namespace InGame.InGameStates
                 UIElements.ModuleInfoCard
             );
             UIManager.Instance.SetDisplayUI(bitmask);
+
+            m_moduleView.HideRange();
         }
 
         private void OnMouseMove(Vector2 worldPos)

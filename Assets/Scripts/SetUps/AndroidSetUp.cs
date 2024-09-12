@@ -1,4 +1,6 @@
 using System;
+using InGame.BattleFields.Androids;
+using InGame.BattleFields.Common;
 
 namespace SetUps
 {   
@@ -23,5 +25,17 @@ namespace SetUps
         public int initialCrystal = 0;
         public int maxCrystal = 50;
         #endregion
+
+        public AndroidSetUp(Android android)
+        {
+            initialHealth = android.Get(LimitedPropertyType.Health, true);
+            maxHealth = android.Get(LimitedPropertyType.Health, false);
+        }
+
+        public void SetAndroid(Android android)
+        {
+            android.Set(LimitedPropertyType.Health, maxHealth, false);
+            android.Set(LimitedPropertyType.Health, initialHealth, true);
+        }
     }
 }

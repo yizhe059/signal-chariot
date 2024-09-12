@@ -41,7 +41,8 @@ namespace InGame.UI
             m_tag.text = content[3];
             m_function.text = content[4];
 
-            Vector2 panelPosition = m_root.WorldToLocal(position);
+            // TODO Fix position
+            Vector2 panelPosition = position;
             Vector2 screenSize = new(Screen.width, Screen.height);
             panelPosition.y = screenSize.y - panelPosition.y;
             panelPosition.x -= screenSize.x * X_DISPLAY_THRESHOLD;

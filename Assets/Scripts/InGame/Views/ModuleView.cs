@@ -1,6 +1,7 @@
 ﻿using System;
 using InGame.Boards.Modules;
 using UnityEngine;
+using Utils.Common;
 
 namespace InGame.Views
 {
@@ -8,9 +9,12 @@ namespace InGame.Views
     {
         private Module m_module;
         private Animator m_animator;
+        private GameObject m_range;
         public void Awake()
         {
             m_animator = GetComponent<Animator>();
+            m_range = transform.Find("Range")?.gameObject;
+            HideRange();
         }
         
 
@@ -43,6 +47,16 @@ namespace InGame.Views
             moduleView.m_module = module;
             moduleView.transform.rotation = rotation;
             return moduleView;
+        }
+
+        public void DisplayRange()
+        {
+            m_range?.SetActive(true);
+        }
+
+        public void HideRange()
+        {
+            m_range?.SetActive(false);
         }
     }
 }

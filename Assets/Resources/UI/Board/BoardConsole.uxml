@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="left" style="flex-grow: 1; flex-direction: row; max-height: 20%; -unity-font-style: normal; font-size: 20px; top: 80%; color: rgb(255, 255, 255); max-width: 50%; background-color: rgb(255, 255, 255); -unity-font-definition: initial; -unity-font: resource(&apos;Fonts/字魂正酷ExtraBold&apos;);">
+    <ui:VisualElement name="left" style="flex-grow: 1; flex-direction: row; max-height: 20%; -unity-font-style: normal; font-size: 20px; top: 80%; color: rgb(255, 255, 255); max-width: 50%; background-color: rgb(255, 255, 255); -unity-font-definition: resource(&apos;Fonts/字魂正酷ExtraBold SDF&apos;); -unity-font: initial;">
         <ui:VisualElement name="buttons" style="flex-grow: 1; max-width: 20%; justify-content: center; align-items: stretch; align-self: auto;">
             <ui:Button text="退出" parse-escape-sequences="true" display-tooltip-when-elided="true" name="exit" style="max-width: none; font-size: 20px; background-color: rgb(217, 91, 91); align-self: auto; align-items: stretch;" />
         </ui:VisualElement>
@@ -29,7 +29,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="right" style="flex-grow: 1; flex-direction: column; max-height: 20%; max-width: 10%; align-items: stretch; align-self: auto; justify-content: center; margin-left: 0; top: 60%; left: 90%; background-color: rgb(255, 255, 255); color: rgb(255, 255, 255); -unity-font-style: normal; -unity-font-definition: initial; -unity-font: resource(&apos;Fonts/字魂正酷ExtraBold&apos;); font-size: 20px;">
+    <ui:VisualElement name="right" style="flex-grow: 1; flex-direction: column; max-height: 20%; max-width: 10%; align-items: stretch; align-self: auto; justify-content: center; margin-left: 0; top: 60%; left: 90%; background-color: rgb(255, 255, 255); color: rgb(255, 255, 255); -unity-font-style: normal; -unity-font-definition: resource(&apos;Fonts/字魂正酷ExtraBold SDF&apos;); -unity-font: initial; font-size: 20px;">
         <ui:Button text="测试" parse-escape-sequences="true" display-tooltip-when-elided="true" name="test" style="font-size: 20px; background-color: rgb(117, 155, 219);" />
         <ui:Button text="扩容" parse-escape-sequences="true" display-tooltip-when-elided="true" name="add" style="font-size: 20px; background-color: rgb(212, 199, 119);" />
         <ui:Button text="出战" parse-escape-sequences="true" display-tooltip-when-elided="true" name="march" style="background-color: rgb(115, 168, 93); font-size: 20px;" />

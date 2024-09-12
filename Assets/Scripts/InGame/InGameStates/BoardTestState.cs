@@ -51,7 +51,8 @@ namespace InGame.InGameStates
             
             m_firstEnemy.SetPosition(new Vector2(32, 32));
             m_secondEnemy.SetPosition(new Vector2(28, 32));
-            
+
+            // TODO store android snapshot
         }
 
         public override void Exit()
@@ -69,6 +70,8 @@ namespace InGame.InGameStates
             UIManager.Instance.SetDisplayUI(bitmask);
             
             GameManager.Instance.GetAndroid().SetPosition(m_androidPos);
+
+            // TODO set android from snapshot
             
             m_firstEnemy.Die();
             m_secondEnemy.Die();
