@@ -17,7 +17,9 @@ namespace SetUps
         public int armor = 0;
         #endregion
 
+        #region Action
         public float speed = 1f;
+        #endregion
 
         #region Resources
         public int initialMod = 0;
@@ -30,12 +32,34 @@ namespace SetUps
         {
             initialHealth = android.Get(LimitedPropertyType.Health, true);
             maxHealth = android.Get(LimitedPropertyType.Health, false);
+            
+            initialMod = (int)android.Get(LimitedPropertyType.Mod, true);
+            maxMod = (int)android.Get(LimitedPropertyType.Mod, false);
+            
+            initialCrystal = (int)android.Get(LimitedPropertyType.Crystal, true);
+            maxCrystal = (int)android.Get(LimitedPropertyType.Crystal, false);
+
+            defense = android.Get(UnlimitedPropertyType.Defense);
+            armor = (int)android.Get(UnlimitedPropertyType.Armor);
+
+            speed = android.Get(UnlimitedPropertyType.Speed);
         }
 
         public void SetAndroid(Android android)
         {
             android.Set(LimitedPropertyType.Health, maxHealth, false);
             android.Set(LimitedPropertyType.Health, initialHealth, true);
+
+            android.Set(LimitedPropertyType.Mod, maxMod, false);
+            android.Set(LimitedPropertyType.Mod, initialMod, true);
+
+            android.Set(LimitedPropertyType.Crystal, maxCrystal, false);
+            android.Set(LimitedPropertyType.Crystal, initialCrystal, true);
+
+            android.Set(UnlimitedPropertyType.Defense, defense);
+            android.Set(UnlimitedPropertyType.Armor, armor);
+
+            android.Set(UnlimitedPropertyType.Speed, speed);
         }
     }
 }
