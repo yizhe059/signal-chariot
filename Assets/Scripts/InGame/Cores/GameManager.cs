@@ -112,6 +112,7 @@ namespace InGame.Cores
             var cameraPrefab = Resources.Load<CameraManager>(Constants.GO_CAMERA_PATH);
             m_cameraManager = Instantiate(cameraPrefab);
             m_cameraManager.transform.position = Vector3.zero;
+            
 
             m_cameraManager.SetBattleCameraFollow(m_androidView?.gameObject);
 
@@ -148,6 +149,8 @@ namespace InGame.Cores
         public EnemySpawnController GetEnemySpawnController() => m_enemySpawnController;
         public InGameStateType GetCurrentInGameState() => WorldState.instance.currentState.type;
         public ModManager GetModManager() => m_modManager;
+
+        public EnemyLib GetEnemyLib() => m_enemyLib;
 
         public ModuleDescriptionDisplayManager GetModuleDescriptionDisplayManager() =>
             m_moduleDescriptionDisplayManager;

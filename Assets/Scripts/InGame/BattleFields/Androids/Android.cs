@@ -263,5 +263,10 @@ namespace InGame.BattleFields.Androids
         {
             return m_androidView.GetPosition();
         }
+        
+        public void SetPosition(Vector2 newPos)
+        {
+            m_androidView.SetPosition(newPos);
+        }
     }
 }
