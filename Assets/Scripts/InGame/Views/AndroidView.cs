@@ -123,6 +123,14 @@ namespace InGame.Views
             return new Vector2(transform.position.x, transform.position.y);
         }
 
+        public void SetPosition(Vector2 newPos)
+        {
+            Vector3 pos = newPos;
+            pos.z = transform.position.z;
+            
+            transform.position = pos;
+        }
+
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;

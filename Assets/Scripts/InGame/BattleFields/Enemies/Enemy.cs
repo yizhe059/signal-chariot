@@ -209,6 +209,7 @@ namespace InGame.BattleFields.Enemies
         public void TakeDamage(float dmg)
         {
             this.m_health.current -= dmg;
+
             if(this.m_health.current <= 0) Die();
         }
 

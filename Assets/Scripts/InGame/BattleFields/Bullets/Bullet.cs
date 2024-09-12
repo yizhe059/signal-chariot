@@ -122,7 +122,6 @@ namespace InGame.BattleFields.Bullets
         public void DealDamage(IDamageable target, float dmg)
         {
             target.TakeDamage(dmg);
-            this.Die();
         }
     }
 }

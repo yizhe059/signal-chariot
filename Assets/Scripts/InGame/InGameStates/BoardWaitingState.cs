@@ -14,7 +14,8 @@ namespace InGame.InGameStates
         private BoardView m_boardView;
         private Board m_board, m_extraBoard;
         private ModuleDescriptionDisplayManager m_displayManager;
-        
+        private Vector2 m_androidPos;
+
         
         private float m_notMovingAccumulatedTime = 0f;
         private const float SelectThreshold = Constants.SELECT_THRESHOLD;
@@ -42,6 +43,11 @@ namespace InGame.InGameStates
                 UIElements.BoardConsole
             );
             UIManager.Instance.SetDisplayUI(bitmask);
+            
+            // To do: Put this to a larger state
+            var android = GameManager.Instance.GetAndroid();
+            m_androidPos = android.GetPosition();
+            android.SetPosition(new Vector2(30, 30));
         }
 
         public override void Exit()
@@ -64,6 +70,8 @@ namespace InGame.InGameStates
                 UIElements.ModuleInfoCard
             );
             UIManager.Instance.SetDisplayUI(bitmask);
+            
+            GameManager.Instance.GetAndroid().SetPosition(m_androidPos);
         }
 
         private void OnClicked(Vector2 worldPosition)
