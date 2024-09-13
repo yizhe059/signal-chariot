@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace InGame.Boards.Modules
 {
-    public class ModuleDescriptionDisplayManager
+    public class ModuleInfoDisplayManager
     {
         private InputManager m_inputManager;
         private bool m_isOn;
         private Vector2 m_currentScreenPos;
         
-        public ModuleDescriptionDisplayManager(InputManager inputManager)
+        public ModuleInfoDisplayManager(InputManager inputManager)
         {
             m_inputManager = inputManager;
         }
@@ -24,13 +24,13 @@ namespace InGame.Boards.Modules
         public void Start()
         {
             m_isOn = true;
-            m_inputManager.RegisterScreenMouseMoveEvent(OnMouseMove);
+            // m_inputManager.RegisterScreenMouseMoveEvent(OnMouseMove);
         }
 
         public void Stop()
         {
             m_isOn = false;
-            m_inputManager.UnregisterScreenMouseMoveEvent(OnMouseMove);
+            // m_inputManager.UnregisterScreenMouseMoveEvent(OnMouseMove);
         }
 
         public void DisplayModule(Module module)
@@ -44,7 +44,7 @@ namespace InGame.Boards.Modules
                 module.tag,
                 module.function
             };
-            if (boardConsoleUI != null) boardConsoleUI.DisplayModuleInfo(content);
+            if (boardConsoleUI != null) boardConsoleUI.moduleInfoUI.SetInfo(content);
         }
 
         public void UndisplayModule(Module module)
@@ -52,7 +52,7 @@ namespace InGame.Boards.Modules
             if (!m_isOn) return;
             BoardConsoleUI boardConsoleUI = UIManager.Instance.GetUI(UIElements.
             BoardConsole) as BoardConsoleUI;
-            if (boardConsoleUI != null) boardConsoleUI.ClearModuleInfo();
+            if (boardConsoleUI != null) boardConsoleUI.moduleInfoUI.ClearInfo();
         }
     }
 }

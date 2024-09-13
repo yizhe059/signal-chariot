@@ -40,7 +40,7 @@ namespace InGame.Cores
         private GeneralBoard m_generalBoard;
         private ModuleLib m_moduleLib;
         private GeneralSignalController m_generalSignalController;
-        private ModuleDescriptionDisplayManager m_moduleDescriptionDisplayManager;
+        private ModuleInfoDisplayManager m_moduleDescriptionDisplayManager;
 
         [Header("Enemy")]
         private EnemySpawnLib m_enemySpawnLib;
@@ -104,7 +104,7 @@ namespace InGame.Cores
             m_generalSignalController = new GeneralSignalController(board, boardView);
             m_generalBoard = GeneralBoard.CreateGeneralBoard(board, extraBoard, boardView);
 
-            m_moduleDescriptionDisplayManager = new ModuleDescriptionDisplayManager(m_inputManager);
+            m_moduleDescriptionDisplayManager = new ModuleInfoDisplayManager(m_inputManager);
         }
 
         private void InitCamera()
@@ -152,7 +152,7 @@ namespace InGame.Cores
 
         public EnemyLib GetEnemyLib() => m_enemyLib;
 
-        public ModuleDescriptionDisplayManager GetModuleDescriptionDisplayManager() =>
+        public ModuleInfoDisplayManager GetModuleInfoDisplayManager() =>
             m_moduleDescriptionDisplayManager;
         #endregion
 

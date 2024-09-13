@@ -16,17 +16,14 @@ namespace InGame.UI
         private Button m_slotButton;
         private Button m_exitButton;
         private Button m_marchButton;
-        private Label m_name;
-        private Label m_category;
-        private Label m_desc;
-        private Label m_tag;
-        private Label m_function;
+        private ModuleInfoUI m_moduleInfoUI;
+        public ModuleInfoUI moduleInfoUI { get { return m_moduleInfoUI;}}
 
         private void Awake()
         {
             m_root = m_doc.rootVisualElement;
             Register();
-            InitModuleInfo();
+            m_moduleInfoUI = new ModuleInfoUI(m_root.Q("module"));
         }
 
         private void Start()
@@ -82,34 +79,6 @@ namespace InGame.UI
                 m_testButton.text = "测试";
                 GameManager.Instance.ChangeToAddSlotState();
             }
-        }
-
-        private void InitModuleInfo()
-        {
-            m_name = m_root.Q<Label>("name");
-            m_category = m_root.Q<Label>("category");
-            m_desc = m_root.Q<Label>("description");
-            m_tag = m_root.Q<Label>("tag");
-            m_function = m_root.Q<Label>("functionality");
-            ClearModuleInfo();
-        }
-
-        public void DisplayModuleInfo(string[] content)
-        {
-            m_name.text = content[0];
-            m_category.text = content[1];
-            m_desc.text = content[2];
-            m_tag.text = content[3];
-            m_function.text = content[4];
-        }
-
-        public void ClearModuleInfo()
-        {
-            m_name.text = "";
-            m_category.text = "";
-            m_desc.text = "";
-            m_tag.text = "";
-            m_function.text = "";
         }
 
         public void Hide()

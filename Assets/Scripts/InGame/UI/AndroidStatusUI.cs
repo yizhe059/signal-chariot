@@ -1,4 +1,3 @@
-using System;
 using InGame.BattleFields.Androids;
 using InGame.BattleFields.Common;
 using InGame.Cores;

@@ -13,7 +13,7 @@ namespace InGame.InGameStates
         public override InGameStateType type => InGameStateType.BoardWaitingState;
         private BoardView m_boardView;
         private Board m_board, m_extraBoard;
-        private ModuleDescriptionDisplayManager m_displayManager;
+        private ModuleInfoDisplayManager m_displayManager;
         private Vector2 m_androidPos;
 
         
@@ -169,7 +169,7 @@ namespace InGame.InGameStates
                 m_board = board,
                 m_extraBoard = extraBoard,
                 m_boardView = boardView,
-                m_displayManager = GameManager.Instance.GetModuleDescriptionDisplayManager()
+                m_displayManager = GameManager.Instance.GetModuleInfoDisplayManager()
             };
             return state;
         }
