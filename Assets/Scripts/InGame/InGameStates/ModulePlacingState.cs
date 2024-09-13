@@ -52,8 +52,7 @@ namespace InGame.InGameStates
             int bitmask = UIManager.Instance.GetDisplayBit(
                 UIElements.BoardConsole,
                 UIElements.BattleConsole,
-                UIElements.BattleResult,
-                UIElements.ModuleInfoCard
+                UIElements.BattleResult
             );
             UIManager.Instance.SetDisplayUI(bitmask);
 

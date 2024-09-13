@@ -62,7 +62,6 @@ namespace InGame.InGameStates
             Debug.Log("Exit AddSlot");
 
             int bitmask = UIManager.Instance.GetDisplayBit(
-                UIElements.ModuleInfoCard,
                 UIElements.BattleConsole,
                 UIElements.BattleResult
             );

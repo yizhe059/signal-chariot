@@ -13,7 +13,6 @@ namespace InGame.UI
         BattleConsole,
         BattleResult,
         BoardConsole,
-        ModuleInfoCard, // TODO delete
         Default,
     }
 
@@ -119,8 +118,6 @@ namespace InGame.UI
                     return UIElements.BattleResult;
                 case "BoardConsole":
                     return UIElements.BoardConsole;
-                case "ModuleInfoCard":
-                    return UIElements.ModuleInfoCard;
                 case "MainMenu":
                     return UIElements.MainMenu;
                 case "Tutorial":

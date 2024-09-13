@@ -36,12 +36,7 @@ namespace InGame.Boards.Modules
         public void DisplayModule(Module module)
         {
             if (!m_isOn) return;
-            int bitmask = UIManager.Instance.GetDisplayBit(
-                UIElements.ModuleInfoCard
-            );
-            UIManager.Instance.AddDisplayUI(bitmask);
-
-            ModuleCardUI moduleCardUI = UIManager.Instance.GetUI(UIElements.ModuleInfoCard) as ModuleCardUI;
+            BoardConsoleUI boardConsoleUI = UIManager.Instance.GetUI(UIElements.BoardConsole) as BoardConsoleUI;
             string[] content = new string[5]{
                 module.name,
                 module.category.ToString(),
@@ -49,16 +44,15 @@ namespace InGame.Boards.Modules
                 module.tag,
                 module.function
             };
-            if (moduleCardUI != null) moduleCardUI.SetContent(content, m_currentScreenPos);
+            if (boardConsoleUI != null) boardConsoleUI.DisplayModuleInfo(content);
         }
 
         public void UndisplayModule(Module module)
         {
             if (!m_isOn) return;
-            int bitmask = UIManager.Instance.GetDisplayBit(
-                UIElements.ModuleInfoCard
-            );
-            UIManager.Instance.RemoveDisplayUI(bitmask);
+            BoardConsoleUI boardConsoleUI = UIManager.Instance.GetUI(UIElements.
+            BoardConsole) as BoardConsoleUI;
+            if (boardConsoleUI != null) boardConsoleUI.ClearModuleInfo();
         }
     }
 }
