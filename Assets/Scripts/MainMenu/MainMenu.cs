@@ -20,7 +20,13 @@ namespace MainMenu
         private void Start()
         {
             m_root = m_doc.rootVisualElement;
+            
             Register();
+
+            int bitmask = UIManager.Instance.GetDisplayBit(
+                UIElements.Tutorial
+            );
+            UIManager.Instance.RemoveDisplayUI(bitmask);
         }
 
         private void Register()
@@ -49,10 +55,10 @@ namespace MainMenu
 
         private void OnTutPressed()
         {
-            // int bitmask = UIManager.Instance.GetDisplayBit(
-                // UIElements.Tutorial
-            // );
-            // UIManager.Instance.AddDisplayUI(bitmask);
+            int bitmask = UIManager.Instance.GetDisplayBit(
+                UIElements.Tutorial
+            );
+            UIManager.Instance.AddDisplayUI(bitmask);
         }
 
         private void OnQuitPressed()

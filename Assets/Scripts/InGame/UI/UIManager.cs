@@ -121,6 +121,10 @@ namespace InGame.UI
                     return UIElements.BoardConsole;
                 case "ModuleInfoCard":
                     return UIElements.ModuleInfoCard;
+                case "MainMenu":
+                    return UIElements.MainMenu;
+                case "Tutorial":
+                    return UIElements.Tutorial;
                 default:
                     return UIElements.Default;
             }

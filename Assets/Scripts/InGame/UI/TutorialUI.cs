@@ -14,10 +14,10 @@ namespace InGame.UI
         {
             m_close = m_doc.rootVisualElement.Q<Button>("close");
             m_close.clicked += () => {
-                // int bitmask = UIManager.Instance.GetDisplayBit(
-                    // UIElements.Tutorial
-                // );
-                // UIManager.Instance.RemoveDisplayUI(bitmask);
+                int bitmask = UIManager.Instance.GetDisplayBit(
+                    UIElements.Tutorial
+                );
+                UIManager.Instance.RemoveDisplayUI(bitmask);
             };
         }
 
