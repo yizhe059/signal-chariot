@@ -8,10 +8,12 @@ namespace InGame.UI
 {
     public enum UIElements
     {
+        MainMenu,
+        Tutorial,
         BattleConsole,
         BattleResult,
         BoardConsole,
-        ModuleInfoCard,
+        ModuleInfoCard, // TODO delete
         Default,
     }
 

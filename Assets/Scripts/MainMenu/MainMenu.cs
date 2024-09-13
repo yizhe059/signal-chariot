@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 using InGame;
-using Utils;
+using InGame.UI;
+
 using Utils.Common;
 
 namespace MainMenu
@@ -14,8 +15,9 @@ namespace MainMenu
         private VisualElement m_root;
         private Button m_startButton;
         private Button m_quitButton;
+        private Button m_tutButton;
 
-        private void Awake()
+        private void Start()
         {
             m_root = m_doc.rootVisualElement;
             Register();
@@ -24,10 +26,15 @@ namespace MainMenu
         private void Register()
         {
             m_startButton = m_root.Q<Button>("start");
+            m_tutButton = m_root.Q<Button>("tutorial");
             m_quitButton = m_root.Q<Button>("quit");
 
             m_startButton.clicked += () => {
                 OnStartPressed();
+            };
+
+            m_tutButton.clicked += () => {
+                OnTutPressed();
             };
 
             m_quitButton.clicked += () => {
@@ -38,6 +45,14 @@ namespace MainMenu
         private void OnStartPressed()
         {
             Game.Instance.nextState = new WorldState();
+        }
+
+        private void OnTutPressed()
+        {
+            // int bitmask = UIManager.Instance.GetDisplayBit(
+                // UIElements.Tutorial
+            // );
+            // UIManager.Instance.AddDisplayUI(bitmask);
         }
 
         private void OnQuitPressed()

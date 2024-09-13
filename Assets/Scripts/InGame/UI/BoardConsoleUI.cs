@@ -5,7 +5,6 @@ using UnityEngine.UIElements;
 using InGame.Cores;
 using Utils.Common;
 using InGame.InGameStates;
-using Utils;
 
 namespace InGame.UI
 {
@@ -13,7 +12,6 @@ namespace InGame.UI
     {
         [SerializeField] private UIDocument m_doc;
         private VisualElement m_root;
-        private AndroidStatusUI m_status;
         private Button m_testButton;
         private Button m_slotButton;
         private Button m_exitButton;
@@ -27,7 +25,7 @@ namespace InGame.UI
 
         private void Start()
         {
-            m_status = new AndroidStatusUI(m_root.Q("status")); // stay in start
+            new AndroidStatusUI(m_root.Q("status")); // stay in start
         }
 
         private void Register()
