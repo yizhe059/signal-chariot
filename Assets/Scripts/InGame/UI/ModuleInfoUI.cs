@@ -29,6 +29,7 @@ namespace InGame.UI
 
         public void SetInfo(string[] content)
         {
+            // TODO: set other info
             m_name.text = content[0];
             m_category.text = content[1];
             m_desc.text = content[2];
