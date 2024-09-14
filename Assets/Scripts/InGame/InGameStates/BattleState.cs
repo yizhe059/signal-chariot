@@ -19,6 +19,8 @@ namespace InGame.InGameStates
         public override void Enter(InGameState last)
         {
             Debug.Log("Enter battle");
+            // Todo: put this in preparing big state
+            GameManager.Instance.GetGeneralBoard().RemoveAllExtraBoardModules();
             
             GameManager.Instance.GetGeneralBoard().Reset();
             #region Camera

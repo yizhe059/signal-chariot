@@ -94,7 +94,7 @@ namespace InGame.Boards.Signals
 
         private void FuseOppositeDirSignals()
         {
-            ExecuteFunctions(controller => controller.FuseBorderSignals());
+            ExecuteFunctions(controller => controller.FuseOppositeDirSignals());
         }
 
         private void TriggerSignals(float deltaTime, float currentTime)

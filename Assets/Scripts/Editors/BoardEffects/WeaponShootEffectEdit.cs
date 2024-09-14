@@ -12,11 +12,13 @@ namespace Editors.Effects
         public float dissipationRate;
         [Min(0f)][Tooltip("每次发射产生的热量")]
         public float heatCostPerShot;
+        [Min(0f)][Tooltip("电荷容量。电荷容量为0时代表永远为打出第二级子弹")]
+        public int electricCapacity;
         
         public override Effect CreateEffect()
         {
             if (heatGauge < 0.001f) heatGauge = 0.001f;
-            return WeaponShootEffect.CreateEffect(heatGauge, dissipationRate, heatCostPerShot);
+            return WeaponShootEffect.CreateEffect(heatGauge, dissipationRate, heatCostPerShot, electricCapacity);
         }
     }
 }

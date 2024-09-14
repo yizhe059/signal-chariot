@@ -151,7 +151,7 @@ namespace InGame.Boards.Signals
             }
         }
 
-        private void FuseOppositeDirSignals()
+        public void FuseOppositeDirSignals()
         {
             for (int x = 0; x < m_signalDistributions.width; x++)
             {

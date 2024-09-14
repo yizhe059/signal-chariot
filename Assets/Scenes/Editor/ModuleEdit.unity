@@ -1391,6 +1391,7 @@ MonoBehaviour:
   heatGauge: 0.001
   dissipationRate: 0
   heatCostPerShot: 0
+  electricCapacity: 4
 --- !u!1 &1001078193
 GameObject:
   m_ObjectHideFlags: 0
