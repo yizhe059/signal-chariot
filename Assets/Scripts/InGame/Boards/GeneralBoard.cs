@@ -24,6 +24,12 @@ namespace InGame.Boards
             }
         }
 
+        public void RemoveAllExtraBoardModules()
+        {
+            extraBoard.DestroyAllModules();
+            
+        }
+
         public void Reset()
         {
             board.Reset();

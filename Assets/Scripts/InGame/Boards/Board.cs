@@ -270,6 +270,20 @@ namespace InGame.Boards
             return module;
         }
 
+        public void DestroyAllModules()
+        {
+            for (int x = 0; x < m_width; x++)
+            {
+                for (int y = 0; y < m_height; y++)
+                {
+                    if (GetSlotStatus(x, y) == SlotStatus.Occupied)
+                    {
+                        var module = RemoveModule(x, y);
+                        GameManager.Instance.GetModuleLib().RemoveModule(module);
+                    }
+                }
+            }
+        }
         public Module GetModule(int x, int y)
         {
             if (GetSlotStatus(x, y) != SlotStatus.Occupied) return null;
@@ -285,10 +299,29 @@ namespace InGame.Boards
         public void SetSlotStatus(int x, int y, SlotStatus status)
         {
             Slot slot = GetValue(x, y);
-            if (slot != null)
+            if (slot == null) return;
+
+            slot.status = status;
+            m_onStatusChanged.Invoke(x, y, status);
+
+            var adjSlots = GetAdjacentSlots(x, y, SlotStatus.Occupied);
+            if (m_noEffectTrigger) return;
+            foreach (var adjSlot in adjSlots)
             {
-                slot.status = status;
-                m_onStatusChanged.Invoke(x, y, status);
+                var module = GetModule(adjSlot.x, adjSlot.y);
+                var pivotPos = module.GetPivotBoardPosition();
+                
+                module.UnTriggerPlacingEffect(new EffectBlackBoard
+                {
+                    slot = GetValue(pivotPos.x, pivotPos.y),
+                });
+                
+                module.TriggerPlacingEffect(new EffectBlackBoard
+                {
+                    slot = GetValue(pivotPos.x, pivotPos.y),
+                    module = module
+                });
+                    
             }
         }
 
@@ -452,14 +485,15 @@ namespace InGame.Boards
             }
             return adjacentSlot;
         }
-        
+
         /// <summary>
         /// Get all the adjacent slot of a single slot
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
+        /// <param name="status"></param>
         /// <returns></returns>
-        public List<BoardPosition> GetAdjacentSlots(int x, int y)
+        public List<BoardPosition> GetAdjacentSlots(int x, int y, SlotStatus status = SlotStatus.Hidden)
         {
             var adjacentSlot = new List<BoardPosition>();
 
@@ -473,7 +507,7 @@ namespace InGame.Boards
 
                     if (GetSlotStatus(x + deltaX, y + deltaY, out SlotStatus adjStatus))
                     {
-                        if (adjStatus == SlotStatus.Hidden)
+                        if (adjStatus == status)
                         {
                             adjacentSlot.Add(new BoardPosition { x = x + deltaX, y = y + deltaY });
                         }

@@ -12,7 +12,9 @@ namespace InGame.Effects.EffectElement
         public float heatGauge;
         public float dissipationRate;
         public float heatCostPerShot;
-
+        public int electricCapacity;
+        
+        private int m_currentElectricCharge = 0;
         private float m_currentHeat = 0;
         private bool m_isOverHeated = false;
         private float m_lastRecordedTime = -1f;
@@ -48,7 +50,21 @@ namespace InGame.Effects.EffectElement
             float dissipationEnergy = dissipationRate * delta;
             ReduceHeat(dissipationEnergy);
         }
+
+        private void IncreaseElectricCharge(int delta)
+        {
+            m_currentElectricCharge += delta;
+            m_currentElectricCharge = Mathf.Clamp(m_currentElectricCharge, 0, electricCapacity);
+        }
+
+        private void ClearElectricCharge()
+        {
+            m_currentElectricCharge = 0;
+        }
+
+        private int GetCurrentElectricCharge() => m_currentElectricCharge;
         
+
         public override void OnTrigger(EffectBlackBoard blackBoard)
         {
             
@@ -61,8 +77,19 @@ namespace InGame.Effects.EffectElement
             
             AddHeat(heatCostPerShot);
 
+            int bulletLevel = 1;
+            if (GetCurrentElectricCharge() == electricCapacity)
+            {
+                bulletLevel++;
+                ClearElectricCharge();
+            }
+            else
+            {
+                IncreaseElectricCharge(1);
+            }
+            
             GameManager.Instance.GetAndroid().GetEquipmentManager().
-            EquipmentEffect(m_module, bulletType, 1, m_buff.CreateCopy() as WeaponBuff);
+            EquipmentEffect(m_module, bulletType, bulletLevel, m_buff.CreateCopy() as WeaponBuff);
         }
 
         protected override void OnReset()
@@ -99,17 +126,19 @@ namespace InGame.Effects.EffectElement
                 heatGauge = heatGauge,
                 dissipationRate = dissipationRate,
                 heatCostPerShot = heatCostPerShot,
+                electricCapacity = electricCapacity
             };
         }
         
 
-        public static WeaponShootEffect CreateEffect(float heatGauge, float dissipationRate, float heatCostPerShot)
+        public static WeaponShootEffect CreateEffect(float heatGauge, float dissipationRate, float heatCostPerShot, int electricCapacity)
         {
             return new WeaponShootEffect
             {
                 heatGauge = heatGauge,
                 dissipationRate = dissipationRate,
                 heatCostPerShot = heatCostPerShot,
+                electricCapacity = electricCapacity
             };
         }
     }

@@ -28,6 +28,11 @@ namespace InGame.Boards.Modules
             return Module.CreateModule(m_modules[id]);
         }
 
+        public void RemoveModule(Module module)
+        {
+            module.SelfDestroy();
+        }
+
         public override string ToString()
         {
             var result = "";

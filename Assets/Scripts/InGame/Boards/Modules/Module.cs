@@ -441,7 +441,13 @@ namespace InGame.Boards.Modules
         }
         #endregion
         
-        
+        #region Life Cycle
+
+        public void SelfDestroy()
+        {
+            m_moduleView?.SelfDestroy();
+        }
+        #endregion
         #region static method
         public static Orientation RotateClockwise(Orientation current)
         {

@@ -49,6 +49,12 @@ namespace InGame.Views
             return moduleView;
         }
 
+        public void SelfDestroy()
+        {
+            // Todo: Maybe Destroy it in ModuleLib
+            Destroy(gameObject);
+        }
+        
         public void DisplayRange()
         {
             m_range?.SetActive(true);

@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using InGame.BattleFields.Bullets;
 using InGame.Boards.Modules.ModuleBuffs;
 using InGame.Boards.Signals;
 using InGame.Cores;
 using UnityEngine;
+using Utils;
 
 namespace InGame.Effects.EffectElement
 {
@@ -35,13 +37,31 @@ namespace InGame.Effects.EffectElement
         private void ShootBullets()
         {
             var equipmentManager = GameManager.Instance.GetAndroid().GetEquipmentManager();
+            BulletType curBulletType = default;
+            int curLevel = 0;
             while (m_bullets.Count != 0)
             {
                 var type = m_bullets.Dequeue();
                 
                 var bulletType = Signal.SignalTypeToBulletType(type);
-                Debug.Log($"Shoot Bullet： {bulletType}");
-                equipmentManager.EquipmentEffect(m_module, bulletType, 1, m_weaponBuff.CreateCopy() as WeaponBuff);
+
+                if (bulletType == curBulletType)
+                {
+                    curLevel++;
+                    if (curLevel == Constants.MAX_BULLET_LEVEL)
+                    {
+                        equipmentManager.EquipmentEffect(m_module, curBulletType, curLevel, m_weaponBuff.CreateCopy() as WeaponBuff);
+                        curLevel = 0;
+                    }
+                }
+                else
+                {
+                    if (curLevel > 0) equipmentManager.EquipmentEffect(m_module, curBulletType, curLevel, m_weaponBuff.CreateCopy() as WeaponBuff);
+                    curBulletType = bulletType;
+                    curLevel = 1;
+                }
+
+                //equipmentManager.EquipmentEffect(m_module, bulletType, 1, m_weaponBuff.CreateCopy() as WeaponBuff);
             }
         }
         
