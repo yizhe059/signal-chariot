@@ -22,9 +22,9 @@ namespace InGame.InGameStates
             GameManager.Instance.GetGeneralBoard().Reset();
             
             var cameraManager = GameManager.Instance.GetCameraManager();
-            cameraManager.BoardCameraSetActive(true);
-            cameraManager.MiniBoardCameraSetActive(false);
-            cameraManager.BattleCameraSetActive(false);
+            cameraManager.SetBoardActive(true);
+            cameraManager.SetBoardThumbnailActive(false);
+            cameraManager.SetBattleActive(false);
             
             m_timeEffectManager.Reset();
             m_signalController.Reset();

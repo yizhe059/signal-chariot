@@ -26,9 +26,9 @@ namespace InGame.InGameStates
             m_exiting = false;
             
             var cameraManager = GameManager.Instance.GetCameraManager();
-            cameraManager.BoardCameraSetActive(true);
-            cameraManager.MiniBoardCameraSetActive(false);
-            cameraManager.BattleCameraSetActive(false);
+            cameraManager.SetBoardActive(true);
+            cameraManager.SetBoardThumbnailActive(false);
+            cameraManager.SetBattleActive(false);
             
             var boardCamera = cameraManager.boardCamera;
             GameManager.Instance.GetInputManager().RegisterMouseMoveEvent(boardCamera, OnMouseMove);

@@ -529,7 +529,7 @@ namespace InGame.BattleFields.Enemies
             // To Do Generate the location in a location manager
             Vector2 min = new Vector2(-9f, -9f), max = new Vector2(9f, 9f);
             var playerPos = GameManager.Instance.GetAndroid().GetPosition();
-            var cameraSize = GameManager.Instance.GetCameraManager().GetBattleCameraSize();
+            var cameraSize = GameManager.Instance.GetCameraManager().GetBattleSize();
             var minPlayer = playerPos - new Vector2(cameraSize.x/2, cameraSize.y/2);
             var maxPlayer = playerPos + new Vector2(cameraSize.x/2, cameraSize.y/2);;
 

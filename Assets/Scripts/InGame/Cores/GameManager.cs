@@ -104,7 +104,7 @@ namespace InGame.Cores
             m_generalSignalController = new GeneralSignalController(board, boardView);
             m_generalBoard = GeneralBoard.CreateGeneralBoard(board, extraBoard, boardView);
 
-            m_moduleDescriptionDisplayManager = new ModuleInfoDisplayManager(m_inputManager);
+            m_moduleDescriptionDisplayManager = new ModuleInfoDisplayManager();
         }
 
         private void InitCamera()
@@ -113,7 +113,6 @@ namespace InGame.Cores
             m_cameraManager = Instantiate(cameraPrefab);
             m_cameraManager.transform.position = Vector3.zero;
             
-
             m_cameraManager.SetBattleCameraFollow(m_androidView?.gameObject);
 
             m_cameraManager.SetMiniBoardCameraPosition(GetBoardView().transform.position);
@@ -125,6 +124,7 @@ namespace InGame.Cores
             m_timeEffectManager?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
             m_generalSignalController?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
             m_enemySpawnController?.Update(UnityEngine.Time.deltaTime);
+            m_cameraManager?.UpdateBattlePosition(); // TODO
         }
 
         public void Clear()

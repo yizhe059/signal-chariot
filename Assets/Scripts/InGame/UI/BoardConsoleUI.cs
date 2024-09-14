@@ -16,6 +16,7 @@ namespace InGame.UI
         private Button m_slotButton;
         private Button m_exitButton;
         private Button m_marchButton;
+        private VisualElement m_log;
         private ModuleInfoUI m_moduleInfoUI;
         public ModuleInfoUI moduleInfoUI { get { return m_moduleInfoUI;}}
 
@@ -23,11 +24,12 @@ namespace InGame.UI
         {
             m_root = m_doc.rootVisualElement;
             Register();
-            m_moduleInfoUI = new ModuleInfoUI(m_root.Q("module"));
         }
 
         private void Start()
         {
+            m_log = m_root.Q("log");
+            m_moduleInfoUI = new ModuleInfoUI(m_root.Q("module"));
             new AndroidStatusUI(m_root.Q("status")); // stay in start
         }
 

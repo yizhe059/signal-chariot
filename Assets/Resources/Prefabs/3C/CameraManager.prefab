@@ -158,9 +158,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2658575108869463433}
   - {fileID: 9002918844891526573}
   - {fileID: 2370542228247132741}
+  - {fileID: 2658575108869463433}
   - {fileID: 4447770411802223313}
   - {fileID: 8778713400582882675}
   m_Father: {fileID: 0}
@@ -177,11 +177,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5696d568d3d34084bb2bf87ae4578423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_boardCamera: {fileID: 1842252410422755935}
-  m_boardThumbnailCamera: {fileID: 5925833667066839654}
-  m_battleCamera: {fileID: 1163668498271188895}
-  m_battleSimulationCamera: {fileID: 7311800439909820095}
+  m_cameras:
+  - {fileID: 1842252410422755935}
+  - {fileID: 5925833667066839654}
+  - {fileID: 1163668498271188895}
+  - {fileID: 7311800439909820095}
   m_battleVirtualCamera: {fileID: 7302969138994297402}
+  battleBoundaries:
+  - -10
+  - 10
+  - -10
+  - 10
 --- !u!1 &5156874556526978143
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,7 +490,7 @@ GameObject:
   - component: {fileID: 8321172706159494978}
   - component: {fileID: 5170821894564466068}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: BattleCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -654,7 +660,7 @@ GameObject:
   - component: {fileID: 7311800439909820095}
   - component: {fileID: 1076406383953163076}
   m_Layer: 0
-  m_Name: BattleSimulationCamera
+  m_Name: BattleTestCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

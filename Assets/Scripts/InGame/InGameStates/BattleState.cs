@@ -30,13 +30,13 @@ namespace InGame.InGameStates
             var length = Mathf.Max(delta.x, delta.y);
             
             var cameraManager = GameManager.Instance.GetCameraManager();
-            cameraManager.BoardCameraSetActive(false);
+            cameraManager.SetBoardActive(false);
             
-            cameraManager.MiniBoardCameraSetActive(true);
+            cameraManager.SetBoardThumbnailActive(true);
             cameraManager.SetMiniBoardCameraPosition(center);
-            cameraManager.SetMiniBoardCameraSize(length / 2);
+            cameraManager.SetBoardThumbnailSize(length / 2);
             
-            cameraManager.BattleCameraSetActive(true);
+            cameraManager.SetBattleActive(true);
             #endregion
             
             GameManager.Instance.GetInputManager().RegisterMoveEvent(OnMoveKeyPressed);

@@ -1,36 +1,24 @@
-﻿using InGame.Cores;
-using InGame.UI;
-
-using UnityEngine;
+﻿using InGame.UI;
 
 namespace InGame.Boards.Modules
 {
     public class ModuleInfoDisplayManager
     {
-        private InputManager m_inputManager;
         private bool m_isOn;
-        private Vector2 m_currentScreenPos;
         
-        public ModuleInfoDisplayManager(InputManager inputManager)
+        public ModuleInfoDisplayManager()
         {
-            m_inputManager = inputManager;
-        }
-
-        private void OnMouseMove(Vector2 pos)
-        {
-            m_currentScreenPos = pos;
+            
         }
 
         public void Start()
         {
             m_isOn = true;
-            // m_inputManager.RegisterScreenMouseMoveEvent(OnMouseMove);
         }
 
         public void Stop()
         {
             m_isOn = false;
-            // m_inputManager.UnregisterScreenMouseMoveEvent(OnMouseMove);
         }
 
         public void DisplayModule(Module module)

@@ -28,9 +28,9 @@ namespace InGame.InGameStates
             Debug.Log("Enter board waiting");
             var cameraManager = GameManager.Instance.GetCameraManager();
 
-            cameraManager.BoardCameraSetActive(true);
-            cameraManager.MiniBoardCameraSetActive(false);
-            cameraManager.BattleCameraSetActive(false);
+            cameraManager.SetBoardActive(true);
+            cameraManager.SetBoardThumbnailActive(false);
+            cameraManager.SetBattleActive(false);
 
             var boardCamera = cameraManager.boardCamera;
 

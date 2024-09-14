@@ -22,9 +22,9 @@ namespace InGame.InGameStates
         {
             Debug.Log("Enter AddSlot");
             var cameraManager = GameManager.Instance.GetCameraManager();
-            cameraManager.BoardCameraSetActive(true);
-            cameraManager.MiniBoardCameraSetActive(false);
-            cameraManager.BattleCameraSetActive(false);
+            cameraManager.SetBoardActive(true);
+            cameraManager.SetBoardThumbnailActive(false);
+            cameraManager.SetBattleActive(false);
             
             // change all the adjacent slot to selectable
             m_selectableSlots = m_board.GetAdjacentSlots();
