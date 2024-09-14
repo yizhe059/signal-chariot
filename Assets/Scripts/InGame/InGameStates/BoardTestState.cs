@@ -2,6 +2,7 @@
 using InGame.Boards.Signals;
 using InGame.UI;
 using InGame.Cores;
+using SetUps;
 using UnityEngine;
 
 namespace InGame.InGameStates
@@ -14,6 +15,7 @@ namespace InGame.InGameStates
         private GeneralSignalController m_signalController;
         private Vector2 m_androidPos;
         private Enemy m_firstEnemy, m_secondEnemy;
+        private AndroidSetUp m_androidSnapshot;
         
         public override void Enter(InGameState last)
         {
@@ -42,6 +44,7 @@ namespace InGame.InGameStates
             var android = GameManager.Instance.GetAndroid();
             m_androidPos = android.GetPosition();
             android.SetPosition(new Vector2(30, 30));
+            
 
             var enemySpawnController = GameManager.Instance.GetEnemySpawnController();
             
@@ -51,8 +54,9 @@ namespace InGame.InGameStates
             
             m_firstEnemy.SetPosition(new Vector2(32, 32));
             m_secondEnemy.SetPosition(new Vector2(28, 32));
-
+        
             // TODO store android snapshot
+            m_androidSnapshot = new AndroidSetUp(android);
         }
 
         public override void Exit()
@@ -74,6 +78,7 @@ namespace InGame.InGameStates
             
             m_firstEnemy.Die();
             m_secondEnemy.Die();
+            m_androidSnapshot.SetAndroid(GameManager.Instance.GetAndroid());
         }
         
 
