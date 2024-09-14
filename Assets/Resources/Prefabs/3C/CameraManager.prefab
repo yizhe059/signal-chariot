@@ -183,11 +183,6 @@ MonoBehaviour:
   - {fileID: 1163668498271188895}
   - {fileID: 7311800439909820095}
   m_battleVirtualCamera: {fileID: 7302969138994297402}
-  battleBoundaries:
-  - -10
-  - 10
-  - -10
-  - 10
 --- !u!1 &5156874556526978143
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +281,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4447770411802223313}
   - component: {fileID: 7302969138994297402}
+  - component: {fileID: 8486117261974476906}
   m_Layer: 0
   m_Name: BattleVCam
   m_TagString: Untagged
@@ -348,6 +344,23 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1306418759040964708}
+--- !u!114 &8486117261974476906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5223066666949638959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2fba25a5cd15594e8f050a11e386c80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ConfineMode: 0
+  m_BoundingVolume: {fileID: 0}
+  m_BoundingShape2D: {fileID: 0}
+  m_ConfineScreenEdges: 1
+  m_Damping: 1
 --- !u!1 &5442372583626922211
 GameObject:
   m_ObjectHideFlags: 0

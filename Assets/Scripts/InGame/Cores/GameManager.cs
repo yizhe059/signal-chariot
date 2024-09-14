@@ -112,11 +112,13 @@ namespace InGame.Cores
             var cameraPrefab = Resources.Load<CameraManager>(Constants.GO_CAMERA_PATH);
             m_cameraManager = Instantiate(cameraPrefab);
             m_cameraManager.transform.position = Vector3.zero;
+            m_cameraManager.Init();
             
             m_cameraManager.SetBattleCameraFollow(m_androidView?.gameObject);
+            m_cameraManager.SetBattleConfiner("Boundary");
 
-            m_cameraManager.SetMiniBoardCameraPosition(GetBoardView().transform.position);
-            m_cameraManager.SetBoardCameraPosition(GetBoardView().transform.position);
+            m_cameraManager.SetBoardThumbnailPosition(GetBoardView().transform.position);
+            m_cameraManager.SetBoardPosition(GetBoardView().transform.position);
         }
 
         public void Update()
@@ -124,7 +126,6 @@ namespace InGame.Cores
             m_timeEffectManager?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
             m_generalSignalController?.Update(UnityEngine.Time.deltaTime, UnityEngine.Time.time);
             m_enemySpawnController?.Update(UnityEngine.Time.deltaTime);
-            m_cameraManager?.UpdateBattlePosition(); // TODO
         }
 
         public void Clear()

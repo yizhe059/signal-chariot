@@ -25,14 +25,11 @@ namespace InGame.Cores
         private Camera[] m_cameras = new Camera[4];
         private CameraInfo m_board, m_boardThumbnail, m_battle, m_battleTest;
         
-        [Header("Battle VCam Settings")]
+        [Header("VCam Settings")]
         [SerializeField]
         private CinemachineVirtualCamera m_battleVirtualCamera;
 
-        [SerializeField]
-        private float[] battleBoundaries = new float[4];
-
-        public void Awake()
+        public void Init()
         {
             m_board = new CameraInfo(m_cameras[0]);
             m_boardThumbnail = new CameraInfo(m_cameras[1]);
@@ -60,43 +57,27 @@ namespace InGame.Cores
         public void SetBattleActive(bool active) => m_battle.gameObject.SetActive(active);
         public void SetBattleCameraFollow(GameObject target) => m_battleVirtualCamera.Follow = target?.transform;
         
-        public void SetBoardCameraPosition(Vector2 pos)
+        public void SetBoardPosition(Vector2 pos)
         {
             var z = m_board.transform.position.z;
             var position = new Vector3(pos.x, pos.y, z);
             m_board.transform.position = position;
         }
         
-        public void SetMiniBoardCameraPosition(Vector2 pos)
+        public void SetBoardThumbnailPosition(Vector2 pos)
         {
             var z = m_boardThumbnail.transform.position.z;
             var position = new Vector3(pos.x, pos.y, z);
             m_boardThumbnail.transform.position = position;
         }
-        #endregion
-        
-        #region Update
-        public void UpdateBattlePosition()
-        {
-            Vector3 position = m_battle.transform.position;
-            float height = m_battle.camera.orthographicSize;
-            float width = height * m_battle.camera.aspect;
-            
-            float clampedX = Mathf.Clamp(position.x, 
-                                        battleBoundaries[0] + width, 
-                                        battleBoundaries[1] - width);
-            float clampedY = Mathf.Clamp(position.y, 
-                                        battleBoundaries[2] + height, 
-                                        battleBoundaries[3] - height);
-            
-            m_battle.transform.position = new Vector3(clampedX, clampedY, 
-                                                    m_battle.transform.position.z);
-            
-            bool atEdgeX = m_battle.transform.position.x == clampedX;
-            bool atEdgeY = m_battle.transform.position.y == clampedY;
 
-            if (atEdgeX || atEdgeY) SetBattleCameraFollow(null);
-            else SetBattleCameraFollow(GameManager.Instance.GetAndroid().androidView?.gameObject);
+        public void SetBattleConfiner(string goName)
+        {
+            CinemachineConfiner confiner = m_battleVirtualCamera.GetComponent<CinemachineConfiner>();
+            PolygonCollider2D bounds = GameObject.Find(goName)?.GetComponent<PolygonCollider2D>();
+            if(confiner == null || bounds == null) return;
+            confiner.m_BoundingShape2D = bounds;
+            confiner.InvalidatePathCache();
         }
         #endregion
     }

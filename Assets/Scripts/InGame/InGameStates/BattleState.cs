@@ -33,7 +33,7 @@ namespace InGame.InGameStates
             cameraManager.SetBoardActive(false);
             
             cameraManager.SetBoardThumbnailActive(true);
-            cameraManager.SetMiniBoardCameraPosition(center);
+            cameraManager.SetBoardThumbnailPosition(center);
             cameraManager.SetBoardThumbnailSize(length / 2);
             
             cameraManager.SetBattleActive(true);
