@@ -8,7 +8,7 @@ using Utils;
 
 namespace InGame.Effects.EffectElement
 {
-    public class MagazineShootBulletEffect: Effect
+    public class MagazineShootBulletEffect : Effect
     {
         public int magazineCapacity;
         public override ModuleBuffType buffMask => ModuleBuffType.Weapon | ModuleBuffType.Magazine;
@@ -18,15 +18,8 @@ namespace InGame.Effects.EffectElement
         
         public override void OnTrigger(EffectBlackBoard blackBoard)
         {
-            //To Do: maybe the trigger requirement is not just the signal
+            //TODO: maybe the trigger requirement is not just the signal
             if (blackBoard.signal == null) return;
-            // if (blackBoard.signal.type == SignalType.Normal)
-            // {
-            //     ShootBullet(blackBoard);
-            // }else if (blackBoard.signal.type != SignalType.None)
-            // {
-            //     LoadBullet(blackBoard);
-            // }
             LoadBullet(blackBoard);
             if (m_bullets.Count == magazineCapacity + m_magazineBuff.magazineCapacityBuff)
             {
@@ -42,7 +35,6 @@ namespace InGame.Effects.EffectElement
             while (m_bullets.Count != 0)
             {
                 var type = m_bullets.Dequeue();
-                
                 var bulletType = Signal.SignalTypeToBulletType(type);
 
                 if (bulletType == curBulletType)
@@ -60,20 +52,7 @@ namespace InGame.Effects.EffectElement
                     curBulletType = bulletType;
                     curLevel = 1;
                 }
-
-                //equipmentManager.EquipmentEffect(m_module, bulletType, 1, m_weaponBuff.CreateCopy() as WeaponBuff);
             }
-        }
-        
-        private void ShootBullet(EffectBlackBoard blackBoard)
-        {
-            if (m_bullets.Count == 0) return;
-            var bullet = m_bullets.Dequeue();
-            var equipmentManager = GameManager.Instance.GetAndroid().GetEquipmentManager();
-            
-            Debug.Log($"Shoot Bullet： {bullet}");
-            // TO DO: add the bullet Type to the thing
-            //equipmentManager.EquipmentEffect(m_module, m_weaponBuff.CreateCopy() as WeaponBuff);
         }
 
         private void LoadBullet(EffectBlackBoard blackBoard)
@@ -85,12 +64,8 @@ namespace InGame.Effects.EffectElement
                 m_bullets.Enqueue(signal.type);
                 Debug.Log($"Load Bullet {signal.type}");
             }
-            
-            
         }
 
-        
-        
         public override void OnAddBuff(ModuleBuff buff)
         {
             if (buff.type == ModuleBuffType.Weapon)
@@ -102,9 +77,7 @@ namespace InGame.Effects.EffectElement
             {
                 MagazineBuff magazineBuff = (MagazineBuff) buff;
                 m_magazineBuff.Add(magazineBuff);
-            }
-            
-            
+            }            
         }
         
         public override void OnRemoveBuff(ModuleBuff buff)

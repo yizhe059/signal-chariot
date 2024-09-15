@@ -426,7 +426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4593550602273945553, guid: 8e200cf0cf1a648e496fa9a050124af6, type: 3}
       propertyPath: m_uiPrefabPaths.Array.data[0]
-      value: Common/Tutorial
+      value: Menu/Tutorial
       objectReference: {fileID: 0}
     - target: {fileID: 4593550602273945553, guid: 8e200cf0cf1a648e496fa9a050124af6, type: 3}
       propertyPath: m_uiPrefabPaths.Array.data[1]

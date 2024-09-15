@@ -11,6 +11,8 @@ namespace InGame.UI
         private VisualElement m_panel;
         private Label m_name;
         private Label m_category;
+        private Label m_energyConsumeNum;
+        private Label m_energyConsumeType;
         private Label m_desc;
         private Label m_tag;
         private Label m_function;
@@ -21,6 +23,8 @@ namespace InGame.UI
             m_panel = m_root.Q("panel");
             m_name = m_root.Q<Label>("name");
             m_category = m_root.Q<Label>("category");
+            m_energyConsumeNum = m_root.Q<Label>("consumeNum");
+            m_energyConsumeType = m_root.Q<Label>("consumeType");
             m_desc = m_root.Q<Label>("description");
             m_tag = m_root.Q<Label>("tag");
             m_function = m_root.Q<Label>("functionality");

@@ -62,3 +62,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_doc: {fileID: 2450999189664655379}
+  m_tutorialBasePath: Arts/Tutorials
