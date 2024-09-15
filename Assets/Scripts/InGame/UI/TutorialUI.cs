@@ -29,11 +29,11 @@ namespace InGame.UI
             m_right = m_root.Q<Button>("right");
             m_left = m_root.Q<Button>("left");
 
-            LoadTutorials();
+            InitTutorials();
             Register();
         }
 
-        private void LoadTutorials()
+        private void InitTutorials()
         {
             m_textures = Resources.LoadAll<Texture2D>(m_tutorialBasePath);
 
