@@ -166,9 +166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0ec11fdf263412d8ed478ad989cb669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 7
+  width: 9
   height: 2
-  originPosition: {x: 0, y: -5, z: 0}
+  originPosition: {x: -1.5, y: -4.9, z: 0}
   cellSize: 1
   openSlots: []
   modules:
