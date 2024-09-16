@@ -13,6 +13,7 @@ namespace InGame.Effects.EffectElement
         public float dissipationRate;
         public float heatCostPerShot;
         public int electricCapacity;
+        public int electricChargeGainPerTrigger;
         
         private int m_currentElectricCharge = 0;
         private float m_currentHeat = 0;
@@ -85,7 +86,7 @@ namespace InGame.Effects.EffectElement
             }
             else
             {
-                IncreaseElectricCharge(1);
+                IncreaseElectricCharge(electricChargeGainPerTrigger);
             }
             
             GameManager.Instance.GetAndroid().GetEquipmentManager().
@@ -126,19 +127,22 @@ namespace InGame.Effects.EffectElement
                 heatGauge = heatGauge,
                 dissipationRate = dissipationRate,
                 heatCostPerShot = heatCostPerShot,
-                electricCapacity = electricCapacity
+                electricCapacity = electricCapacity,
+                electricChargeGainPerTrigger = electricChargeGainPerTrigger
             };
         }
         
 
-        public static WeaponShootEffect CreateEffect(float heatGauge, float dissipationRate, float heatCostPerShot, int electricCapacity)
+        public static WeaponShootEffect CreateEffect(float heatGauge, float dissipationRate, float heatCostPerShot, 
+            int electricCapacity, int electricChargeGainPerTrigger)
         {
             return new WeaponShootEffect
             {
                 heatGauge = heatGauge,
                 dissipationRate = dissipationRate,
                 heatCostPerShot = heatCostPerShot,
-                electricCapacity = electricCapacity
+                electricCapacity = electricCapacity,
+                electricChargeGainPerTrigger = electricChargeGainPerTrigger
             };
         }
     }

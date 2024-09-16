@@ -48,6 +48,7 @@ namespace InGame.BattleFields.Androids
 
         public void EquipmentEffect(Module module, BulletType type, int level, WeaponBuff buff)
         {
+            Debug.Log(level);
             foreach(Equipment equipment in m_equipments)
             {
                 if(module == equipment.module)
