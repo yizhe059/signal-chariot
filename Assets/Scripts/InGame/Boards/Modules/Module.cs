@@ -103,6 +103,8 @@ namespace InGame.Boards.Modules
         
         public string name { get; protected set; }
         public Category category { get; protected set; }
+        public string leftBox { get; protected set; }
+        public string rightBox { get; protected set; }
         public string desc { get; protected set; }
         public string tag { get; protected set; }
         public string function { get; protected set; }
@@ -122,6 +124,7 @@ namespace InGame.Boards.Modules
 
         private Dictionary<ModuleBuffType, ModuleBuff> m_buffs =
             new Dictionary<ModuleBuffType, ModuleBuff>();
+
         #endregion
         public ModuleView moduleView => m_moduleView;
         public Orientation orientation => m_orientation;
@@ -533,6 +536,8 @@ namespace InGame.Boards.Modules
             var newModule = new Module
             {
                 name = setUp.name,
+                leftBox = setUp.leftBox,
+                rightBox = setUp.rightBox,
                 desc = setUp.desc,
                 tag = setUp.tag,
                 function = setUp.function,
@@ -562,6 +567,8 @@ namespace InGame.Boards.Modules
                 m_prefab = other.m_prefab,
                 m_slotMap = other.m_slotMap,
                 name = other.name,
+                leftBox = other.leftBox,
+                rightBox = other.rightBox,
                 desc = other.desc,
                 tag = other.tag,
                 function = other.function,

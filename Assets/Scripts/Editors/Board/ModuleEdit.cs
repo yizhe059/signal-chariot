@@ -11,6 +11,8 @@ namespace Editors.Board
     public class ModuleEdit: MonoBehaviour
     {
         public new string name = "";
+        public string leftBox = "";
+        public string rightBox = "";
         public string desc = "";
         public string tags = "";
         public string function = "";
@@ -58,6 +60,8 @@ namespace Editors.Board
             {
                 name = name,
                 category = category,
+                leftBox = leftBox,
+                rightBox = rightBox,
                 desc = desc,
                 tag = tags,
                 function = function,

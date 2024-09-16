@@ -25,9 +25,11 @@ namespace InGame.Boards.Modules
         {
             if (!m_isOn) return;
             BoardConsoleUI boardConsoleUI = UIManager.Instance.GetUI(UIElements.BoardConsole) as BoardConsoleUI;
-            string[] content = new string[5]{
+            string[] content = new string[7]{
                 module.name,
                 module.category.ToString(),
+                module.leftBox,
+                module.rightBox,
                 module.desc,
                 module.tag,
                 module.function

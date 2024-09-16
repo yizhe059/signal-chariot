@@ -15,7 +15,9 @@ namespace SetUps
     [System.Serializable]
     public class ModuleSetUp
     {
-        public string name ="";
+        public string name = "";
+        public string rightBox = "";
+        public string leftBox = "";
         public string desc = "";
         public string tag = "";
         public string function = "";

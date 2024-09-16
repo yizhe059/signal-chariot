@@ -252,6 +252,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6197358729617534202, guid: ce0eb96a9ad87a74b89d40efae5e0bbd, type: 3}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: leftBox
+      value: "\u84C4\u80FD\uFF1A5"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: buffMask
       value: 3
       objectReference: {fileID: 0}
@@ -1265,6 +1269,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1402701477217004034, guid: 17646af2c7a669e49bb57947bbd60d0a, type: 3}
     - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
+      propertyPath: leftBox
+      value: "\u89E6\u53D1\uFF1A1"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762337055685843865, guid: 71e9ad517f1e3e848a4cc0f0b380fad5, type: 3}
       propertyPath: buffMask
       value: 1
       objectReference: {fileID: 0}
@@ -1768,6 +1776,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Module 1
+  leftBox: 
+  rightBox: 
   desc: 
   tags: 
   function: 
@@ -2578,6 +2588,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Module 2
+  leftBox: 
+  rightBox: 
   desc: 
   tags: 
   function: 
