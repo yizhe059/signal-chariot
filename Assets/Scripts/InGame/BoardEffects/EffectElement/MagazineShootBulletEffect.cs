@@ -53,6 +53,7 @@ namespace InGame.Effects.EffectElement
                     curLevel = 1;
                 }
             }
+            if (curLevel > 0) equipmentManager.EquipmentEffect(m_module, curBulletType, curLevel, m_weaponBuff.CreateCopy() as WeaponBuff);
         }
 
         private void LoadBullet(EffectBlackBoard blackBoard)
