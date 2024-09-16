@@ -4,11 +4,11 @@
             <ui:Label tabindex="-1" text="生命" parse-escape-sequences="true" display-tooltip-when-elided="true" name="name" style="width: auto; color: rgb(255, 255, 255); -unity-font-style: normal; font-size: 20px; justify-content: center;" />
             <ui:ProgressBar value="50" title="50/100" name="bar" style="width: 80%; -unity-font-style: bold; justify-content: center; color: rgb(0, 0, 0);" />
         </ui:VisualElement>
-        <ui:VisualElement name="defense" style="flex-grow: 1; flex-direction: row; height: 20%; align-items: center; justify-content: flex-start;">
-            <ui:Label tabindex="-1" text="防御: 10" parse-escape-sequences="true" display-tooltip-when-elided="true" name="content" style="font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: normal;" />
-        </ui:VisualElement>
         <ui:VisualElement name="armor" style="flex-grow: 1; flex-direction: row; height: 20%; align-items: center; justify-content: flex-start;">
             <ui:Label tabindex="-1" text="护甲: 10" parse-escape-sequences="true" display-tooltip-when-elided="true" name="content" style="font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: normal;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="defense" style="flex-grow: 1; flex-direction: row; height: 20%; align-items: center; justify-content: flex-start;">
+            <ui:Label tabindex="-1" text="防御: 10" parse-escape-sequences="true" display-tooltip-when-elided="true" name="content" style="font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: normal;" />
         </ui:VisualElement>
         <ui:VisualElement name="mod" style="flex-grow: 1; flex-direction: row; height: 20%; align-items: center; justify-content: flex-start;">
             <ui:Label tabindex="-1" text="零件: 500" parse-escape-sequences="true" display-tooltip-when-elided="true" name="content" style="font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: normal;" />
