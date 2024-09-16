@@ -298,6 +298,7 @@ namespace InGame.Boards
 
         public void SetSlotStatus(int x, int y, SlotStatus status)
         {
+            SlotStatus prevSlotStatus = GetSlotStatus(x, y);
             Slot slot = GetValue(x, y);
             if (slot == null) return;
 
@@ -306,6 +307,8 @@ namespace InGame.Boards
 
             var adjSlots = GetAdjacentSlots(x, y, SlotStatus.Occupied);
             if (m_noEffectTrigger) return;
+
+            if (prevSlotStatus != SlotStatus.Selectable || status != SlotStatus.Empty) return;
             foreach (var adjSlot in adjSlots)
             {
                 var module = GetModule(adjSlot.x, adjSlot.y);
