@@ -191,7 +191,7 @@ MonoBehaviour:
     moduleName: "\u5145\u80FD\u62A4\u7532"
     orientation: 0
   - pos:
-      x: 4
+      x: 2
       y: 0
     moduleID: 12
     moduleName: "\u5145\u80FD\u70AE"
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 7
   height: 7
-  originPosition: {x: 1, y: -2.5, z: 0}
+  originPosition: {x: 0.5, y: -2.5, z: 0}
   cellSize: 1
   openSlots:
   - x: 2
